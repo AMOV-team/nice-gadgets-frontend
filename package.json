@@ -35,6 +35,8 @@
     "vite": "^7.1.2"
   },
   "lint-staged": {
-    "*": "npm run fix-style"
+    "*": "npm run fix-style",
+    "*.js": "eslint --cache --fix",
+    "*.--write": "prettier --write"
   }
 }
