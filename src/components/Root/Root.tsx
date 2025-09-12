@@ -1,7 +1,6 @@
-import 'bulma/css/bulma.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import '@fortawesome/fontawesome-free/css/all.css';
-import './App.scss';
+
+import '../../App.css';
 
 import { HashRouter } from 'react-router-dom';
 import App from '../../App';
