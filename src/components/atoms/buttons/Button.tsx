@@ -13,7 +13,7 @@ export const ButtonsPrimary: React.FC<ButtonProps> = ({ text }) => {
         relative bg-accent rounded-[48px] cursor-pointer 
         transition-all duration-200 
         hover:bg-white hover:text-accent hover:border-borderGray hover:shadow-[0px_3px_13px_0px_#17203166] 
-        focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 
+        focus:outline-none 
         active:scale-95
       "
       type="button"
