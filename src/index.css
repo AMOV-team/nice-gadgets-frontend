@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
+a {
+  @apply text-inherit no-underline;
+}
+
 @layer utilities {
   .text-h1 {
     font-family: 'Montserrat', sans-serif;
@@ -39,7 +49,7 @@
     letter-spacing: theme('fontSize.button[1].letterSpacing');
   }
 
-  @screen md {
+  /* @screen md {
     .text-h1 {
       @apply text-h1-lg;
     }
@@ -52,5 +62,5 @@
     .text-h4 {
       @apply text-h4-lg;
     }
-  }
+  } */
 }
