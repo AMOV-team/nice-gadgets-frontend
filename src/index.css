@@ -4,31 +4,36 @@
 
 @layer utilities {
   .text-h1 {
-    @apply font-mont font-bold;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
     font-size: theme('fontSize.h1[0]');
     line-height: theme('fontSize.h1[1].lineHeight');
     letter-spacing: theme('fontSize.h1[1].letterSpacing');
   }
   .text-h2 {
-    @apply font-mont font-bold;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
     font-size: theme('fontSize.h2[0]');
     line-height: theme('fontSize.h2[1].lineHeight');
     letter-spacing: theme('fontSize.h2[1].letterSpacing');
   }
   .text-h3 {
-    @apply font-mont font-semibold;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     font-size: theme('fontSize.h3[0]');
     line-height: theme('fontSize.h3[1].lineHeight');
     letter-spacing: theme('fontSize.h3[1].letterSpacing');
   }
   .text-h4 {
-    @apply font-mont font-semibold;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     font-size: theme('fontSize.h4[0]');
     line-height: theme('fontSize.h4[1].lineHeight');
     letter-spacing: theme('fontSize.h4[1].letterSpacing');
   }
   .text-button {
-    @apply font-mont font-semibold;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     font-size: theme('fontSize.button[0]');
     line-height: theme('fontSize.button[1].lineHeight');
     letter-spacing: theme('fontSize.button[1].letterSpacing');
