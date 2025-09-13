@@ -4,9 +4,9 @@ import '../../App.css';
 
 import { HashRouter } from 'react-router-dom';
 import App from '../../App';
-import { PageNotFound } from '../../pages/PageNotFound';
-import { HomePage } from '../../pages/HomePage';
-import { PhonesPage } from '../../pages/PhonesPage';
+import { PageNotFound } from '../pages/PageNotFound';
+import { HomePage } from '../pages/HomePage';
+import { PhonesPage } from '../pages/PhonesPage';
 
 export const Root = () => (
   <HashRouter>
