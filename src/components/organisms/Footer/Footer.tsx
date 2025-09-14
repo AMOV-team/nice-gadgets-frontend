@@ -2,76 +2,41 @@ import React from 'react';
 import { FooterLink } from '../../atoms/text/FooterLink';
 import { BackToTopButton } from '../../atoms/buttons/BackToTopButton';
 
-// const footerLinks = [
-//   { label: 'github', href: '#github' },
-//   { label: 'contacts', href: '#contacts' },
-//   { label: 'rights', href: '#rights' },
-// ];
+const footerLinks = [
+  { label: 'github', href: '/github' },
+  { label: 'contacts', href: '/contacts' },
+  { label: 'rights', href: '/rights' },
+];
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="flex flex-col md:flex-row justify-evenly px-4 py-8 gap-8 md:gap-[103px] lg:gap-72 bg-grayblack border-t [border-top-style:solid] border-grayelements">
+    <footer className="flex flex-col md:flex-row flex-wrap justify-between px-4 py-8 md:px-8 xl:px-16 gap-8 md:gap-10 bg-grayblack border-t [border-top-style:solid] border-grayelements">
       <a
         href="#"
-        className="flex "
+        className="flex flex-shrink-0"
       >
         <img
-          src="../public/img/footer-logo.png"
+          src="../public/img/logo-light-theme.png"
           alt="footer-logo"
+          className="w-[89px] h-[32px] object-contain"
         />
       </a>
 
-      <div className="flex flex-col md:flex-row">
-        <ul className="flex flex-col md:flex-row list-none items-start md:items-center gap-4 md:gap-[13.5px] lg:gap-28 p-0 m-0">
+      <ul className="flex flex-col md:flex-row list-none items-start md:items-center gap-4 md:gap-8 lg:gap-12 p-0 m-0">
+        {footerLinks.map((link) => (
           <li>
             <FooterLink
-              text="github"
-              link="#"
+              text={`${link.label}`}
+              link={`${link.href}`}
             />
           </li>
-          <li>
-            <FooterLink
-              text="contacts"
-              link="#"
-            />
-          </li>
-          <li>
-            <FooterLink
-              text="rights"
-              link="#"
-            />
-          </li>
-        </ul>
-        {/* <ul className="flex flex-col md:flex-row list-none items-start md:items-center gap-4 md:gap-[13.5px] lg:gap-28 p-0 m-0 md:ml-20 lg:ml-72">
-          <li>
-            <a
-              href="#"
-              className="font-mont uppercase text-secondary text-small font-extrabold"
-            >
-              github
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="uppercase text-xs font-extrabold"
-            >
-              contacts
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="uppercase text-xs font-extrabold"
-            >
-              rights
-            </a>
-          </li>
-        </ul> */}
-      </div>
+        ))}
+      </ul>
+      {/* <div className="flex flex-col md:flex-row">
+      </div> */}
 
-      <div className="flex flex-row justify-center gap-4">
-        <p className="font-mont text-small text-secondary font-bold m-0 text-center self-center">
+      <div className="flex flex-row justify-center gap-4 flex-shrink-0">
+        <p className="font-mont text-small text-custom-secondary font-bold m-0 text-center self-center">
           Back to top
         </p>
         <BackToTopButton
