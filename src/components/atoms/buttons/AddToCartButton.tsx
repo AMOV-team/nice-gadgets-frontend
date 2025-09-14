@@ -22,7 +22,7 @@ export const AddToCartButton: React.FC<ButtonProps> = ({
           ${
             selected ?
               'bg-white text-accent border-elements border-solid'
-            : 'bg-accent text-white border-none hover:shadow-[0px_3px_13px_0px_#17203166]'
+            : 'bg-custom-accent text-white border-none hover:shadow-[0px_3px_13px_0px_#17203166]'
           }
           active:scale-95
         `}
