@@ -1,16 +1,15 @@
 import * as React from 'react';
 
-type AddToFavoriteButtonProps = {
-  selected?: boolean;
-  onSelect?: () => void;
+type SliderButtonLeftProps = {
+  onClick: () => void;
 };
 
-export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
-  selected = false,
-  onSelect,
+export const SliderButtonLeft: React.FC<SliderButtonLeftProps> = ({
+  onClick,
 }) => {
   return (
-    <div
+    <a
+      onClick={onClick}
       className="
         flex items-center justify-center
         w-[36px] h-[36px]
@@ -24,10 +23,10 @@ export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
       "
     >
       <img
-        onClick={onSelect}
+        src="/img/slider-button-left.png"
+        alt="slider-button-left"
         className="w-[16px] h-[16px] object-contain select-none"
-        src={selected ? '/img/heart-filled.png' : '/img/heart-outline.png'}
-      ></img>
-    </div>
+      />
+    </a>
   );
 };

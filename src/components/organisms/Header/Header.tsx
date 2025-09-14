@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navbar } from '../NavBar/Navbar';
 
 export const Header: React.FC = () => {
   return (
@@ -9,32 +10,13 @@ export const Header: React.FC = () => {
           className="pt-[13px] pb-[13px]"
         >
           <img
-            className="w-[64px] h-[22px]"
+            className="w-[64px] h-[22px] block"
             src="img/header-logo.png"
             alt="Nice gadgets"
           />
         </a>
 
-        <nav className="hidden sm:flex justify-start gap-8 h-full flex items-center text-sm text-black no-underline">
-          <a
-            href="#"
-            className="h-full leading-[48px]"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="h-full leading-[48px]"
-          >
-            Products
-          </a>
-          <a
-            href="#"
-            className="h-full leading-[48px]"
-          >
-            Contact
-          </a>
-        </nav>
+        <Navbar />
       </div>
 
       <a
@@ -55,7 +37,7 @@ export const Header: React.FC = () => {
         >
           <img
             className="w-[16px] h-[16px]"
-            src="img/favourites.svg"
+            src="/img/heart-outline.png"
             alt=""
           />
         </a>
