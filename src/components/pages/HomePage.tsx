@@ -1,6 +1,6 @@
 import React from 'react';
-import { SORT_OPTIONS } from '../../constants/sortOptions';
 
+import { SORT_OPTIONS } from '../../constants/sortOptions';
 import { Dropdown } from '../atoms/Dropdown';
 import { AddToCartButton } from '../atoms/buttons';
 

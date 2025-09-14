@@ -8,7 +8,7 @@ type PaginationButtonProps = {
 
 export const PaginationButton: React.FC<PaginationButtonProps> = ({
   text,
-  selected = false,
+  selected = true,
   onSelect,
 }) => {
   return (
@@ -21,15 +21,17 @@ export const PaginationButton: React.FC<PaginationButtonProps> = ({
         box-border
         border-solid border-[1px] 
         transition-all duration-200 
-        hover:border-primary
+        hover:border-custom-primary
         ${
           selected ?
-            'bg-primary text-white border-primary'
+            'bg-primary text-white border-custom-primary'
           : 'text-primary border-elements'
         }
         `}
     >
-      <span className="text-body font-mont">{text}</span>
+      <span className="flex items-center justify-center text-body font-mont leading-[36px]">
+        {text}
+      </span>
     </a>
   );
 };

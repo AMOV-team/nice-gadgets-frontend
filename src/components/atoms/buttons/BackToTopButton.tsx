@@ -15,9 +15,10 @@ export const BackToTopButton: React.FC<BackToTopButtonProps> = ({
         w-[36px] h-[36px]
         rounded-full cursor-pointer
         box-border
-        border border-primary 
+        border-solid
+        border border-elements
         transition-all duration-200 
-        hover:border-solid
+        hover:border-custom-primary
         disabled:border-elements
       "
     >
