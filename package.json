@@ -9,7 +9,7 @@
     "build": "tsc -b && vite build",
     "format": "prettier . --ignore-path .gitignore --write",
     "lint": "eslint . --fix",
-    "fix-style": "npm run format & npm run lint",
+    "fix-style": "npm run format && npm run lint",
     "preview": "vite preview",
     "prepare": "husky && husky install"
   },
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/classnames": "^2.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
