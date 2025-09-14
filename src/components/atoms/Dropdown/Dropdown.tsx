@@ -6,33 +6,83 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../ui/select';
+import type { SortOption } from '../../../types/SortOption';
 
-export const Dropdown: React.FC = () => {
+type Props = {
+  defaultText: string;
+  itemData: SortOption[];
+};
+
+export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
+  const [open, setOpen] = React.useState(false);
+
   return (
-    <Select>
-      <SelectTrigger className="w-[180px] border-transparent font-mont text-sm text-custom-primary font-bold ">
-        <SelectValue placeholder="Theme" />
+    <Select onOpenChange={setOpen}>
+      <SelectTrigger
+        open={open}
+        className="
+          w-[136px]
+          md:w-[187px]
+          xl:w-[176px]
+          h-10
+          p-3
+          min-h-0
+          border-solid
+          border-elements
+          font-mont
+          text-sm
+          text-custom-primary
+          font-semibold
+          overflow-hidden
+          box-border
+          rounded-md
+          hover:border-custom-secondary
+          focus:outline-none
+          focus:ring-0
+          data-[state=open]:border-black
+          transition-colors
+          duration-200
+        "
+      >
+        <SelectValue placeholder={defaultText} />
       </SelectTrigger>
-      <SelectContent>
-        {/* Кожен SelectItem має свої власні стилі */}
-        <SelectItem
-          className="font-mont text-sm text-custom-secondary font-medium data-[highlighted]:text-custom-primary"
-          value="light"
-        >
-          Light
-        </SelectItem>
-        <SelectItem
-          className="font-mont text-sm text-custom-secondary font-semibold data-[highlighted]:text-custom-primary"
-          value="dark"
-        >
-          Dark
-        </SelectItem>
-        <SelectItem
-          className="font-mont text-sm text-custom-secondary font-semibold data-[highlighted]:text-custom-primary"
-          value="system"
-        >
-          System
-        </SelectItem>
+
+      <SelectContent
+        className="
+          w-[136px]
+          md:w-[187px]
+          xl:w-[176px]
+          overflow-y-auto
+          max-h-[200px]
+          box-border
+          bg-white
+          border-elements
+          rounded-md
+          shadow-[0px_2px_15px_0px_rgba(0,0,0,0.05)]
+        "
+      >
+        {itemData.map((item) => (
+          <SelectItem
+            key={item.id}
+            value={item.label}
+            className="
+              w-full
+              h-6
+              px-3
+              py-1.5
+              font-mont
+              text-sm
+              text-custom-secondary
+              font-medium
+              rounded-md
+              outline-none
+              data-[highlighted]:bg-ho
+              data-[highlighted]:text-custom-primary
+            "
+          >
+            {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );
