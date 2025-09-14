@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import { Navbar } from '../NavBar/Navbar';
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,27 +18,7 @@ export const Header: React.FC = () => {
             alt="Nice gadgets"
           />
         </a>
-
-        <nav className="hidden sm:flex justify-start gap-8 h-full flex items-center no-underline">
-          <a
-            href="#"
-            className="h-full leading-[48px] font-mont uppercase font-extrabold"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="h-full leading-[48px] font-mont uppercase font-extrabold"
-          >
-            Products
-          </a>
-          <a
-            href="#"
-            className="h-full leading-[48px] font-mont uppercase font-extrabold"
-          >
-            Contact
-          </a>
-        </nav>
+        <Navbar />
       </div>
 
       <a
@@ -65,7 +47,7 @@ export const Header: React.FC = () => {
         >
           <img
             className="w-[16px] h-[16px]"
-            src="img/favourites.svg"
+            src="/img/heart-outline.png"
             alt=""
           />
         </a>
