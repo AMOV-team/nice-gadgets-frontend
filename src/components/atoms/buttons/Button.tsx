@@ -21,7 +21,7 @@ export const ButtonsPrimary: React.FC<ButtonProps> = ({
         ${
           selected ?
             'bg-white text-accent border-borderGray shadow-none'
-          : 'bg-accent text-white hover:shadow-[0px_3px_13px_0px_#17203166]'
+          : 'bg-custom-accent text-white hover:shadow-[0px_3px_13px_0px_#17203166]'
         }
         active:scale-95
       `}
