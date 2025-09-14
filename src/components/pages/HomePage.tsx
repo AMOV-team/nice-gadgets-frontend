@@ -1,11 +1,16 @@
 import React from 'react';
-import { ButtonsPrimary } from '../atoms/buttons/Button';
+import { AddToCartButton } from '../atoms/buttons/AddToCartButton';
+import { PaginationButton } from '../atoms/buttons/PaginationButton';
 
 export const HomePage: React.FC = () => {
   return (
     <>
       <h1 className="title">Home Page</h1>
-      <ButtonsPrimary text="Test" />
+      <AddToCartButton text="Add to cart" />
+      <PaginationButton
+        onSelect={() => alert('Clicked!')}
+        text="1"
+      />
     </>
   );
 };
