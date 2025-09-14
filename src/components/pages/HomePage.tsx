@@ -1,9 +1,8 @@
 import React from 'react';
-
+import { SORT_OPTIONS } from '../../constants/sortOptions';
 
 import { Dropdown } from '../atoms/Dropdown';
 import { AddToCartButton } from '../atoms/buttons';
-
 
 import { PaginationButton } from '../atoms/buttons/PaginationButton';
 
@@ -17,8 +16,10 @@ export const HomePage: React.FC = () => {
         text="1"
       />
 
-      <Dropdown />
+      <Dropdown
+        defaultText="Оберіть"
+        itemData={SORT_OPTIONS}
+      />
     </div>
-
   );
 };

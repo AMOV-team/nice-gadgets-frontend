@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
-  html,
+  html {
+    height: 100%;
+    scrollbar-gutter: stable;
+  }
+
   body,
   #root {
     height: 100%;
   }
-
 
   a {
     @apply text-inherit no-underline;
@@ -122,23 +124,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  src: url('/fonts/Mont-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Montserrat';
-  src: url('/fonts/Mont-SemiBold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Montserrat';
-  src: url('/fonts/Mont-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
 }
