@@ -5,6 +5,7 @@ import { Dropdown } from '../atoms/Dropdown';
 import { AddToCartButton } from '../atoms/buttons';
 
 import { PaginationButton } from '../atoms/buttons/PaginationButton';
+import { AddToFavoriteButton } from '../atoms/buttons/AddToFavoriteButton';
 
 export const HomePage: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ export const HomePage: React.FC = () => {
         onSelect={() => alert('Clicked!')}
         text="1"
       />
+      <AddToFavoriteButton />
 
       <Dropdown
         defaultText="Оберіть"
