@@ -14,7 +14,6 @@ export const Dropdown: React.FC = () => {
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
       <SelectContent>
-        {/* Кожен SelectItem має свої власні стилі */}
         <SelectItem
           className="font-mont text-sm text-custom-secondary font-medium data-[highlighted]:text-custom-primary"
           value="light"
