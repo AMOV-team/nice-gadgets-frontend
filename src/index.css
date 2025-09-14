@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   html,
   body,
   #root {
     height: 100%;
   }
-
 
   a {
     @apply text-inherit no-underline;
