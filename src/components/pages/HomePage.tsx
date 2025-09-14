@@ -1,7 +1,10 @@
 import React from 'react';
 
+
 import { Dropdown } from '../atoms/Dropdown';
 import { AddToCartButton } from '../atoms/buttons';
+
+
 import { PaginationButton } from '../atoms/buttons/PaginationButton';
 
 export const HomePage: React.FC = () => {
@@ -13,7 +16,9 @@ export const HomePage: React.FC = () => {
         onSelect={() => alert('Clicked!')}
         text="1"
       />
+
       <Dropdown />
     </div>
+
   );
 };
