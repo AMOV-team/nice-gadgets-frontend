@@ -1,10 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html,
-body,
-#root {
+@import './utils/normalize.css' html, body, #root {
   height: 100%;
 }
 
@@ -63,4 +60,23 @@ a {
       @apply text-h4-lg;
     }
   } */
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Mont-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Mont-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Mont-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
 }
