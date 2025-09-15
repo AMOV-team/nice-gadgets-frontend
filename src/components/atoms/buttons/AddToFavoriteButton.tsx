@@ -13,7 +13,7 @@ export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
     <div
       className="
         flex items-center justify-center
-        w-[36px] h-[36px]
+        size-[40px]
         rounded-full cursor-pointer
         box-border
         border-solid
