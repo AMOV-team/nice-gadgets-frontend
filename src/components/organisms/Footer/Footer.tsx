@@ -1,6 +1,6 @@
 import React from 'react';
 import { FooterLink } from '../../atoms/link/FooterLink';
-import { BackToTopButton } from '../../atoms/button/BackToTopButton';
+import { BackToTopButton } from '../../atoms/buttons/BackToTopButton';
 import { Link } from 'react-router-dom';
 
 const footerLinks = [

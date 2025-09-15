@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { AddToCartButton } from '../../../atoms/button';
-import { AddToFavoriteButton } from '../../../atoms/button/AddToFavoriteButton';
+import { AddToCartButton } from '../../../atoms/buttons';
+import { AddToFavoriteButton } from '../../../atoms/buttons/AddToFavoriteButton';
 
 type ProductActionsProps = {
   onAddToCart?: () => void;
