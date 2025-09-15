@@ -12,12 +12,6 @@ function App() {
 
       <main className="flex-1 section px-4 md:px-6 lg:px-8 xl:px-16 py-6 md:py-8 lg:py-14 mx-auto">
         <Outlet />
-        {/* <div className="container">
-          <div className="block">
-            <div className="box table-container">
-            </div>
-          </div>
-        </div> */}
       </main>
 
       <Footer />
