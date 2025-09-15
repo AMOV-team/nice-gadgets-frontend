@@ -11,13 +11,7 @@ function App() {
       <Header />
 
       <main className="flex-1 section">
-        <div className="container">
-          <div className="block">
-            <div className="box table-container">
-              <Outlet />
-            </div>
-          </div>
-        </div>
+        <Outlet />
       </main>
 
       <Footer />
