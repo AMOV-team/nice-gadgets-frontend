@@ -5,7 +5,7 @@
 @layer base {
   html {
     height: 100%;
-    scrollbar-gutter: stable;
+    /* scrollbar-gutter: stable; */
   }
 
   body,
@@ -60,7 +60,7 @@
     /* #FAFBFC */
     --white: 0 0% 100%;
     /* #FFFFFF */
-    --greem: 139 63% 42%;
+    --green: 139 63% 42%;
     /* #27AE60 */
     --red: 0 79% 64%;
     /* #EB5757 */
