@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import cn from 'classnames';
 
-type SliderButtonRightProps = {
+type SliderButtonLeftProps = {
   onClick: () => void;
   disabled: boolean;
 };
 
-export const SliderButtonRight: React.FC<SliderButtonRightProps> = ({
+export const SliderButtonLeft: React.FC<SliderButtonLeftProps> = ({
   onClick,
   disabled,
 }) => {
@@ -40,9 +40,9 @@ export const SliderButtonRight: React.FC<SliderButtonRightProps> = ({
         fill="none"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M0.528758 0.528606C0.789108 0.268256 1.21122 0.268256 1.47157 0.528606L5.47157 4.52861C5.73192 4.78896 5.73192 5.21107 5.47157 5.47141L1.47157 9.47141C1.21122 9.73176 0.789108 9.73176 0.528758 9.47141C0.268409 9.21107 0.268409 8.78896 0.528758 8.52861L4.05735 5.00001L0.528758 1.47141C0.268409 1.21107 0.268409 0.788955 0.528758 0.528606Z"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5.47124 0.528606C5.21089 0.268256 4.78878 0.268256 4.52843 0.528606L0.528427 4.52861C0.268077 4.78896 0.268077 5.21107 0.528427 5.47141L4.52843 9.47141C4.78878 9.73176 5.21089 9.73176 5.47124 9.47141C5.73159 9.21107 5.73159 8.78896 5.47124 8.52861L1.94265 5.00001L5.47124 1.47141C5.73159 1.21107 5.73159 0.788955 5.47124 0.528606Z"
           fill={disabled ? 'hsl(var(--icons))' : 'hsl(var(--primary))'}
         />
       </svg>
