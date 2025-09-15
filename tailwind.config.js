@@ -2,7 +2,7 @@
 module.exports = {
   darkMode: ['class'],
   corePlugins: {
-    preflight: false,
+    preflight: true,
   },
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,css,scss}'],
   theme: {
@@ -97,7 +97,7 @@ module.exports = {
         'elements': 'hsl(var(--elements))',
         'hover': 'hsl(var(--hover))',
         'white': 'hsl(var(--white))',
-        'greem': 'hsl(var(--greem))',
+        'green': 'hsl(var(--green))',
         'red': 'hsl(var(--red))',
       },
       borderRadius: {
