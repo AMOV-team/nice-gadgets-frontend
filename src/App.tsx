@@ -9,7 +9,6 @@ function App() {
       className="flex flex-col min-h-screen"
     >
       <Header />
-
       <main className="flex-1 section">
         <div className="container">
           <div className="block">
