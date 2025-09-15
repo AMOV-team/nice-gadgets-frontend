@@ -29,7 +29,7 @@ export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
           min-h-0
           border-solid
           border-elements
-          font-mont
+          
           text-sm
           text-custom-primary
           font-semibold
@@ -70,7 +70,7 @@ export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
               h-6
               px-3
               py-1.5
-              font-mont
+              
               text-sm
               text-custom-secondary
               font-medium

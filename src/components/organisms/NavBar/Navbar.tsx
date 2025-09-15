@@ -1,4 +1,4 @@
-import { NavbarLink } from '../../atoms/text/NavbarLink';
+import { NavbarLink } from '../../atoms/link/NavbarLink';
 
 export const Navbar = () => {
   return (

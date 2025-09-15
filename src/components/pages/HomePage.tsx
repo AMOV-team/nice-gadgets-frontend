@@ -12,25 +12,25 @@ export const HomePage: React.FC = () => {
     <div className="grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-x-4 gap-y-14 sm:gap-x-6 sm:gap-y-16">
       {/* These sections have been added as examples */}
       <section className="col-span-4 sm:col-span-12 xl:col-span-24 bg-gray-400 rounded">
-        <h1 className="text-left font-mont font-extrabold text-3xl sm:text-5xl m-0">
+        <h1 className="text-left  font-extrabold text-3xl sm:text-5xl m-0">
           Welcome to Nice Gadgets store!
         </h1>
       </section>
 
       <section className="col-span-4 sm:col-span-12 xl:col-span-24 bg-gray-400 rounded">
-        <h2 className="text-left font-mont font-extrabold text-2xl sm:text-3xl m-0">
+        <h2 className="text-left  font-extrabold text-2xl sm:text-3xl m-0">
           Brand new models
         </h2>
       </section>
 
       <section className="col-span-4 sm:col-span-12 xl:col-span-24 bg-gray-400 rounded">
-        <h2 className="text-left font-mont font-extrabold text-2xl sm:text-3xl m-0">
+        <h2 className="text-left  font-extrabold text-2xl sm:text-3xl m-0">
           Shop by category
         </h2>
       </section>
 
       <section className="col-span-4 sm:col-span-12 xl:col-span-24 bg-gray-400 rounded">
-        <h2 className="text-left font-mont font-extrabold text-2xl sm:text-3xl m-0">
+        <h2 className="text-left  font-extrabold text-2xl sm:text-3xl m-0">
           Hot prices
         </h2>
       </section>

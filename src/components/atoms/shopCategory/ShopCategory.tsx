@@ -48,10 +48,10 @@ export const ShopCategory: React.FC<Props> = ({
         />
       </Link>
       <div className="mt-6 col-span-full">
-        <h2 className="text-h4-lg font-mont font-bold leading-[100%] m-0">
+        <h2 className="text-h4-lg  font-bold leading-[100%] m-0">
           {productName}
         </h2>
-        <p className="text-body font-mont m-0 font-semibold mt-1 text-[hsl(var(--custom-secondary))]">
+        <p className="text-body  m-0 font-semibold mt-1 text-[hsl(var(--custom-secondary))]">
           {displayText}
         </p>
       </div>

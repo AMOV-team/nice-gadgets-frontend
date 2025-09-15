@@ -28,7 +28,7 @@ export const AddToCartButton: React.FC<ButtonProps> = ({
         `}
       type="button"
     >
-      <span className="text-button font-mont font-bold">{text}</span>
+      <span className="text-button  font-bold">{text}</span>
     </button>
   );
 };

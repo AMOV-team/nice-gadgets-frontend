@@ -7,9 +7,15 @@ type ProductActionsProps = {
   onAddToFavorite?: () => void;
 };
 
-export const ProductActions: React.FC<ProductActionsProps> = ({ onAddToCart, onAddToFavorite }) => (
+export const ProductActions: React.FC<ProductActionsProps> = ({
+  onAddToCart,
+  onAddToFavorite,
+}) => (
   <div className="flex justify-between items-center">
-    <AddToCartButton text="Add to Cart" onSelect={onAddToCart} />
+    <AddToCartButton
+      text="Add to Cart"
+      onSelect={onAddToCart}
+    />
     <AddToFavoriteButton onSelect={onAddToFavorite} />
   </div>
 );
