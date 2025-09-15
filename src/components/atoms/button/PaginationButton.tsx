@@ -29,7 +29,7 @@ export const PaginationButton: React.FC<PaginationButtonProps> = ({
         }
         `}
     >
-      <span className="flex items-center justify-center text-body font-mont leading-[36px]">
+      <span className="flex items-center justify-center text-body  leading-[36px]">
         {text}
       </span>
     </a>

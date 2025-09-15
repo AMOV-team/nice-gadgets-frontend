@@ -5,6 +5,8 @@
 @layer base {
   html {
     height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    color: hsl(var(--primary));
     /* scrollbar-gutter: stable; */
   }
 

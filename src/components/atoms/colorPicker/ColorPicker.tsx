@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ColorButton } from '../buttons/ColorButton.tsx';
+import { ColorButton } from '../button/ColorButton.tsx';
 
 type Props = {
   colors: Array<string>;

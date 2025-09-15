@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from '../NavBar/Navbar';
+import { NavbarIconLink } from '../../atoms/link/NavbarIconLink';
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +41,15 @@ export const Header: React.FC = () => {
       </a>
 
       <div className="hidden sm:flex">
-        <a
+        <NavbarIconLink
+          imgUrl="/img/heart-outline.png"
+          link="/favorites"
+        />
+        <NavbarIconLink
+          imgUrl="img/shopping-bag.svg"
+          link="/cart"
+        />
+        {/* <a
           href="#"
           className="shadow-[-1px_0px_0px_0px_hsl(var(--elements))] p-4 inline-flex items-center justify-center no-underline"
         >
@@ -60,7 +69,7 @@ export const Header: React.FC = () => {
             src="img/shopping-bag.svg"
             alt=""
           />
-        </a>
+        </a> */}
       </div>
     </header>
   );
