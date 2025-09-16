@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
         className="flex flex-shrink-0"
       >
         <img
-          src="/img/logo-light-theme.png"
+          src="img/logo-light-theme.png"
           alt="footer-logo"
           className="w-[89px] h-[32px] object-contain block"
         />
@@ -33,8 +33,6 @@ export const Footer: React.FC = () => {
           </li>
         ))}
       </ul>
-      {/* <div className="flex flex-col md:flex-row">
-      </div> */}
 
       <div className="flex flex-row justify-center gap-4 flex-shrink-0">
         <p

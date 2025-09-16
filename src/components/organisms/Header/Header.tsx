@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
 
       <div className="hidden sm:flex">
         <NavbarIconLink
-          imgUrl="/img/heart-outline.png"
+          imgUrl="img/heart-outline.png"
           link="/favorites"
         />
         <NavbarIconLink
