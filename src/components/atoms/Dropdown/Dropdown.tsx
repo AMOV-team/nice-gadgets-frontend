@@ -11,19 +11,24 @@ import type { SortOption } from '../../../types/SortOption';
 type Props = {
   defaultText: string;
   itemData: SortOption[];
+  triggerClass: string;
+  itemClass: string;
 };
 
-export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
+export const Dropdown: React.FC<Props> = ({
+  defaultText,
+  itemData,
+  triggerClass,
+  itemClass,
+}) => {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Select onOpenChange={setOpen}>
       <SelectTrigger
         open={open}
-        className="
+        className={`
           w-[136px]
-          md:w-[187px]
-          xl:w-[176px]
           h-10
           p-3
           min-h-0
@@ -42,14 +47,14 @@ export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
           data-[state=open]:border-black
           transition-colors
           duration-200
-        "
+          ${triggerClass}
+        `}
       >
         <SelectValue placeholder={defaultText} />
       </SelectTrigger>
 
       <SelectContent
         className="
-          w-[136px]
           md:w-[187px]
           xl:w-[176px]
           overflow-y-auto
@@ -59,13 +64,14 @@ export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
           border-elements
           rounded-md
           shadow-[0px_2px_15px_0px_rgba(0,0,0,0.05)]
+          w-full
         "
       >
         {itemData.map((item) => (
           <SelectItem
             key={item.id}
             value={item.label}
-            className="
+            className={`
               w-full
               h-6
               px-3
@@ -78,7 +84,8 @@ export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
               outline-none
               data-[highlighted]:bg-ho
               data-[highlighted]:text-custom-primary
-            "
+              ${itemClass}
+            `}
           >
             {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
           </SelectItem>
