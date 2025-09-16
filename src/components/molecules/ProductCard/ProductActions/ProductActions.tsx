@@ -11,7 +11,7 @@ export const ProductActions: React.FC<ProductActionsProps> = ({
   onAddToCart,
   onAddToFavorite,
 }) => (
-  <div className="flex justify-between items-center">
+  <div className="flex justify-between items-center gap-[8px]">
     <AddToCartButton
       text="Add to Cart"
       onSelect={onAddToCart}

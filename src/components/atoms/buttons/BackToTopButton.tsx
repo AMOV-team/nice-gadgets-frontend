@@ -23,7 +23,7 @@ export const BackToTopButton: React.FC<BackToTopButtonProps> = ({
       "
     >
       <img
-        src="/img/slider-button.png"
+        src="img/slider-button.png"
         alt="slider-button"
         className="w-[16px] h-[16px] object-contain select-none"
       />
