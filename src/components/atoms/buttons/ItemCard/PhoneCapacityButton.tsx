@@ -21,11 +21,8 @@ export const PhoneCapacityButton: React.FC<Props> = ({
       }}
       className={cn(
         {
-          'bg-primary': isSelected,
-          'text-white': isSelected,
-          'border border-solid border-icons': !isSelected,
-          'bg-white': !isSelected,
-          'text-primary': !isSelected,
+          'bg-primary text-white border-none': isSelected,
+          'border border-solid border-icons bg-white text-primary': !isSelected,
         },
         `
           font-mont font-medium
