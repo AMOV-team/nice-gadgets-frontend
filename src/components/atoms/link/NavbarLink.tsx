@@ -13,8 +13,10 @@ export const NavbarLink: React.FC<NavbarLinkProps> = ({ text, link }) => {
       to={link}
       className={({ isActive }) =>
         classNames(
-          'font-mont uppercase text-small tracking-[.04em] font-bold transition-colors duration-200',
-          isActive ? 'text-primary' : 'text-secondary',
+          'relative  leading-[48px] uppercase text-small tracking-[.04em] font-extrabold transition-colors duration-200 hover:text-custom-primary',
+          isActive ?
+            'text-custom-primary after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[4px] after:bg-custom-primary after:rounded-lg'
+          : 'text-custom-secondary',
         )
       }
     >

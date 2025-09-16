@@ -16,7 +16,8 @@ export const AddToCartButton: React.FC<ButtonProps> = ({
       onClick={onSelect}
       className={`
           flex items-center justify-center relative
-          px-[40px] py-[10px] 
+          min-w-[100px]
+          w-full h-full
           border rounded-[48px]
           transition-all duration-200 cursor-pointer
           ${
@@ -28,7 +29,7 @@ export const AddToCartButton: React.FC<ButtonProps> = ({
         `}
       type="button"
     >
-      <span className="text-button font-mont font-bold">{text}</span>
+      <span className="text-button font-bold">{text}</span>
     </button>
   );
 };

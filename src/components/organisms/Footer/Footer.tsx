@@ -1,6 +1,7 @@
 import React from 'react';
-import { FooterLink } from '../../atoms/text/FooterLink';
+import { FooterLink } from '../../atoms/link/FooterLink';
 import { BackToTopButton } from '../../atoms/buttons/BackToTopButton';
+import { Link } from 'react-router-dom';
 
 const footerLinks = [
   { label: 'github', href: '/github' },
@@ -11,16 +12,16 @@ const footerLinks = [
 export const Footer: React.FC = () => {
   return (
     <footer className="flex flex-col md:flex-row flex-wrap justify-between px-4 py-8 md:px-8 xl:px-16 gap-8 md:gap-10 bg-grayblack border-t [border-top-style:solid] border-grayelements">
-      <a
-        href="#"
+      <Link
+        to="/"
         className="flex flex-shrink-0"
       >
         <img
-          src="../public/img/logo-light-theme.png"
+          src="img/logo-light-theme.png"
           alt="footer-logo"
-          className="w-[89px] h-[32px] object-contain"
+          className="w-[89px] h-[32px] object-contain block"
         />
-      </a>
+      </Link>
 
       <ul className="flex flex-col md:flex-row list-none items-start md:items-center gap-4 md:gap-8 lg:gap-12 p-0 m-0">
         {footerLinks.map((link) => (
@@ -32,11 +33,13 @@ export const Footer: React.FC = () => {
           </li>
         ))}
       </ul>
-      {/* <div className="flex flex-col md:flex-row">
-      </div> */}
 
       <div className="flex flex-row justify-center gap-4 flex-shrink-0">
-        <p className="font-mont text-small text-custom-secondary font-bold m-0 text-center self-center">
+        <p
+          className="
+          text-small text-center text-custom-secondaryfont-bold
+          m-0 self-center"
+        >
           Back to top
         </p>
         <BackToTopButton
