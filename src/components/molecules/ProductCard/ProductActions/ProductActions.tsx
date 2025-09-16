@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AddToCartButton } from '../../../atoms/buttons';
+import { PrimaryButton } from '../../../atoms/buttons';
 import { AddToFavoriteButton } from '../../../atoms/buttons/AddToFavoriteButton';
 
 type ProductActionsProps = {
@@ -12,8 +12,8 @@ export const ProductActions: React.FC<ProductActionsProps> = ({
   onAddToFavorite,
 }) => (
   <div className="flex justify-between items-center gap-[8px]">
-    <AddToCartButton
-      text="Add to Cart"
+    <PrimaryButton
+      text="Add to cart"
       onSelect={onAddToCart}
     />
     <AddToFavoriteButton onSelect={onAddToFavorite} />

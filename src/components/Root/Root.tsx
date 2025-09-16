@@ -8,6 +8,7 @@ import { PageNotFound } from '../pages/PageNotFound';
 import { HomePage } from '../pages/HomePage';
 import { PhonesPage } from '../pages/PhonesPage';
 import { FavoritesPage } from '../pages/FavoritesPage';
+import { CartPage } from '../pages/CartPage';
 
 export const Root = () => (
   <HashRouter>
@@ -47,6 +48,10 @@ export const Root = () => (
         <Route
           path="favorites"
           element={<FavoritesPage />}
+        />
+        <Route
+          path="cart"
+          element={<CartPage />}
         />
         <Route
           path="*"

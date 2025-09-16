@@ -6,7 +6,7 @@ type ButtonProps = {
   onSelect?: () => void;
 };
 
-export const AddToCartButton: React.FC<ButtonProps> = ({
+export const PrimaryButton: React.FC<ButtonProps> = ({
   text,
   selected = false,
   onSelect,
