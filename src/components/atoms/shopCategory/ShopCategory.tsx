@@ -25,10 +25,10 @@ export const ShopCategory: React.FC<Props> = ({
     modelsCount > 0 ? `${modelsCount} models` : 'Currently out of stock';
 
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4 sm:gap-6 xl:gap-8 px-4">
+    <div className="grid grid-cols-4 gap-4 sm:gap-6 xl:gap-8">
       <Link
         to={productLink}
-        className={`group col-span-4 xl:col-span-8 aspect-square rounded-lg relative overflow-hidden 
+        className={`group col-span-4 aspect-square rounded-lg relative overflow-hidden 
             transition-shadow duration-1000`}
         style={{
           backgroundColor: color,
