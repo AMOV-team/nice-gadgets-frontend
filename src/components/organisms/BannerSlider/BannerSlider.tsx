@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -8,9 +8,9 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './styles.scss';
 
-import bannerMain from '../../../../public/img/banner-slider/light-phone.png';
-import banner3 from '../../../../public/img/banner-slider/light-accessories.png';
-import banner2 from '../../../../public/img/banner-slider/light-tablet.png';
+import bannerMain from 'img/banner-slider/light-phone.png';
+import banner3 from 'img/banner-slider/light-accessories.png';
+import banner2 from 'img/banner-slider/light-tablet.png';
 import { SliderButtonRight } from '../../atoms/buttons/SliderButtonRight';
 import { SliderButtonLeft } from '../../atoms/buttons/SliderButtonLeft';
 
