@@ -28,15 +28,19 @@ const testCart: CartItem[] = products.slice(0, 10).map((item) => ({
 export const CartPage: React.FC = () => {
   return (
     <>
-      <h1 className="text-h1 font-bold text-custom-primary">Cart</h1>
+      <div className="col-span-full">
+        <h1 className="text-h1 font-bold text-custom-primary">Cart</h1>
+      </div>
 
-      <div className="col-span-4 sm:col-span-12 xl:col-span-16 flex flex-col gap-4">
-        {testCart.map((cartItem) => (
-          <CartCard
-            key={cartItem.itemId}
-            cartItem={cartItem}
-          />
-        ))}
+      <div className="col-span-full xl:col-span-16">
+        <div className="flex flex-col gap-4">
+          {testCart.map((cartItem) => (
+            <CartCard
+              key={cartItem.itemId}
+              cartItem={cartItem}
+            />
+          ))}
+        </div>
       </div>
       <div className="col-span-4 sm:col-span-12 xl:col-span-8">
         <CartCheckout cartItems={testCart} />

@@ -34,7 +34,7 @@ export const PhonesPage: React.FC = () => {
   ];
 
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-x-4 gap-y-10">
+    <>
       <div className="col-span-full">
         <h1 className="text-h1 font-extrabold font-mont mb-2 sm:text-h1-lg">
           Mobile Phones
@@ -91,6 +91,6 @@ export const PhonesPage: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
