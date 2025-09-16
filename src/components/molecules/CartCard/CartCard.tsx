@@ -30,7 +30,7 @@ export const CartCard: React.FC<CartCardProps> = ({ cartItem }) => {
     >
       <div className="flex flex-row justify-between items-center gap-[16px] sm:gap-[24px]">
         <div className="flex items-center gap-[16px] sm:gap-[24px]">
-          <DeleteButton />
+          <DeleteButton onDelete={() => {}} />
           <img
             src={cartItem.image}
             alt={`${cartItem.name} image`}
@@ -41,9 +41,15 @@ export const CartCard: React.FC<CartCardProps> = ({ cartItem }) => {
       </div>
       <div className="flex flex-row gap-[24px] justify-between items-center">
         <div className="flex flex-row gap-[14px] justify-center items-center">
-          <DecreaseButton />
+          <DecreaseButton
+            onDecrease={() => {}}
+            disabled={false}
+          />
           <span>{cartItem.quantity}</span>
-          <AddButton />
+          <AddButton
+            onAdd={() => {}}
+            disabled={false}
+          />
         </div>
         <p className="text-h3 font-extrabold min-w-[80px] text-right">
           ${cartItem.price}
