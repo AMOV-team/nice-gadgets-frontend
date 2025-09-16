@@ -28,6 +28,7 @@ export const SliderButtonLeft: React.FC<SliderButtonLeftProps> = ({
         transition-all duration-200
         disabled:border-elements
         bg-transparent
+        self-center
         `,
         { 'hover:border-custom-primary': !disabled },
       )}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar } from '../NavBar/Navbar';
 import { NavbarIconLink } from '../../atoms/link/NavbarIconLink';
+import { Link } from 'react-router-dom';
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,8 +9,8 @@ export const Header: React.FC = () => {
   return (
     <header className="flex items-center justify-between h-[48px] pl-4 border-b shadow-[0px_1px_0px_0px_hsl(var(--elements))] gap-8">
       <div className="flex gap-4 items-center">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="pt-[13px] pb-[13px]"
         >
           <img
@@ -17,7 +18,7 @@ export const Header: React.FC = () => {
             src="img/header-logo.png"
             alt="Nice gadgets"
           />
-        </a>
+        </Link>
         <Navbar />
       </div>
 
