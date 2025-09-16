@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Phone } from '../../../types/phone.ts';
 import { ItemPrice } from './ItemPrice.tsx';
-import { AddToCartButton } from '../buttons';
+import { PrimaryButton } from '../buttons';
 import { AddToFavoriteButton } from '../buttons/AddToFavoriteButton.tsx';
 import { TechSpecs } from './TechSpecs.tsx';
 import { ColorPickerWithTitle } from './ColorPickerWithTitle.tsx';
@@ -40,7 +40,7 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
     <ItemPrice phone={phone} />
 
     <div className="flex gap-2 items-center mb-8 justify-between">
-      <AddToCartButton text="Add to cart" />
+      <PrimaryButton text="Add to cart" />
       <AddToFavoriteButton />
     </div>
 
