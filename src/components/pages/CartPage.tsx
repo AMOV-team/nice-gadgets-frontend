@@ -3,6 +3,7 @@ import productsData from '../../../public/api/products.json';
 import type { Product } from '../../types/Product';
 import { CartCard } from '../molecules/CartCard/CartCard';
 import { CartCheckout } from '../molecules/CartCheckout/CartCheckout';
+import { GridContainer } from '../atoms/GridContainer';
 
 type CartItem = {
   id: number;
@@ -13,7 +14,6 @@ type CartItem = {
   quantity: number;
 };
 
-// Витягуємо перші 10 товарів з JSON і формуємо масив для корзини
 const products: Product[] = productsData as Product[];
 
 const testCart: CartItem[] = products.slice(0, 10).map((item) => ({
@@ -27,7 +27,7 @@ const testCart: CartItem[] = products.slice(0, 10).map((item) => ({
 
 export const CartPage: React.FC = () => {
   return (
-    <>
+    <GridContainer>
       <div className="col-span-full">
         <h1 className="text-h1 font-bold text-custom-primary">Cart</h1>
       </div>
@@ -45,6 +45,6 @@ export const CartPage: React.FC = () => {
       <div className="col-span-4 sm:col-span-12 xl:col-span-8">
         <CartCheckout cartItems={testCart} />
       </div>
-    </>
+    </GridContainer>
   );
 };

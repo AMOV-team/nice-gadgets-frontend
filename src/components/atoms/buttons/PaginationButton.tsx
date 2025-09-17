@@ -24,12 +24,12 @@ export const PaginationButton: React.FC<PaginationButtonProps> = ({
         hover:border-custom-primary
         ${
           selected ?
-            'bg-primary text-white border-custom-primary'
+            'bg-primary text-white dark:text-black border-custom-primary'
           : 'text-primary border-elements'
         }
         `}
     >
-      <span className="flex items-center justify-center text-body  leading-[36px]">
+      <span className="flex items-center justify-center text-body leading-[36px]">
         {text}
       </span>
     </a>

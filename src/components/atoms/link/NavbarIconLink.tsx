@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
 type Props = {
-  imgUrl: string;
   link: string;
+  children: React.ReactNode; // тут буде твоє "зміст" іконки
 };
 
-export const NavbarIconLink: React.FC<Props> = ({ imgUrl, link }) => {
+export const NavbarIconLink: React.FC<Props> = ({ link, children }) => {
   return (
     <NavLink
       to={link}
@@ -20,11 +20,7 @@ export const NavbarIconLink: React.FC<Props> = ({ imgUrl, link }) => {
         )
       }
     >
-      <img
-        className="w-[16px] h-[16px]"
-        src={imgUrl}
-        alt=""
-      />
+      {children}
     </NavLink>
   );
 };

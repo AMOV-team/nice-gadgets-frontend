@@ -1,9 +1,9 @@
 import React from 'react';
 import { PhoneCapacityButton } from '../buttons/ItemCard/PhoneCapacityButton.tsx';
-import type { Phone } from '../../../types/phone.ts';
+import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  phone: Phone;
+  phone: Item;
   selectCapacityHandler: (capacity: string) => void;
 };
 
@@ -19,6 +19,7 @@ export const CapacityPicker: React.FC<Props> = ({
 
         return (
           <PhoneCapacityButton
+            key={capacity}
             capacity={formattedCapacity}
             selectCapacityHandler={selectCapacityHandler}
             isSelected={phone.capacity === capacity}

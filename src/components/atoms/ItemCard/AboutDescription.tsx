@@ -1,9 +1,9 @@
 import { ItemParagraph } from '../text/ItemCard/ItemParagraph.tsx';
 import React from 'react';
-import type { Phone } from '../../../types/phone.ts';
+import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  phone: Phone;
+  phone: Item;
 };
 
 export const AboutDescription: React.FC<Props> = ({ phone }) => {
@@ -44,6 +44,7 @@ export const AboutDescription: React.FC<Props> = ({ phone }) => {
       >
         {phone.description.map((currentDescription) => (
           <ItemParagraph
+            key={currentDescription.title}
             title={currentDescription.title}
             text={currentDescription.text.join('/n')}
           />

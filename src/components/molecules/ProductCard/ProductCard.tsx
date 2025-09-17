@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import type { Product } from '../../../types/Product';
 import { ProductCharacteristics } from './ProductCharacteristics/ProductCharacteristics';
 import { ProductActions } from './ProductActions/ProductActions';
@@ -27,15 +28,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       ${className}
     `}
   >
-    <div className="flex-1 flex items-center justify-center overflow-hidden">
+    <Link
+      to={`/products/${product.category}/${product.itemId}`}
+      className="flex-1 flex items-center justify-center overflow-hidden"
+    >
       <img
         src={product.image}
         alt={product.name}
         className="max-h-full max-w-full object-contain"
       />
-    </div>
+    </Link>
 
-    <p className="font-semibold text-body text-custom-primary break-words whitespace-normal">
+    <p className="font-semibold text-body break-words whitespace-normal">
       {product.name}
     </p>
 

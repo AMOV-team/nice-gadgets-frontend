@@ -14,6 +14,7 @@ export const ColorPicker: React.FC<Props> = ({ colors, handleSelectColor }) => {
     <div className="flex gap-2">
       {colors.map((color) => (
         <ColorButton
+          key={color}
           handleSelectColor={handleSelectColor}
           color={color}
           selected={selected}
