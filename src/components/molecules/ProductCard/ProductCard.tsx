@@ -39,7 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       />
     </Link>
 
-    <p className="font-semibold text-body text-custom-primary break-words whitespace-normal">
+    <p className="font-semibold text-body break-words whitespace-normal">
       {product.name}
     </p>
 

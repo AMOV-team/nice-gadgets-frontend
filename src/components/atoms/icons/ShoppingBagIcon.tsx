@@ -7,7 +7,7 @@ type Props = {
 export const ShoppingBagIcon: React.FC<Props> = ({ className = '' }) => {
   return (
     <ShoppingBag
-      className={`text-custom-primary ${className}`}
+      className={`${className}`}
       size={16}
     />
   );

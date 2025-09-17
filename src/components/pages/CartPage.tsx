@@ -14,7 +14,6 @@ type CartItem = {
   quantity: number;
 };
 
-// Витягуємо перші 10 товарів з JSON і формуємо масив для корзини
 const products: Product[] = productsData as Product[];
 
 const testCart: CartItem[] = products.slice(0, 10).map((item) => ({

@@ -7,7 +7,7 @@ type Props = {
 export const MinusIcon: React.FC<Props> = ({ className = '' }) => {
   return (
     <Minus
-      className={`text-custom-primary ${className}`}
+      className={`${className}`}
       size={16}
     />
   );

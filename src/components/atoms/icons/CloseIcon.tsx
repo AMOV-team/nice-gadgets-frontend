@@ -7,7 +7,7 @@ type Props = {
 export const CloseIcon: React.FC<Props> = ({ className = '' }) => {
   return (
     <X
-      className={`text-custom-primary ${className}`}
+      className={`${className}`}
       size={16}
     />
   );
