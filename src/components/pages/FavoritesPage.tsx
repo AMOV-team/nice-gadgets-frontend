@@ -9,7 +9,7 @@ export const FavoritesPage: React.FC = () => {
   return (
     <>
       <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-        <h1 className="text-h1 font-bold text-custom-primary">Favorites</h1>
+        <h1 className="text-h1 font-bold">Favorites</h1>
         <p className="font-semibold text-custom-secondary text-body">
           {testFavorites.length} items
         </p>

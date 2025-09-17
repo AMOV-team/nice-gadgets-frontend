@@ -7,7 +7,7 @@ type Props = {
 export const SearchIcon: React.FC<Props> = ({ className = '' }) => {
   return (
     <Search
-      className={`text-custom-primary ${className}`}
+      className={`${className}`}
       size={16}
     />
   );

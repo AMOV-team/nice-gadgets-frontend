@@ -6,7 +6,7 @@
   html {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
-    color: hsl(var(--primary));
+    color: hsl(var(--custom-primary));
     /* scrollbar-gutter: stable; */
   }
 
@@ -132,6 +132,27 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    --custom-primary: 231 29% 96%;
+    /* #F1F2F9 */
+    --custom-accent: 257 87% 51%;
+    /* #4219D0 */
+    --custom-accent-secondary: 40 99% 61%;
+    /* #F4BA47 */
+    --custom-secondary: 228 6% 48%;
+    /* #75767F */
+    --icons: 227 9% 31%;
+    /* #4A4D58 */
+    --elements: 229 11% 26%;
+    /* #3B3E4A */
+    --hover: 210 100% 99%;
+    /* #FAFBFC */
+    --white: 0 0% 100%;
+    /* #FFFFFF */
+    --green: 139 63% 42%;
+    /* #27AE60 */
+    --red: 0 79% 64%;
+    /* #EB5757 */
   }
 }
 

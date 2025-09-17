@@ -7,7 +7,7 @@ type Props = {
 export const PlusIcon: React.FC<Props> = ({ className = '' }) => {
   return (
     <Plus
-      className={`text-custom-primary ${className}`}
+      className={`${className}`}
       size={16}
     />
   );

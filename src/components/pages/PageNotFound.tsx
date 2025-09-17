@@ -14,6 +14,7 @@ import { ArrowUpIcon } from '../atoms/icons/ArrowUpIcon';
 import { ArrowDownIcon } from '../atoms/icons/ArrowDownIcon';
 import { PlusIcon } from '../atoms/icons/PlusIcon';
 import { BurgerMenuIcon } from '../atoms/icons/BurgerMenuIcon';
+import { ThemeSwitcher } from '../atoms/buttons/ThemeSwitcher';
 
 export const PageNotFound = () => {
   return (
@@ -21,6 +22,7 @@ export const PageNotFound = () => {
       <h1 className="title">Page not found</h1>
       <section className=" flex flex-col gap-6 col-span-4 sm:col-span-12 xl:col-span-24">
         <h2>Gadget store</h2>
+        <ThemeSwitcher />
         <HouseIcon />
         <SearchIcon />
         <ShoppingBagIcon />

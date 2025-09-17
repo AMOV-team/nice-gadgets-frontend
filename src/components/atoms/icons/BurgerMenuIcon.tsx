@@ -7,7 +7,7 @@ type Props = {
 export const BurgerMenuIcon: React.FC<Props> = ({ className = '' }) => {
   return (
     <Menu
-      className={`text-custom-primary ${className}`}
+      className={`${className}`}
       size={16}
     />
   );
