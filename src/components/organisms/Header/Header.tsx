@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Navbar } from '../NavBar/Navbar';
+import { NavbarIconLink } from '../../atoms/link/NavbarIconLink';
+import { Link } from 'react-router-dom';
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="flex items-center justify-between h-[48px] pl-4 border-b shadow-[0px_1px_0px_0px_#E2E6E9] gap-8">
+    <header className="flex items-center justify-between h-[48px] pl-4 border-b shadow-[0px_1px_0px_0px_hsl(var(--elements))] gap-8">
       <div className="flex gap-4 items-center">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="pt-[13px] pb-[13px]"
         >
           <img
@@ -16,14 +18,14 @@ export const Header: React.FC = () => {
             src="img/header-logo.png"
             alt="Nice gadgets"
           />
-        </a>
+        </Link>
         <Navbar />
       </div>
 
       <a
         onClick={() => setIsOpen(!isOpen)}
         href="#"
-        className="sm:hidden shadow-[-1px_0px_0px_0px_#E2E6E9] p-4 inline-flex items-center gap-4 no-underline"
+        className="sm:hidden shadow-[-1px_0px_0px_0px_hsl(var(--elements))] p-4 inline-flex items-center gap-4 no-underline"
       >
         {isOpen ?
           <img
@@ -40,9 +42,17 @@ export const Header: React.FC = () => {
       </a>
 
       <div className="hidden sm:flex">
-        <a
+        <NavbarIconLink
+          imgUrl="img/heart-outline.png"
+          link="/favorites"
+        />
+        <NavbarIconLink
+          imgUrl="img/shopping-bag.svg"
+          link="/cart"
+        />
+        {/* <a
           href="#"
-          className="shadow-[-1px_0px_0px_0px_#E2E6E9] p-4 inline-flex items-center justify-center no-underline"
+          className="shadow-[-1px_0px_0px_0px_hsl(var(--elements))] p-4 inline-flex items-center justify-center no-underline"
         >
           <img
             className="w-[16px] h-[16px]"
@@ -53,14 +63,14 @@ export const Header: React.FC = () => {
 
         <a
           href="#"
-          className="shadow-[-1px_0px_0px_0px_#E2E6E9] p-4 inline-flex items-center justify-center no-underline"
+          className="shadow-[-1px_0px_0px_0px_hsl(var(--elements))] p-4 inline-flex items-center justify-center no-underline"
         >
           <img
             className="w-[16px] h-[16px]"
             src="img/shopping-bag.svg"
             alt=""
           />
-        </a>
+        </a> */}
       </div>
     </header>
   );

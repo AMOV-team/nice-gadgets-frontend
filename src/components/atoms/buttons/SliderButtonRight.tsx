@@ -23,10 +23,12 @@ export const SliderButtonRight: React.FC<SliderButtonRightProps> = ({
         cursor-pointer
         box-border
         border-solid
+        rounded-full
         border border-elements
         transition-all duration-200
         disabled:border-elements
         bg-transparent
+        self-center
         `,
         { 'hover:border-custom-primary': !disabled },
       )}

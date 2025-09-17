@@ -1,5 +1,5 @@
 import React from 'react';
-import { FooterLink } from '../../atoms/text/FooterLink';
+import { FooterLink } from '../../atoms/link/FooterLink';
 import { BackToTopButton } from '../../atoms/buttons/BackToTopButton';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
         className="flex flex-shrink-0"
       >
         <img
-          src="/img/logo-light-theme.png"
+          src="img/logo-light-theme.png"
           alt="footer-logo"
           className="w-[89px] h-[32px] object-contain block"
         />
@@ -33,11 +33,13 @@ export const Footer: React.FC = () => {
           </li>
         ))}
       </ul>
-      {/* <div className="flex flex-col md:flex-row">
-      </div> */}
 
       <div className="flex flex-row justify-center gap-4 flex-shrink-0">
-        <p className="font-mont text-small text-custom-secondary font-bold m-0 text-center self-center">
+        <p
+          className="
+          text-small text-center text-custom-secondaryfont-bold
+          m-0 self-center"
+        >
           Back to top
         </p>
         <BackToTopButton
