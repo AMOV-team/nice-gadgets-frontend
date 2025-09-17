@@ -66,6 +66,23 @@
     /* #27AE60 */
     --red: 0 79% 64%;
     /* #EB5757 */
+
+    /* Color picker */
+    --picker-black: 0 0% 12%;
+    --picker-spaceblack: 210 8% 14%;
+    --picker-white: 0 0% 96%;
+    --picker-silver: 210 5% 78%;
+    --picker-spacegray: 220 6% 45%;
+    --picker-gold: 45 85% 58%;
+    --picker-rosegold: 345 40% 66%;
+    --picker-yellow: 50 90% 60%;
+    --picker-green: 140 40% 35%;
+    --picker-midnightgreen: 175 60% 25%;
+    --picker-red: 0 65% 50%;
+    --picker-purple: 280 45% 45%;
+    --picker-deep-purple: 270 40% 35%;
+    --picker-coral: 12 70% 65%;
+    --picker-midnight: 240 60% 30%;
   }
 
   @font-face {

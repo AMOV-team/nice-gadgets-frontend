@@ -5,7 +5,7 @@ import type { Phone } from '../../../types/phone.ts';
 import { AboutDescription } from '../../atoms/ItemCard/AboutDescription.tsx';
 import { TechSpecsWithTitle } from '../../atoms/ItemCard/TechSpecsWithTitle.tsx';
 import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWrapper.tsx';
-import { ImagesWrapper } from '../../atoms/ItemCard/ImagesWrapper.tsx';
+import { ItemSwiper } from '../../atoms/buttons/ItemCard/ItemSwiper.tsx';
 
 export const ItemCard: React.FC = () => {
   const [phone, setPhone] = useState<Phone>(phones[0]);
@@ -85,33 +85,21 @@ export const ItemCard: React.FC = () => {
       `}
       >
         {/* Product ID */}
-        <div className="absolute top-0 right-0">
+        <div
+          className={`
+          absolute right-0 top-[395px]
+          xl:top-0 sm:top-0 md:top-0 lg:top-0 2xl:top-0
+        `}
+        >
           <p className="font-mont font-bold text-xs text-icons">ID: {goodId}</p>
         </div>
 
         {/* Left side */}
-        <div
-          className={`
-          flex flex-col gap-4 mb-10
-          sm:flex-row-reverse
-          xl:flex-row-reverse xl:mb-16
-        `}
-        >
-          <img
-            className={`
-              w-full h-72
-              sm:w-[287px] sm:h-[287px]
-              xl:w-[464px] xl:h-[464px] object-contain
-            `}
-            src={selectedImage}
-            alt="iphone"
-          ></img>
-          <ImagesWrapper
-            phone={phone}
-            selectedImage={selectedImage}
-            selectImageHandler={setSelectedImage}
-          />
-        </div>
+        <ItemSwiper
+          images={phone.images}
+          selectImageHandler={setSelectedImage}
+          selectedImage={selectedImage}
+        />
 
         {/* Right side */}
         <AvailableOptionsWrapper
