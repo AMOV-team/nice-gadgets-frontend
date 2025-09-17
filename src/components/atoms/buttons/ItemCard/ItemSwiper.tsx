@@ -4,9 +4,7 @@ import { FreeMode, Thumbs } from 'swiper/modules';
 import type SwiperType from 'swiper';
 
 import 'swiper/css';
-import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
 
 type Props = {
   images: Array<string>;
