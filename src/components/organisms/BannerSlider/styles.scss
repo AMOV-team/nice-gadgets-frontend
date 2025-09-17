@@ -3,74 +3,81 @@
 @import 'swiper/css/pagination';
 @import 'swiper/css/effect-fade';
 
-/* Pagination */
-.swiper-pagination {
-  position: absolute;
-  bottom: 10px;
-  text-align: center;
+.bannerslider {
+  position: relative;
   width: 100%;
-  z-index: 10;
-}
+  height: 80vh;
 
-.swiper-pagination-bullet {
-  width: 8px;
-  height: 8px;
-  background: #0f0f11;
-  opacity: 0.2;
-  border-radius: 50%;
-  margin: 0 4px;
-  transition:
-    opacity 0.3s,
-    background 0.3s;
-}
+  .bannerslider-pagination {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
 
-.swiper-pagination-bullet-active {
-  opacity: 1;
-  background: #0f0f11;
-}
+    .bannerslider-bullet {
+      width: 8px;
+      height: 8px;
+      background: #0f0f11;
+      opacity: 0.2;
+      border-radius: 50%;
+      margin: 0 4px;
+      transition:
+        opacity 0.3s,
+        background 0.3s;
 
-/* Swiper slide — базова позиція */
-.swiper-slide {
-  position: relative;
-  z-index: 1;
-}
+      &.bannerslider-bullet-active {
+        opacity: 1;
+        background: #0f0f11;
+      }
+    }
+  }
 
-/* Активний слайд — легка тінь */
-.swiper-slide-active {
-  z-index: 2;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
+  .bannerslider-slide {
+    position: relative;
+    z-index: 1;
 
-/* Slide wrapper — основна анімація */
-.slide-wrapper {
-  opacity: 0.5;
-  transform: scale(0.95);
-  transition:
-    transform 0.6s ease,
-    opacity 0.6s ease,
-    box-shadow 0.6s ease;
-  position: relative;
-  z-index: 1;
-}
+    &.bannerslider-slide-active {
+      z-index: 2;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
 
-.slide-wrapper.is-active {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 2;
+    .slide-wrapper {
+      opacity: 0.5;
+      transform: scale(0.95);
+      transition:
+        transform 0.6s ease,
+        opacity 0.6s ease,
+        box-shadow 0.6s ease;
+      position: relative;
+      z-index: 1;
 
-  box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.2),
-    0 0 32px rgba(255, 255, 255, 0.1);
+      &.is-active {
+        opacity: 1;
+        transform: scale(1);
+        z-index: 2;
+        box-shadow:
+          0 16px 48px rgba(0, 0, 0, 0.2),
+          0 0 32px rgba(255, 255, 255, 0.1);
+        background-image: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.15),
+          transparent 70%
+        );
+        background-blend-mode: lighten;
+        outline: 1px solid rgba(255, 255, 255, 0.2);
+        outline-offset: -4px;
+      }
 
-  background-image: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.15),
-    transparent 70%
-  );
-  background-blend-mode: lighten;
+      &.fade-in {
+        animation: fadeIn 2s ease-out-in forwards;
+      }
 
-  outline: 1px solid rgba(255, 255, 255, 0.2);
-  outline-offset: -4px;
+      &.fade-out {
+        animation: fadeOut 2s ease-out-in forwards;
+      }
+    }
+  }
 }
 
 @keyframes fadeIn {
@@ -111,13 +118,4 @@
     transform: scale(0.975);
     filter: brightness(0.88);
   }
-}
-.fade-in {
-  animation: fadeIn 2s ease-out-in;
-  animation-fill-mode: forwards;
-}
-
-.fade-out {
-  animation: fadeOut 2s ease-out-in;
-  animation-fill-mode: forwards;
 }

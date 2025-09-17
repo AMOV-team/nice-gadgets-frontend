@@ -1,8 +1,7 @@
 import React from 'react';
 import { BannerSlider } from '../organisms/BannerSlider/BannerSlider';
 import { ShopCategory } from '../atoms/shopCategory';
-import { SliderButtonLeft } from '../atoms/buttons/SliderButtonLeft';
-import { SliderButtonRight } from '../atoms/buttons/SliderButtonRight';
+import { SectionSlider } from '../organisms/SectionSlider/SectionSlider';
 
 // import { SORT_OPTIONS } from '../../constants/sortOptions';
 // import { Dropdown } from '../atoms/Dropdown';
@@ -26,25 +25,8 @@ export const HomePage: React.FC = () => {
 
       {/* In progress... */}
       <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
-        <div className="flex flex-row justify-between">
-          <h2 className="text-left font-extrabold text-2xl sm:text-3xl m-0">
-            Brand new models
-          </h2>
-
-          <div className="flex flex-row justify-between gap-x-4">
-            <SliderButtonLeft
-              onClick={() => {}}
-              disabled={false}
-            />
-            <SliderButtonRight
-              onClick={() => {}}
-              disabled={false}
-            />
-          </div>
-        </div>
-
-        <div className="flex justify-center border rounded-sm border-gray-300 bg-gray-300">
-          <p className="font-extrabold">Must be slider</p>
+        <div className="mx-[-1rem] sm:mx-0">
+          <SectionSlider HeaderText={'Brand new models'} />
         </div>
       </section>
 
@@ -86,25 +68,8 @@ export const HomePage: React.FC = () => {
 
       {/* In progress... */}
       <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
-        <div className="flex flex-row justify-between">
-          <h2 className="text-left font-extrabold text-2xl sm:text-3xl m-0">
-            Hot prices
-          </h2>
-
-          <div className="flex flex-row justify-between gap-x-4">
-            <SliderButtonLeft
-              onClick={() => {}}
-              disabled={false}
-            />
-            <SliderButtonRight
-              onClick={() => {}}
-              disabled={false}
-            />
-          </div>
-        </div>
-
-        <div className="flex justify-center border rounded-sm border-gray-300 bg-gray-300">
-          <p className="font-extrabold">Must be slider</p>
+        <div className="mx-[-1rem] sm:mx-0 ">
+          <SectionSlider HeaderText={'Hot prices'} />
         </div>
       </section>
 

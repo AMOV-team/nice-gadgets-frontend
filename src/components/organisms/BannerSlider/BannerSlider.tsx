@@ -41,22 +41,28 @@ export const BannerSlider = ({ className = '' }) => {
           setAnimationTrigger(swiper.realIndex);
           setActiveIndex(swiper.realIndex);
         }}
-        className="w-full h-full"
+        className="bannerslider"
         spaceBetween={30}
         centeredSlides
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         speed={2000}
-        pagination={{ clickable: true }}
+        pagination={{
+          clickable: true,
+          el: '.bannerslider-pagination',
+          bulletClass: 'bannerslider-bullet',
+          bulletActiveClass: 'bannerslider-bullet-active',
+        }}
         loop
         modules={[Autoplay, Pagination, Navigation]}
       >
         {slides.map((s, i) => (
-          <SwiperSlide key={i}>
+          <SwiperSlide
+            key={i}
+            className={`bannerslider-slide ${i === activeIndex ? 'bannerslider-slide-active' : ''}`}
+          >
             <Link
               to={s.to}
-              className={`slide-wrapper relative w-full h-full flex items-center justify-center overflow-hidden ${
-                i === activeIndex ? 'is-active' : ''
-              } ${i === animationTrigger ? 'fade-in' : ''}`}
+              className={`slide-wrapper ${i === activeIndex ? 'is-active' : ''} ${i === animationTrigger ? 'fade-in' : ''}`}
               style={{ backgroundColor: slideBg[i] }}
             >
               <img
@@ -68,6 +74,8 @@ export const BannerSlider = ({ className = '' }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <div className="bannerslider-pagination" />
 
       <div className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10">
         <SliderButtonLeft

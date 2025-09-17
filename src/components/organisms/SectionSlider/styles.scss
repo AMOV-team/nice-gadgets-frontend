@@ -1,0 +1,24 @@
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/effect-fade';
+
+.section-slider .swiper-slide {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-radius 0.3s ease-in-out;
+}
+
+.section-slider .swiper-slide:hover {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 500;
+  overflow: visible;
+}
+
+@media (max-width: 640px) {
+  .section-slider .swiper-slide:first-child {
+    margin-left: 16px;
+  }
+}
