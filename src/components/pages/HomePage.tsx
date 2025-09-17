@@ -4,13 +4,6 @@ import { ShopCategory } from '../atoms/shopCategory';
 import { SectionSlider } from '../organisms/SectionSlider/SectionSlider';
 import { GridContainer } from '../atoms/GridContainer';
 
-// import { SORT_OPTIONS } from '../../constants/sortOptions';
-// import { Dropdown } from '../atoms/Dropdown';
-// import { AddToCartButton } from '../atoms/buttons';
-
-// import { PaginationButton } from '../atoms/buttons/PaginationButton';
-// import { AddToFavoriteButton } from '../atoms/buttons/AddToFavoriteButton';
-
 export const HomePage: React.FC = () => {
   return (
     <>
@@ -63,26 +56,9 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* In progress... */}
         <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
           <SectionSlider HeaderText={'Hot prices'} />
         </section>
-
-        {/* Old buttons */}
-        <>
-          {/* <h1 className="title">Home Page</h1>
-        <AddToCartButton text="Add to cart" />
-        <PaginationButton
-          onSelect={() => alert('Clicked!')}
-          text="1"
-        />
-        <AddToFavoriteButton />
-
-        <Dropdown
-          defaultText="Оберіть"
-          itemData={SORT_OPTIONS}
-        /> */}
-        </>
       </GridContainer>
     </>
   );
