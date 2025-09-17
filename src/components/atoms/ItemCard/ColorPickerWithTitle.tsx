@@ -1,9 +1,9 @@
 import { ColorPicker } from './ColorPicker.tsx';
 import React from 'react';
-import type { Phone } from '../../../types/phone.ts';
+import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  phone: Phone;
+  phone: Item;
   handleSelectColor: (color: string) => void;
 };
 
