@@ -25,7 +25,7 @@ export const ContactsPage: React.FC = ({
   members = [
     {
       id: 'member-1',
-      name: 'Oleksand Oliferuk',
+      name: 'Oleksandr Oliferuk',
       role: 'Team Lead & Frontend Developer',
       avatar: '/public/img/OleksandrTM-contacts.png',
       github: '#',
