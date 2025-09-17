@@ -2,6 +2,7 @@ import React from 'react';
 import { FooterLink } from '../../atoms/link/FooterLink';
 import { BackToTopButton } from '../../atoms/buttons/BackToTopButton';
 import { Link } from 'react-router-dom';
+import { ThemeImage } from '../../atoms/icons/ThemeImage';
 
 const footerLinks = [
   { label: 'github', href: '/github' },
@@ -16,9 +17,10 @@ export const Footer: React.FC = () => {
         to="/"
         className="flex flex-shrink-0"
       >
-        <img
-          src="img/logo-light-theme.png"
-          alt="footer-logo"
+        <ThemeImage
+          light="img/logo-light-theme.png"
+          dark="img/logo-dark-theme.png"
+          alt="Nice gadgets logo"
           className="w-[89px] h-[32px] object-contain block"
         />
       </Link>
