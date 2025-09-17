@@ -11,6 +11,7 @@ import { FavoritesPage } from '../pages/FavoritesPage';
 import { CartPage } from '../pages/CartPage';
 import { TabletsPage } from '../pages/TabletsPage';
 import { AccessoriesPage } from '../pages/AccessoriesPage';
+import { ContactsPage } from '../pages/ContactsPage';
 
 export const Root = () => (
   <HashRouter>
@@ -82,6 +83,10 @@ export const Root = () => (
         <Route
           path="cart"
           element={<CartPage />}
+        />
+        <Route
+          path="contacts"
+          element={<ContactsPage />}
         />
         <Route
           path="*"
