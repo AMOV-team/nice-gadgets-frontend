@@ -13,6 +13,7 @@ type Props = {
   itemData: SortOption[];
   triggerClass: string;
   itemClass: string;
+  onSelect: (value: string) => void;
 };
 
 export const Dropdown: React.FC<Props> = ({
@@ -20,11 +21,15 @@ export const Dropdown: React.FC<Props> = ({
   itemData,
   triggerClass,
   itemClass,
+  onSelect,
 }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Select onOpenChange={setOpen}>
+    <Select
+      onOpenChange={setOpen}
+      onValueChange={onSelect}
+    >
       <SelectTrigger
         open={open}
         className={`
