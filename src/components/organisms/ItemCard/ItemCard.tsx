@@ -4,17 +4,12 @@ import accessories from '../../../../public/api/accessories.json';
 import tablets from '../../../../public/api/tablets.json';
 import products from '../../../../public/api/products.json';
 import type { Item } from '../../../types/Item.ts';
+import type { Category } from '../../../types/Category.ts';
 import { AboutDescription } from '../../atoms/ItemCard/AboutDescription.tsx';
 import { TechSpecsWithTitle } from '../../atoms/ItemCard/TechSpecsWithTitle.tsx';
 import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWrapper.tsx';
 import { ItemSwiper } from '../../atoms/buttons/ItemCard/ItemSwiper.tsx';
 import { useParams } from 'react-router-dom';
-
-enum Category {
-  ACCESSORIES = 'accessories',
-  PHONES = 'phones',
-  TABLETS = 'tablets',
-}
 
 function findItemById(arr: Array<Item>, itemId: string) {
   return arr.find((item) => item.id === itemId);
@@ -22,11 +17,11 @@ function findItemById(arr: Array<Item>, itemId: string) {
 
 function getProduct(category: Category, itemId: string) {
   switch (category) {
-    case Category.ACCESSORIES:
+    case 'accessories':
       return findItemById(accessories, itemId);
-    case Category.PHONES:
+    case 'phones':
       return findItemById(phones, itemId);
-    case Category.TABLETS:
+    case 'tablets':
       return findItemById(tablets, itemId);
     default:
       return null;
