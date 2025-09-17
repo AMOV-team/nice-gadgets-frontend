@@ -17,8 +17,8 @@ export const getProductsByCategory = (
 export const getProductById = (
   category: Category,
   id: string,
-): Promise<Products> => {
-  return client.get<Products>(`/${category}?id=eq.${id}&select=*`);
+): Promise<Products[]> => {
+  return client.get<Products[]>(`/${category}?id=eq.${id}&select=*`);
 };
 
 // POST
