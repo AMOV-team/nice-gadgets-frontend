@@ -20,7 +20,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   <div
     className={`
       flex flex-col 
-      w-full min-w-[272px]
+      w-full min-w-[212px]
       h-[440px] sm:h-[506px] 
       gap-[8px] p-[32px] 
       border border-solid border-elements rounded-lg 
