@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+import { getProductById, getProductsByCategory } from '../../api/productCrud';
+import type { Products } from '../../types/Products';
+import type { ProductsAll } from '../../types/ProductsAll';
+
 export const PageNotFound = () => {
   const [products, setProducts] = useState<ProductsAll[]>([]);
   const [productsById, setProductsById] = useState<Products[]>([]);
