@@ -8,8 +8,8 @@ import type { Category } from '../../../types/Category.ts';
 import { AboutDescription } from '../../atoms/ItemCard/AboutDescription.tsx';
 import { TechSpecsWithTitle } from '../../atoms/ItemCard/TechSpecsWithTitle.tsx';
 import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWrapper.tsx';
-import { ItemSwiper } from '../../atoms/buttons/ItemCard/ItemSwiper.tsx';
-import { useParams } from 'react-router-dom';
+import { ItemSwiper } from '../../atoms/ItemCard/ItemSwiper.tsx';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function findItemById(arr: Array<Item>, itemId: string) {
   return arr.find((item) => item.id === itemId);
@@ -29,6 +29,7 @@ function getProduct(category: Category, itemId: string) {
 }
 
 export const ItemCard: React.FC = () => {
+  const navigate = useNavigate();
   const { category, slug } = useParams<{ category: string; slug: string }>();
 
   const productMeta = products.find((p) => String(p.itemId) === slug);
@@ -39,6 +40,7 @@ export const ItemCard: React.FC = () => {
     : null;
 
   const [item, setItem] = useState<Item | null>(product ?? null);
+
   const [selectedImage, setSelectedImage] = useState(
     product ? product.images[0] : '',
   );
@@ -57,30 +59,45 @@ export const ItemCard: React.FC = () => {
     { name: 'Cell', value: item.cell?.join(', ') ?? '' },
   ];
 
-  const findPhone = (namespaceId: string, capacity: string, color: string) => {
-    return phones.find(
-      (phone) =>
-        phone.namespaceId === namespaceId &&
-        phone.capacity === capacity &&
-        phone.color === color,
-    );
+  const findItem = (namespaceId: string, capacity: string, color: string) => {
+    switch (category) {
+      case 'accessories':
+        return findItemInsideCategory(accessories);
+      case 'phones':
+        return findItemInsideCategory(phones);
+      case 'tablets':
+        return findItemInsideCategory(tablets);
+      default:
+        return null;
+    }
+
+    function findItemInsideCategory(arr: Item[]) {
+      return arr.find(
+        (item) =>
+          item.namespaceId === namespaceId &&
+          item.capacity === capacity &&
+          item.color === color,
+      );
+    }
   };
 
   const handleSelectCapacity = (newCapacity: string) => {
-    const newPhone = findPhone(item.namespaceId, newCapacity, item.color);
+    const newItem = findItem(item.namespaceId, newCapacity, item.color);
 
-    if (newPhone) {
-      setItem(newPhone);
-      setSelectedImage(newPhone.images[0]);
+    if (newItem) {
+      setItem(newItem);
+      setSelectedImage(newItem.images[0]);
+      navigate(`/products/${category}/${newItem.id}`, { replace: true });
     }
   };
 
   const handleSelectColor = (newColor: string) => {
-    const newPhone = findPhone(item.namespaceId, item.capacity, newColor);
+    const newItem = findItem(item.namespaceId, item.capacity, newColor);
 
-    if (newPhone) {
-      setItem(newPhone);
-      setSelectedImage(newPhone.images[0]);
+    if (newItem) {
+      setItem(newItem);
+      setSelectedImage(newItem.images[0]);
+      navigate(`/products/${category}/${newItem.id}`, { replace: true });
     }
   };
 
@@ -137,7 +154,7 @@ export const ItemCard: React.FC = () => {
 
         {/* Right side */}
         <AvailableOptionsWrapper
-          phone={item}
+          item={item}
           handleSelectColor={handleSelectColor}
           handleSelectCapacity={handleSelectCapacity}
           specs={specs}
@@ -151,7 +168,7 @@ export const ItemCard: React.FC = () => {
           xl:justify-center xl:flex-row xl:gap-16
         `}
       >
-        <AboutDescription phone={item} />
+        <AboutDescription item={item} />
         <TechSpecsWithTitle specs={specs} />
       </div>
     </div>

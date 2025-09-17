@@ -1,24 +1,21 @@
 import React from 'react';
-import { useState } from 'react';
 import { ColorButton } from '../buttons/ItemCard/ColorButton.tsx';
+import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  colors: Array<string>;
+  item: Item;
   handleSelectColor: (color: string) => void;
 };
 
-export const ColorPicker: React.FC<Props> = ({ colors, handleSelectColor }) => {
-  const [selected, setSelected] = useState(colors[0]);
-
+export const ColorPicker: React.FC<Props> = ({ item, handleSelectColor }) => {
   return (
     <div className="flex gap-2">
-      {colors.map((color) => (
+      {item.colorsAvailable.map((color) => (
         <ColorButton
           key={color}
           handleSelectColor={handleSelectColor}
           color={color}
-          selected={selected}
-          selectHandler={setSelected}
+          isSelected={item.color === color}
         />
       ))}
     </div>

@@ -8,14 +8,14 @@ import { ColorPickerWithTitle } from './ColorPickerWithTitle.tsx';
 import { CapacityPickerWithTitle } from './CapacityPickerWithTitle.tsx';
 
 type Props = {
-  phone: Item;
+  item: Item;
   handleSelectColor: (color: string) => void;
   handleSelectCapacity: (capacity: string) => void;
   specs: Array<{ name: string; value: string }>;
 };
 
 export const AvailableOptionsWrapper: React.FC<Props> = ({
-  phone,
+  item: item,
   handleSelectColor,
   handleSelectCapacity,
   specs,
@@ -28,16 +28,16 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
   `}
   >
     <ColorPickerWithTitle
-      phone={phone}
+      item={item}
       handleSelectColor={handleSelectColor}
     />
 
     <CapacityPickerWithTitle
-      phone={phone}
+      item={item}
       handleSelectCapacity={handleSelectCapacity}
     />
 
-    <ItemPrice phone={phone} />
+    <ItemPrice item={item} />
 
     <div className="flex gap-2 items-center mb-8 justify-between">
       <PrimaryButton text="Add to cart" />

@@ -2,10 +2,10 @@ import React from 'react';
 import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  phone: Item;
+  item: Item;
 };
 
-export const ItemPrice: React.FC<Props> = ({ phone }) => {
+export const ItemPrice: React.FC<Props> = ({ item }) => {
   return (
     <div className="font-mont flex items-end gap-2 mb-4">
       <h2
@@ -16,7 +16,7 @@ export const ItemPrice: React.FC<Props> = ({ phone }) => {
                m-0
                `}
       >
-        ${phone.priceDiscount}
+        ${item.priceDiscount}
       </h2>
       <span
         className={`
@@ -26,7 +26,7 @@ export const ItemPrice: React.FC<Props> = ({ phone }) => {
                line-through
                `}
       >
-        ${phone.priceRegular}
+        ${item.priceRegular}
       </span>
     </div>
   );

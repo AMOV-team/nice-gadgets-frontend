@@ -3,10 +3,10 @@ import React from 'react';
 import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  phone: Item;
+  item: Item;
 };
 
-export const AboutDescription: React.FC<Props> = ({ phone }) => {
+export const AboutDescription: React.FC<Props> = ({ item: item }) => {
   return (
     <div
       className={`
@@ -42,7 +42,7 @@ export const AboutDescription: React.FC<Props> = ({ phone }) => {
         flex flex-col gap-8
       `}
       >
-        {phone.description.map((currentDescription) => (
+        {item.description.map((currentDescription) => (
           <ItemParagraph
             key={currentDescription.title}
             title={currentDescription.title}

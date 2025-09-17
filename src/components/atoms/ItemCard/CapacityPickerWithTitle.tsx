@@ -3,12 +3,12 @@ import { CapacityPicker } from './CapacityPicker.tsx';
 import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  phone: Item;
+  item: Item;
   handleSelectCapacity: (color: string) => void;
 };
 
 export const CapacityPickerWithTitle: React.FC<Props> = ({
-  phone,
+  item,
   handleSelectCapacity,
 }) => {
   return (
@@ -25,11 +25,11 @@ export const CapacityPickerWithTitle: React.FC<Props> = ({
               after:left-0
             `}
     >
-      <p className="font-mont font-semibold text-[#89939A] text-xs">
+      <p className="font-mont font-semibold text-[#89939A] text-xs mb-2">
         Select capacity
       </p>
       <CapacityPicker
-        phone={phone}
+        item={item}
         selectCapacityHandler={handleSelectCapacity}
       />
     </div>

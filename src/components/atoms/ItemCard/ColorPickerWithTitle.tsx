@@ -3,12 +3,12 @@ import React from 'react';
 import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  phone: Item;
+  item: Item;
   handleSelectColor: (color: string) => void;
 };
 
 export const ColorPickerWithTitle: React.FC<Props> = ({
-  phone,
+  item,
   handleSelectColor,
 }) => {
   return (
@@ -25,11 +25,11 @@ export const ColorPickerWithTitle: React.FC<Props> = ({
               after:left-0
             `}
     >
-      <p className="font-mont font-semibold text-[#89939A] text-xs">
+      <p className="font-mont font-semibold text-[#89939A] text-xs mb-2">
         Available colors
       </p>
       <ColorPicker
-        colors={phone.colorsAvailable}
+        item={item}
         handleSelectColor={handleSelectColor}
       />
     </div>
