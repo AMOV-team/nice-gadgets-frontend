@@ -9,6 +9,8 @@ import { HomePage } from '../pages/HomePage';
 import { PhonesPage } from '../pages/PhonesPage';
 import { FavoritesPage } from '../pages/FavoritesPage';
 import { CartPage } from '../pages/CartPage';
+import { TabletsPage } from '../pages/TabletsPage';
+import { AccessoriesPage } from '../pages/AccessoriesPage';
 
 export const Root = () => (
   <HashRouter>
@@ -39,6 +41,34 @@ export const Root = () => (
           <Route
             path=":slug"
             element={<PhonesPage />}
+          />
+          <Route
+            path="*"
+            element={<PageNotFound />}
+          />
+        </Route>
+        <Route path="tablets">
+          <Route
+            index
+            element={<TabletsPage />}
+          />
+          <Route
+            path=":slug"
+            element={<TabletsPage />}
+          />
+          <Route
+            path="*"
+            element={<PageNotFound />}
+          />
+        </Route>
+        <Route path="accessories">
+          <Route
+            index
+            element={<AccessoriesPage />}
+          />
+          <Route
+            path=":slug"
+            element={<AccessoriesPage />}
           />
           <Route
             path="*"
