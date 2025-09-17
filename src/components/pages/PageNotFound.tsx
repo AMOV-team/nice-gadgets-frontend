@@ -14,8 +14,50 @@ import { ArrowUpIcon } from '../atoms/icons/ArrowUpIcon';
 import { ArrowDownIcon } from '../atoms/icons/ArrowDownIcon';
 import { PlusIcon } from '../atoms/icons/PlusIcon';
 import { BurgerMenuIcon } from '../atoms/icons/BurgerMenuIcon';
+import { useEffect, useState } from 'react';
+import { getProductById, getProductsByCategory } from '../../api/productCrud';
+import type { Products } from '../../types/Products';
+import type { ProductsAll } from '../../types/ProductsAll';
 
 export const PageNotFound = () => {
+  const [products, setProducts] = useState<ProductsAll[]>([]);
+  const [productsById, setProductsById] = useState<Products>();
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchProducts = async () => {
+    try {
+      const phones = await getProductsByCategory('phones');
+      setProducts(phones);
+      // console.log('Phones only:', phones);
+    } catch (err) {
+      // console.error('Fetch error:', err);
+      setError(`Упс, щось пішло не так ${err} 🙈`);
+    }
+  };
+
+  const fetchProductById = async () => {
+    try {
+      const phoneById = await getProductById(
+        'phones',
+        'apple-iphone-13-pro-max-128gb-graphite',
+      );
+      setProductsById(phoneById);
+      // console.log('Phones byid:', phoneById);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setError(`Упс, щось пішло не так ${err} 🙈`);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+    fetchProductById();
+  }, []);
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
+
   return (
     <>
       <h1 className="title">Page not found</h1>
@@ -36,7 +78,8 @@ export const PageNotFound = () => {
         <ArrowUpIcon />
         <ArrowDownIcon />
         <BurgerMenuIcon />
-
+        {<p>{productsById?.name}</p>}
+        {<p>{products[0].category}</p>}
         {/* <div className="mx-[-1rem] sm:mx-0">
                  <SectionSlider />
                 </div> */}
