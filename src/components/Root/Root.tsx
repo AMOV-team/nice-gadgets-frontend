@@ -14,7 +14,6 @@ import { AccessoriesPage } from '../pages/AccessoriesPage';
 import { ItemCardPage } from '../pages/ItemCardPage.tsx';
 import { ContactsPage } from '../pages/ContactsPage';
 
-
 export const Root = () => (
   <HashRouter>
     <Routes>
