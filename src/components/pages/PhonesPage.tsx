@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import products from '../../../public/api/products.json';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { Dropdown } from '../atoms/Dropdown';
@@ -8,11 +9,35 @@ import { PaginationButton } from '../atoms/buttons/PaginationButton';
 export const PhonesPage: React.FC = () => {
   const phones = products.filter((p) => p.category === 'phones');
 
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const itemsPerPage = 16;
-  const totalPages = Math.ceil(phones.length / itemsPerPage);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentPhones = phones.slice(
+  const sortBy = searchParams.get('sortBy') || 'Newest';
+  const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 8;
+  const currentPage = Number(searchParams.get('page')) || 1;
+
+  const sortedPhones = useMemo(() => {
+    const sorted = [...phones];
+
+    switch (sortBy) {
+      case 'Price: Low to High':
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+      case 'Price: High to Low':
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+      case 'Alphabetically':
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      default:
+        sorted.sort((a, b) => b.year - a.year);
+        break;
+    }
+    return sorted;
+  }, [phones, sortBy]);
+
+  const totalPages = Math.ceil(sortedPhones.length / itemsPerPage);
+
+  const currentPhones = sortedPhones.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
@@ -21,17 +46,40 @@ export const PhonesPage: React.FC = () => {
 
   const itemOptions: SortOption[] = [
     { id: 1, label: '8' },
-    { id: 1, label: '16' },
-    { id: 1, label: '24' },
-    { id: 1, label: '32' },
+    { id: 2, label: '16' },
+    { id: 3, label: '24' },
+    { id: 4, label: '32' },
   ];
 
   const sortOptions: SortOption[] = [
     { id: 1, label: 'Newest' },
     { id: 2, label: 'Price: Low to High' },
     { id: 3, label: 'Price: High to Low' },
-    { id: 4, label: 'Best Selling' },
+    { id: 4, label: 'Alphabetically' },
   ];
+
+  const handleSortChange = (value: string) => {
+    setSearchParams((prevParams) => {
+      prevParams.set('sortBy', value);
+      prevParams.set('page', '1');
+      return prevParams;
+    });
+  };
+
+  const handleItemsPerPageChange = (value: string) => {
+    setSearchParams((prevParams) => {
+      prevParams.set('itemsPerPage', value);
+      prevParams.set('page', '1');
+      return prevParams;
+    });
+  };
+
+  const handlePageChange = (page: number) => {
+    setSearchParams((prevParams) => {
+      prevParams.set('page', String(page));
+      return prevParams;
+    });
+  };
 
   return (
     <>
@@ -50,10 +98,11 @@ export const PhonesPage: React.FC = () => {
             Sort by
           </p>
           <Dropdown
-            defaultText="Newest"
+            defaultText={sortBy}
             itemData={sortOptions}
             triggerClass="w-full"
             itemClass="w-full"
+            onSelect={handleSortChange}
           />
         </div>
 
@@ -62,10 +111,11 @@ export const PhonesPage: React.FC = () => {
             Items on page
           </p>
           <Dropdown
-            defaultText="8"
+            defaultText={String(itemsPerPage)}
             itemData={itemOptions}
             triggerClass="w-full"
             itemClass="w-full"
+            onSelect={handleItemsPerPageChange}
           />
         </div>
       </div>
@@ -86,7 +136,7 @@ export const PhonesPage: React.FC = () => {
               key={page}
               text={page.toString()}
               selected={page === currentPage}
-              onSelect={() => setCurrentPage(page)}
+              onSelect={() => handlePageChange(page)}
             />
           ))}
         </div>
