@@ -14,12 +14,14 @@ export const ColorButton: React.FC<Props> = ({
   selected,
   selectHandler,
 }) => {
+  const formattedColor = '--picker-' + color.replace(' ', '');
+
   return (
     <button
       onClick={(event) => {
         event.preventDefault();
 
-        handleSelectColor(color);
+        handleSelectColor(color.replace('picker', ' ').replace('-', ' '));
         selectHandler(color);
       }}
       className={cn(
@@ -46,9 +48,9 @@ export const ColorButton: React.FC<Props> = ({
         w-full
         h-full
         rounded-full
-        transition-all duration-200 
+        transition-all duration-200
       `}
-        style={{ backgroundColor: color }}
+        style={{ backgroundColor: `hsl(var(${formattedColor}))` }}
       ></div>
     </button>
   );

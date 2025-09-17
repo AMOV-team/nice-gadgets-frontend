@@ -19,6 +19,7 @@ export const CapacityPicker: React.FC<Props> = ({
 
         return (
           <PhoneCapacityButton
+            key={capacity}
             capacity={formattedCapacity}
             selectCapacityHandler={selectCapacityHandler}
             isSelected={phone.capacity === capacity}

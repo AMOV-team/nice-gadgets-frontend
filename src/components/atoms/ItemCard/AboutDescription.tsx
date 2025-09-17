@@ -44,6 +44,7 @@ export const AboutDescription: React.FC<Props> = ({ phone }) => {
       >
         {phone.description.map((currentDescription) => (
           <ItemParagraph
+            key={currentDescription.title}
             title={currentDescription.title}
             text={currentDescription.text.join('/n')}
           />
