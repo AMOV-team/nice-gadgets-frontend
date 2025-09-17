@@ -13,9 +13,11 @@ import { TabletsPage } from '../pages/TabletsPage';
 import { AccessoriesPage } from '../pages/AccessoriesPage';
 import { ItemCardPage } from '../pages/ItemCardPage.tsx';
 import { ContactsPage } from '../pages/ContactsPage';
+import { ScrollToTop } from '../organisms/ScrollToTop/ScrollToTop.tsx';
 
 export const Root = () => (
   <HashRouter>
+    <ScrollToTop />
     <Routes>
       <Route
         path="/"

@@ -3,17 +3,17 @@ import { PhoneCapacityButton } from '../buttons/ItemCard/PhoneCapacityButton.tsx
 import type { Item } from '../../../types/Item.ts';
 
 type Props = {
-  phone: Item;
+  item: Item;
   selectCapacityHandler: (capacity: string) => void;
 };
 
 export const CapacityPicker: React.FC<Props> = ({
-  phone,
+  item,
   selectCapacityHandler,
 }) => {
   return (
     <div className="flex gap-2">
-      {phone.capacityAvailable.map((capacity) => {
+      {item.capacityAvailable.map((capacity) => {
         const formattedCapacity =
           capacity.slice(0, -2) + ' ' + capacity.slice(-2);
 
@@ -22,7 +22,7 @@ export const CapacityPicker: React.FC<Props> = ({
             key={capacity}
             capacity={formattedCapacity}
             selectCapacityHandler={selectCapacityHandler}
-            isSelected={phone.capacity === capacity}
+            isSelected={item.capacity === capacity}
           />
         );
       })}

@@ -4,15 +4,13 @@ import cn from 'classnames';
 type Props = {
   handleSelectColor: (color: string) => void;
   color: string;
-  selected: string;
-  selectHandler: (color: string) => void;
+  isSelected: boolean;
 };
 
 export const ColorButton: React.FC<Props> = ({
   handleSelectColor,
   color,
-  selected,
-  selectHandler,
+  isSelected,
 }) => {
   const formattedColor = '--picker-' + color.replace(' ', '');
 
@@ -22,7 +20,6 @@ export const ColorButton: React.FC<Props> = ({
         event.preventDefault();
 
         handleSelectColor(color.replace('picker', ' ').replace('-', ' '));
-        selectHandler(color);
       }}
       className={cn(
         `
@@ -38,8 +35,8 @@ export const ColorButton: React.FC<Props> = ({
         transition-all duration-200 
       `,
         {
-          'border-primary': selected === color,
-          'hover:border-icons': selected !== color,
+          'border-primary': isSelected,
+          'hover:border-icons': !isSelected,
         },
       )}
     >
