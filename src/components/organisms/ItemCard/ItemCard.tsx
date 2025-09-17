@@ -1,24 +1,65 @@
 import React, { useState } from 'react';
 import phones from '../../../../public/api/phones.json';
+import accessories from '../../../../public/api/accessories.json';
+import tablets from '../../../../public/api/tablets.json';
 import products from '../../../../public/api/products.json';
-import type { Phone } from '../../../types/phone.ts';
+import type { Item } from '../../../types/Item.ts';
 import { AboutDescription } from '../../atoms/ItemCard/AboutDescription.tsx';
 import { TechSpecsWithTitle } from '../../atoms/ItemCard/TechSpecsWithTitle.tsx';
 import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWrapper.tsx';
 import { ItemSwiper } from '../../atoms/buttons/ItemCard/ItemSwiper.tsx';
+import { useParams } from 'react-router-dom';
+
+enum Category {
+  ACCESSORIES = 'accessories',
+  PHONES = 'phones',
+  TABLETS = 'tablets',
+}
+
+function findItemById(arr: Array<Item>, itemId: string) {
+  return arr.find((item) => item.id === itemId);
+}
+
+function getProduct(category: Category, itemId: string) {
+  switch (category) {
+    case Category.ACCESSORIES:
+      return findItemById(accessories, itemId);
+    case Category.PHONES:
+      return findItemById(phones, itemId);
+    case Category.TABLETS:
+      return findItemById(tablets, itemId);
+    default:
+      return null;
+  }
+}
 
 export const ItemCard: React.FC = () => {
-  const [phone, setPhone] = useState<Phone>(phones[0]);
-  const [selectedImage, setSelectedImage] = useState(phone.images[0]);
+  const { category, slug } = useParams<{ category: string; slug: string }>();
+
+  const productMeta = products.find((p) => String(p.itemId) === slug);
+
+  const product =
+    category && slug && productMeta?.itemId ?
+      getProduct(category as Category, productMeta.itemId)
+    : null;
+
+  const [item, setItem] = useState<Item | null>(product ?? null);
+  const [selectedImage, setSelectedImage] = useState(
+    product ? product.images[0] : '',
+  );
+
+  if (!item) {
+    return <p>Product not found1</p>;
+  }
 
   const specs = [
-    { name: 'Screen', value: phone.screen },
-    { name: 'Resolution', value: phone.resolution },
-    { name: 'Processor', value: phone.processor },
-    { name: 'RAM', value: phone.ram },
-    { name: 'Camera', value: phone.camera },
-    { name: 'Zoom', value: phone.zoom },
-    { name: 'Cell', value: phone.cell.join(', ') },
+    { name: 'Screen', value: item.screen ?? '' },
+    { name: 'Resolution', value: item.resolution ?? '' },
+    { name: 'Processor', value: item.processor ?? '' },
+    { name: 'RAM', value: item.ram ?? '' },
+    { name: 'Camera', value: item.camera ?? '' },
+    { name: 'Zoom', value: item.zoom ?? '' },
+    { name: 'Cell', value: item.cell?.join(', ') ?? '' },
   ];
 
   const findPhone = (namespaceId: string, capacity: string, color: string) => {
@@ -31,36 +72,35 @@ export const ItemCard: React.FC = () => {
   };
 
   const handleSelectCapacity = (newCapacity: string) => {
-    const newPhone = findPhone(phone.namespaceId, newCapacity, phone.color);
+    const newPhone = findPhone(item.namespaceId, newCapacity, item.color);
 
     if (newPhone) {
-      setPhone(newPhone);
+      setItem(newPhone);
       setSelectedImage(newPhone.images[0]);
     }
   };
 
   const handleSelectColor = (newColor: string) => {
-    const newPhone = findPhone(phone.namespaceId, phone.capacity, newColor);
+    const newPhone = findPhone(item.namespaceId, item.capacity, newColor);
 
     if (newPhone) {
-      setPhone(newPhone);
+      setItem(newPhone);
       setSelectedImage(newPhone.images[0]);
     }
   };
 
-  const goodId =
-    products.find((product) => product.itemId === phone.id)?.id ?? '802390';
+  const goodId = productMeta?.id ?? '802390';
 
   return (
     <div
       className={`
-      p-4
-      sm:p-6
-      xl:p-8
-      mb-14
-      sm:mb-16
-      xl:mb-20
-    `}
+        p-4
+        sm:p-6
+        xl:p-8
+        mb-14
+        sm:mb-16
+        xl:mb-20
+      `}
     >
       {/* Name */}
       <h2
@@ -69,41 +109,40 @@ export const ItemCard: React.FC = () => {
           text-[22px] leading-[140%] mb-4
           sm:mb-10
           xl:text-[32px] xl:leading-[41px] xl:tracking-[-1%] xl:mb-14
-          
         `}
       >
-        {phone.name}
+        {item.name}
       </h2>
 
       {/* Main */}
       <div
         className={`
-        flex flex-col mb-14
-        sm:mb-16 sm:flex-row sm:justify-start
-        xl:mb-20 xl:flex-row xl:gap-16
-        relative
-      `}
+          flex flex-col mb-14
+          sm:mb-16 sm:flex-row sm:justify-start
+          xl:mb-20 xl:flex-row xl:gap-16
+          relative
+        `}
       >
         {/* Product ID */}
         <div
           className={`
-          absolute right-0 top-[395px]
-          xl:top-0 sm:top-0 md:top-0 lg:top-0 2xl:top-0
-        `}
+            absolute right-0 top-[395px]
+            xl:top-0 sm:top-0 md:top-0 lg:top-0 2xl:top-0
+          `}
         >
           <p className="font-mont font-bold text-xs text-icons">ID: {goodId}</p>
         </div>
 
         {/* Left side */}
         <ItemSwiper
-          images={phone.images}
+          images={item.images}
           selectImageHandler={setSelectedImage}
           selectedImage={selectedImage}
         />
 
         {/* Right side */}
         <AvailableOptionsWrapper
-          phone={phone}
+          phone={item}
           handleSelectColor={handleSelectColor}
           handleSelectCapacity={handleSelectCapacity}
           specs={specs}
@@ -113,11 +152,11 @@ export const ItemCard: React.FC = () => {
       {/* Product Description */}
       <div
         className={`
-        flex flex-col items-start w-full
-        xl:justify-center xl:flex-row xl:gap-16
-      `}
+          flex flex-col items-start w-full
+          xl:justify-center xl:flex-row xl:gap-16
+        `}
       >
-        <AboutDescription phone={phone} />
+        <AboutDescription phone={item} />
         <TechSpecsWithTitle specs={specs} />
       </div>
     </div>

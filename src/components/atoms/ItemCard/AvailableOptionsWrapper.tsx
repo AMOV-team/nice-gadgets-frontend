@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Phone } from '../../../types/phone.ts';
+import type { Item } from '../../../types/Item.ts';
 import { ItemPrice } from './ItemPrice.tsx';
 import { PrimaryButton } from '../buttons';
 import { AddToFavoriteButton } from '../buttons/AddToFavoriteButton.tsx';
@@ -8,7 +8,7 @@ import { ColorPickerWithTitle } from './ColorPickerWithTitle.tsx';
 import { CapacityPickerWithTitle } from './CapacityPickerWithTitle.tsx';
 
 type Props = {
-  phone: Phone;
+  phone: Item;
   handleSelectColor: (color: string) => void;
   handleSelectCapacity: (capacity: string) => void;
   specs: Array<{ name: string; value: string }>;

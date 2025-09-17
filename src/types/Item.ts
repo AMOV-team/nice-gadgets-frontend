@@ -1,4 +1,4 @@
-export type Phone = {
+export type Item = {
   id: string;
   category: string;
   namespaceId: string;
@@ -15,7 +15,7 @@ export type Phone = {
   resolution: string;
   processor: string;
   ram: string;
-  camera: string;
-  zoom: string;
+  camera?: string;
+  zoom?: string;
   cell: Array<string>;
 };
