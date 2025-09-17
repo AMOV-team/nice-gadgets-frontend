@@ -5,6 +5,7 @@ import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { Dropdown } from '../atoms/Dropdown';
 import type { SortOption } from '../../types/SortOption';
 import { PaginationButton } from '../atoms/buttons/PaginationButton';
+import { GridContainer } from '../atoms/GridContainer';
 
 export const TabletsPage: React.FC = () => {
   const tablets = products.filter((p) => p.category === 'tablets');
@@ -81,7 +82,7 @@ export const TabletsPage: React.FC = () => {
   };
 
   return (
-    <>
+    <GridContainer>
       <div className="col-span-full">
         <h1 className="text-h1 font-extrabold font-mont mb-2 sm:text-h1-lg">
           Tablets
@@ -140,6 +141,6 @@ export const TabletsPage: React.FC = () => {
           ))}
         </div>
       </div>
-    </>
+    </GridContainer>
   );
 };
