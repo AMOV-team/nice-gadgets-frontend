@@ -29,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     `}
   >
     <Link
-      to={`/products/${product.category}/${product.itemId}`}
+      to={`/${product.category}/${product.itemId}`}
       className="flex-1 flex items-center justify-center overflow-hidden"
     >
       <img

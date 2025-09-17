@@ -44,7 +44,7 @@ export const Root = () => (
           />
           <Route
             path=":slug"
-            element={<PhonesPage />}
+            element={<ItemCardPage category="phones" />}
           />
           <Route
             path="*"
@@ -58,7 +58,7 @@ export const Root = () => (
           />
           <Route
             path=":slug"
-            element={<TabletsPage />}
+            element={<ItemCardPage category="tablets" />}
           />
           <Route
             path="*"
@@ -72,7 +72,7 @@ export const Root = () => (
           />
           <Route
             path=":slug"
-            element={<AccessoriesPage />}
+            element={<ItemCardPage category="accessories" />}
           />
           <Route
             path="*"
@@ -94,10 +94,6 @@ export const Root = () => (
         <Route
           path="*"
           element={<PageNotFound />}
-        />
-        <Route
-          path="products/:category/:slug"
-          element={<ItemCardPage />}
         />
       </Route>
     </Routes>

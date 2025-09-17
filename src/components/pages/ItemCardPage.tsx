@@ -1,10 +1,14 @@
-import { ItemCard } from '../organisms/ItemCard/ItemCard.tsx';
+import { ItemCard } from '../molecules/ItemCard/ItemCard.tsx';
 import { SectionSlider } from '../organisms/SectionSlider/SectionSlider.tsx';
 import React from 'react';
 
-export const ItemCardPage: React.FC = () => (
+type Props = {
+  category: string;
+};
+
+export const ItemCardPage: React.FC<Props> = ({ category }) => (
   <div>
-    <ItemCard />
+    <ItemCard category={category} />
     <SectionSlider HeaderText="You may also like" />
   </div>
 );

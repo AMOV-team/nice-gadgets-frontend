@@ -28,9 +28,13 @@ function getProduct(category: Category, itemId: string) {
   }
 }
 
-export const ItemCard: React.FC = () => {
+type Props = {
+  category: string;
+};
+
+export const ItemCard: React.FC<Props> = ({ category }) => {
   const navigate = useNavigate();
-  const { category, slug } = useParams<{ category: string; slug: string }>();
+  const { slug } = useParams<{ slug: string }>();
 
   const productMeta = products.find((p) => String(p.itemId) === slug);
 
@@ -87,7 +91,7 @@ export const ItemCard: React.FC = () => {
     if (newItem) {
       setItem(newItem);
       setSelectedImage(newItem.images[0]);
-      navigate(`/products/${category}/${newItem.id}`, { replace: true });
+      navigate(`/${category}/${newItem.id}`, { replace: true });
     }
   };
 
@@ -97,7 +101,7 @@ export const ItemCard: React.FC = () => {
     if (newItem) {
       setItem(newItem);
       setSelectedImage(newItem.images[0]);
-      navigate(`/products/${category}/${newItem.id}`, { replace: true });
+      navigate(`/${category}/${newItem.id}`, { replace: true });
     }
   };
 
