@@ -7,8 +7,10 @@ import type { SortOption } from '../../types/SortOption';
 import { PaginationButton } from '../atoms/buttons/PaginationButton';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
+import { useTranslation } from 'react-i18next';
 
 export const TabletsPage: React.FC = () => {
+  const { t } = useTranslation();
   const tablets = products.filter((p) => p.category === 'tablets');
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -87,17 +89,17 @@ export const TabletsPage: React.FC = () => {
       <div className="col-span-full">
         <Breadcrumb />
         <h1 className="text-h1 font-extrabold font-mont mb-2 sm:text-h1-lg">
-          Tablets
+          {t('tablets')}
         </h1>
         <p className="text-body-14 font-mont font-semibold text-custom-secondary">
-          {modelsCount} models
+          {modelsCount} {t('models')}
         </p>
       </div>
 
       <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4">
         <div className="col-start-1 col-end-3 sm:col-end-5">
           <p className="text-small font-mont text-custom-secondary mb-1">
-            Sort by
+            {t('sortby')}
           </p>
           <Dropdown
             defaultText={sortBy}
@@ -110,7 +112,7 @@ export const TabletsPage: React.FC = () => {
 
         <div className="col-start-3 col-end-5 sm:col-start-5 sm:col-end-8">
           <p className="text-small font-mont text-custom-secondary mb-1">
-            Items on page
+            {t('items-on-page')}
           </p>
           <Dropdown
             defaultText={String(itemsPerPage)}

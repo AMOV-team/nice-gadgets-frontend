@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 export const Breadcrumb: React.FC = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const pathnames = location.pathname.split('/').filter(Boolean);
@@ -127,7 +129,7 @@ export const Breadcrumb: React.FC = () => {
               />
             </svg>
             <span className="font-mont font-bold text-xs text-custom-secondary ">
-              Back
+              {t('back')}
             </span>
           </button>
         </div>

@@ -7,13 +7,15 @@ import type { SortOption } from '../../types/SortOption';
 import { PaginationButton } from '../atoms/buttons/PaginationButton';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
+import { useTranslation } from 'react-i18next';
 
 export const PhonesPage: React.FC = () => {
+  const { t } = useTranslation();
   const phones = products.filter((p) => p.category === 'phones');
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const sortBy = searchParams.get('sortBy') || 'Newest';
+  const sortBy = searchParams.get('sortBy');
   const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 8;
   const currentPage = Number(searchParams.get('page')) || 1;
 
@@ -55,8 +57,8 @@ export const PhonesPage: React.FC = () => {
 
   const sortOptions: SortOption[] = [
     { id: 1, label: 'Newest' },
-    { id: 2, label: 'Price: Low to High' },
-    { id: 3, label: 'Price: High to Low' },
+    { id: 2, label: 'Low-to-High' },
+    { id: 3, label: 'High-to-Low' },
     { id: 4, label: 'Alphabetically' },
   ];
 
@@ -88,20 +90,20 @@ export const PhonesPage: React.FC = () => {
       <div className="col-span-full">
         <Breadcrumb />
         <h1 className="text-h1 font-extrabold font-mont mb-2 sm:text-h1-lg">
-          Mobile Phones
+          {t('mobile-phones')}
         </h1>
         <p className="text-body-14 font-mont font-semibold text-custom-secondary">
-          {modelsCount} models
+          {modelsCount} {t('models')}
         </p>
       </div>
 
       <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4">
-        <div className="col-start-1 col-end-3 sm:col-end-5">
+        <div className="col-start-1 col-end-3 sm:col-end-6">
           <p className="text-small font-mont text-custom-secondary mb-1">
-            Sort by
+            {t('sortby')}
           </p>
           <Dropdown
-            defaultText={sortBy}
+            defaultText="Newest"
             itemData={sortOptions}
             triggerClass="w-full"
             itemClass="w-full"
@@ -109,9 +111,9 @@ export const PhonesPage: React.FC = () => {
           />
         </div>
 
-        <div className="col-start-3 col-end-5 sm:col-start-5 sm:col-end-8">
+        <div className="col-start-3 col-end-5 sm:col-start-6 sm:col-end-9">
           <p className="text-small font-mont text-custom-secondary mb-1">
-            Items on page
+            {t('items-on-page')}
           </p>
           <Dropdown
             defaultText={String(itemsPerPage)}
