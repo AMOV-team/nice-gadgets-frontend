@@ -85,11 +85,11 @@ export const ItemSwiper: React.FC<Props> = ({
             className={`
               border border-solid border-elements
               rounded-lg
+              box-border
               cursor-pointer
               !w-[49px] !h-[49px]
               sm:!w-[35px] sm:!h-[35px]
               xl:!w-20 xl:!h-20
-              overflow-hidden
             `}
             style={{
               border: `1px solid ${

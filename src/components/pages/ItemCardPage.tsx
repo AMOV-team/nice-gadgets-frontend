@@ -7,7 +7,13 @@ type Props = {
 };
 
 export const ItemCardPage: React.FC<Props> = ({ category }) => (
-  <div>
+  <div
+    className={`
+    xl:mx-[152px] xl:mb-20
+    sm:mx-8
+    mt-6 mx-4 mb-14
+  `}
+  >
     <ItemCard category={category} />
     <SectionSlider HeaderText="You may also like" />
   </div>

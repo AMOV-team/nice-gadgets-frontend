@@ -10,6 +10,7 @@ import { TechSpecsWithTitle } from '../../atoms/ItemCard/TechSpecsWithTitle.tsx'
 import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWrapper.tsx';
 import { ItemSwiper } from '../../atoms/ItemCard/ItemSwiper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Breadcrumb } from '../Breadcrumb/Breadcrumb.tsx';
 
 function findItemById(arr: Array<Item>, itemId: string) {
   return arr.find((item) => item.id === itemId);
@@ -110,14 +111,13 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   return (
     <div
       className={`
-        p-4
-        sm:p-6
-        xl:p-8
         mb-14
         sm:mb-16
         xl:mb-20
       `}
     >
+      <Breadcrumb />
+
       {/* Name */}
       <h2
         className={`
@@ -135,7 +135,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         className={`
           flex flex-col mb-14
           sm:mb-16 sm:flex-row sm:justify-start
-          xl:mb-20 xl:flex-row xl:gap-16
+          xl:mb-20 xl:gap-16
           relative
         `}
       >
@@ -143,7 +143,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         <div
           className={`
             absolute right-0 top-[395px]
-            xl:top-0 sm:top-0 md:top-0 lg:top-0 2xl:top-0
+            sm:top-0
           `}
         >
           <p className="font-mont font-bold text-xs text-icons">ID: {goodId}</p>
