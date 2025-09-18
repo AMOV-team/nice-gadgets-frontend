@@ -5,6 +5,10 @@ export default async function handler(req, res) {
 
   const { text, targetLang } = req.body;
 
+  if (!text || !targetLang) {
+    return res.status(400).json({ error: 'Missing text or targetLang' });
+  }
+
   try {
     const response = await fetch('https://libretranslate.de/translate', {
       method: 'POST',
@@ -17,8 +21,13 @@ export default async function handler(req, res) {
       }),
     });
 
+    if (!response.ok) {
+      console.error('LibreTranslate returned error:', response.status);
+      return res.status(500).json({ error: 'Translation failed' });
+    }
+
     const data = await response.json();
-    res.status(200).json(data);
+    res.status(200).json({ translatedText: data.translatedText });
   } catch (err) {
     console.error('Translation error:', err);
     res.status(500).json({ error: 'Translation failed' });
