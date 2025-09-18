@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const ShoppingBagIconCounter: React.FC<Props> = ({
-  count = 100,
+  count = 0,
   className = '',
 }) => {
   return (
@@ -21,7 +21,7 @@ export const ShoppingBagIconCounter: React.FC<Props> = ({
 
       {count > 0 && (
         <span
-          className="absolute top-[1px] right-[1px] w-[15px] h-[15px] 
+          className="absolute top-[1px] right-[-7px] w-[15px] h-[15px] 
                      bg-custom-accent text-white text-[7px] leading-[15px] 
                      font-mont font-semibold rounded-full text-center 
                      border border-white"

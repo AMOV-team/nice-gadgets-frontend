@@ -1,6 +1,7 @@
 import { NavbarLink } from '../../atoms/link/NavbarLink';
 import React from 'react';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   isBurgerMenuActive: boolean;
@@ -11,6 +12,8 @@ export const Navbar: React.FC<Props> = ({
   isBurgerMenuActive,
   handleIsBurgerMenuActive,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <nav
       data-cy="nav"
@@ -31,22 +34,22 @@ export const Navbar: React.FC<Props> = ({
       aria-label="main navigation"
     >
       <NavbarLink
-        text="Home"
+        text={t('home')}
         link="/"
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
       />
       <NavbarLink
-        text="Phones"
+        text={t('phones')}
         link="/phones"
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
       />
       <NavbarLink
-        text="Tablets"
+        text={t('tablets')}
         link="/tablets"
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
       />
       <NavbarLink
-        text="Accessories"
+        text={t('accessories')}
         link="/accessories"
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
       />

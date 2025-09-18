@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom';
 import { ThemeImage } from '../../atoms/icons/ThemeImage';
 import { BurgerMenu } from '../../atoms/BugerMenu/BurgerMenu.tsx';
 import { HeaderButtons } from '../../atoms/HeaderButtons/HeaderButtons.tsx';
+import { ThemeSwitcher } from '../../atoms/buttons/ThemeSwitcher';
+import { LangButton } from '../../atoms/buttons/LangButton';
+import { FavouritesIconCounter } from '../../atoms/icons/FavouritesIconCounter';
+import { ShoppingBagIconCounter } from '../../atoms/icons/ShoppingBagIconCounter';
+import { CloseIcon } from '../../atoms/icons/CloseIcon';
+import { BurgerMenuIcon } from '../../atoms/icons/BurgerMenuIcon';
 
 type Props = {
   isBurgerMenuActive: boolean;

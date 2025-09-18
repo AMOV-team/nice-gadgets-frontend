@@ -11,6 +11,7 @@ import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWr
 import { ItemSwiper } from '../../atoms/ItemCard/ItemSwiper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumb } from '../Breadcrumb/Breadcrumb.tsx';
+import { useTranslation } from 'react-i18next';
 
 function findItemById(arr: Array<Item>, itemId: string) {
   return arr.find((item) => item.id === itemId);
@@ -34,6 +35,7 @@ type Props = {
 };
 
 export const ItemCard: React.FC<Props> = ({ category }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
 
@@ -59,17 +61,17 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   }, [category, slug]);
 
   if (!item) {
-    return <p>Product not found!</p>;
+    return <p>{t('product-not-found')}</p>;
   }
 
   const specs = [
-    { name: 'Screen', value: item.screen ?? '' },
-    { name: 'Resolution', value: item.resolution ?? '' },
-    { name: 'Processor', value: item.processor ?? '' },
-    { name: 'RAM', value: item.ram ?? '' },
-    { name: 'Camera', value: item.camera ?? '' },
-    { name: 'Zoom', value: item.zoom ?? '' },
-    { name: 'Cell', value: item.cell?.join(', ') ?? '' },
+    { name: `${t('Screen')}`, value: item.screen ?? '' },
+    { name: `${t('Resolution')}`, value: item.resolution ?? '' },
+    { name: `${t('Processor')}`, value: item.processor ?? '' },
+    { name: `${t('RAM')}`, value: item.ram ?? '' },
+    { name: `${t('Camera')}`, value: item.camera ?? '' },
+    { name: `${t('Zoom')}`, value: item.zoom ?? '' },
+    { name: `${t('Cell')}`, value: item.cell?.join(', ') ?? '' },
   ];
 
   const findItem = (namespaceId: string, capacity: string, color: string) => {
