@@ -1,6 +1,7 @@
 import React from 'react';
 import products from '../../../../public/api/products.json';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   color: string;
@@ -17,12 +18,16 @@ export const ShopCategory: React.FC<Props> = ({
   category,
   productLink,
 }) => {
+  const { t } = useTranslation();
+
   const modelsCount = products.filter(
     (product) => product.category === category,
   ).length;
 
   const displayText =
-    modelsCount > 0 ? `${modelsCount} models` : 'Currently out of stock';
+    modelsCount > 0 ?
+      `${modelsCount} ${t('models')}`
+    : 'Currently out of stock';
 
   return (
     <div className="grid grid-cols-4 gap-4 sm:gap-6 xl:gap-8">
