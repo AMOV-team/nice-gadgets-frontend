@@ -20,7 +20,7 @@ export const Header: React.FC<Props> = ({
         relative flex items-center justify-between h-[48px] pl-4 border-b
         shadow-[0px_1px_0px_0px_hsl(var(--elements))]
         after:content-[""] after:absolute after:block after:top-0 after:w-full
-        after:h-full after:bg-white after:z-20
+        after:h-full after:bg-white after:z-20 dark:after:bg-black
       `}
     >
       <div className="flex gap-4 items-center z-30">
