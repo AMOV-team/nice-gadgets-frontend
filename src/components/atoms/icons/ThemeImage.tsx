@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 type ThemeImageProps = {
-  light: string;
-  dark: string;
+  light: string; // шлях до світлої версії
+  dark: string; // шлях до темної версії
   alt: string;
   className?: string;
 };
@@ -19,6 +19,19 @@ export const ThemeImage: React.FC<ThemeImageProps> = ({
     const saved =
       (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
     setTheme(saved);
+
+    const observer = new MutationObserver(() => {
+      setTheme(
+        document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+      );
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (

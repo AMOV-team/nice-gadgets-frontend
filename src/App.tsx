@@ -9,7 +9,9 @@ function App() {
       className="flex flex-col min-h-screen"
     >
       <Header />
-      <Outlet />
+      <div className="bg-hover dark:bg-black">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );
