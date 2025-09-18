@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import phones from '../../../../public/api/phones.json';
 import accessories from '../../../../public/api/accessories.json';
 import tablets from '../../../../public/api/tablets.json';
@@ -11,6 +11,7 @@ import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWr
 import { ItemSwiper } from '../../atoms/ItemCard/ItemSwiper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumb } from '../Breadcrumb/Breadcrumb.tsx';
+import { useTranslation } from 'react-i18next';
 
 function findItemById(arr: Array<Item>, itemId: string) {
   return arr.find((item) => item.id === itemId);
@@ -34,34 +35,43 @@ type Props = {
 };
 
 export const ItemCard: React.FC<Props> = ({ category }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
 
-  const productMeta = products.find((p) => String(p.itemId) === slug);
+  const [item, setItem] = useState<Item | null>(null);
 
-  const product =
-    category && slug && productMeta?.itemId ?
-      getProduct(category as Category, productMeta.itemId)
-    : null;
+  const [selectedImage, setSelectedImage] = useState('');
 
-  const [item, setItem] = useState<Item | null>(product ?? null);
+  useEffect(() => {
+    const productMeta = products.find((p) => String(p.itemId) === slug);
 
-  const [selectedImage, setSelectedImage] = useState(
-    product ? product.images[0] : '',
-  );
+    const product =
+      category && slug && productMeta?.itemId ?
+        getProduct(category as Category, productMeta.itemId)
+      : null;
+
+    if (product) {
+      setItem(product);
+      setSelectedImage(product.images[0]);
+    } else {
+      setItem(null);
+      setSelectedImage('');
+    }
+  }, [category, slug]);
 
   if (!item) {
-    return <p>Product not found1</p>;
+    return <p>{t('product-not-found')}</p>;
   }
 
   const specs = [
-    { name: 'Screen', value: item.screen ?? '' },
-    { name: 'Resolution', value: item.resolution ?? '' },
-    { name: 'Processor', value: item.processor ?? '' },
-    { name: 'RAM', value: item.ram ?? '' },
-    { name: 'Camera', value: item.camera ?? '' },
-    { name: 'Zoom', value: item.zoom ?? '' },
-    { name: 'Cell', value: item.cell?.join(', ') ?? '' },
+    { name: `${t('Screen')}`, value: item.screen ?? '' },
+    { name: `${t('Resolution')}`, value: item.resolution ?? '' },
+    { name: `${t('Processor')}`, value: item.processor ?? '' },
+    { name: `${t('RAM')}`, value: item.ram ?? '' },
+    { name: `${t('Camera')}`, value: item.camera ?? '' },
+    { name: `${t('Zoom')}`, value: item.zoom ?? '' },
+    { name: `${t('Cell')}`, value: item.cell?.join(', ') ?? '' },
   ];
 
   const findItem = (namespaceId: string, capacity: string, color: string) => {
@@ -106,7 +116,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
     }
   };
 
-  const goodId = productMeta?.id ?? '802390';
+  const goodId = item.id;
 
   return (
     <div

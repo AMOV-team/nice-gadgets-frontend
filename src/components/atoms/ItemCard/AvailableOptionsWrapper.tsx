@@ -7,6 +7,8 @@ import { TechSpecs } from './TechSpecs.tsx';
 import { ColorPickerWithTitle } from './ColorPickerWithTitle.tsx';
 import { CapacityPickerWithTitle } from './CapacityPickerWithTitle.tsx';
 import { useCart } from 'react-use-cart';
+import { useTranslation } from 'react-i18next';
+
 
 type Props = {
   item: Item;
@@ -21,6 +23,7 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
   handleSelectCapacity,
   specs,
 }) => {
+
   const { addItem } = useCart();
   const handleAdd = () => {
     addItem({
@@ -37,6 +40,9 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
       },
     });
   };
+
+  const { t } = useTranslation();
+
   return (
     <div
       className={`
@@ -59,7 +65,7 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
 
       <div className="flex gap-2 items-center mb-8 justify-between">
         <PrimaryButton
-          text="Add to cart"
+          text={t('add-to-cart')}
           onSelect={handleAdd}
         />
         <AddToFavoriteButton />

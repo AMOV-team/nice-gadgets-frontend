@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const ShoppingBagIconCounter: React.FC<Props> = ({
-  count = 100,
+  count = 0,
   className = '',
 }) => {
   return (

@@ -1,31 +1,37 @@
 import * as React from 'react';
-import products from '../../../public/api/products.json';
-import type { Product } from '../../types/Product';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
-
-const testFavorites: Product[] = products.slice(0, 10);
+import { useFavorites } from '../../utils/useFavorites';
 
 export const FavoritesPage: React.FC = () => {
+  const { favorites } = useFavorites();
+
   return (
     <GridContainer>
       <div className="col-span-4 sm:col-span-12 xl:col-span-24">
         <Breadcrumb />
         <h1 className="text-h1 font-bold">Favorites</h1>
         <p className="font-semibold text-custom-secondary text-body">
-          {testFavorites.length} items
+          {favorites.length} items
         </p>
       </div>
 
-      {testFavorites.map((product) => (
-        <div
-          key={product.id}
-          className="col-span-4 sm:col-span-6 xl:col-span-6"
-        >
-          <ProductCard product={product} />
+      {favorites.length === 0 ?
+        <div className="col-span-4 sm:col-span-12 xl:col-span-24 text-center py-16">
+          <p className="text-custom-secondary text-body">
+            No favorites yet. Start adding products to your favorites!
+          </p>
         </div>
-      ))}
+      : favorites.map((product) => (
+          <div
+            key={product.id}
+            className="col-span-4 sm:col-span-6 xl:col-span-6"
+          >
+            <ProductCard product={product} />
+          </div>
+        ))
+      }
     </GridContainer>
   );
 };

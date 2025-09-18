@@ -73,8 +73,7 @@
     "@rollup/rollup-linux-x64-gnu": "^4.6.1"
   },
   "lint-staged": {
-    "*": "npm run fix-style",
-    "*.js": "eslint --cache --fix",
-    "*.--write": "prettier --write"
+    "*.{js,ts,tsx}": "eslint --fix",
+    "*.{js,ts,tsx,css,scss,md,json}": "prettier --write"
   }
 }

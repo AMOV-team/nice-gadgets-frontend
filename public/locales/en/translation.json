@@ -12,6 +12,8 @@
   "search": "Search",
   "sortby": "Sort by",
   "Newest": "Newest",
+  "Low-to-High": "Low to High",
+  "High-to-Low": "High to Low",
   "Alphabetically": "Alphabetically",
   "Cheapest": "Cheapest",
   "items-on-page": "Items on page",
@@ -57,32 +59,13 @@
   "new-phones": "Discover New Phones",
   "top-tablets": "Top Tablets for Work and Play",
   "must-have-accessories": "Your shape. Your health. Your watch",
-  "screen": "Screen",
   "capacity": "Capacity",
-  "ram": "RAM",
   "add-to-cart": "Add to cart",
   "added-to-cart": "Added to cart",
   "items": "items",
   "item": "item",
   "back": "Back",
-
-  "phones-carousel": {
-    "apple13": {
-      "short": "Flagship iPhone with top-tier camera and performance"
-    }
-  },
-
-  "tablets-carousel": {
-    "ipadPro12": {
-      "short": "The ultimate iPad for creatives and professionals with an M1 chip and 11' Liquid Retina display"
-    }
-  },
-
-  "smartwatches-carousel": {
-    "apple6": {
-      "short": "Розширене відстеження активності, сенсор кисню в крові та Retina-дисплей у класичному дизайні"
-    }
-  },
+  "product-not-found": "Product not found",
 
   "ownership-and-ip": "1. Ownership and Intellectual Property",
   "ownership-and-ip-content": "All content on this site — including text, images, graphics, logos, design, software, trademarks, and domain names — is owned by the Nice Gadgets team and is protected by copyright and intellectual property laws.",
@@ -105,28 +88,23 @@
   "contact-information": "7. Contact Information",
   "contact-information-content": "If you have any questions or feedback about these terms, feel free to reach out via the Contacts page.",
 
-  "team-amov": "AMOV²",
+  "team-amov": "We are a strong team capable of solving any problems.",
 
   "team": {
     "oleksandr": {
-      "name": "Oleksandr Oliferuk",
-      "position": "Team Lead & Frontend Developer"
+      "name": "Oleksandr Oliferuk"
     },
     "vladyslav-pm": {
-      "name": "Vladyslav Sulyma",
-      "position": "Project Manager & Frontend Developer"
+      "name": "Vladyslav Sulyma"
     },
     "artem": {
-      "name": "Artem Vikuliev",
-      "position": "Frontend Developer"
+      "name": "Artem Vikuliev"
     },
     "max": {
-      "name": "Max Tovstopyatyi",
-      "position": "Frontend Developer"
+      "name": "Max Tovstopyatyi"
     },
     "vladyslav": {
-      "name": "Vladyslav Matkosvkyi",
-      "position": "Frontend Developer"
+      "name": "Vladyslav Matkosvkyi"
     }
   }
 }

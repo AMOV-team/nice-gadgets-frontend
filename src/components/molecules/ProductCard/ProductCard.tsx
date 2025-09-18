@@ -9,7 +9,6 @@ import { useCart } from 'react-use-cart';
 type ProductCardProps = {
   product: Product;
   className?: string;
-  onAddToFavorite?: () => void;
 };
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -73,7 +72,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       <ProductActions
         onAddToCart={handleAdd}
-        onAddToFavorite={onAddToFavorite}
+        product={product}
       />
     </div>
   );

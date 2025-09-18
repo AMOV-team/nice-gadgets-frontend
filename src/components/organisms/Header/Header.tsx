@@ -1,62 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from '../NavBar/Navbar';
-import { NavbarIconLink } from '../../atoms/link/NavbarIconLink';
 import { Link } from 'react-router-dom';
 import { ThemeImage } from '../../atoms/icons/ThemeImage';
-import { ThemeSwitcher } from '../../atoms/buttons/ThemeSwitcher';
-import { LangButton } from '../../atoms/buttons/LangButton';
-import { FavouritesIconCounter } from '../../atoms/icons/FavouritesIconCounter';
 import { ShoppingBagIconCounter } from '../../atoms/icons/ShoppingBagIconCounter';
-import { CloseIcon } from '../../atoms/icons/CloseIcon';
-import { BurgerMenuIcon } from '../../atoms/icons/BurgerMenuIcon';
 import { useCart } from 'react-use-cart';
-import { ShoppingBagIcon } from 'lucide-react';
+import { BurgerMenu } from '../../atoms/BugerMenu/BurgerMenu.tsx';
+import { HeaderButtons } from '../../atoms/HeaderButtons/HeaderButtons.tsx';
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isEmpty, totalItems } = useCart();
 
+type Props = {
+  isBurgerMenuActive: boolean;
+  handleIsBurgerMenuActive: (state: boolean) => void;
+};
+
+export const Header: React.FC<Props> = ({
+  isBurgerMenuActive,
+  handleIsBurgerMenuActive,
+}) => {
   return (
-    <header className="flex items-center justify-between h-[48px] pl-4 border-b shadow-[0px_1px_0px_0px_hsl(var(--elements))] gap-8 bg-white dark:bg-black">
-      <div className="flex gap-4 items-center">
+    <header
+      className={`
+        relative flex items-center justify-between h-[48px] pl-4 border-b
+        shadow-[0px_1px_0px_0px_hsl(var(--elements))]
+        after:content-[""] after:absolute after:block after:top-0 after:w-full
+        after:h-full after:bg-white after:z-20 dark:after:bg-black
+      `}
+    >
+      <div className="flex gap-4 items-center z-30">
         <Link
           to="/"
-          className="pt-[13px] pb-[13px]"
+          className="pt-[13px] pb-[13px] z-30"
         >
           <ThemeImage
             light="img/logo-light-theme.png"
             dark="img/logo-dark-theme.png"
             alt="Nice gadgets"
-            className="w-[64px] h-[22px] block"
+            className="w-[64px] h-[22px] block z-30"
           />
         </Link>
-        <Navbar />
+        <Navbar
+          isBurgerMenuActive={isBurgerMenuActive}
+          handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+        />
       </div>
 
-      <a
-        onClick={() => setIsOpen(!isOpen)}
-        href="#"
+      <button
+        onClick={() => handleIsBurgerMenuActive(!isBurgerMenuActive)}
         className="sm:hidden shadow-[-1px_0px_0px_0px_hsl(var(--elements))] p-4 inline-flex items-center gap-4 no-underline"
       >
-        {isOpen ?
-          <div className="size-[16px] flex justify-center items-center">
-            <CloseIcon />
-          </div>
-        : <div className="size-[16px] flex justify-center items-center">
-            <BurgerMenuIcon />
-          </div>
-        }
-      </a>
+        <BurgerMenu isActive={isBurgerMenuActive} />
+      </button>
 
-      <div className="hidden sm:flex">
-        <ThemeSwitcher />
-        <LangButton />
-        <NavbarIconLink link="/favorites">
-          <div className="size-[16px] flex justify-center items-center">
-            <FavouritesIconCounter className="text-custom-primary" />
-          </div>
-        </NavbarIconLink>
-        <NavbarIconLink link="/cart">
+      <HeaderButtons
+        isBurgerMenuActive={isBurgerMenuActive}
+        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+      />
+      <NavbarIconLink link="/cart">
           <div className="size-[16px] flex justify-center items-center">
             {isEmpty ?
               <ShoppingBagIcon />
@@ -67,7 +69,6 @@ export const Header: React.FC = () => {
             }
           </div>
         </NavbarIconLink>
-      </div>
     </header>
   );
 };

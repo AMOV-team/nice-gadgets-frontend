@@ -15,10 +15,17 @@ import { ItemCardPage } from '../pages/ItemCardPage.tsx';
 import { ContactsPage } from '../pages/ContactsPage';
 import { ScrollToTop } from '../organisms/ScrollToTop/ScrollToTop.tsx';
 import { CartProvider } from 'react-use-cart';
+import { ComparePage } from '../pages/ComparePage.tsx';
+import { FavoritesProvider } from '../../context/FavoritesContext.tsx';
+
 
 export const Root = () => (
   <HashRouter>
+
+export const Root = () => (
+  <FavoritesProvider>
     <CartProvider id="main-cart">
+    <HashRouter>
       <ScrollToTop />
       <Routes>
         <Route
@@ -53,6 +60,7 @@ export const Root = () => (
               element={<PageNotFound />}
             />
           </Route>
+
           <Route path="tablets">
             <Route
               index
@@ -67,6 +75,7 @@ export const Root = () => (
               element={<PageNotFound />}
             />
           </Route>
+
           <Route path="accessories">
             <Route
               index
@@ -81,24 +90,34 @@ export const Root = () => (
               element={<PageNotFound />}
             />
           </Route>
+
           <Route
             path="favorites"
             element={<FavoritesPage />}
           />
+
           <Route
             path="cart"
             element={<CartPage />}
           />
+
           <Route
             path="contacts"
             element={<ContactsPage />}
           />
+
+          <Route
+            path="compare"
+            element={<ComparePage />}
+          />
+
           <Route
             path="*"
             element={<PageNotFound />}
           />
         </Route>
       </Routes>
+    </HashRouter>
     </CartProvider>
-  </HashRouter>
+  </FavoritesProvider>
 );

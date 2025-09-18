@@ -12,6 +12,8 @@
   "search": "Пошук",
   "sortby": "Сортувати за",
   "Newest": "Новизною",
+  "Low-to-High": "Від дешевих до дорогих",
+  "High-to-Low": "Від дорогих до дешевих",
   "Alphabetically": "Алфавітом",
   "Cheapest": "Дешевизною",
   "items-on-page": "Предметів",
@@ -57,14 +59,13 @@
   "new-phones": "Відкрийте для себе нові моделі",
   "top-tablets": "Найкращі планшети для роботи та розваг",
   "must-have-accessories": "Твоя форма. Твоє здоров’я. Твій годинник",
-  "screen": "Екран",
   "capacity": "Вбудована пам'ять",
-  "ram": "Оперативна пам'ять",
   "add-to-cart": "Додати в кошик",
   "added-to-cart": "Додано в кошик",
   "items": "предметів",
   "item": "предмет",
   "back": "Назад",
+  "product-not-found": "Продукт не знайдено",
 
   "phones-carousel": {
     "apple13": {
@@ -105,28 +106,23 @@
   "contact-information": "7. Контактна інформація",
   "contact-information-content": "Якщо у вас є запитання або пропозиції щодо цих умов — зверніться до нас через сторінку Контакти.",
 
-  "team-nemasliv": "Команда Нема Слів",
+  "team-amov": "Ми — сильна команда, здатна вирішити будь-які проблеми.",
 
   "team": {
     "oleksandr": {
-      "name": "Олександр Оліферук",
-      "position": "Team Lead & Frontend Developer"
+      "name": "Олександр Оліферук"
     },
     "vladyslav-pm": {
-      "name": "Владислав Суліма",
-      "position": "Project Manager & Frontend Developer"
+      "name": "Владислав Суліма"
     },
     "artem": {
-      "name": "Артем Вікульєв",
-      "position": "Frontend Developer"
+      "name": "Артем Вікульєв"
     },
     "max": {
-      "name": "Макс Товстопятий",
-      "position": "Frontend Developer"
+      "name": "Максим Товстопятий"
     },
     "vladyslav": {
-      "name": "Владислав Матковскій",
-      "position": "Frontend Developer"
+      "name": "Владислав Матковський"
     }
   }
 }
