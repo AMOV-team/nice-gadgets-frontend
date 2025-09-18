@@ -1,0 +1,132 @@
+{
+  "dark": "Switch to Dark Theme",
+  "light": "Switch to Light Theme",
+  "home": "Home",
+  "phones": "Phones",
+  "mobile-phones": "Mobile phones",
+  "browse-categories": "Go to shopping",
+  "top3": "Elevate Your Tech: Top 3 New Arrivals",
+  "choose-brand": "Choose your brand",
+  "choose-all": "All brands",
+  "learn-more": "Learn more",
+  "search": "Search",
+  "sortby": "Sort by",
+  "Newest": "Newest",
+  "Alphabetically": "Alphabetically",
+  "Cheapest": "Cheapest",
+  "items-on-page": "Items on page",
+  "current-brand": "Current brand",
+  "choose": "Choose",
+  "All": "All",
+  "About": "About",
+  "Tech-specs": "Tech specs",
+  "Available-colors": "Available colors",
+  "Select-capacity": "Select capacity",
+  "comparison": "Comparison",
+  "compare": "Compare",
+  "previous": "Previous",
+  "next": "Next",
+  "Screen": "Screen",
+  "Resolution": "Resolution",
+  "Processor": "Processor",
+  "RAM": "RAM",
+  "Built-in-memory": "Built in memory",
+  "Camera": "Camera",
+  "Zoom": "Zoom",
+  "Cell": "Cell",
+  "You-may-like": "You may also like",
+  "tablets": "Tablets",
+  "accessories": "Accessories",
+  "favourites": "Favourites",
+  "empty-favourites": "You don't have any favourite items",
+  "cart": "Cart",
+  "empty-cart": "Your cart is empty",
+  "back-to-shopping": "Back to shopping",
+  "total-for": "Total for",
+  "checkout": "Checkout",
+  "contacts": "Contacts",
+  "rights": "Rights",
+  "terms-policies": "Terms & Policies",
+  "back-to-top": "Back to top",
+  "welcome-text": "Welcome to Nice Gadgets store!",
+  "new-models": "Brand new models",
+  "category": "Shop by category",
+  "models": "models",
+  "hot-prices": "Hot prices",
+  "latest-phones": "Latest Smartphones in Store",
+  "new-phones": "Discover New Phones",
+  "top-tablets": "Top Tablets for Work and Play",
+  "must-have-accessories": "Your shape. Your health. Your watch",
+  "screen": "Screen",
+  "capacity": "Capacity",
+  "ram": "RAM",
+  "add-to-cart": "Add to cart",
+  "added-to-cart": "Added to cart",
+  "items": "items",
+  "item": "item",
+  "back": "Back",
+
+  "phones-carousel": {
+    "apple13": {
+      "short": "Flagship iPhone with top-tier camera and performance"
+    }
+  },
+
+  "tablets-carousel": {
+    "ipadPro12": {
+      "short": "The ultimate iPad for creatives and professionals with an M1 chip and 11' Liquid Retina display"
+    }
+  },
+
+  "smartwatches-carousel": {
+    "apple6": {
+      "short": "Розширене відстеження активності, сенсор кисню в крові та Retina-дисплей у класичному дизайні"
+    }
+  },
+
+  "ownership-and-ip": "1. Ownership and Intellectual Property",
+  "ownership-and-ip-content": "All content on this site — including text, images, graphics, logos, design, software, trademarks, and domain names — is owned by the Nice Gadgets team and is protected by copyright and intellectual property laws.",
+
+  "use-of-content": "2. Use of Content",
+  "use-of-content-content": "You may view, download, or print content from this website for personal, non-commercial use only. Any other use — such as copying, sharing, publishing, or selling — is not allowed without prior written permission.",
+
+  "copy-protection": "3. Copy Protection",
+  "copy-protection-content": "All materials are protected against unauthorized copying. Using bots, scripts, or automated tools to collect or copy content without permission is strictly prohibited.",
+
+  "privacy-policy": "4. Privacy Policy",
+  "privacy-policy-content": "Your privacy matters to us. We do not collect or store any personal data, except for information related to orders and your saved favorite products on this site.",
+
+  "updates-and-changes": "5. Updates and Changes",
+  "updates-and-changes-content": "We reserve the right to update these terms at any time. Changes take effect once published on the website. We encourage you to review the terms periodically to stay informed.",
+
+  "limitation-of-liability": "6. Limitation of Liability",
+  "limitation-of-liability-content": "We are not responsible for any damage or loss resulting from your use of this website. You use the site at your own risk.",
+
+  "contact-information": "7. Contact Information",
+  "contact-information-content": "If you have any questions or feedback about these terms, feel free to reach out via the Contacts page.",
+
+  "team-amov": "AMOV²",
+
+  "team": {
+    "oleksandr": {
+      "name": "Oleksandr Oliferuk",
+      "position": "Team Lead & Frontend Developer"
+    },
+    "vladyslav-pm": {
+      "name": "Vladyslav Sulyma",
+      "position": "Project Manager & Frontend Developer"
+    },
+    "artem": {
+      "name": "Artem Vikuliev",
+      "position": "Frontend Developer"
+    },
+    "max": {
+      "name": "Max Tovstopyatyi",
+      "position": "Frontend Developer"
+    },
+    "vladyslav": {
+      "name": "Vladyslav Matkosvkyi",
+      "position": "Frontend Developer"
+    }
+  }
+}

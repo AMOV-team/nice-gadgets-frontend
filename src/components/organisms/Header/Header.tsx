@@ -4,6 +4,7 @@ import { NavbarIconLink } from '../../atoms/link/NavbarIconLink';
 import { Link } from 'react-router-dom';
 import { ThemeImage } from '../../atoms/icons/ThemeImage';
 import { ThemeSwitcher } from '../../atoms/buttons/ThemeSwitcher';
+import { LangButton } from '../../atoms/buttons/LangButton';
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,6 +75,7 @@ export const Header: React.FC = () => {
 
       <div className="hidden sm:flex">
         <ThemeSwitcher />
+        <LangButton />
         <NavbarIconLink link="/favorites">
           <svg
             width="16"

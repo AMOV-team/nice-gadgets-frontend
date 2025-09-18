@@ -1,6 +1,9 @@
 import { NavbarLink } from '../../atoms/link/NavbarLink';
+import { useTranslation } from 'react-i18next';
 
 export const Navbar = () => {
+  const { t } = useTranslation();
+
   return (
     <nav
       data-cy="nav"
@@ -9,19 +12,19 @@ export const Navbar = () => {
       aria-label="main navigation"
     >
       <NavbarLink
-        text="Home"
+        text={t('home')}
         link="/"
       />
       <NavbarLink
-        text="Phones"
+        text={t('phones')}
         link="/phones"
       />
       <NavbarLink
-        text="Tablets"
+        text={t('tablets')}
         link="/tablets"
       />
       <NavbarLink
-        text="Accessories"
+        text={t('accessories')}
         link="/accessories"
       />
     </nav>
