@@ -1,21 +1,9 @@
 import * as React from 'react';
 import { PrimaryButton } from '../../atoms/buttons';
+import { useCart } from 'react-use-cart';
 
-type CartItem = {
-  id: number;
-  itemId: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-};
-
-type CartCheckoutProps = {
-  cartItems: CartItem[];
-};
-
-export const CartCheckout: React.FC<CartCheckoutProps> = ({ cartItems }) => {
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+export const CartCheckout: React.FC = () => {
+  const { cartTotal, totalItems } = useCart();
 
   return (
     <>
@@ -27,9 +15,9 @@ export const CartCheckout: React.FC<CartCheckoutProps> = ({ cartItems }) => {
         "
       >
         <div className="flex flex-col justify-center items-center">
-          <span className="text-h2 font-extrabold">${totalPrice}</span>
+          <span className="text-h2 font-extrabold">${cartTotal}</span>
           <span className="text-body font-semibold">
-            Total for {cartItems.length} items
+            Total for {totalItems} items
           </span>
         </div>
         <div className="border border-solid border-elements"></div>

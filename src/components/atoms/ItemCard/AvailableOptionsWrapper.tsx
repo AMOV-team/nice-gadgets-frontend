@@ -6,7 +6,9 @@ import { AddToFavoriteButton } from '../buttons/AddToFavoriteButton.tsx';
 import { TechSpecs } from './TechSpecs.tsx';
 import { ColorPickerWithTitle } from './ColorPickerWithTitle.tsx';
 import { CapacityPickerWithTitle } from './CapacityPickerWithTitle.tsx';
+import { useCart } from 'react-use-cart';
 import { useTranslation } from 'react-i18next';
+
 
 type Props = {
   item: Item;
@@ -21,6 +23,24 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
   handleSelectCapacity,
   specs,
 }) => {
+
+  const { addItem } = useCart();
+  const handleAdd = () => {
+    addItem({
+      id: item.id,
+      name: item.name,
+      price: item.priceDiscount,
+      quantity: 1,
+      image: item.images[0],
+      metadata: {
+        color: item.color,
+        capacity: item.capacity,
+        ram: item.ram,
+        screen: item.screen,
+      },
+    });
+  };
+
   const { t } = useTranslation();
 
   return (
@@ -44,7 +64,10 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
       <ItemPrice item={item} />
 
       <div className="flex gap-2 items-center mb-8 justify-between">
-        <PrimaryButton text={t('add-to-cart')} />
+        <PrimaryButton
+          text={t('add-to-cart')}
+          onSelect={handleAdd}
+        />
         <AddToFavoriteButton />
       </div>
 

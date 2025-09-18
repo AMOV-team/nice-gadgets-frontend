@@ -2,8 +2,14 @@ import React from 'react';
 import { Navbar } from '../NavBar/Navbar';
 import { Link } from 'react-router-dom';
 import { ThemeImage } from '../../atoms/icons/ThemeImage';
+import { ShoppingBagIconCounter } from '../../atoms/icons/ShoppingBagIconCounter';
+import { useCart } from 'react-use-cart';
 import { BurgerMenu } from '../../atoms/BugerMenu/BurgerMenu.tsx';
 import { HeaderButtons } from '../../atoms/HeaderButtons/HeaderButtons.tsx';
+
+export const Header: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { isEmpty, totalItems } = useCart();
 
 type Props = {
   isBurgerMenuActive: boolean;
@@ -52,6 +58,17 @@ export const Header: React.FC<Props> = ({
         isBurgerMenuActive={isBurgerMenuActive}
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
       />
+      <NavbarIconLink link="/cart">
+          <div className="size-[16px] flex justify-center items-center">
+            {isEmpty ?
+              <ShoppingBagIcon />
+            : <ShoppingBagIconCounter
+                className="text-custom-primary"
+                count={totalItems}
+              />
+            }
+          </div>
+        </NavbarIconLink>
     </header>
   );
 };

@@ -14,11 +14,17 @@ import { AccessoriesPage } from '../pages/AccessoriesPage';
 import { ItemCardPage } from '../pages/ItemCardPage.tsx';
 import { ContactsPage } from '../pages/ContactsPage';
 import { ScrollToTop } from '../organisms/ScrollToTop/ScrollToTop.tsx';
+import { CartProvider } from 'react-use-cart';
 import { ComparePage } from '../pages/ComparePage.tsx';
 import { FavoritesProvider } from '../../context/FavoritesContext.tsx';
 
+
+export const Root = () => (
+  <HashRouter>
+
 export const Root = () => (
   <FavoritesProvider>
+    <CartProvider id="main-cart">
     <HashRouter>
       <ScrollToTop />
       <Routes>
@@ -112,5 +118,6 @@ export const Root = () => (
         </Route>
       </Routes>
     </HashRouter>
+    </CartProvider>
   </FavoritesProvider>
 );
