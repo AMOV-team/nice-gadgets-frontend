@@ -7,7 +7,7 @@ type Props = {
 export const ArrowUpIcon: React.FC<Props> = ({ className = '' }) => {
   return (
     <ChevronUp
-      className={`text-icons ${className}`}
+      className={`${className}`}
       size={16}
     />
   );
