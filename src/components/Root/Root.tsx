@@ -14,6 +14,7 @@ import { AccessoriesPage } from '../pages/AccessoriesPage';
 import { ItemCardPage } from '../pages/ItemCardPage.tsx';
 import { ContactsPage } from '../pages/ContactsPage';
 import { ScrollToTop } from '../organisms/ScrollToTop/ScrollToTop.tsx';
+import { ComparePage } from '../pages/ComparePage.tsx';
 
 export const Root = () => (
   <HashRouter>
@@ -51,6 +52,7 @@ export const Root = () => (
             element={<PageNotFound />}
           />
         </Route>
+
         <Route path="tablets">
           <Route
             index
@@ -65,6 +67,7 @@ export const Root = () => (
             element={<PageNotFound />}
           />
         </Route>
+
         <Route path="accessories">
           <Route
             index
@@ -79,18 +82,27 @@ export const Root = () => (
             element={<PageNotFound />}
           />
         </Route>
+
         <Route
           path="favorites"
           element={<FavoritesPage />}
         />
+
         <Route
           path="cart"
           element={<CartPage />}
         />
+
         <Route
           path="contacts"
           element={<ContactsPage />}
         />
+
+        <Route
+          path="compare"
+          element={<ComparePage />}
+        />
+
         <Route
           path="*"
           element={<PageNotFound />}
