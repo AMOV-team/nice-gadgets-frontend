@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import phones from '../../../../public/api/phones.json';
 import accessories from '../../../../public/api/accessories.json';
 import tablets from '../../../../public/api/tablets.json';
@@ -39,18 +39,26 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
 
-  const productMeta = products.find((p) => String(p.itemId) === slug);
+  const [item, setItem] = useState<Item | null>(null);
 
-  const product =
-    category && slug && productMeta?.itemId ?
-      getProduct(category as Category, productMeta.itemId)
-    : null;
+  const [selectedImage, setSelectedImage] = useState('');
 
-  const [item, setItem] = useState<Item | null>(product ?? null);
+  useEffect(() => {
+    const productMeta = products.find((p) => String(p.itemId) === slug);
 
-  const [selectedImage, setSelectedImage] = useState(
-    product ? product.images[0] : '',
-  );
+    const product =
+      category && slug && productMeta?.itemId ?
+        getProduct(category as Category, productMeta.itemId)
+      : null;
+
+    if (product) {
+      setItem(product);
+      setSelectedImage(product.images[0]);
+    } else {
+      setItem(null);
+      setSelectedImage('');
+    }
+  }, [category, slug]);
 
   if (!item) {
     return <p>{t('product-not-found')}</p>;
@@ -108,7 +116,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
     }
   };
 
-  const goodId = productMeta?.id ?? '802390';
+  const goodId = item.id;
 
   return (
     <div
