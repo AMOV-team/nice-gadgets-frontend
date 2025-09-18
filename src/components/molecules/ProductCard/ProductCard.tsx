@@ -9,14 +9,12 @@ type ProductCardProps = {
   product: Product;
   className?: string;
   onAddToCart?: () => void;
-  onAddToFavorite?: () => void;
 };
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   className = '',
   onAddToCart,
-  onAddToFavorite,
 }) => (
   <div
     className={`
@@ -54,8 +52,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     <ProductCharacteristics product={product} />
 
     <ProductActions
+      product={product}
       onAddToCart={onAddToCart}
-      onAddToFavorite={onAddToFavorite}
     />
   </div>
 );
