@@ -22,13 +22,16 @@ export const HeaderButtons: React.FC<Props> = ({
     <div
       className={cn(
         {
-          'fixed bottom-0 left-0 right-0 z-10 ': isBurgerMenuActive,
+          'fixed bottom-0 left-0 right-0 z-10 h-16': isBurgerMenuActive,
           'hidden sm:flex': !isBurgerMenuActive,
         },
         `
-        flex items-center flex-row h-16 sm:h-full z-30 border-t border-1 border-b-
+        flex items-center flex-row sm:h-full z-30 border-t border-1
+        absolute -bottom-[calc(100vh-46px)] left-0 right-0 sm:static
+        h-0 bg-white dark:bg-black
       `,
       )}
+      style={{ transition: 'height 1s ease' }}
     >
       <ThemeSwitcher />
       <LangButton />
@@ -36,10 +39,10 @@ export const HeaderButtons: React.FC<Props> = ({
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
         link="/favorites"
       >
-        <div className="size-[16px] flex justify-center items-center">
+        <div className="size-[16px] flex justify-center items-center bg-white">
           <FavouritesIconCounter
             count={favorites.length}
-            className="text-custom-primary"
+            className="text-custom-primary bg-white dark:bg-black"
           />
         </div>
       </NavbarIconLink>

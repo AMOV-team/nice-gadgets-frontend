@@ -12,7 +12,7 @@ export const LangButton: React.FC = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="w-[48px] h-[48px] flex justify-center items-center shadow-[-1px_0_0_0_hsl(var(--elements))]"
+      className="bg-white dark:bg-black h-16 sm:h-full flex justify-center items-center shadow-[-1px_0_0_0_hsl(var(--elements))] flex-1"
     >
       {i18n.language === 'ua' ? 'UA' : 'EN'}
     </button>

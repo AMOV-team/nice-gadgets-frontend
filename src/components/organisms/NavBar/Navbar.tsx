@@ -23,13 +23,14 @@ export const Navbar: React.FC<Props> = ({
           'h-0': !isBurgerMenuActive,
         },
         `
-          justify-start gap-6 sm:gap-8 sm:h-full flex sm:w-full box-border items-center text-sm
-          text-black no-underline bg-white z-10 overflow-hidden flex-col sm:flex-row
+          justify-start gap-6 sm:gap-8 sm:h-full flex box-border items-center text-sm
+          text-black no-underline z-10 overflow-hidden flex-col sm:flex-row
           absolute top-16 left-0 right-0
           sm:static
+          bg-white dark:bg-black
         `,
       )}
-      style={{ transition: 'height .3s ease' }}
+      style={{ transition: 'height 1s ease' }}
       role="navigation"
       aria-label="main navigation"
     >
