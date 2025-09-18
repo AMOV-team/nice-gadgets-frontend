@@ -9,26 +9,32 @@ import {
 import type { SortOption } from '../../../types/SortOption';
 
 type Props = {
+  // value?: string | null;
   defaultText: string;
   itemData: SortOption[];
   triggerClass: string;
   itemClass: string;
   onSelect: (value: string) => void;
+  disabled?: boolean;
 };
 
 export const Dropdown: React.FC<Props> = ({
+  // value,
   defaultText,
   itemData,
   triggerClass,
   itemClass,
   onSelect,
+  disabled,
 }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Select
+      // value={value || undefined}
       onOpenChange={setOpen}
       onValueChange={onSelect}
+      disabled={disabled}
     >
       <SelectTrigger
         open={open}
@@ -60,16 +66,14 @@ export const Dropdown: React.FC<Props> = ({
 
       <SelectContent
         className="
-          md:w-[187px]
-          xl:w-[176px]
+          w-[250px]
           overflow-y-auto
-          max-h-[200px]
+          max-h-[300px]
           box-border
           bg-white
           border-elements
           rounded-md
           shadow-[0px_2px_15px_0px_rgba(0,0,0,0.05)]
-          w-full
         "
       >
         {itemData.map((item) => (
@@ -78,7 +82,7 @@ export const Dropdown: React.FC<Props> = ({
             value={item.label}
             className={`
               w-full
-              h-6
+              h-10
               px-3
               py-1.5
               
