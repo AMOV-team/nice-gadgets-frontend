@@ -1,11 +1,14 @@
 import React from 'react';
 import { TechSpecs } from './TechSpecs.tsx';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   specs: Array<{ name: string; value: string }>;
 };
 
 export const TechSpecsWithTitle: React.FC<Props> = ({ specs }) => {
+  const { t } = useTranslation();
+
   return (
     <div
       className={`
@@ -31,7 +34,7 @@ export const TechSpecsWithTitle: React.FC<Props> = ({ specs }) => {
           after:left-0
         `}
       >
-        Tech Specs
+        {t('Tech-specs')}
       </h3>
 
       <TechSpecs specs={specs} />

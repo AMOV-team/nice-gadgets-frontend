@@ -59,7 +59,7 @@ export const HomePage: React.FC = () => {
         </section>
 
         <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
-          <SectionSlider HeaderText={'Hot prices'} />
+          <SectionSlider HeaderText={t('hot-prices')} />
         </section>
       </GridContainer>
     </>

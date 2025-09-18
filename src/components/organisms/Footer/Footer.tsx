@@ -3,14 +3,17 @@ import { FooterLink } from '../../atoms/link/FooterLink';
 import { BackToTopButton } from '../../atoms/buttons/BackToTopButton';
 import { Link } from 'react-router-dom';
 import { ThemeImage } from '../../atoms/icons/ThemeImage';
-
-const footerLinks = [
-  { label: 'github', href: '/github' },
-  { label: 'contacts', href: '/contacts' },
-  { label: 'rights', href: '/rights' },
-];
+import { useTranslation } from 'react-i18next';
 
 export const Footer: React.FC = () => {
+  const { t } = useTranslation();
+
+  const footerLinks = [
+    { label: 'github', href: '/github' },
+    { label: t('contacts'), href: '/contacts' },
+    { label: t('rights'), href: '/rights' },
+  ];
+
   return (
     <footer className="flex flex-col md:flex-row flex-wrap justify-between px-4 py-8 md:px-8 xl:px-16 gap-8 md:gap-10 bg-grayblack border-t [border-top-style:solid] border-grayelements">
       <Link
@@ -39,10 +42,10 @@ export const Footer: React.FC = () => {
       <div className="flex flex-row justify-center gap-4 flex-shrink-0">
         <p
           className="
-          text-small text-center text-custom-secondaryfont-bold
-          m-0 self-center"
+          text-small text-center text-custom-secondary font-bold
+          m-0 self-center font-mont"
         >
-          Back to top
+          {t('back-to-top')}
         </p>
         <BackToTopButton
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
