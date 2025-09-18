@@ -6,33 +6,6 @@ import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
 import { useCart } from 'react-use-cart';
 import type { CartItem } from '../../types/CartItem.tsx';
 
-// type CartItem = {
-//   id: string
-//   name: string,
-//   price: number,
-//   quantity: 1,
-//   image: string,
-//   metadata: {
-//     color: string,
-//     capacity: string,
-//     year: number,
-//     image: string,
-//     ram: string,
-//     screen: string,
-//       }
-// };
-
-// const products: Product[] = productsData as Product[];
-
-// const testCart: CartItem[] = products.slice(0, 10).map((item) => ({
-//   id: item.id,
-//   itemId: item.itemId,
-//   name: item.name,
-//   image: item.image,
-//   price: item.price,
-//   quantity: 1,
-// }));
-
 export const CartPage: React.FC = () => {
   const { items } = useCart() as unknown as { items: CartItem[] };
   return (
