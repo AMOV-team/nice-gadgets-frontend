@@ -4,6 +4,7 @@ import type { Product } from '../../types/Product';
 import { CartCard } from '../molecules/CartCard/CartCard';
 import { CartCheckout } from '../molecules/CartCheckout/CartCheckout';
 import { GridContainer } from '../atoms/GridContainer';
+import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
 
 type CartItem = {
   id: number;
@@ -29,6 +30,7 @@ export const CartPage: React.FC = () => {
   return (
     <GridContainer>
       <div className="col-span-full">
+        <Breadcrumb />
         <h1 className="text-h1 font-bold text-custom-primary">Cart</h1>
       </div>
 

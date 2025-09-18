@@ -6,6 +6,7 @@ import { Dropdown } from '../atoms/Dropdown';
 import type { SortOption } from '../../types/SortOption';
 import { PaginationButton } from '../atoms/buttons/PaginationButton';
 import { GridContainer } from '../atoms/GridContainer';
+import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
 
 export const AccessoriesPage: React.FC = () => {
   const accessories = products.filter((p) => p.category === 'accessories');
@@ -84,6 +85,7 @@ export const AccessoriesPage: React.FC = () => {
   return (
     <GridContainer>
       <div className="col-span-full">
+        <Breadcrumb />
         <h1 className="text-h1 font-extrabold font-mont mb-2 sm:text-h1-lg">
           Accessories
         </h1>
