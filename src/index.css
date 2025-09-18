@@ -135,8 +135,8 @@
 
     --custom-primary: 231 29% 96%;
     /* #F1F2F9 */
-    --custom-accent: 257 87% 51%;
-    /* #4219D0 */
+    --custom-accent: 260 100% 68%;
+    /* #905BFF */
     --custom-accent-secondary: 40 99% 61%;
     /* #F4BA47 */
     --custom-secondary: 228 6% 48%;
@@ -149,6 +149,10 @@
     /* #FAFBFC */
     --white: 0 0% 100%;
     /* #FFFFFF */
+    --black: 234, 38%, 9%;
+    /* #0F1121 */
+    --surface: 233, 28%, 12%;
+    /* #161827 */
     --green: 139 63% 42%;
     /* #27AE60 */
     --red: 0 79% 64%;

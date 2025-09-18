@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="flex items-center justify-between h-[48px] pl-4 border-b shadow-[0px_1px_0px_0px_hsl(var(--elements))] gap-8">
+    <header className="flex items-center justify-between h-[48px] pl-4 border-b shadow-[0px_1px_0px_0px_hsl(var(--elements))] gap-8 bg-white dark:bg-black">
       <div className="flex gap-4 items-center">
         <Link
           to="/"
