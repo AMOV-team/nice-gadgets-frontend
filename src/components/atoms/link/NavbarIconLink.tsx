@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 type Props = {
   link: string;
-  children: React.ReactNode; // тут буде твоє "зміст" іконки
+  children: React.ReactNode;
 };
 
 export const NavbarIconLink: React.FC<Props> = ({ link, children }) => {

@@ -6,6 +6,7 @@ import { AddToFavoriteButton } from '../buttons/AddToFavoriteButton.tsx';
 import { TechSpecs } from './TechSpecs.tsx';
 import { ColorPickerWithTitle } from './ColorPickerWithTitle.tsx';
 import { CapacityPickerWithTitle } from './CapacityPickerWithTitle.tsx';
+import { useCart } from 'react-use-cart';
 
 type Props = {
   item: Item;
@@ -19,31 +20,52 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
   handleSelectColor,
   handleSelectCapacity,
   specs,
-}) => (
-  <div
-    className={`
+}) => {
+  const { addItem } = useCart();
+  const handleAdd = () => {
+    addItem({
+      id: item.id,
+      name: item.name,
+      price: item.priceDiscount,
+      quantity: 1,
+      image: item.images[0],
+      metadata: {
+        color: item.color,
+        capacity: item.capacity,
+        ram: item.ram,
+        screen: item.screen,
+      },
+    });
+  };
+  return (
+    <div
+      className={`
     w-full
     sm:w-[237px]
     xl:w-[320px]
   `}
-  >
-    <ColorPickerWithTitle
-      item={item}
-      handleSelectColor={handleSelectColor}
-    />
+    >
+      <ColorPickerWithTitle
+        item={item}
+        handleSelectColor={handleSelectColor}
+      />
 
-    <CapacityPickerWithTitle
-      item={item}
-      handleSelectCapacity={handleSelectCapacity}
-    />
+      <CapacityPickerWithTitle
+        item={item}
+        handleSelectCapacity={handleSelectCapacity}
+      />
 
-    <ItemPrice item={item} />
+      <ItemPrice item={item} />
 
-    <div className="flex gap-2 items-center mb-8 justify-between">
-      <PrimaryButton text="Add to cart" />
-      <AddToFavoriteButton />
+      <div className="flex gap-2 items-center mb-8 justify-between">
+        <PrimaryButton
+          text="Add to cart"
+          onSelect={handleAdd}
+        />
+        <AddToFavoriteButton />
+      </div>
+
+      <TechSpecs specs={specs.slice(0, 4)} />
     </div>
-
-    <TechSpecs specs={specs.slice(0, 4)} />
-  </div>
-);
+  );
+};
