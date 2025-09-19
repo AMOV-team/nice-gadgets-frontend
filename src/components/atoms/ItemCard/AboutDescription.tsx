@@ -37,7 +37,7 @@ export const AboutDescription: React.FC<Props> = ({ item }) => {
   }, [item, i18n.language]);
 
   return (
-    <div className="w-full xl:w-[50%] mb-14 sm:mb-16">
+    <div className="w-full xl:w-[50%]">
       <h3
         className="relative font-mont font-extrabold text-[22px] leading-[140%] m-0 mb-12
           after:content-[''] after:w-full after:h-[1px] after:bg-elements

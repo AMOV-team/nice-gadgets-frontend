@@ -128,7 +128,7 @@ export const Breadcrumb: React.FC = () => {
                 fill="#0F0F11"
               />
             </svg>
-            <span className="font-mont font-bold text-xs text-custom-secondary ">
+            <span className="font-mont font-bold text-xs mt-[2px] text-custom-secondary ">
               {t('back')}
             </span>
           </button>

@@ -27,8 +27,8 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
     <div
       className={`
     w-full
-    sm:w-[237px]
-    xl:w-[320px]
+    col-span-full sm:col-start-8 sm:col-end-12 sm:col-span-5
+    xl:col-start-14 xl:col-end-20 xl:col-span-7
   `}
     >
       <ColorPickerWithTitle
@@ -43,12 +43,14 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
 
       <ItemPrice item={item} />
 
-      <div className="flex gap-2 items-center mb-8 justify-between">
+      <div className="flex gap-2 items-center mb-8 justify-between max-w-[400px]">
         <PrimaryButton text={t('add-to-cart')} />
         <AddToFavoriteButton />
       </div>
 
-      <TechSpecs specs={specs.slice(0, 4)} />
+      <div className="max-w-[400px]">
+        <TechSpecs specs={specs.slice(0, 4)} />
+      </div>
     </div>
   );
 };

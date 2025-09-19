@@ -30,7 +30,7 @@ export const Navbar: React.FC<Props> = ({
           bg-white dark:bg-black
         `,
       )}
-      style={{ transition: 'height 1s ease' }}
+      style={{ transition: 'height .3s ease' }}
       role="navigation"
       aria-label="main navigation"
     >

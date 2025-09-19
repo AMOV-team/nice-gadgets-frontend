@@ -27,11 +27,11 @@ export const HeaderButtons: React.FC<Props> = ({
         },
         `
         flex items-center flex-row sm:h-full z-30 border-t border-1
-        absolute -bottom-[calc(100vh-46px)] left-0 right-0 sm:static
+        fixed -bottom-[calc(100vh-46px)] left-0 right-0 sm:static
         h-0 bg-white dark:bg-black
       `,
       )}
-      style={{ transition: 'height 1s ease' }}
+      style={{ transition: 'height .3s ease' }}
     >
       <ThemeSwitcher />
       <LangButton />
