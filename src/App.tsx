@@ -16,12 +16,11 @@ function App() {
         'flex flex-col min-h-screen overflow-hidden',
       )}
     >
-
       <Header
         isBurgerMenuActive={isBurgerMenuActive}
         handleIsBurgerMenuActive={setIsBurgerMenuActive}
       />
-      <div className="bg-hover dark:bg-black">
+      <div className="bg-hover dark:bg-black flex-grow">
         <Outlet />
       </div>
       <Footer />
