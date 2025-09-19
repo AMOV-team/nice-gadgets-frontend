@@ -13,10 +13,11 @@ export const CompareButton: React.FC<Props> = ({
   return (
     <div
       className="
-        absolute top-[22px] right-[22px]
+        absolute top-[20px] right-[22px]
         flex items-center justify-center
         w-[40px] h-[40px]
         min-w-[40px]
+        bg-white dark:bg-surface
         rounded-full cursor-pointer
         box-border
         border border-elements

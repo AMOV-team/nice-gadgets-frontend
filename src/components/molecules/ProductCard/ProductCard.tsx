@@ -51,7 +51,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       h-[440px] sm:h-[506px]
       gap-[8px] p-[32px]
       bg-white dark:bg-surface
-      border border-solid border-elements rounded-lg 
+      transition-all duration-200
+      border border-solid border-white dark:border-surface
+      dark:hover:shadow-[0px_0px_5px_0px_hsl(var(--hover)/0.4)] hover:shadow-[0px_3px_13px_0px_#17203166]
+      rounded-lg 
       ${className}
     `}
     >
