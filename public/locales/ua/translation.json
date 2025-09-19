@@ -39,8 +39,8 @@
   "You-may-like": "Також може сподобатися",
   "tablets": "Планшети",
   "accessories": "Аксесуари",
-  "favourites": "Обране",
-  "empty-favourites": "У вас жодного обраного предмета",
+  "favorites": "Обране",
+  "empty-favourites": "Поки що немає обраних товарів. Почніть додавати товари до обраного!",
   "cart": "Кошик",
   "empty-cart": "Ваш кошик пустий",
   "back-to-shopping": "Назад до покупок",
@@ -66,6 +66,7 @@
   "item": "предмет",
   "back": "Назад",
   "product-not-found": "Продукт не знайдено",
+  "userprofile": "Профіль користувача",
 
   "phones-carousel": {
     "apple13": {
