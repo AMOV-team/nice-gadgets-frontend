@@ -6,6 +6,8 @@ import { ShoppingBagIconCounter } from '../icons/ShoppingBagIconCounter.tsx';
 import { LangButton } from '../buttons/LangButton.tsx';
 import { FavouritesIconCounter } from '../icons/FavouritesIconCounter.tsx';
 import { useFavorites } from '../../../utils/useFavorites';
+import { useCart } from 'react-use-cart';
+import { ShoppingBagIcon } from '../icons/ShoppingBagIcon.tsx';
 
 type Props = {
   isBurgerMenuActive: boolean;
@@ -17,6 +19,7 @@ export const HeaderButtons: React.FC<Props> = ({
   handleIsBurgerMenuActive,
 }) => {
   const { favorites } = useFavorites();
+  const { isEmpty, totalItems } = useCart();
 
   return (
     <div
@@ -47,11 +50,17 @@ export const HeaderButtons: React.FC<Props> = ({
         </div>
       </NavbarIconLink>
       <NavbarIconLink
-        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
         link="/cart"
+        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
       >
         <div className="size-[16px] flex justify-center items-center">
-          <ShoppingBagIconCounter className="text-custom-primary" />
+          {isEmpty ?
+            <ShoppingBagIcon />
+          : <ShoppingBagIconCounter
+              className="text-custom-primary"
+              count={totalItems}
+            />
+          }
         </div>
       </NavbarIconLink>
     </div>
