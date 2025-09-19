@@ -3,9 +3,10 @@ import { ItemCard } from '../molecules/ItemCard/ItemCard.tsx';
 import { SectionSlider } from '../organisms/SectionSlider/SectionSlider.tsx';
 import React from 'react';
 import { GridContainer } from '../atoms/GridContainer.tsx';
+import type { Category } from '@/types/Category.ts';
 
 type Props = {
-  category: string;
+  category: Category;
 };
 
 export const ItemCardPage: React.FC<Props> = ({ category }) => {

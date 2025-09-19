@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { Item } from '../../../types/Item.ts';
 import type { Category } from '../../../types/Category.ts';
-import type { Product } from '../../../types/Product.ts';
 import { AboutDescription } from '../../atoms/ItemCard/AboutDescription.tsx';
 import { TechSpecsWithTitle } from '../../atoms/ItemCard/TechSpecsWithTitle.tsx';
 import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWrapper.tsx';
@@ -10,10 +9,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumb } from '../Breadcrumb/Breadcrumb.tsx';
 import { useTranslation } from 'react-i18next';
 import { getProductById } from '../../../api/productCrud.ts';
-import { client } from '@/utils/fetchClient';
 
 type Props = {
-  category: string;
+  category: Category;
 };
 
 export const ItemCard: React.FC<Props> = ({ category }) => {
@@ -22,18 +20,17 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const { slug } = useParams<{ slug: string }>();
 
   const [item, setItem] = useState<Item | null>(null);
-  const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState('');
 
-  // Фетчимо сам item (варіація товару)
   useEffect(() => {
     if (!category || !slug) return;
 
-    getProductById(category as Category, slug)
-      .then((data) => {
-        if (data.length > 0) {
-          setItem(data[0]);
-          setSelectedImage(data[0].images[0]);
+    getProductById(category, slug)
+      .then((res) => {
+        if (res && res.length > 0) {
+          const product = res[0];
+          setItem(product);
+          setSelectedImage(product.images[0]);
         } else {
           setItem(null);
           setSelectedImage('');
@@ -44,22 +41,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         setSelectedImage('');
       });
   }, [category, slug]);
-
-  // Фетчимо product для favorites
-  useEffect(() => {
-    if (!slug) return;
-
-    client
-      .get<Product[]>(`/products?itemId=eq.${slug}&select=*`)
-      .then((data) => {
-        if (data.length > 0) {
-          setProduct(data[0]);
-        } else {
-          setProduct(null);
-        }
-      })
-      .catch(() => setProduct(null));
-  }, [slug]);
 
   if (!item) {
     return <p>{t('product-not-found')}</p>;
@@ -76,16 +57,24 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   ];
 
   const handleSelectCapacity = (newCapacity: string) => {
-    navigate(`/${category}/${item.namespaceId}-${newCapacity}-${item.color}`, {
-      replace: true,
-    });
+    navigate(
+      `/${category}/${item.namespaceId}-${newCapacity.toLowerCase()}-${item.color}`,
+      {
+        replace: true,
+      },
+    );
   };
 
   const handleSelectColor = (newColor: string) => {
-    navigate(`/${category}/${item.namespaceId}-${item.capacity}-${newColor}`, {
-      replace: true,
-    });
+    navigate(
+      `/${category}/${item.namespaceId}-${item.capacity.toLowerCase()}-${newColor}`,
+      {
+        replace: true,
+      },
+    );
   };
+
+  const goodId = item.id;
 
   return (
     <div
@@ -94,6 +83,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
       `}
     >
+      {/* Заголовок + breadcrumb */}
       <div className="col-span-full">
         <Breadcrumb />
 
@@ -112,44 +102,39 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
       {/* Main */}
       <div
         className={`
-          mb-14
-          sm:mb-16 sm:flex-row sm:justify-start
-          xl:mb-20
+          mb-14 sm:mb-16 xl:mb-20
           relative
           col-span-full
           grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
         `}
       >
+        {/* Product ID */}
         <div
           className={`
             absolute right-0 top-[395px]
             sm:top-0
           `}
         >
-          {product && (
-            <p className="font-mont font-bold text-xs text-icons">
-              ID: {product.id}
-            </p>
-          )}
+          <p className="font-mont font-bold text-xs text-icons">ID: {goodId}</p>
         </div>
 
+        {/* Left side */}
         <ItemSwiper
           images={item.images}
           selectImageHandler={setSelectedImage}
           selectedImage={selectedImage}
         />
 
-        {product && (
-          <AvailableOptionsWrapper
-            item={item}
-            product={product}
-            handleSelectColor={handleSelectColor}
-            handleSelectCapacity={handleSelectCapacity}
-            specs={specs}
-          />
-        )}
+        {/* Right side */}
+        <AvailableOptionsWrapper
+          item={item}
+          handleSelectColor={handleSelectColor}
+          handleSelectCapacity={handleSelectCapacity}
+          specs={specs}
+        />
       </div>
 
+      {/* Product Description */}
       <div
         className={`
           flex flex-col gap-14 sm:gap-16 col-span-4 sm:col-span-12 xl:col-span-24

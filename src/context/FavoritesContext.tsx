@@ -1,13 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import type { Product } from '../types/Product';
 
 export interface FavoritesContextType {
-  favorites: Product[];
-  addToFavorites: (product: Product) => void;
-  removeFromFavorites: (productId: Product['id']) => void;
-  isFavorite: (productId: Product['id']) => boolean;
-  toggleFavorite: (product: Product) => void;
+  favorites: Item[];
+  addToFavorites: (item: Item) => void;
+  removeFromFavorites: (itemId: Item['id']) => void;
+  isFavorite: (itemId: Item['id']) => boolean;
+  toggleFavorite: (item: Item) => void;
+}
+export interface Item {
+  id: string;
+  price: number;
+  quantity?: number;
+  itemTotal?: number;
+  [key: string]: any;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(
@@ -21,7 +28,7 @@ interface FavoritesProviderProps {
 export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
   children,
 }) => {
-  const [favorites, setFavorites] = useState<Product[]>(() => {
+  const [favorites, setFavorites] = useState<Item[]>(() => {
     try {
       const saved = localStorage.getItem('favorites');
       return saved ? JSON.parse(saved) : [];
@@ -34,22 +41,22 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
-  const addToFavorites = (product: Product) => {
+  const addToFavorites = (item: Item) => {
     setFavorites((prev) =>
-      prev.some((p) => p.id === product.id) ? prev : [...prev, product],
+      prev.some((p) => p.id === item.id) ? prev : [...prev, item],
     );
   };
 
-  const removeFromFavorites = (productId: Product['id']) => {
-    setFavorites((prev) => prev.filter((p) => p.id !== productId));
+  const removeFromFavorites = (itemId: Item['id']) => {
+    setFavorites((prev) => prev.filter((p) => p.id !== itemId));
   };
 
-  const isFavorite = (productId: Product['id']) =>
-    favorites.some((p) => p.id === productId);
+  const isFavorite = (itemId: Item['id']) =>
+    favorites.some((p) => p.id === itemId);
 
-  const toggleFavorite = (product: Product) => {
-    if (isFavorite(product.id)) removeFromFavorites(product.id);
-    else addToFavorites(product);
+  const toggleFavorite = (item: Item) => {
+    if (isFavorite(item.id)) removeFromFavorites(item.id);
+    else addToFavorites(item);
   };
 
   return (
