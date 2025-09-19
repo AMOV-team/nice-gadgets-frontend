@@ -14,7 +14,6 @@ type ProductCardProps = {
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   className = '',
-  onAddToFavorite,
 }) => {
   const { addItem } = useCart();
   const handleAdd = () => {
