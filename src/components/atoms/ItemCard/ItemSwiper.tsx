@@ -22,33 +22,36 @@ export const ItemSwiper: React.FC<Props> = ({
   return (
     <div
       className={`
-          flex flex-col gap-4 mb-10
-          sm:flex-row-reverse
-          xl:flex-row-reverse xl:mb-16 xl:mr-16 sm:mr-[17px] 
+          gap-4 mb-10
+          !grid grid-cols-4 sm:grid-cols-7 xl:grid-cols-12
+          col-span-4 sm:col-span-7 xl:col-span-12
+          grid-rows-1
       `}
     >
       <Swiper
         spaceBetween={0}
-        navigation={true}
+        navigation={false}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Thumbs]}
         className={`
-        w-72 h-72 sm:w-[287px] sm:h-[287px] xl:!w-[464px] xl:!h-[464px] !m-0 cursor-pointer
-        !flex !justify-center !items-center
+        h-72 col-span-4 sm:col-start-2 sm:h-[287px]
+        xl:!h-[464px] !m-0 cursor-pointer xl:max-w-[464px]
+        xl:col-start-3 xl:col-end-12 xl:col-span-10
+        !flex !justify-center !items-center sm:order-2
         `}
       >
         {images.map((image) => (
           <SwiperSlide
             key={image}
             className={`
-             w-72 h-72 sm:w-[287px] sm:h-[287px] xl:!w-[464px] xl:!h-[464px]
+            h-72 sm:h-[287px] xl:!h-[464px]
             flex justify-center items-center
           `}
           >
             <img
               src={image}
               alt=""
-              className=" w-72 h-72 sm:w-[287px] sm:h-[287px] xl:!w-[464px] xl:!h-[464px] object-contain"
+              className=" w-auto h-full object-contain mx-auto"
             />
           </SwiperSlide>
         ))}
@@ -73,11 +76,12 @@ export const ItemSwiper: React.FC<Props> = ({
         freeMode={true}
         modules={[FreeMode, Thumbs]}
         className={`
-                !w-[295px] !h-[51px]
-                sm:!w-[37px] sm:!h-[230px]
-                xl:!w-[82px] xl:!h-[474px]
-                !m-0
-                `}
+          col-span-full
+          !h-[51px]
+          sm:!h-[230px]  sm:order-1 sm:col-span-1
+          xl:!h-[474px] xl:col-span-2
+          !m-0
+        `}
       >
         {images.map((image) => (
           <SwiperSlide
@@ -87,9 +91,10 @@ export const ItemSwiper: React.FC<Props> = ({
               rounded-lg
               box-border
               cursor-pointer
-              !w-[49px] !h-[49px]
-              sm:!w-[35px] sm:!h-[35px]
-              xl:!w-20 xl:!h-20
+              !h-[49px] !w-[49px]
+              sm:!h-[35px] sm:!w-[35px]
+              xl:!h-20 xl:!w-20
+              p-[2px]
             `}
             style={{
               border: `1px solid ${
@@ -111,9 +116,8 @@ export const ItemSwiper: React.FC<Props> = ({
               alt=""
               className={`
               object-contain
-              !w-[49px] !h-[49px]
-              sm:!w-[35px] sm:!h-[35px]
-              xl:!w-20 xl:!h-20
+
+              h-full w-full
               `}
             />
           </SwiperSlide>

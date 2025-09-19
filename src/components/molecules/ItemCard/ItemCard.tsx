@@ -13,6 +13,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumb } from '../Breadcrumb/Breadcrumb.tsx';
 import { useTranslation } from 'react-i18next';
 
+function getProductId(item: Item) {
+  return (
+    products.find((currentItem) => currentItem.itemId === item.id)?.id ?? '1'
+  );
+}
+
 function findItemById(arr: Array<Item>, itemId: string) {
   return arr.find((item) => item.id === itemId);
 }
@@ -20,11 +26,11 @@ function findItemById(arr: Array<Item>, itemId: string) {
 function getProduct(category: Category, itemId: string) {
   switch (category) {
     case 'accessories':
-      return findItemById(accessories, itemId);
+      return findItemById(accessories as Item[], itemId);
     case 'phones':
-      return findItemById(phones, itemId);
+      return findItemById(phones as Item[], itemId);
     case 'tablets':
-      return findItemById(tablets, itemId);
+      return findItemById(tablets as Item[], itemId);
     default:
       return null;
   }
@@ -40,7 +46,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const { slug } = useParams<{ slug: string }>();
 
   const [item, setItem] = useState<Item | null>(null);
-
   const [selectedImage, setSelectedImage] = useState('');
 
   useEffect(() => {
@@ -75,24 +80,24 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   ];
 
   const findItem = (namespaceId: string, capacity: string, color: string) => {
-    switch (category) {
-      case 'accessories':
-        return findItemInsideCategory(accessories);
-      case 'phones':
-        return findItemInsideCategory(phones);
-      case 'tablets':
-        return findItemInsideCategory(tablets);
-      default:
-        return null;
-    }
-
     function findItemInsideCategory(arr: Item[]) {
       return arr.find(
-        (item) =>
-          item.namespaceId === namespaceId &&
-          item.capacity === capacity &&
-          item.color === color,
+        (i) =>
+          i.namespaceId === namespaceId &&
+          i.capacity === capacity &&
+          i.color === color,
       );
+    }
+
+    switch (category) {
+      case 'accessories':
+        return findItemInsideCategory(accessories as Item[]);
+      case 'phones':
+        return findItemInsideCategory(phones as Item[]);
+      case 'tablets':
+        return findItemInsideCategory(tablets as Item[]);
+      default:
+        return null;
     }
   };
 
@@ -116,40 +121,41 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
     }
   };
 
-  const goodId = item.id;
+  const goodId = getProductId(item);
 
   return (
     <div
       className={`
-        mb-14
-        sm:mb-16
-        xl:mb-20
+        col-span-full
+        grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
       `}
     >
-      <Breadcrumb />
+      <div className="col-span-full">
+        <Breadcrumb />
 
-      {/* Name */}
-      <h2
-        className={`
-          font-mont font-extrabold
-          text-[22px] leading-[140%] mb-4
-          sm:mb-10
-          xl:text-[32px] xl:leading-[41px] xl:tracking-[-1%] xl:mb-14
-        `}
-      >
-        {item.name}
-      </h2>
+        <h2
+          className={`
+            font-mont font-extrabold
+            text-[22px] leading-[140%]
+            xl:text-[32px] xl:leading-[41px] xl:tracking-[-1%]
+            mb-4 sm:mb-6
+          `}
+        >
+          {item.name}
+        </h2>
+      </div>
 
       {/* Main */}
       <div
         className={`
-          flex flex-col mb-14
+          mb-14
           sm:mb-16 sm:flex-row sm:justify-start
-          xl:mb-20 xl:gap-16
+          xl:mb-20
           relative
+          col-span-full
+          grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
         `}
       >
-        {/* Product ID */}
         <div
           className={`
             absolute right-0 top-[395px]
@@ -159,14 +165,12 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
           <p className="font-mont font-bold text-xs text-icons">ID: {goodId}</p>
         </div>
 
-        {/* Left side */}
         <ItemSwiper
           images={item.images}
           selectImageHandler={setSelectedImage}
           selectedImage={selectedImage}
         />
 
-        {/* Right side */}
         <AvailableOptionsWrapper
           item={item}
           handleSelectColor={handleSelectColor}
@@ -175,11 +179,11 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         />
       </div>
 
-      {/* Product Description */}
       <div
         className={`
-          flex flex-col items-start w-full
-          xl:justify-center xl:flex-row xl:gap-16
+          flex flex-col gap-14 sm:gap-16 col-span-4 sm:col-span-12 xl:col-span-24
+          xl:flex-row
+          mb-14 sm:mb-14 xl:mb-20
         `}
       >
         <AboutDescription item={item} />
