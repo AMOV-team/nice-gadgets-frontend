@@ -59,7 +59,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         }
       })
       .catch(() => setProduct(null));
-  }, [slug]);
+  }, [slug, category]);
 
   if (!item) {
     return <p>{t('product-not-found')}</p>;
@@ -76,15 +76,21 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   ];
 
   const handleSelectCapacity = (newCapacity: string) => {
-    navigate(`/${category}/${item.namespaceId}-${newCapacity}-${item.color}`, {
-      replace: true,
-    });
+    navigate(
+      `/${category}/${item.namespaceId}-${newCapacity.toLowerCase()}-${item.color}`,
+      {
+        replace: true,
+      },
+    );
   };
 
   const handleSelectColor = (newColor: string) => {
-    navigate(`/${category}/${item.namespaceId}-${item.capacity}-${newColor}`, {
-      replace: true,
-    });
+    navigate(
+      `/${category}/${item.namespaceId}-${item.capacity.toLowerCase()}-${newColor}`,
+      {
+        replace: true,
+      },
+    );
   };
 
   return (
