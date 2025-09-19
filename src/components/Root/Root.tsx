@@ -17,6 +17,7 @@ import { ScrollToTop } from '../organisms/ScrollToTop/ScrollToTop.tsx';
 import { CartProvider } from 'react-use-cart';
 import { ComparePage } from '../pages/ComparePage.tsx';
 import { FavoritesProvider } from '../../context/FavoritesContext.tsx';
+import { UserProfilePage } from '../pages/UserProfilePage.tsx';
 
 export const Root = () => (
   <FavoritesProvider>
@@ -41,7 +42,10 @@ export const Root = () => (
                 />
               }
             />
-
+            <Route
+              path="userprofile"
+              element={<UserProfilePage />}
+            />
             <Route path="phones">
               <Route
                 index
