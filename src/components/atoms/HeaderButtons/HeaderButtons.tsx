@@ -8,6 +8,7 @@ import { FavouritesIconCounter } from '../icons/FavouritesIconCounter.tsx';
 import { useFavorites } from '../../../utils/useFavorites';
 import { useCart } from 'react-use-cart';
 import { ShoppingBagIcon } from '../icons/ShoppingBagIcon.tsx';
+import { UserCabinetIcon } from '../icons/UserCabinetIcon.tsx';
 
 type Props = {
   isBurgerMenuActive: boolean;
@@ -38,6 +39,14 @@ export const HeaderButtons: React.FC<Props> = ({
     >
       <ThemeSwitcher />
       <LangButton />
+      <NavbarIconLink
+        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+        link="/userprofile"
+      >
+        <div className="size-[16px] flex justify-center items-center bg-white">
+          <UserCabinetIcon className="text-custom-primary bg-white dark:bg-black" />
+        </div>
+      </NavbarIconLink>
       <NavbarIconLink
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
         link="/favorites"
