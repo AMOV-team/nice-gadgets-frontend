@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
-import { useFavorites } from '../../utils/useFavorites';
+import { useFavorites } from '../../hooks/useFavorites.ts';
 
 export const FavoritesPage: React.FC = () => {
   const { favorites } = useFavorites();
