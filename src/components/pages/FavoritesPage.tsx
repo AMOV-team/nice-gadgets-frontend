@@ -61,7 +61,6 @@ export const FavoritesPage: React.FC = () => {
         </div>
       )}
 
-      {/* Сітка карток продуктів */}
       {!loading &&
         favoriteProducts.length > 0 &&
         favoriteProducts.map((product) => (
