@@ -8,10 +8,20 @@ type CartItem = {
   quantity: number;
 };
 
+type RawFavorite = Omit<Favorite, 'product'> & {
+  product: Favorite['product'][];
+};
+
 type Favorite = {
   id: string;
   user_id: string;
   product_id: string;
+  product: {
+    id: string;
+    name: string;
+    image: string;
+    price: number;
+  };
 };
 
 type Comparison = {
@@ -34,10 +44,29 @@ export function useUserSync(userId: string | null) {
         .select('*')
         .eq('user_id', userId);
 
-      const { data: favs } = await supabase
+      const { data: rawFavorites } = await supabase
         .from('favorites')
-        .select('*')
+        .select(
+          `
+          id,
+          user_id,
+          product_id,
+          product:products (
+            id,
+            name,
+            image,
+            price
+          )
+        `,
+        )
         .eq('user_id', userId);
+
+      const normalizedFavorites: Favorite[] = (rawFavorites ?? []).map(
+        (fav: RawFavorite) => ({
+          ...fav,
+          product: Array.isArray(fav.product) ? fav.product[0] : fav.product,
+        }),
+      );
 
       const { data: comps } = await supabase
         .from('comparisons')
@@ -45,7 +74,7 @@ export function useUserSync(userId: string | null) {
         .eq('user_id', userId);
 
       setCart(cartItems ?? []);
-      setFavorites(favs ?? []);
+      setFavorites(normalizedFavorites);
       setComparisons(comps ?? []);
     };
 
