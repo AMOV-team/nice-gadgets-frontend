@@ -23,37 +23,30 @@
   }
 
   .swiper-pagination {
-    bottom: 0 !important;
+    bottom: 10px !important;
     position: absolute !important;
     width: 100%;
     display: flex !important;
     justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 8px; // как у верхней пагинации
     z-index: 20;
   }
 
   .swiper-pagination-bullet {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
+    width: 8px;
+    height: 8px;
+    background: #929292;
+    opacity: 0.2;
+    border-radius: 50%;
     margin: 0 !important;
-  }
-
-  .swiper-pagination-bullet::before {
-    content: '';
-    width: 14px;
-    height: 4px;
-    background: #3b3e4a;
     transition:
-      background 0.3s,
-      opacity 0.3s;
+      opacity 0.3s,
+      background 0.3s;
   }
 
-  .swiper-pagination-bullet-active::before {
-    background: #f1f2f9;
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: white;
   }
 }
