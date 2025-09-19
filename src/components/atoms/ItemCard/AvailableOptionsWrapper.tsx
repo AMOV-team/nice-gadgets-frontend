@@ -8,7 +8,7 @@ import { ColorPickerWithTitle } from './ColorPickerWithTitle.tsx';
 import { CapacityPickerWithTitle } from './CapacityPickerWithTitle.tsx';
 import { useCart } from 'react-use-cart';
 import { useTranslation } from 'react-i18next';
-import { useFavorites } from '@/utils/useFavorites.ts';
+import { useFavorites } from '@/hooks/useFavorites.ts';
 import type { Product } from '@/types/Product.ts';
 
 type Props = {

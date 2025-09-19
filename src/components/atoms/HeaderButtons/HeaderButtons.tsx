@@ -5,10 +5,12 @@ import React from 'react';
 import { ShoppingBagIconCounter } from '../icons/ShoppingBagIconCounter.tsx';
 import { LangButton } from '../buttons/LangButton.tsx';
 import { FavouritesIconCounter } from '../icons/FavouritesIconCounter.tsx';
-import { useFavorites } from '../../../utils/useFavorites';
+import { useFavorites } from '../../../hooks/useFavorites.ts';
 import { useCart } from 'react-use-cart';
 import { ShoppingBagIcon } from '../icons/ShoppingBagIcon.tsx';
 import { UserCabinetIcon } from '../icons/UserCabinetIcon.tsx';
+import { CompareIconCounter } from '../icons/CompareIconCounter.tsx';
+import { useComparison } from '@/hooks/useComparison.ts';
 
 type Props = {
   isBurgerMenuActive: boolean;
@@ -20,6 +22,7 @@ export const HeaderButtons: React.FC<Props> = ({
   handleIsBurgerMenuActive,
 }) => {
   const { favorites } = useFavorites();
+  const { comparison } = useComparison();
   const { isEmpty, totalItems } = useCart();
 
   return (
@@ -41,10 +44,13 @@ export const HeaderButtons: React.FC<Props> = ({
       <LangButton />
       <NavbarIconLink
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
-        link="/userprofile"
+        link="/compare"
       >
         <div className="size-[16px] flex justify-center items-center bg-white">
-          <UserCabinetIcon className="text-custom-primary bg-white dark:bg-black" />
+          <CompareIconCounter
+            count={comparison.length}
+            className="text-custom-primary bg-white dark:bg-black"
+          />
         </div>
       </NavbarIconLink>
       <NavbarIconLink
@@ -70,6 +76,14 @@ export const HeaderButtons: React.FC<Props> = ({
               count={totalItems}
             />
           }
+        </div>
+      </NavbarIconLink>
+      <NavbarIconLink
+        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+        link="/userprofile"
+      >
+        <div className="size-[16px] flex justify-center items-center bg-white">
+          <UserCabinetIcon className="text-custom-primary bg-white dark:bg-black" />
         </div>
       </NavbarIconLink>
     </div>

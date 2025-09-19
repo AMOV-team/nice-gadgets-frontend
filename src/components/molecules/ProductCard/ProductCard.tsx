@@ -5,6 +5,8 @@ import { ProductCharacteristics } from './ProductCharacteristics/ProductCharacte
 import { ProductActions } from './ProductActions/ProductActions';
 import { ProductPrice } from './ProductPrice/ProductPrice';
 import { useCart } from 'react-use-cart';
+import { CompareButton } from '@/components/atoms/buttons/CompareButton';
+import { useComparison } from '@/hooks/useComparison';
 
 type ProductCardProps = {
   product: Product;
@@ -16,6 +18,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   className = '',
 }) => {
   const { addItem } = useCart();
+  const { toggleComparison, isInComparison } = useComparison();
+
   const handleAdd = () => {
     addItem({
       id: product.itemId,
@@ -33,9 +37,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       },
     });
   };
+
+  const handleComparisonClick = () => {
+    toggleComparison(product);
+  };
+
   return (
     <div
       className={`
+      relative
       flex flex-col 
       w-full min-w-[212px]
       h-[440px] sm:h-[506px]
@@ -45,6 +55,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       ${className}
     `}
     >
+      <CompareButton
+        selected={isInComparison(product.id)}
+        onSelect={handleComparisonClick}
+      />
+
       <Link
         to={`/${product.category}/${product.itemId}`}
         className="flex-1 flex items-center justify-center overflow-hidden"

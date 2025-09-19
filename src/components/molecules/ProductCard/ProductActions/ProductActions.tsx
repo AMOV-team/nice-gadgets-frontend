@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimaryButton } from '../../../atoms/buttons';
 import { AddToFavoriteButton } from '../../../atoms/buttons/AddToFavoriteButton';
 import { useTranslation } from 'react-i18next';
-import { useFavorites } from '../../../../utils/useFavorites';
+import { useFavorites } from '../../../../hooks/useFavorites';
 import type { Product } from '../../../../types/Product';
 
 type ProductActionsProps = {
