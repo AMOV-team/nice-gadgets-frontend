@@ -33,35 +33,32 @@ export const BannerSlider = ({ className = '' }) => {
     >
       <Swiper
         modules={[Pagination, Autoplay, EffectFade]}
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        loop
-        speed={1000}
         effect="fade"
         fadeEffect={{ crossFade: true }}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        loop
+        speed={3000}
         className="bannerslider"
         onSwiper={(swiper) => (swiperRef.current = swiper)}
       >
         {slides.map((s, i) => (
-          <SwiperSlide
-            key={i}
-            className="bannerslider-slide"
-          >
+          <SwiperSlide key={i}>
             <Link
               to={s.to}
-              className="slide-wrapper"
+              className="block w-full h-full relative"
             >
               <img
                 src={s.src}
                 alt={s.alt}
                 className="w-full h-full object-cover"
               />
+              <div className="overlay" />
             </Link>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* кастомные кнопки */}
       <div className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10">
         <SliderButtonLeft
           onClick={handlePrev}
