@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import phones from '../../../../public/api/phones.json';
-import accessories from '../../../../public/api/accessories.json';
-import tablets from '../../../../public/api/tablets.json';
-import products from '../../../../public/api/products.json';
 import type { Item } from '../../../types/Item.ts';
 import type { Category } from '../../../types/Category.ts';
+import type { Product } from '../../../types/Product.ts';
 import { AboutDescription } from '../../atoms/ItemCard/AboutDescription.tsx';
 import { TechSpecsWithTitle } from '../../atoms/ItemCard/TechSpecsWithTitle.tsx';
 import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWrapper.tsx';
@@ -12,29 +9,8 @@ import { ItemSwiper } from '../../atoms/ItemCard/ItemSwiper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumb } from '../Breadcrumb/Breadcrumb.tsx';
 import { useTranslation } from 'react-i18next';
-
-function getProductId(item: Item) {
-  return (
-    products.find((currentItem) => currentItem.itemId === item.id)?.id ?? '1'
-  );
-}
-
-function findItemById(arr: Array<Item>, itemId: string) {
-  return arr.find((item) => item.id === itemId);
-}
-
-function getProduct(category: Category, itemId: string) {
-  switch (category) {
-    case 'accessories':
-      return findItemById(accessories as Item[], itemId);
-    case 'phones':
-      return findItemById(phones as Item[], itemId);
-    case 'tablets':
-      return findItemById(tablets as Item[], itemId);
-    default:
-      return null;
-  }
-}
+import { getProductById } from '../../../api/productCrud.ts';
+import { client } from '@/utils/fetchClient';
 
 type Props = {
   category: string;
@@ -46,24 +22,44 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const { slug } = useParams<{ slug: string }>();
 
   const [item, setItem] = useState<Item | null>(null);
+  const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState('');
 
+  // Фетчимо сам item (варіація товару)
   useEffect(() => {
-    const productMeta = products.find((p) => String(p.itemId) === slug);
+    if (!category || !slug) return;
 
-    const product =
-      category && slug && productMeta?.itemId ?
-        getProduct(category as Category, productMeta.itemId)
-      : null;
-
-    if (product) {
-      setItem(product);
-      setSelectedImage(product.images[0]);
-    } else {
-      setItem(null);
-      setSelectedImage('');
-    }
+    getProductById(category as Category, slug)
+      .then((data) => {
+        if (data.length > 0) {
+          setItem(data[0]);
+          setSelectedImage(data[0].images[0]);
+        } else {
+          setItem(null);
+          setSelectedImage('');
+        }
+      })
+      .catch(() => {
+        setItem(null);
+        setSelectedImage('');
+      });
   }, [category, slug]);
+
+  // Фетчимо product для favorites
+  useEffect(() => {
+    if (!slug) return;
+
+    client
+      .get<Product[]>(`/products?itemId=eq.${slug}&select=*`)
+      .then((data) => {
+        if (data.length > 0) {
+          setProduct(data[0]);
+        } else {
+          setProduct(null);
+        }
+      })
+      .catch(() => setProduct(null));
+  }, [slug]);
 
   if (!item) {
     return <p>{t('product-not-found')}</p>;
@@ -79,49 +75,17 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
     { name: `${t('Cell')}`, value: item.cell?.join(', ') ?? '' },
   ];
 
-  const findItem = (namespaceId: string, capacity: string, color: string) => {
-    function findItemInsideCategory(arr: Item[]) {
-      return arr.find(
-        (i) =>
-          i.namespaceId === namespaceId &&
-          i.capacity === capacity &&
-          i.color === color,
-      );
-    }
-
-    switch (category) {
-      case 'accessories':
-        return findItemInsideCategory(accessories as Item[]);
-      case 'phones':
-        return findItemInsideCategory(phones as Item[]);
-      case 'tablets':
-        return findItemInsideCategory(tablets as Item[]);
-      default:
-        return null;
-    }
-  };
-
   const handleSelectCapacity = (newCapacity: string) => {
-    const newItem = findItem(item.namespaceId, newCapacity, item.color);
-
-    if (newItem) {
-      setItem(newItem);
-      setSelectedImage(newItem.images[0]);
-      navigate(`/${category}/${newItem.id}`, { replace: true });
-    }
+    navigate(`/${category}/${item.namespaceId}-${newCapacity}-${item.color}`, {
+      replace: true,
+    });
   };
 
   const handleSelectColor = (newColor: string) => {
-    const newItem = findItem(item.namespaceId, item.capacity, newColor);
-
-    if (newItem) {
-      setItem(newItem);
-      setSelectedImage(newItem.images[0]);
-      navigate(`/${category}/${newItem.id}`, { replace: true });
-    }
+    navigate(`/${category}/${item.namespaceId}-${item.capacity}-${newColor}`, {
+      replace: true,
+    });
   };
-
-  const goodId = getProductId(item);
 
   return (
     <div
@@ -162,7 +126,11 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
             sm:top-0
           `}
         >
-          <p className="font-mont font-bold text-xs text-icons">ID: {goodId}</p>
+          {product && (
+            <p className="font-mont font-bold text-xs text-icons">
+              ID: {product.id}
+            </p>
+          )}
         </div>
 
         <ItemSwiper
@@ -171,12 +139,15 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
           selectedImage={selectedImage}
         />
 
-        <AvailableOptionsWrapper
-          item={item}
-          handleSelectColor={handleSelectColor}
-          handleSelectCapacity={handleSelectCapacity}
-          specs={specs}
-        />
+        {product && (
+          <AvailableOptionsWrapper
+            item={item}
+            product={product}
+            handleSelectColor={handleSelectColor}
+            handleSelectCapacity={handleSelectCapacity}
+            specs={specs}
+          />
+        )}
       </div>
 
       <div

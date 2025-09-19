@@ -79,7 +79,7 @@ export default function UserCabinet() {
               {favorites.map((item) => (
                 <Card key={item.id}>
                   <CardContent className="flex items-center justify-between p-4">
-                    <span>{item.name}</span>
+                    <span>{item.product.name}</span>
                     <Heart className="text-red-500" />
                   </CardContent>
                 </Card>
