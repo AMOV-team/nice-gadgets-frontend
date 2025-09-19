@@ -23,9 +23,7 @@ export const SliderButtonLeft: React.FC<SliderButtonLeftProps> = ({
         w-[32px] h-[32px]
         cursor-pointer
         box-border
-        border-solid
         rounded-full
-        border border-elements
         transition-all duration-200
         disabled:border-elements
         bg-transparent
