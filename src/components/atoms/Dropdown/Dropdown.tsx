@@ -79,7 +79,7 @@ export const Dropdown: React.FC<Props> = ({
         {itemData.map((item) => (
           <SelectItem
             key={item.id}
-            value={item.label}
+            value={item.value ?? item.label}
             className={`
               w-full
               h-10

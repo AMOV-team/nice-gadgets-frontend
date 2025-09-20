@@ -1,189 +1,143 @@
-import React, { useState, useEffect } from 'react';
-import { Dropdown } from '../atoms/Dropdown';
+import React, { useState, useRef } from 'react';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
-import products from '../../../public/api/products.json';
-import type { SortOption } from '../../types/SortOption';
+import { useComparison } from '@/hooks/useComparison';
 import type { Product } from '../../types/Product';
+import { Dropdown } from '../atoms/Dropdown';
+import type { SortOption } from '@/types/SortOption';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import type { SwiperClass } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import { SliderButtonLeft } from '../atoms/buttons/SliderButtonLeft';
+import { SliderButtonRight } from '../atoms/buttons/SliderButtonRight';
 
 export const ComparePage: React.FC = () => {
-  const [firstProduct, setFirstProduct] = useState<Product | null>(null);
-  const [secondProduct, setSecondProduct] = useState<Product | null>(null);
-  const [firstProductCategory, setFirstProductCategory] = useState<
-    string | null
-  >(null);
+  const { comparison } = useComparison();
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  const [productOptions, setProductOptions] = useState<SortOption[]>([]);
-  const [secondProductOptions, setSecondProductOptions] = useState<
-    SortOption[]
-  >([]);
+  const categories: SortOption[] = [
+    { id: 1, label: 'Phones', value: 'phones' },
+    { id: 2, label: 'Tablets', value: 'tablets' },
+    { id: 3, label: 'Accessories', value: 'accessories' },
+  ];
 
-  useEffect(() => {
-    const allOptions: SortOption[] = products.map((product) => ({
-      id: product.id,
-      label: product.name,
-      category: product.category,
-    }));
-    setProductOptions(allOptions);
-  }, []);
+  const filteredProducts: Product[] =
+    activeCategory ?
+      comparison.filter((p: Product) => p.category === activeCategory)
+    : [];
 
-  useEffect(() => {
-    if (firstProductCategory) {
-      const filteredOptions: SortOption[] = products
-        .filter((product) => product.category === firstProductCategory)
-        .map((product) => ({
-          id: product.id,
-          label: product.name,
-        }));
-      setSecondProductOptions(filteredOptions);
-    }
-  }, [firstProductCategory]);
-
-  const handleFirstProductSelect = (selectedLabel: string) => {
-    const selectedProduct = products.find((p) => p.name === selectedLabel);
-    if (selectedProduct) {
-      setFirstProduct(selectedProduct);
-      setFirstProductCategory(selectedProduct.category);
-      //   setSecondProduct(null);
-    }
-  };
-
-  const handleSecondProductSelect = (selectedLabel: string) => {
-    const selectedProduct = products.find((p) => p.name === selectedLabel);
-    if (selectedProduct) {
-      setSecondProduct(selectedProduct);
-    }
-  };
+  const swiperRef = useRef<SwiperClass | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   return (
     <GridContainer>
       <div className="col-span-full">
         <Breadcrumb />
-        <h1 className="text-h1 font-extrabold font-mont mb-2 sm:text-h1-lg">
+        <h1 className="text-h1 font-extrabold font-mont mb-4 sm:text-h1-lg">
           Compare devices
         </h1>
       </div>
 
-      <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4">
-        <div className="col-start-1 col-end-3 sm:col-end-6">
-          <p className="text-small font-mont text-custom-secondary mb-1">
-            First device
-          </p>
-          <Dropdown
-            // value={firstProduct?.name ?? null}
-            defaultText={
-              firstProduct ? firstProduct.name : 'Select a device to compare'
-            }
-            itemData={productOptions}
-            triggerClass="w-full"
-            itemClass="w-full"
-            onSelect={handleFirstProductSelect}
-          />
-        </div>
-
-        <div className="col-start-3 col-end-5 sm:col-start-6 sm:col-end-11">
-          <p className="text-small font-mont text-custom-secondary mb-1">
-            Second device
-          </p>
-          <Dropdown
-            // value={secondProduct?.name ?? null}
-            defaultText={
-              secondProduct !== null ?
-                secondProduct.name
-              : 'Select a device to compare'
-            }
-            itemData={secondProductOptions}
-            triggerClass="w-full"
-            itemClass="w-full"
-            onSelect={handleSecondProductSelect}
-            disabled={!firstProduct}
-          />
-        </div>
+      <div className="col-span-full mb-6">
+        <Dropdown
+          defaultText="Select category"
+          itemData={categories}
+          triggerClass="w-[250px]"
+          itemClass="w-full"
+          onSelect={(value) => setActiveCategory(value)}
+        />
       </div>
 
-      {firstProduct && secondProduct && (
-        <div className="col-span-full">
-          {/* Header Row */}
-          <div className="grid grid-cols-3 sm:grid-cols-12 xl:grid-cols-24 gap-4 py-3 border-b border-gray-900 items-center">
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center text-xs font-semibold font-mont text-gray-600 uppercase tracking-wider">
-              Spec
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center text-xs font-semibold font-mont text-gray-600 uppercase tracking-wider">
-              {firstProduct.name}
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center text-xs font-semibold font-mont text-gray-600 uppercase tracking-wider">
-              {secondProduct.name}
-            </div>
+      {filteredProducts.length > 1 && (
+        <div className="col-span-full flex flex-col">
+          <div className="flex justify-end gap-x-4 mb-4">
+            <SliderButtonLeft
+              onClick={() => swiperRef.current?.slidePrev()}
+              disabled={isBeginning}
+            />
+            <SliderButtonRight
+              onClick={() => swiperRef.current?.slideNext()}
+              disabled={isEnd}
+            />
           </div>
 
-          {/* Image Row */}
-          <div className="grid grid-cols-3 sm:grid-cols-12 xl:grid-cols-24 gap-4 py-4 items-center border-b border-gray-200">
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-medium">
-              Image
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 flex justify-center items-center">
-              <img
-                src={firstProduct.image}
-                alt={firstProduct.name}
-                className="h-20 w-20 object-contain"
-              />
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 flex justify-center items-center">
-              <img
-                src={secondProduct.image}
-                alt={secondProduct.name}
-                className="h-20 w-20 object-contain"
-              />
-            </div>
-          </div>
+          <Swiper
+            modules={[Navigation]}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            spaceBetween={16}
+            slidesPerView={1.1}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="w-full"
+          >
+            {filteredProducts.map((product) => (
+              <SwiperSlide key={product.id}>
+                <div className="border rounded-lg shadow-sm p-4 flex flex-col items-center">
+                  <h3 className="text-base font-bold mb-3 text-center">
+                    {product.name}
+                  </h3>
 
-          {/* Full Price Row */}
-          <div className="grid grid-cols-3 sm:grid-cols-12 xl:grid-cols-24 gap-4 py-4 border-b border-gray-200">
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-mont">
-              Full Price
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-mont">{`$ ${firstProduct.fullPrice}`}</div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-mont">{`$ ${secondProduct.fullPrice}`}</div>
-          </div>
+                  <div className="mb-4">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="h-28 w-28 object-contain mx-auto"
+                    />
+                  </div>
 
-          {/* Screen Row */}
-          <div className="grid grid-cols-3 sm:grid-cols-12 xl:grid-cols-24 gap-4 py-4 border-b border-gray-200">
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-mont">
-              Screen
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-mont">
-              {firstProduct.screen}
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-mont">
-              {secondProduct.screen}
-            </div>
-          </div>
+                  <div className="w-full text-sm space-y-3">
+                    <div>
+                      <p className="text-center text-gray-500 font-semibold uppercase text-xs">
+                        Full Price
+                      </p>
+                      <p className="text-center">{`$ ${product.fullPrice}`}</p>
+                    </div>
 
-          {/* Capacity Row */}
-          <div className="grid grid-cols-3 sm:grid-cols-12 xl:grid-cols-24 gap-4 py-4 border-b border-gray-200">
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-medium">
-              Capacity
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center">
-              {firstProduct.capacity}
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center">
-              {secondProduct.capacity}
-            </div>
-          </div>
+                    <div>
+                      <p className="text-center text-gray-500 font-semibold uppercase text-xs">
+                        Screen
+                      </p>
+                      <p className="text-center">{product.screen}</p>
+                    </div>
 
-          {/* RAM Row */}
-          <div className="grid grid-cols-3 sm:grid-cols-12 xl:grid-cols-24 gap-4 py-4 border-b border-gray-200">
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center font-medium">
-              RAM
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center">
-              {firstProduct.ram}
-            </div>
-            <div className="col-span-1 sm:col-span-4 xl:col-span-8 text-center">
-              {secondProduct.ram}
-            </div>
-          </div>
+                    <div>
+                      <p className="text-center text-gray-500 font-semibold uppercase text-xs">
+                        Capacity
+                      </p>
+                      <p className="text-center">{product.capacity}</p>
+                    </div>
+
+                    <div>
+                      <p className="text-center text-gray-500 font-semibold uppercase text-xs">
+                        RAM
+                      </p>
+                      <p className="text-center">{product.ram}</p>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
+
+      {activeCategory && filteredProducts.length <= 1 && (
+        <div className="col-span-full text-center text-gray-500 mt-6">
+          Not enough products in this category for comparison
         </div>
       )}
     </GridContainer>
