@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { PrimaryButton } from '../../atoms/buttons';
 import { useCart } from 'react-use-cart';
+import { useTranslation } from 'react-i18next';
 
 export const CartCheckout: React.FC = () => {
   const { cartTotal, totalItems } = useCart();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -17,7 +19,7 @@ export const CartCheckout: React.FC = () => {
         <div className="flex flex-col justify-center items-center">
           <span className="text-h2 font-extrabold">${cartTotal}</span>
           <span className="text-body font-semibold">
-            Total for {totalItems} items
+            {t('total-for')} {totalItems} {t('items')}
           </span>
         </div>
         <div className="border border-solid border-elements"></div>
