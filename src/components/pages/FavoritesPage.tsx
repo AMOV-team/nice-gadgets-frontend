@@ -6,10 +6,14 @@ import { client } from '../../utils/fetchClient';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
+import { useTranslation } from 'react-i18next';
 
 export const FavoritesPage: React.FC = () => {
   const { favorites } = useFavorites();
   const [favoriteProducts, setFavoriteProducts] = useState<ProductsAll[]>([]);
+  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+  const count = favorites.length;
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -39,21 +43,23 @@ export const FavoritesPage: React.FC = () => {
     <GridContainer>
       <div className="col-span-4 sm:col-span-12 xl:col-span-24">
         <Breadcrumb />
-        <h1 className="text-h1 font-bold">Favorites</h1>
+        <h1 className="text-h1 font-bold">{t('favorites')}</h1>
         <p className="font-semibold text-custom-secondary text-body">
-          {favorites.length} items
+          {count === 0 ?
+            ``
+          : `${count} ${count === 1 ? `${t('item')}` : `${t('items')}`}`}
         </p>
       </div>
 
       {
         <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-          <p>Loading favorites...</p>
+          <p>{t('loading-favorites')}</p>
         </div>
       }
 
       {favoriteProducts.length === 0 && (
         <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-          <p>No favorites yet</p>
+          <p>{t('empty-favourites')}</p>
         </div>
       )}
 

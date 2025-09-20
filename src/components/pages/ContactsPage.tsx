@@ -2,6 +2,11 @@ import { Github, Linkedin, Send } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useTranslation } from 'react-i18next';
+import oleskandrTL from '../../../public/img/OleksandrTM-contacts.png';
+import vladPM from '../../../public/img/VladPM-contacts.png';
+import artem from '../../../public/img/ArtemkaPro-contacts.png';
+import max from '../../../public/img/MaxWhySoSerious-contacts.jpg';
+import vlad from '../../../public/img/VladDev-contacts.jpg';
 
 interface TeamMember {
   id: string;
@@ -25,7 +30,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
       id: 'member-1',
       name: `${t('team.oleksandr.name')}`,
       role: 'Team Lead & Frontend Developer',
-      avatar: '../../../../public/img/OleksandrTM-contacts.png',
+      avatar: oleskandrTL,
       github: 'https://github.com/Oleksandr-Oliferuk',
       telegram: '#',
       linkedin: 'https://www.linkedin.com/in/oleksandr-oliferuk/',
@@ -34,7 +39,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
       id: 'member-2',
       name: `${t('team.vladyslav-pm.name')}`,
       role: 'Project Manager & Frontend Developer',
-      avatar: '../../../../public/img/VladPM-contacts.png',
+      avatar: vladPM,
       github: 'https://github.com/vladsulyma',
       telegram: 'https://t.me/sulymavladyslav',
       linkedin: 'https://www.linkedin.com/in/vladyslav-sulyma-5b4125360/',
@@ -43,7 +48,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
       id: 'member-3',
       name: `${t('team.artem.name')}`,
       role: 'Frontend Developer',
-      avatar: '../../../../public/img/ArtemkaPro-contacts.png',
+      avatar: artem,
       github: 'https://github.com/AARON-FOX',
       telegram: 'https://t.me/Air_foxx',
       linkedin: '#',
@@ -52,7 +57,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
       id: 'member-4',
       name: `${t('team.max.name')}`,
       role: 'Frontend Developer',
-      avatar: '../../../../public/img/MaxWhySoSerious-contacts.jpg',
+      avatar: max,
       github: 'https://github.com/maxrori228',
       telegram: 'https://t.me/maxrori',
       linkedin: 'https://www.linkedin.com/in/maxrori/',
@@ -61,7 +66,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
       id: 'member-5',
       name: `${t('team.vladyslav.name')}`,
       role: 'Frontend Developer',
-      avatar: '../../../../public/img/VladDev-contacts.jpg',
+      avatar: vlad,
       github: 'https://github.com/O1ympus',
       telegram: 'https://t.me/keygen_exe',
       linkedin:

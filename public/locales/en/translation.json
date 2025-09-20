@@ -39,8 +39,8 @@
   "You-may-like": "You may also like",
   "tablets": "Tablets",
   "accessories": "Accessories",
-  "favourites": "Favourites",
-  "empty-favourites": "You don't have any favourite items",
+  "favorites": "Favourites",
+  "empty-favourites": "No favorites yet. Start adding products to your favorites!",
   "cart": "Cart",
   "empty-cart": "Your cart is empty",
   "back-to-shopping": "Back to shopping",
@@ -66,6 +66,7 @@
   "item": "item",
   "back": "Back",
   "product-not-found": "Product not found",
+  "userprofile": "User profile",
 
   "ownership-and-ip": "1. Ownership and Intellectual Property",
   "ownership-and-ip-content": "All content on this site — including text, images, graphics, logos, design, software, trademarks, and domain names — is owned by the Nice Gadgets team and is protected by copyright and intellectual property laws.",

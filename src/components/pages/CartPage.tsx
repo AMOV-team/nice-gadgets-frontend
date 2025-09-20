@@ -5,14 +5,16 @@ import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
 import { useCart } from 'react-use-cart';
 import type { CartItem } from '../../types/CartItem.tsx';
+import { useTranslation } from 'react-i18next';
 
 export const CartPage: React.FC = () => {
   const { items } = useCart() as unknown as { items: CartItem[] };
+  const { t } = useTranslation();
   return (
     <GridContainer>
       <div className="col-span-full">
         <Breadcrumb />
-        <h1 className="text-h1 font-bold text-custom-primary">Cart</h1>
+        <h1 className="text-h1 font-bold text-custom-primary">{t('cart')}</h1>
       </div>
 
       <div className="col-span-full xl:col-span-16">
