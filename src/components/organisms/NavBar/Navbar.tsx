@@ -25,7 +25,7 @@ export const Navbar: React.FC<Props> = ({
         `
           justify-start gap-6 sm:gap-8 sm:h-full flex box-border items-center text-sm
           text-black no-underline z-10 overflow-hidden flex-col sm:flex-row
-          absolute top-16 left-0 right-0
+          absolute top-12 left-0 right-0
           sm:static
           bg-white dark:bg-black
         `,
@@ -34,6 +34,17 @@ export const Navbar: React.FC<Props> = ({
       role="navigation"
       aria-label="main navigation"
     >
+      <div
+        className={cn(
+          {
+            'h-5': isBurgerMenuActive,
+            'h-0': !isBurgerMenuActive,
+          },
+          `
+          transition-all duration-200
+        `,
+        )}
+      ></div>
       <NavbarLink
         text={t('home')}
         link="/"

@@ -10,7 +10,6 @@ import { ProductCard } from '../molecules/ProductCard/ProductCard';
 export const FavoritesPage: React.FC = () => {
   const { favorites } = useFavorites();
   const [favoriteProducts, setFavoriteProducts] = useState<ProductsAll[]>([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -19,7 +18,6 @@ export const FavoritesPage: React.FC = () => {
         return;
       }
 
-      setLoading(true);
       try {
         const itemIds = favorites.map((f) => `"${f.id}"`).join(',');
 
@@ -30,8 +28,6 @@ export const FavoritesPage: React.FC = () => {
         setFavoriteProducts(products);
       } catch (error) {
         console.error('Failed to fetch favorites', error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -49,20 +45,19 @@ export const FavoritesPage: React.FC = () => {
         </p>
       </div>
 
-      {loading && (
+      {
         <div className="col-span-4 sm:col-span-12 xl:col-span-24">
           <p>Loading favorites...</p>
         </div>
-      )}
+      }
 
-      {!loading && favoriteProducts.length === 0 && (
+      {favoriteProducts.length === 0 && (
         <div className="col-span-4 sm:col-span-12 xl:col-span-24">
           <p>No favorites yet</p>
         </div>
       )}
 
-      {!loading &&
-        favoriteProducts.length > 0 &&
+      {favoriteProducts.length > 0 &&
         favoriteProducts.map((product) => (
           <div
             key={product.itemId}
