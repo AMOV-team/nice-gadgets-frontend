@@ -57,8 +57,8 @@ export const PhonesPage: React.FC = () => {
 
   const sortOptions: SortOption[] = [
     { id: 1, label: 'Newest' },
-    { id: 2, label: 'Low-to-High' },
-    { id: 3, label: 'High-to-Low' },
+    { id: 2, label: 'Price: Low to High' },
+    { id: 3, label: 'Price: High to Low' },
     { id: 4, label: 'Alphabetically' },
   ];
 

@@ -17,10 +17,12 @@ export const Header: React.FC<Props> = ({
   return (
     <header
       className={`
-        relative flex items-center justify-between h-[48px] pl-4 border-b
+        flex items-center justify-between h-12 xl:h-16 pl-4 border-b
         shadow-[0px_1px_0px_0px_hsl(var(--elements))]
-        after:content-[""] after:absolute after:block after:top-0 after:w-full
+        after:content-[""] after:absolute after:block after:top-0
+        after:w-[100vw]
         after:h-full after:bg-white after:z-20 dark:after:bg-black
+        sticky top-0 z-20
       `}
     >
       <div className="flex gap-4 items-center z-30">
