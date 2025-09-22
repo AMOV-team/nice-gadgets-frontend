@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { supabase } from '@/lib/supabase';
 
 export async function pullCartFromServer(userId: string) {
@@ -17,7 +18,7 @@ export async function pullCartFromServer(userId: string) {
   const mergedItems = [...localItems];
 
   for (const serverItem of data) {
-    const exists = localItems.find((i) => i.id === serverItem.product_id);
+    const exists = localItems.find((i: any) => i.id === serverItem.product_id);
     if (!exists) {
       mergedItems.push({
         id: serverItem.product_id,
