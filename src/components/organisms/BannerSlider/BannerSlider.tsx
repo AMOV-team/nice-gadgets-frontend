@@ -9,18 +9,37 @@ import 'swiper/css/pagination';
 import './styles.scss';
 
 import bannerMain from '../../../../public/img/banner-slider/light-phone.png';
+import darkBannerMain from '../../../../public/img/banner-slider/dark-phone.png';
 import banner3 from '../../../../public/img/banner-slider/light-accessories.png';
+import darkBanner3 from '../../../../public/img/banner-slider/dark-accessories.png';
 import banner2 from '../../../../public/img/banner-slider/light-tablet.png';
+import darkBanner2 from '../../../../public/img/banner-slider/dark-tablets.png';
 import { SliderButtonRight } from '../../atoms/buttons/SliderButtonRight';
 import { SliderButtonLeft } from '../../atoms/buttons/SliderButtonLeft';
+import { ThemeImage } from '@/components/atoms/icons/ThemeImage';
 
 export const BannerSlider = ({ className = '' }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
 
   const slides = [
-    { src: bannerMain, alt: 'Phones banner', to: '/phones' },
-    { src: banner3, alt: 'Tablets banner', to: '/tablets' },
-    { src: banner2, alt: 'Watches banner', to: '/accessories' },
+    {
+      light: bannerMain,
+      dark: darkBannerMain,
+      alt: 'Phones banner',
+      to: '/phones',
+    },
+    {
+      light: banner3,
+      dark: darkBanner3,
+      alt: 'Tablets banner',
+      to: '/tablets',
+    },
+    {
+      light: banner2,
+      dark: darkBanner2,
+      alt: 'Watches banner',
+      to: '/accessories',
+    },
   ];
 
   const handleNext = () => swiperRef.current?.slideNext();
@@ -48,8 +67,9 @@ export const BannerSlider = ({ className = '' }) => {
               to={s.to}
               className="block w-full h-full relative"
             >
-              <img
-                src={s.src}
+              <ThemeImage
+                light={s.light as string}
+                dark={s.dark as string}
                 alt={s.alt}
                 className="w-full h-full object-cover"
               />

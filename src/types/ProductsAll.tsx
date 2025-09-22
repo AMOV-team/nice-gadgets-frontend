@@ -3,6 +3,7 @@ export interface ProductsAll {
   category: 'phones' | 'tablets' | 'accessories';
   itemId: string;
   name: string;
+  namespaceId: string;
   fullPrice: number;
   price: number;
   screen: string;

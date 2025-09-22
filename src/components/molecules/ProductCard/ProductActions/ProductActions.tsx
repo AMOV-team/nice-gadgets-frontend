@@ -18,7 +18,18 @@ export const ProductActions: React.FC<ProductActionsProps> = ({
   const { toggleFavorite, isFavorite } = useFavorites();
 
   const handleFavoriteClick = () => {
-    toggleFavorite(product);
+    toggleFavorite({
+      id: product.itemId,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      metadata: {
+        color: product.color,
+        capacity: product.capacity,
+        ram: product.ram,
+        screen: product.screen,
+      },
+    });
   };
 
   return (
@@ -28,7 +39,7 @@ export const ProductActions: React.FC<ProductActionsProps> = ({
         onSelect={onAddToCart}
       />
       <AddToFavoriteButton
-        selected={isFavorite(product.id)}
+        selected={isFavorite(product.itemId)}
         onSelect={handleFavoriteClick}
       />
     </div>
