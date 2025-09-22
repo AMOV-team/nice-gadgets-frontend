@@ -14,6 +14,8 @@ import 'swiper/css/navigation';
 import { SliderButtonLeft } from '../atoms/buttons/SliderButtonLeft';
 import { SliderButtonRight } from '../atoms/buttons/SliderButtonRight';
 
+// aboba
+
 export const ComparePage: React.FC = () => {
   const { comparison } = useComparison();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
