@@ -10,6 +10,6 @@ export const ProductCharacteristic: React.FC<ProductCharacteristicProps> = ({
 }) => (
   <div className="flex justify-between">
     <p className="text-custom-secondary text-small">{label}</p>
-    <p className="text-custom-primary uppercase text-small">{value}</p>
+    <p className="uppercase text-small">{value}</p>
   </div>
 );

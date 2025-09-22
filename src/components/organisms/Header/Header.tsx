@@ -1,76 +1,57 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from '../NavBar/Navbar';
-import { NavbarIconLink } from '../../atoms/link/NavbarIconLink';
+import { Link } from 'react-router-dom';
+import { ThemeImage } from '../../atoms/icons/ThemeImage';
+import { BurgerMenu } from '../../atoms/BugerMenu/BurgerMenu.tsx';
+import { HeaderButtons } from '../../atoms/HeaderButtons/HeaderButtons.tsx';
 
-export const Header: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+type Props = {
+  isBurgerMenuActive: boolean;
+  handleIsBurgerMenuActive: (state: boolean) => void;
+};
 
+export const Header: React.FC<Props> = ({
+  isBurgerMenuActive,
+  handleIsBurgerMenuActive,
+}) => {
   return (
-    <header className="flex items-center justify-between h-[48px] pl-4 border-b shadow-[0px_1px_0px_0px_hsl(var(--elements))] gap-8">
-      <div className="flex gap-4 items-center">
-        <a
-          href="/"
-          className="pt-[13px] pb-[13px]"
+    <header
+      className={`
+        relative flex items-center justify-between h-[48px] pl-4 border-b
+        shadow-[0px_1px_0px_0px_hsl(var(--elements))]
+        after:content-[""] after:absolute after:block after:top-0 after:w-full
+        after:h-full after:bg-white after:z-20 dark:after:bg-black
+      `}
+    >
+      <div className="flex gap-4 items-center z-30">
+        <Link
+          to="/"
+          className="pt-[13px] pb-[13px] z-30"
         >
-          <img
-            className="w-[64px] h-[22px] block"
-            src="img/header-logo.png"
+          <ThemeImage
+            light="img/logo-light-theme.png"
+            dark="img/logo-dark-theme.png"
             alt="Nice gadgets"
+            className="w-[64px] h-[22px] block z-30"
           />
-        </a>
-        <Navbar />
+        </Link>
+        <Navbar
+          isBurgerMenuActive={isBurgerMenuActive}
+          handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+        />
       </div>
 
-      <a
-        onClick={() => setIsOpen(!isOpen)}
-        href="#"
+      <button
+        onClick={() => handleIsBurgerMenuActive(!isBurgerMenuActive)}
         className="sm:hidden shadow-[-1px_0px_0px_0px_hsl(var(--elements))] p-4 inline-flex items-center gap-4 no-underline"
       >
-        {isOpen ?
-          <img
-            className="w-[16px] h-[16px]"
-            src="img/burger-menu-close.svg"
-            alt="close"
-          />
-        : <img
-            className="w-[16px] h-[16px]"
-            src="img/burger-menu.svg"
-            alt="menu"
-          />
-        }
-      </a>
+        <BurgerMenu isActive={isBurgerMenuActive} />
+      </button>
 
-      <div className="hidden sm:flex">
-        <NavbarIconLink
-          imgUrl="img/heart-outline.png"
-          link="/favorites"
-        />
-        <NavbarIconLink
-          imgUrl="img/shopping-bag.svg"
-          link="/cart"
-        />
-        {/* <a
-          href="#"
-          className="shadow-[-1px_0px_0px_0px_hsl(var(--elements))] p-4 inline-flex items-center justify-center no-underline"
-        >
-          <img
-            className="w-[16px] h-[16px]"
-            src="/img/heart-outline.png"
-            alt=""
-          />
-        </a>
-
-        <a
-          href="#"
-          className="shadow-[-1px_0px_0px_0px_hsl(var(--elements))] p-4 inline-flex items-center justify-center no-underline"
-        >
-          <img
-            className="w-[16px] h-[16px]"
-            src="img/shopping-bag.svg"
-            alt=""
-          />
-        </a> */}
-      </div>
+      <HeaderButtons
+        isBurgerMenuActive={isBurgerMenuActive}
+        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+      />
     </header>
   );
 };

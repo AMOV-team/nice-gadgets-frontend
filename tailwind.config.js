@@ -97,6 +97,8 @@ module.exports = {
         'elements': 'hsl(var(--elements))',
         'hover': 'hsl(var(--hover))',
         'white': 'hsl(var(--white))',
+        'black': 'hsl(var(--black))',
+        'surface': 'hsl(var(--surface))',
         'green': 'hsl(var(--green))',
         'red': 'hsl(var(--red))',
       },

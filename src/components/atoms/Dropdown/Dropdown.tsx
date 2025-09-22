@@ -9,21 +9,37 @@ import {
 import type { SortOption } from '../../../types/SortOption';
 
 type Props = {
+  value?: string | null;
   defaultText: string;
   itemData: SortOption[];
+  triggerClass: string;
+  itemClass: string;
+  onSelect: (value: string) => void;
+  disabled?: boolean;
 };
 
-export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
+export const Dropdown: React.FC<Props> = ({
+  value,
+  defaultText,
+  itemData,
+  triggerClass,
+  itemClass,
+  onSelect,
+  disabled,
+}) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Select onOpenChange={setOpen}>
+    <Select
+      value={value || undefined}
+      onOpenChange={setOpen}
+      onValueChange={onSelect}
+      disabled={disabled}
+    >
       <SelectTrigger
         open={open}
-        className="
+        className={`
           w-[136px]
-          md:w-[187px]
-          xl:w-[176px]
           h-10
           p-3
           min-h-0
@@ -42,18 +58,17 @@ export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
           data-[state=open]:border-black
           transition-colors
           duration-200
-        "
+          ${triggerClass}
+        `}
       >
         <SelectValue placeholder={defaultText} />
       </SelectTrigger>
 
       <SelectContent
         className="
-          w-[136px]
-          md:w-[187px]
-          xl:w-[176px]
+          w-[250px]
           overflow-y-auto
-          max-h-[200px]
+          max-h-[300px]
           box-border
           bg-white
           border-elements
@@ -64,10 +79,10 @@ export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
         {itemData.map((item) => (
           <SelectItem
             key={item.id}
-            value={item.label}
-            className="
+            value={item.value!}
+            className={`
               w-full
-              h-6
+              h-10
               px-3
               py-1.5
               
@@ -78,7 +93,8 @@ export const Dropdown: React.FC<Props> = ({ defaultText, itemData }) => {
               outline-none
               data-[highlighted]:bg-ho
               data-[highlighted]:text-custom-primary
-            "
+              ${itemClass}
+            `}
           >
             {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
           </SelectItem>

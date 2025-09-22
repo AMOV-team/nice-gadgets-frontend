@@ -1,28 +1,82 @@
 import * as React from 'react';
-import products from '../../../public/api/products.json';
-import type { Product } from '../../types/Product';
+import { useEffect, useState } from 'react';
+import { useFavorites } from '../../hooks/useFavorites';
+import type { ProductsAll } from '../../types/ProductsAll';
+import { client } from '../../utils/fetchClient';
+import { GridContainer } from '../atoms/GridContainer';
+import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
-
-const testFavorites: Product[] = products.slice(0, 10);
+import { useTranslation } from 'react-i18next';
 
 export const FavoritesPage: React.FC = () => {
+  const { favorites } = useFavorites();
+  const [favoriteProducts, setFavoriteProducts] = useState<ProductsAll[]>([]);
+  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+
+  const count = favorites.length;
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      if (favorites.length === 0) {
+        setFavoriteProducts([]);
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const itemIds = favorites.map((f) => `"${f.id}"`).join(',');
+
+        const products: ProductsAll[] = await client.get<ProductsAll[]>(
+          `/products?itemId=in.(${itemIds})&select=*`,
+        );
+
+        setFavoriteProducts(products);
+      } catch (error) {
+        console.error('Failed to fetch favorites', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFavorites();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-12 [@media(min-width:988px)]:grid-cols-18 xl:grid-cols-24 gap-x-4 gap-y-[40px]">
+    <GridContainer>
       <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-        <h1 className="text-h1 font-bold text-custom-primary">Favorites</h1>
+        <Breadcrumb />
+        <h1 className="text-h1 font-bold">{t('favorites')}</h1>
         <p className="font-semibold text-custom-secondary text-body">
-          {testFavorites.length} items
+          {count === 0 ?
+            ``
+          : `${count} ${count === 1 ? `${t('item')}` : `${t('items')}`}`}
         </p>
       </div>
 
-      {testFavorites.map((product) => (
-        <div
-          key={product.id}
-          className="col-span-4 sm:col-span-6 xl:col-span-6"
-        >
-          <ProductCard product={product} />
+      {loading && (
+        <div className="col-span-4 sm:col-span-12 xl:col-span-24">
+          <p>{t('loading-favorites')}</p>
         </div>
-      ))}
-    </div>
+      )}
+
+      {!loading && favoriteProducts.length === 0 && (
+        <div className="col-span-4 sm:col-span-12 xl:col-span-24">
+          <p>{t('empty-favourites')}</p>
+        </div>
+      )}
+
+      {!loading &&
+        favoriteProducts.length > 0 &&
+        favoriteProducts.map((product) => (
+          <div
+            key={product.itemId}
+            className="col-span-4 sm:col-span-6 xl:col-span-6"
+          >
+            <ProductCard product={product} />
+          </div>
+        ))}
+    </GridContainer>
   );
 };

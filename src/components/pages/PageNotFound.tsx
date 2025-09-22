@@ -1,14 +1,64 @@
-import { BannerSlider } from '../organisms/BannerSlider/BannerSlider';
+import { useEffect, useState } from 'react';
+import { getProductById, getProductsByCategory } from '../../api/productCrud';
+import type { Products } from '../../types/Products';
+import type { ProductsAll } from '../../types/ProductsAll';
+import { Dashboard } from './Dashboard';
+import UserCabinet from './Dashboard2';
+import { AuthPanel } from './AuthPanel';
 
 export const PageNotFound = () => {
+  const [products, setProducts] = useState<ProductsAll[]>([]);
+  const [productsById, setProductsById] = useState<Products[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchProducts = async () => {
+    try {
+      const phones = await getProductsByCategory('phones');
+      setProducts(phones);
+      console.log('Phones only:', phones);
+    } catch (err) {
+      // console.error('Fetch error:', err);
+      setError(`Упс, щось пішло не так ${err} 🙈`);
+    }
+  };
+
+  const fetchProductById = async () => {
+    try {
+      const phoneById = await getProductById(
+        'phones',
+        'apple-iphone-13-pro-max-128gb-graphite',
+      );
+      setProductsById(phoneById);
+      console.log('Phones byid:', phoneById);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setError(`Упс, щось пішло не так ${err} 🙈`);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+    fetchProductById();
+  }, []);
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
+
   return (
     <>
       <h1 className="title">Page not found</h1>
-      <section className=" bg-white w-screen-1 relative flex flex-col">
+      <p>{products[1]?.name}</p>
+      <p className="text-black bg-yellow-200">
+        {productsById[0]?.description[0].text}
+      </p>
+
+      <section className=" flex flex-col gap-6 col-span-4 sm:col-span-12 xl:col-span-24">
         <h2>Gadget store</h2>
-        <div className="w-full h-full max-h-screen relative z-0">
-          <BannerSlider className="" />
-        </div>
+
+        <Dashboard />
+        <AuthPanel />
+        <UserCabinet />
       </section>
     </>
   );

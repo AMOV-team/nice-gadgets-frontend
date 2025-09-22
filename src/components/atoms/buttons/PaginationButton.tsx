@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 type PaginationButtonProps = {
-  text: string;
+  children?: React.ReactNode;
   selected?: boolean;
   onSelect: () => void;
 };
 
 export const PaginationButton: React.FC<PaginationButtonProps> = ({
-  text,
+  children,
   selected = true,
   onSelect,
 }) => {
@@ -24,13 +24,13 @@ export const PaginationButton: React.FC<PaginationButtonProps> = ({
         hover:border-custom-primary
         ${
           selected ?
-            'bg-primary text-white border-custom-primary'
+            'bg-primary text-white dark:text-black border-custom-primary'
           : 'text-primary border-elements'
         }
         `}
     >
-      <span className="flex items-center justify-center text-body  leading-[36px]">
-        {text}
+      <span className="flex items-center justify-center text-body leading-[36px] select-none">
+        {children}
       </span>
     </a>
   );

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ArrowUpIcon } from '../icons/ArrowUpIcon';
 
 type BackToTopButtonProps = {
   onClick: () => void;
@@ -22,11 +23,7 @@ export const BackToTopButton: React.FC<BackToTopButtonProps> = ({
         disabled:border-elements
       "
     >
-      <img
-        src="img/slider-button.png"
-        alt="slider-button"
-        className="w-[16px] h-[16px] object-contain select-none"
-      />
+      <ArrowUpIcon />
     </a>
   );
 };
