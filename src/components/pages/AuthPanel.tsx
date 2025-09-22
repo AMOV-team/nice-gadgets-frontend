@@ -1,5 +1,7 @@
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
+import SignInForm from '../organisms/SignInForm/SignInForm';
+import SignUpForm from '../organisms/SignUpForm/SignUpForm';
 
 export function AuthPanel() {
   const { user, signOut } = useAuth();
@@ -19,6 +21,8 @@ export function AuthPanel() {
 
   return (
     <div className="flex items-center gap-4 p-4">
+      <SignInForm />
+      <SignUpForm />
       {user ?
         <>
           <span className="text-sm text-muted-foreground">
