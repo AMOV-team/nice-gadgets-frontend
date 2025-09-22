@@ -19,6 +19,7 @@ import { ComparePage } from '../pages/ComparePage.tsx';
 import { FavoritesProvider } from '../../context/FavoritesContext.tsx';
 import { ComparisonProvider } from '../../context/ComparisonContext.tsx';
 import { UserProfilePage } from '../pages/UserProfilePage.tsx';
+import { RightsPage } from '../pages/RightsPage.tsx';
 
 export const Root = () => (
   <FavoritesProvider>
@@ -108,6 +109,10 @@ export const Root = () => (
               <Route
                 path="compare"
                 element={<ComparePage />}
+              />
+              <Route
+                path="rights"
+                element={<RightsPage />}
               />
               <Route
                 path="*"
