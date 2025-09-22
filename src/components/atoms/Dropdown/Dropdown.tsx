@@ -9,7 +9,7 @@ import {
 import type { SortOption } from '../../../types/SortOption';
 
 type Props = {
-  // value?: string | null;
+  value?: string | null;
   defaultText: string;
   itemData: SortOption[];
   triggerClass: string;
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const Dropdown: React.FC<Props> = ({
-  // value,
+  value,
   defaultText,
   itemData,
   triggerClass,
@@ -31,7 +31,7 @@ export const Dropdown: React.FC<Props> = ({
 
   return (
     <Select
-      // value={value || undefined}
+      value={value || undefined}
       onOpenChange={setOpen}
       onValueChange={onSelect}
       disabled={disabled}
@@ -79,7 +79,7 @@ export const Dropdown: React.FC<Props> = ({
         {itemData.map((item) => (
           <SelectItem
             key={item.id}
-            value={item.value ?? item.label}
+            value={item.value!}
             className={`
               w-full
               h-10
