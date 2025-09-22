@@ -15,7 +15,7 @@ export const useCartSyncManager = () => {
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (!userId || totalItems === 0) return;
+    if (!userId) return;
 
     if (debounceTimer.current) clearTimeout(debounceTimer.current);
 
