@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import products from '../../../public/api/products.json';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { Dropdown } from '../atoms/Dropdown';
 import type { SortOption } from '../../types/SortOption';
@@ -10,12 +9,34 @@ import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
 import { useTranslation } from 'react-i18next';
 import { ArrowRightIcon } from '../atoms/icons/ArrowRightIcon.tsx';
 import { ArrowLeftIcon } from '../atoms/icons/ArrowLeftIcon.tsx';
+import { client } from '../../utils/fetchClient';
+
+import type { Product } from '../../types/Product';
 
 export const AccessoriesPage: React.FC = () => {
   const { t } = useTranslation();
-  const accessories = products.filter((p) => p.category === 'accessories');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setLoading(true);
+    client
+      .get<Product[]>('/products?select=*')
+      .then((data) => {
+        setProducts(data);
+        setError(null);
+      })
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const accessories = useMemo(
+    () => products.filter((p) => p.category === 'accessories'),
+    [products],
+  );
 
   const sortBy = searchParams.get('sortBy') || 'Newest';
   const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 8;
@@ -134,6 +155,14 @@ export const AccessoriesPage: React.FC = () => {
       </div>
     );
   };
+
+  if (loading) {
+    return <p className="col-span-full">{t('loading')}...</p>;
+  }
+
+  if (error) {
+    return <p className="col-span-full text-red-500">{error}</p>;
+  }
 
   return (
     <GridContainer>

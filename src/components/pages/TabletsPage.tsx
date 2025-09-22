@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import products from '../../../public/api/products.json';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { Dropdown } from '../atoms/Dropdown';
 import type { SortOption } from '../../types/SortOption';
@@ -10,14 +9,36 @@ import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
 import { useTranslation } from 'react-i18next';
 import { ArrowRightIcon } from '../atoms/icons/ArrowRightIcon.tsx';
 import { ArrowLeftIcon } from '../atoms/icons/ArrowLeftIcon.tsx';
+import { client } from '../../utils/fetchClient';
+
+import type { Product } from '../../types/Product';
 
 export const TabletsPage: React.FC = () => {
   const { t } = useTranslation();
-  const tablets = products.filter((p) => p.category === 'tablets');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const sortBy = searchParams.get('sortBy') || 'Newest';
+  useEffect(() => {
+    setLoading(true);
+    client
+      .get<Product[]>('/products?select=*')
+      .then((data) => {
+        setProducts(data);
+        setError(null);
+      })
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const tablets = useMemo(
+    () => products.filter((p) => p.category === 'tablets'),
+    [products],
+  );
+
+  const sortBy = searchParams.get('sortBy') || 'year';
   const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 8;
   const currentPage = Number(searchParams.get('page')) || 1;
 
@@ -135,6 +156,14 @@ export const TabletsPage: React.FC = () => {
     );
   };
 
+  if (loading) {
+    return <p className="col-span-full">{t('loading')}...</p>;
+  }
+
+  if (error) {
+    return <p className="col-span-full text-red-500">{error}</p>;
+  }
+
   return (
     <GridContainer>
       <div className="col-span-full">
@@ -148,7 +177,7 @@ export const TabletsPage: React.FC = () => {
       </div>
 
       <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4">
-        <div className="col-start-1 col-end-3 sm:col-end-5">
+        <div className="col-start-1 col-end-3 sm:col-end-6">
           <p className="text-small font-mont text-custom-secondary mb-1">
             {t('sortby')}
           </p>
@@ -161,7 +190,7 @@ export const TabletsPage: React.FC = () => {
           />
         </div>
 
-        <div className="col-start-3 col-end-5 sm:col-start-5 sm:col-end-8">
+        <div className="col-start-3 col-end-5 sm:col-start-6 sm:col-end-9">
           <p className="text-small font-mont text-custom-secondary mb-1">
             {t('items-on-page')}
           </p>
