@@ -7,11 +7,15 @@ export const Loader: React.FC = () => (
       fixed inset-0 z-50
       w-screen
       h-screen
-      flex items-center justify-center backdrop-blur-md bg-white/20
-      border border-white/30 shadow-lg rounded-xl p-6`}
+      flex items-center justify-center backdrop-blur-md bg-black/10
+      border shadow-lg p-6
+      dark:bg-white/10
+      `}
   >
     <FadeLoader
-      color={'#4219D0'}
+      color={
+        document.documentElement.classList.contains('dark') ? 'white' : 'black'
+      }
       loading={true}
     />
   </div>
