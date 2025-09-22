@@ -24,7 +24,7 @@ export async function pullCartFromServer(userId: string) {
         id: serverItem.product_id,
         quantity: serverItem.quantity,
         metadata: serverItem.metadata,
-        name: serverItem.metadata?.name || '',
+        name: serverItem.name || '',
         price: serverItem.price || 0,
         image: serverItem.metadata?.image || '',
         itemTotal: serverItem.quantity * (serverItem.metadata?.price || 0),
