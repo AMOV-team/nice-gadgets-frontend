@@ -13,17 +13,18 @@ import 'swiper/css/navigation';
 
 import { SliderButtonLeft } from '../atoms/buttons/SliderButtonLeft';
 import { SliderButtonRight } from '../atoms/buttons/SliderButtonRight';
-
-// aboba
+import { useTranslation } from 'react-i18next';
 
 export const ComparePage: React.FC = () => {
   const { comparison } = useComparison();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+  const { t } = useTranslation();
+
   const categories: SortOption[] = [
-    { id: 1, label: 'Phones', value: 'phones' },
-    { id: 2, label: 'Tablets', value: 'tablets' },
-    { id: 3, label: 'Accessories', value: 'accessories' },
+    { id: 1, label: `${t('phones')}`, value: 'phones' },
+    { id: 2, label: `${t('tablets')}`, value: 'tablets' },
+    { id: 3, label: `${t('accessories')}`, value: 'accessories' },
   ];
 
   const filteredProducts: Product[] =
@@ -40,13 +41,13 @@ export const ComparePage: React.FC = () => {
       <div className="col-span-full">
         <Breadcrumb />
         <h1 className="text-h1 font-extrabold font-mont mb-4 sm:text-h1-lg">
-          Compare devices
+          {t('compare-devices')}
         </h1>
       </div>
 
       <div className="col-span-full mb-6">
         <Dropdown
-          defaultText="Select category"
+          defaultText={t('select-category')}
           itemData={categories}
           triggerClass="w-[250px]"
           itemClass="w-full"
@@ -104,28 +105,28 @@ export const ComparePage: React.FC = () => {
                   <div className="w-full text-sm space-y-3">
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
-                        Full Price
+                        {t('full-price')}
                       </p>
                       <p className="text-center">{`$ ${product.fullPrice}`}</p>
                     </div>
 
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
-                        Screen
+                        {t('Screen')}
                       </p>
                       <p className="text-center">{product.screen}</p>
                     </div>
 
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
-                        Capacity
+                        {t('capacity')}
                       </p>
                       <p className="text-center">{product.capacity}</p>
                     </div>
 
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
-                        RAM
+                        {t('RAM')}
                       </p>
                       <p className="text-center">{product.ram}</p>
                     </div>
@@ -139,7 +140,7 @@ export const ComparePage: React.FC = () => {
 
       {activeCategory && filteredProducts.length <= 1 && (
         <div className="col-span-full text-center text-gray-500 mt-6">
-          Not enough products in this category for comparison
+          {t('not-enough-product')}
         </div>
       )}
     </GridContainer>
