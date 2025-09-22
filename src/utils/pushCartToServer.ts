@@ -9,7 +9,7 @@ export async function pushCartToServer(userId: string) {
     const parsed = JSON.parse(raw);
     const items = parsed.items || [];
 
-    if (items.length === 0) return;
+    // if (items.length === 0) return;
 
     // Підготовка payload у форматі JSON-масиву
     const payload = items.map((item: any) => ({
