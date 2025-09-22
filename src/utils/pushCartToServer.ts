@@ -17,6 +17,7 @@ export async function pushCartToServer(userId: string) {
       quantity: item.quantity,
       metadata: item.metadata || {},
       price: item.price,
+      name: item.name,
     }));
 
     // Важливо: передаємо payload напряму, без stringify
