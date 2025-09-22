@@ -8,7 +8,10 @@ import { ItemSwiper } from '../../atoms/ItemCard/ItemSwiper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumb } from '../Breadcrumb/Breadcrumb.tsx';
 import { useTranslation } from 'react-i18next';
-import { getProductById } from '../../../api/productCrud.ts';
+import {
+  getProductById,
+  getProductsByCategory,
+} from '../../../api/productCrud.ts';
 
 type Props = {
   category: Category;
@@ -20,13 +23,16 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const { slug } = useParams<{ slug: string }>();
 
   const [item, setItem] = useState<Item | null>(null);
+  const [productId, setProductId] = useState<number | null>();
   const [selectedImage, setSelectedImage] = useState('');
 
   useEffect(() => {
     if (!category || !slug) return;
 
-    getProductById(category, slug)
-      .then((res) => {
+    const fetchItem = async () => {
+      try {
+        const res = await getProductById(category, slug);
+
         if (res && res.length > 0) {
           const product = res[0];
           setItem(product);
@@ -35,12 +41,38 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
           setItem(null);
           setSelectedImage('');
         }
-      })
-      .catch(() => {
+      } catch {
         setItem(null);
         setSelectedImage('');
-      });
+      }
+    };
+
+    fetchItem();
   }, [category, slug]);
+
+  useEffect(() => {
+    if (!item) {
+      return;
+    }
+
+    const fetchItem = async () => {
+      try {
+        const res = await getProductsByCategory(category);
+
+        if (res && res.length) {
+          const product = res.find((p) => p.itemId === item.id);
+
+          setProductId(product?.id);
+        } else {
+          setProductId(null);
+        }
+      } catch {
+        setProductId(null);
+      }
+    };
+
+    fetchItem();
+  }, [category, slug, item]);
 
   if (!item) {
     return <p>{t('product-not-found')}</p>;
@@ -73,8 +105,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
       },
     );
   };
-
-  const goodId = item.id;
 
   return (
     <div
@@ -115,7 +145,9 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
             sm:top-0
           `}
         >
-          <p className="font-mont font-bold text-xs text-icons">ID: {goodId}</p>
+          <p className="font-mont font-bold text-xs text-icons">
+            ID: {productId}
+          </p>
         </div>
 
         {/* Left side */}

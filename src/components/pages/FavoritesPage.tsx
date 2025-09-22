@@ -7,11 +7,13 @@ import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { useTranslation } from 'react-i18next';
+import { useLoader } from '@/hooks/useLoader.ts';
+import { Loader } from '@/components/organisms/Loader/Loader.tsx'; // 👈 use your full-screen loader
 
 export const FavoritesPage: React.FC = () => {
   const { favorites } = useFavorites();
   const [favoriteProducts, setFavoriteProducts] = useState<ProductsAll[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { isLoading, setIsLoading } = useLoader();
   const { t } = useTranslation();
 
   const count = favorites.length;
@@ -23,7 +25,7 @@ export const FavoritesPage: React.FC = () => {
         return;
       }
 
-      setLoading(true);
+      setIsLoading(true);
       try {
         const itemIds = favorites.map((f) => `"${f.id}"`).join(',');
 
@@ -35,48 +37,42 @@ export const FavoritesPage: React.FC = () => {
       } catch (error) {
         console.error('Failed to fetch favorites', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchFavorites();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [favorites]);
 
   return (
-    <GridContainer>
-      <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-        <Breadcrumb />
-        <h1 className="text-h1 font-bold">{t('favorites')}</h1>
-        <p className="font-semibold text-custom-secondary text-body">
-          {count === 0 ?
-            ``
-          : `${count} ${count === 1 ? `${t('item')}` : `${t('items')}`}`}
-        </p>
-      </div>
-
-      {loading && (
-        <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-          <p>{t('loading-favorites')}</p>
-        </div>
-      )}
-
-      {!loading && favoriteProducts.length === 0 && (
-        <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-          <p>{t('empty-favourites')}</p>
-        </div>
-      )}
-
-      {!loading &&
-        favoriteProducts.length > 0 &&
-        favoriteProducts.map((product) => (
-          <div
-            key={product.itemId}
-            className="col-span-4 sm:col-span-6 xl:col-span-6"
-          >
-            <ProductCard product={product} />
+    <>
+      {isLoading ?
+        <Loader /> // 👈 full screen loader
+      : <GridContainer>
+          <div className="col-span-4 sm:col-span-12 xl:col-span-24">
+            <Breadcrumb />
+            <h1 className="text-h1 font-bold">{t('favorites')}</h1>
+            <p className="font-semibold text-custom-secondary text-body">
+              {count > 0 && `${count} ${count === 1 ? t('item') : t('items')}`}
+            </p>
           </div>
-        ))}
-    </GridContainer>
+
+          {favoriteProducts.length === 0 ?
+            <div className="col-span-4 sm:col-span-12 xl:col-span-24">
+              <p>{t('empty-favourites')}</p>
+            </div>
+          : favoriteProducts.map((product) => (
+              <div
+                key={product.itemId}
+                className="col-span-4 sm:col-span-6 xl:col-span-6"
+              >
+                <ProductCard product={product} />
+              </div>
+            ))
+          }
+        </GridContainer>
+      }
+    </>
   );
 };

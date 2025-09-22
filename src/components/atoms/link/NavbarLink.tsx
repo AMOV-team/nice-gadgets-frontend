@@ -25,9 +25,9 @@ export const NavbarLink: React.FC<NavbarLinkProps> = ({
       }}
       className={({ isActive }) =>
         classNames(
-          'relative sm:leading-[48px] leading-[30px] uppercase text-small tracking-[.04em] font-extrabold transition-colors duration-200 hover:text-custom-primary',
+          'relative xl:leading-[64px] sm:leading-[48px] leading-[30px] uppercase text-small tracking-[.04em] font-extrabold transition-colors duration-200 hover:text-custom-primary',
           isActive ?
-            'text-custom-primary after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[4px] after:bg-custom-primary after:rounded-lg'
+            'text-custom-primary after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-custom-primary after:rounded-lg'
           : 'text-custom-secondary',
         )
       }

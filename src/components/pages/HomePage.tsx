@@ -9,15 +9,20 @@ export const HomePage: React.FC = () => {
   const { t } = useTranslation();
   return (
     <>
-      <section className="flex flex-col w-full px-4 sm:px-6 lg:px-8 xl:px-16">
-        <h1 className="text-left font-extrabold text-3xl sm:text-5xl my-6">
-          {t('welcome-text')}
-        </h1>
-      </section>
-
       <BannerSlider />
 
       <GridContainer>
+        <section className="flex items-center sm:items-start w-[90vw] flex-col absolute left-[calc(50%-45vw)] top-12 z-10">
+          <h1
+            className={`text-center font-extrabold text-[32px] leading-[41px]
+            break-words !mt-10 max-w-[500px] sm:max-w-full
+            sm:text-left sm:text-5xl sm:leading-[56px] sm:!mt-[60px]
+            `}
+          >
+            {t('welcome-text')}
+          </h1>
+        </section>
+
         <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
           <SectionSlider HeaderText={t('new-models')} />
         </section>

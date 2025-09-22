@@ -57,11 +57,11 @@ export const SectionSlider: React.FC<Props> = ({ HeaderText }) => {
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 4 },
           }}
-          className="w-full  swiper section-slider swiper"
+          className="w-full section-slider !py-3"
         >
           {products.map((product) => (
             <SwiperSlide key={product.id}>
-              <div className="relative w-full h-full ">
+              <div className="relative w-full  ">
                 <ProductCard product={product} />
               </div>
             </SwiperSlide>

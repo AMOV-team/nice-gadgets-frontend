@@ -61,8 +61,8 @@ export const PhonesPage: React.FC = () => {
 
   const sortOptions: SortOption[] = [
     { id: 1, label: `${t('Newest')}`, value: 'year' },
-    { id: 2, label: `${t('Low-to-High')}`, value: 'price-asc' },
-    { id: 3, label: `${t('High-to-Low')}`, value: 'price-desc' },
+    { id: 2, label: 'Price: Low to High' },
+    { id: 3, label: 'Price: High to Low' },
     { id: 4, label: `${t('Alphabetically')}`, value: 'name' },
   ];
 

@@ -6,14 +6,15 @@ import cn from 'classnames';
 
 function App() {
   const [isBurgerMenuActive, setIsBurgerMenuActive] = useState(false);
+
   return (
     <div
       data-cy="app"
       className={cn(
         {
-          'max-h-[100vh]': isBurgerMenuActive,
+          'max-h-[100vh] overflow-y-hidden': isBurgerMenuActive,
         },
-        'flex flex-col min-h-screen overflow-hidden',
+        'flex flex-col min-h-screen',
       )}
     >
       <Header
