@@ -8,7 +8,7 @@ import type { CartItem } from '../../types/CartItem.tsx';
 import { useTranslation } from 'react-i18next';
 
 export const CartPage: React.FC = () => {
-  const { items, isEmpty } = useCart() as unknown as { items: CartItem[] };
+  const { items } = useCart() as unknown as { items: CartItem[] };
   const { t } = useTranslation();
 
   return (
@@ -16,7 +16,7 @@ export const CartPage: React.FC = () => {
       <div className="col-span-full">
         <Breadcrumb />
         <h1 className="text-h1 font-bold text-custom-primary">{t('cart')}</h1>
-        {isEmpty && <p>Ваша корзина порожня</p>}
+        {items.length === 0 && <p>Ваша корзина порожня</p>}
       </div>
 
       <div className="col-span-full xl:col-span-16">
