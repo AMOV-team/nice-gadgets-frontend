@@ -53,15 +53,27 @@ export const SectionSlider: React.FC<Props> = ({ HeaderText }) => {
           slidesPerView={1.5}
           slidesPerGroup={1}
           breakpoints={{
-            0: { slidesPerView: 1.3 },
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 4 },
+            0: {
+              slidesPerView: 1.3,
+              slidesOffsetBefore: 16,
+              slidesOffsetAfter: 16,
+            },
+            640: {
+              slidesPerView: 2,
+              slidesOffsetBefore: 20,
+              slidesOffsetAfter: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              slidesOffsetBefore: 32,
+              slidesOffsetAfter: 32,
+            },
           }}
-          className="w-full section-slider !py-3"
+          className="w-full section-slider !py-3 overflow-visible"
         >
           {products.map((product) => (
             <SwiperSlide key={product.id}>
-              <div className="relative w-full  ">
+              <div className="relative w-full">
                 <ProductCard product={product} />
               </div>
             </SwiperSlide>
