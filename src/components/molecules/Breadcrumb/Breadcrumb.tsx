@@ -2,8 +2,8 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Словарь перевода для всех страниц
 const BREADCRUMB_TRANSLATIONS: Record<string, string> = {
   home: 'home',
   favorites: 'favorites',
@@ -68,21 +68,7 @@ export const Breadcrumb: React.FC = () => {
 
             return (
               <React.Fragment key={to}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="6"
-                  height="10"
-                  viewBox="0 0 6 10"
-                  fill="none"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M0.52827 0.528606C0.788619 0.268256 1.21073 0.268256 1.47108 0.528606L5.47108 4.52861C5.73143 4.78896 5.73143 5.21107 5.47108 5.47141L1.47108 9.47141C1.21073 9.73176 0.788619 9.73176 0.52827 9.47141C0.26792 9.21107 0.26792 8.78896 0.52827 8.52861L4.05687 5.00001L0.52827 1.47141C0.26792 1.21107 0.26792 0.788955 0.52827 0.528606Z"
-                    fill="#B4BDC4"
-                  />
-                </svg>
-
+                <ChevronRight className="text-custom-primary size-[16px]" />
                 <Link
                   to={to}
                   replace
@@ -112,20 +98,7 @@ export const Breadcrumb: React.FC = () => {
             }}
             className="flex items-center"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M10.4717 3.52861C10.2114 3.26826 9.78927 3.26826 9.52892 3.52861L5.52892 7.52861C5.26857 7.78896 5.26857 8.21107 5.52892 8.47141L9.52892 12.4714C9.78927 12.7318 10.2114 12.7318 10.4717 12.4714C10.7321 12.2111 10.7321 11.789 10.4717 11.5286L6.94313 8.00001L10.4717 4.47141C10.7321 4.21107 10.7321 3.78896 10.4717 3.52861Z"
-                fill="#0F0F11"
-              />
-            </svg>
+            <ChevronLeft className="text-elements size-[16px]" />
             <span className="font-mont font-bold text-xs mt-[2px] text-custom-secondary">
               {t('back')}
             </span>
