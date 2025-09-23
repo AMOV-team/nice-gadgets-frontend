@@ -7,15 +7,14 @@
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     color: hsl(var(--custom-primary));
-    /* scrollbar-gutter: stable; */
-    overflow: -moz-scrollbars-none; /* для старого Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-    scrollbar-width: none; /* Firefox */
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   html::-webkit-scrollbar,
   body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
   }
 
   body,

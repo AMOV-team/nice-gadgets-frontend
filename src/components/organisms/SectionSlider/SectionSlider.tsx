@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import products from '../../../../public/api/products.json';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import type { SwiperClass } from 'swiper/react';
@@ -10,14 +9,23 @@ import './styles.scss';
 import { ProductCard } from '../../molecules/ProductCard/ProductCard';
 import { SliderButtonLeft } from '../../atoms/buttons/SliderButtonLeft';
 import { SliderButtonRight } from '../../atoms/buttons/SliderButtonRight';
+import { useProducts } from '@/hooks/useProducts';
 
 type Props = {
   HeaderText: string;
+  category: string;
+  sortBy: 'newest' | 'hot';
 };
-export const SectionSlider: React.FC<Props> = ({ HeaderText }) => {
+
+export const SectionSlider: React.FC<Props> = ({
+  HeaderText,
+  category,
+  sortBy,
+}) => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const { products } = useProducts(category, sortBy);
 
   return (
     <>

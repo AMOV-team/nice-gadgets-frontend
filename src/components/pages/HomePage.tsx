@@ -41,7 +41,11 @@ export const HomePage: React.FC = () => {
         </section>
 
         <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
-          <SectionSlider HeaderText={t('new-models')} />
+          <SectionSlider
+            HeaderText={t('new-models')}
+            category="phones"
+            sortBy="newest"
+          />
         </section>
 
         <section className="grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 col-span-4 sm:col-span-12 xl:col-span-24 gap-y-6 gap-x-4">
@@ -81,7 +85,11 @@ export const HomePage: React.FC = () => {
         </section>
 
         <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
-          <SectionSlider HeaderText={t('hot-prices')} />
+          <SectionSlider
+            HeaderText={t('hot-prices')}
+            category="phones"
+            sortBy="hot"
+          />
         </section>
       </GridContainer>
     </>
