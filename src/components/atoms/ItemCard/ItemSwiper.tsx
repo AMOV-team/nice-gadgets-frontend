@@ -39,6 +39,12 @@ export const ItemSwiper: React.FC<Props> = ({
           xl:col-start-3 xl:col-end-12 xl:col-span-10
           !flex !justify-center !items-center sm:order-2
         `}
+        onSlideChange={(swiper) => {
+          const activeImage = images[swiper.activeIndex];
+          if (activeImage && activeImage !== selectedImage) {
+            selectImageHandler(activeImage);
+          }
+        }}
       >
         {images.map((image) => (
           <SwiperSlide
