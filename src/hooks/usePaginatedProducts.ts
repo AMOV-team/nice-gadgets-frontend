@@ -9,8 +9,32 @@ export const usePaginatedProducts = (products: Product[]) => {
   const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 8;
   const currentPage = Number(searchParams.get('page')) || 1;
 
+  const query = searchParams.get('q')?.toLowerCase() || '';
+
   const sortedProducts = useMemo(() => {
-    const sorted = [...products];
+    let filtered = products;
+
+    if (query) {
+      filtered = products.filter(
+        (p) =>
+          [
+            p.category,
+            p.itemId,
+            p.name,
+            p.screen,
+            p.capacity,
+            p.color,
+            p.ram,
+          ].some((value) =>
+            value.toLowerCase().includes(query.toLowerCase()),
+          ) ||
+          [p.fullPrice, p.price, p.year].some((value) =>
+            value.toString().includes(query),
+          ),
+      );
+    }
+
+    const sorted = [...filtered];
 
     switch (sortBy) {
       case 'price-asc':
@@ -29,7 +53,7 @@ export const usePaginatedProducts = (products: Product[]) => {
     }
 
     return sorted;
-  }, [products, sortBy]);
+  }, [products, sortBy, query]);
 
   const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
 
