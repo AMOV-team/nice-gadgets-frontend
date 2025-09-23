@@ -46,7 +46,6 @@ export const CartCard: React.FC<CartCardProps> = ({ cartItem }) => {
           <AddButton
             onAdd={() => {
               updateItemQuantity(cartItem.id, cartItem.quantity + 1);
-              console.log('CartCard:', cartItem);
             }}
             disabled={false}
           />

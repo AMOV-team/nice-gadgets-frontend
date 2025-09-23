@@ -1,4 +1,3 @@
-import React from 'react';
 import { BannerSlider } from '../organisms/BannerSlider/BannerSlider';
 import { ShopCategory } from '../atoms/shopCategory';
 import { SectionSlider } from '../organisms/SectionSlider/SectionSlider';

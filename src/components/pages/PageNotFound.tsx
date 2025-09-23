@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { getProductById, getProductsByCategory } from '../../api/productCrud';
 import type { Products } from '../../types/Products';
 import type { ProductsAll } from '../../types/ProductsAll';
-import { Dashboard } from './Dashboard';
 import UserCabinet from './Dashboard2';
 import { AuthPanel } from './AuthPanel';
 
@@ -56,7 +55,6 @@ export const PageNotFound = () => {
       <section className=" flex flex-col gap-6 col-span-4 sm:col-span-12 xl:col-span-24">
         <h2>Gadget store</h2>
 
-        <Dashboard />
         <AuthPanel />
         <UserCabinet />
       </section>
