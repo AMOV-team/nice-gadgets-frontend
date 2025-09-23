@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import type { SwiperClass } from 'swiper/react';
@@ -14,18 +14,26 @@ import { useProducts } from '@/hooks/useProducts';
 type Props = {
   HeaderText: string;
   category: string;
-  sortBy: 'newest' | 'hot';
+  sortBy?: 'newest' | 'hot';
+  random?: boolean;
 };
 
 export const SectionSlider: React.FC<Props> = ({
   HeaderText,
   category,
   sortBy,
+  random = false,
 }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const { products } = useProducts(category, sortBy);
+
+  const randomProducts = useMemo(() => {
+    if (!random) return products;
+
+    return [...products].sort(() => Math.random() - 0.5).slice(0, 10);
+  }, [products, random]);
 
   return (
     <>
@@ -79,7 +87,7 @@ export const SectionSlider: React.FC<Props> = ({
           }}
           className="w-full section-slider !py-3 overflow-visible"
         >
-          {products.map((product) => (
+          {randomProducts.map((product) => (
             <SwiperSlide key={product.id}>
               <div className="relative w-full">
                 <ProductCard product={product} />

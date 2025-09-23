@@ -30,7 +30,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             selected={false}
             onSelect={() => onPageChange(currentPage - 1)}
           >
-            <ArrowLeftIcon />
+            <ArrowLeftIcon className="translate-x-[-1px]" />
           </PaginationButton>
         )}
 
@@ -49,7 +49,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             selected={false}
             onSelect={() => onPageChange(currentPage + 1)}
           >
-            <ArrowRightIcon />
+            <ArrowRightIcon className="translate-x-[0.5px]" />
           </PaginationButton>
         )}
       </div>

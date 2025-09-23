@@ -11,9 +11,7 @@ import {
 } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-// import { Heart, ShoppingCart } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-// import { useUserSync } from '@/hooks/useUserSync';
 import { useProfile } from '@/hooks/useProfile';
 import { usePullOrders } from '@/hooks/usePullOrders';
 import { Button } from '../ui/button';
@@ -23,7 +21,6 @@ import { useCartSync } from '@/hooks/useCartSync';
 export default function UserCabinet() {
   const { user } = useAuth();
   const profile = useProfile(user?.id ?? null);
-  // const { cart, favorites } = useUserSync(user?.id ?? null);
   const orders = usePullOrders(user?.id ?? null);
   const { signOut } = useAuth();
   const navigate = useNavigate();
@@ -36,13 +33,10 @@ export default function UserCabinet() {
           variant="outline"
           type="button"
           onClick={async () => {
-            //  Before signing out — push local cart to server
             await syncBeforeLogout();
 
-            //  Sign out user
             await signOut();
 
-            //  Redirect to login page
             navigate('/signin');
           }}
           className="w-[60px] absolute top-[30px] right-[24px] bg-rose-500 text-white "
@@ -73,7 +67,6 @@ export default function UserCabinet() {
             <TabsTrigger value="orders">Замовлення</TabsTrigger>
           </TabsList>
 
-          {/* Замовлення */}
           <TabsContent value="orders">
             <Table>
               <TableHeader>

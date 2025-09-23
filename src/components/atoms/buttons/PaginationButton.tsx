@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 type PaginationButtonProps = {
-  children?: React.ReactNode;
-  selected?: boolean;
+  children: React.ReactNode;
+  selected: boolean;
   onSelect: () => void;
 };
 

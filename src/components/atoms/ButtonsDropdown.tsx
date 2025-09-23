@@ -12,7 +12,7 @@ export const ButtonsDropdown: React.FC<Props> = () => {
   const [isWide, setIsWide] = useState(false);
 
   useEffect(() => {
-    const checkWidth = () => setIsWide(window.innerWidth >= 640); // 640px = sm
+    const checkWidth = () => setIsWide(window.innerWidth >= 640);
     checkWidth();
     window.addEventListener('resize', checkWidth);
     return () => window.removeEventListener('resize', checkWidth);
@@ -25,13 +25,13 @@ export const ButtonsDropdown: React.FC<Props> = () => {
       >
         <MenuButton
           className={`
-          h-12 xl:h-16 w-12 xl:w-16 justify-center
-          bg-white dark:bg-black
-          flex items-center
-          box-border
-          shadow-[-1px_0px_0px_0px_hsl(var(--elements))]
-          cursor-pointer
-        `}
+            h-12 xl:h-16 w-12 xl:w-16 justify-center
+            bg-white dark:bg-black
+            flex items-center
+            box-border
+            shadow-[-1px_0px_0px_0px_hsl(var(--elements))]
+            cursor-pointer
+          `}
         >
           <Settings className="text-custom-primary size-[16px]" />
         </MenuButton>
@@ -39,13 +39,13 @@ export const ButtonsDropdown: React.FC<Props> = () => {
         <MenuItems
           transition
           className={`
-          translate-y-[1px]
-          absolute right-0 z-10 origin-top-right w-12 xl:w-16 flex flex-col items-center
-          bg-white dark:bg-black outline-1 -outline-offset-1 outline-white/10 transition
-          data-closed:scale-95 data-closed:transform data-closed:opacity-0
-          data-enter:duration-100 data-enter:ease-out data-leave:duration-75
-          data-leave:ease-in
-        `}
+            translate-y-[1px]
+            absolute right-0 z-10 origin-top-right w-12 xl:w-16 flex flex-col items-center
+            bg-white dark:bg-black outline-1 -outline-offset-1 outline-white/10 transition
+            data-closed:scale-95 data-closed:transform data-closed:opacity-0
+            data-enter:duration-100 data-enter:ease-out data-leave:duration-75
+            data-leave:ease-in
+          `}
         >
           <div>
             <MenuItem as="div">

@@ -21,7 +21,11 @@ export const ItemCardPage: React.FC<Props> = ({ category }) => {
       >
         <ItemCard category={category} />
         <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
-          <SectionSlider HeaderText={t('You-may-like')} />
+          <SectionSlider
+            HeaderText={t('You-may-like')}
+            category={category}
+            random
+          />
         </section>
       </div>
     </GridContainer>

@@ -38,7 +38,6 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
-  // Оновлюємо filteredProducts при зміні products з API
   useEffect(() => {
     setFilteredProducts(products);
   }, [products]);
