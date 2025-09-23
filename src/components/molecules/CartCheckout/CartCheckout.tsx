@@ -5,9 +5,14 @@ import { useCart } from 'react-use-cart';
 import { useCartSyncManager } from '@/hooks/useCartSyncManager';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useOrderSubmit } from '@/hooks/useOrderSubmit';
+import { SubmitButton } from '@/components/atoms/buttons/SubmitButton';
 
 export const CartCheckout: React.FC = () => {
   const { cartTotal, totalItems } = useCart();
+  const { handleSubmit } = useOrderSubmit();
+  const [showSuccessModal, setShowSuccessModal] = React.useState(false);
+
   useCartSyncManager();
 
   const [showForm, setShowForm] = React.useState(false);
@@ -30,11 +35,6 @@ export const CartCheckout: React.FC = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    console.log('🧾 Замовлення:', { ...form, deliveryType });
-    // Тут буде логіка збереження в Supabase або виклик RPC
-  };
-
   return (
     <div className="flex flex-col gap-6 p-6 border border-solid border-elements rounded-lg">
       <div className="flex flex-col justify-center items-center">
@@ -45,6 +45,20 @@ export const CartCheckout: React.FC = () => {
       </div>
 
       <div className="border border-solid border-elements" />
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 shadow-lg text-center max-w-sm w-full">
+            <h2 className="text-xl font-bold mb-2">Дякуємо за замовлення!</h2>
+            <p className="text-muted-foreground mb-4">
+              Ваше замовлення успішно оформлено.
+            </p>
+            <PrimaryButton
+              text="Закрити"
+              onSelect={() => setShowSuccessModal(false)}
+            />
+          </div>
+        </div>
+      )}
 
       {!showForm ?
         <PrimaryButton
@@ -56,6 +70,8 @@ export const CartCheckout: React.FC = () => {
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
+            setShowForm(false);
+            setShowSuccessModal(true);
           }}
         >
           <div>
@@ -142,7 +158,10 @@ export const CartCheckout: React.FC = () => {
             </div>
           </div>
 
-          <PrimaryButton text="Оформити замовлення" />
+          <SubmitButton
+            text="Оформити замовлення"
+            type="submit"
+          />
         </form>
       }
     </div>
