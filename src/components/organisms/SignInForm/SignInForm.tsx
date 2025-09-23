@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,6 +15,18 @@ export default function SignInForm() {
   const [loading, setLoading] = useState(false);
   const { login } = useLogin();
   const navigate = useNavigate();
+
+  const signUpWithGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth-callback`,
+        queryParams: {
+          prompt: 'select_account',
+        },
+      },
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,6 +109,18 @@ export default function SignInForm() {
           >
             {loading ? 'Завантаження...' : 'Увійти'}
           </Button>
+
+          <div className="mt-6 text-center">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={signUpWithGoogle}
+              className="w-full"
+            >
+              Увійти через Google{' '}
+              <img src="../../../../public/img/google-color.svg"></img>
+            </Button>
+          </div>
         </form>
 
         <div className="mt-6 text-center">
