@@ -14,9 +14,10 @@ import 'swiper/css/navigation';
 import { SliderButtonLeft } from '../atoms/buttons/SliderButtonLeft';
 import { SliderButtonRight } from '../atoms/buttons/SliderButtonRight';
 import { useTranslation } from 'react-i18next';
+import DeleteButton from '../atoms/buttons/DeleteButton';
 
 export const ComparePage: React.FC = () => {
-  const { comparison } = useComparison();
+  const { comparison, clearComparison } = useComparison();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const { t } = useTranslation();
@@ -46,13 +47,19 @@ export const ComparePage: React.FC = () => {
       </div>
 
       <div className="col-span-full mb-6">
-        <Dropdown
-          defaultText={t('select-category')}
-          itemData={categories}
-          triggerClass="w-[250px]"
-          itemClass="w-full"
-          onSelect={(value) => setActiveCategory(value)}
-        />
+        <div className="flex flex-col sm:flex-row items-start gap-[10px] sm:justify-between">
+          <Dropdown
+            defaultText={t('select-category')}
+            itemData={categories}
+            triggerClass="w-[250px]"
+            itemClass="w-full"
+            onSelect={(value) => setActiveCategory(value)}
+          />
+          <div className="flex flex-row font-semibold text-sm justify-center items-center gap-[10px] px-4 py-2 bg-red-500 text-custom-primary rounded hover:bg-red-600">
+            <DeleteButton onDelete={clearComparison} />
+            Clear all
+          </div>
+        </div>
       </div>
 
       {filteredProducts.length > 1 && (

@@ -24,6 +24,8 @@ import SignUpForm from '../organisms/SignUpForm/SignUpForm.tsx';
 import SignInForm from '../organisms/SignInForm/SignInForm.tsx';
 import { AuthProvider } from '@/context/AuthProvider.tsx';
 import AuthCallback from '../pages/AuthCallback.tsx';
+import { RightsPage } from '../pages/RightsPage.tsx';
+
 
 export const Root = () => (
   <AuthProvider>
@@ -128,6 +130,10 @@ export const Root = () => (
                 <Route
                   path="compare"
                   element={<ComparePage />}
+                />
+                <Route
+                  path="rights"
+                  element={<RightsPage />}
                 />
                 <Route
                   path="*"

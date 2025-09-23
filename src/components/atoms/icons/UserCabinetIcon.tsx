@@ -1,13 +1,9 @@
 import { User } from 'lucide-react';
 
-type Props = {
-  className?: string;
-};
-
-export const UserCabinetIcon: React.FC<Props> = ({ className = '' }) => {
+export const UserCabinetIcon: React.FC = () => {
   return (
     <User
-      className={`${className}`}
+      className="text-custom-primary bg-white dark:bg-black"
       size={16}
     />
   );
