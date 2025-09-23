@@ -4,7 +4,7 @@ import { AddToFavoriteButton } from '../../../atoms/buttons/AddToFavoriteButton'
 import { useTranslation } from 'react-i18next';
 import { useFavorites } from '../../../../hooks/useFavorites';
 import type { Product } from '../../../../types/Product';
-import { toast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/useToast';
 
 type ProductActionsProps = {
   product: Product;
