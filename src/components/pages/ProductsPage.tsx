@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
@@ -8,6 +8,7 @@ import { usePaginatedProducts } from '../../hooks/usePaginatedProducts';
 import { Filters } from '../molecules/Filters/Filters';
 import { Pagination } from '../molecules/Pagination/Pagination';
 import type { SortOption } from '../../types/SortOption';
+import type { Product } from '../../types/Product';
 
 interface ProductsPageProps {
   category: string;
@@ -34,6 +35,18 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 }) => {
   const { t } = useTranslation();
   const { products, error } = useProducts(category);
+
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+
+  // Оновлюємо filteredProducts при зміні products з API
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
+
+  const handleFiltered = useCallback((filtered: Product[]) => {
+    setFilteredProducts(filtered);
+  }, []);
+
   const {
     currentItems,
     totalPages,
@@ -42,7 +55,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
     handleSortChange,
     handleItemsPerPageChange,
     handlePageChange,
-  } = usePaginatedProducts(products);
+  } = usePaginatedProducts(filteredProducts);
 
   if (error) return <p className="col-span-full text-red-500">{error}</p>;
 
@@ -54,7 +67,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           {t(titleKey)}
         </h1>
         <p className="text-body-14 font-mont font-semibold text-custom-secondary">
-          {products.length} {t('models')}
+          {filteredProducts.length} {t('models')}
         </p>
       </div>
 
@@ -65,6 +78,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         onSortChange={handleSortChange}
         onItemsPerPageChange={handleItemsPerPageChange}
         sortDefault={t('Newest')}
+        products={products}
+        onFiltered={handleFiltered}
       />
 
       <Pagination
