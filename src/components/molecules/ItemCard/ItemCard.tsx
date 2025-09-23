@@ -117,7 +117,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
       `}
     >
-      {/* Заголовок + breadcrumb */}
       <div className="col-span-full">
         <Breadcrumb />
 
