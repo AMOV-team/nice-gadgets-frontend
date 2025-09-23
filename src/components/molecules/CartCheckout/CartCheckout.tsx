@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import { PrimaryButton } from '../../atoms/buttons';
 import { useCart } from 'react-use-cart';
@@ -9,6 +8,7 @@ import { useOrderSubmit } from '@/hooks/useOrderSubmit';
 import { SubmitButton } from '@/components/atoms/buttons/SubmitButton';
 import { useAuth } from '@/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
+import { Dropdown } from '@/components/atoms/Dropdown';
 
 export const CartCheckout: React.FC = () => {
   const { cartTotal, totalItems } = useCart();
@@ -41,9 +41,17 @@ export const CartCheckout: React.FC = () => {
   };
 
   const { t } = useTranslation();
+  const deliveryOptions = [
+    {
+      id: 'nova_poshta',
+      label: `${t('nova-post')}`,
+      value: 'nova_poshta',
+    },
+    { id: 'courier', label: `${t('courier')}`, value: 'courier' },
+  ];
 
   return (
-    <div className="flex flex-col gap-6 p-6 border border-solid border-elements rounded-lg">
+    <div className="flex flex-col gap-6 p-6 border border-solid border-elements rounded-lg bg-white dark:bg-black text-primary">
       <div className="flex flex-col justify-center items-center">
         <span className="text-h2 font-extrabold">${cartTotal}</span>
         <span className="text-body font-semibold">
@@ -51,11 +59,14 @@ export const CartCheckout: React.FC = () => {
         </span>
       </div>
 
-      <div className="border border-solid border-elements" />
+      <div className="border border-solid border-elements dark:border-elements" />
+
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 shadow-lg text-center max-w-sm w-full">
-            <h2 className="text-xl font-bold mb-2">Дякуємо за замовлення!</h2>
+          <div className="bg-white dark:bg-black rounded-lg p-6 shadow-lg text-center max-w-sm w-full text-primary">
+            <h2 className="text-xl font-bold mb-2 text-primary">
+              Дякуємо за замовлення!
+            </h2>
             <p className="text-muted-foreground mb-4">
               Ваше замовлення успішно оформлено.
             </p>
@@ -73,9 +84,10 @@ export const CartCheckout: React.FC = () => {
           onSelect={() => setShowForm(true)}
         />
       )}
+
       {showForm && totalItems > 0 && (
         <form
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-4 text-primary"
           onSubmit={async (e) => {
             e.preventDefault();
 
@@ -93,18 +105,22 @@ export const CartCheckout: React.FC = () => {
           }}
         >
           <div>
-            <Label htmlFor="deliveryType">{t('delivery-type')}</Label>
-            <select
-              name="deliveryType"
-              value={deliveryType}
-              onChange={(e) => setDeliveryType(e.target.value as any)}
-              className="w-full border rounded px-2 py-1"
-              required
+            <Label
+              htmlFor="deliveryType"
+              className="bg-white dark:bg-black text-primary"
             >
-              <option value="">{t('select-type')}</option>
-              <option value="nova_poshta">{t('nova-post')}</option>
-              <option value="courier">{t('courier')}</option>
-            </select>
+              {t('delivery-type')}
+            </Label>
+            <Dropdown
+              value={deliveryType}
+              defaultText={t('select-type')}
+              itemData={deliveryOptions}
+              triggerClass="w-full"
+              itemClass=""
+              onSelect={(val) =>
+                setDeliveryType(val as 'nova_poshta' | 'courier' | '')
+              }
+            />
           </div>
 
           {deliveryType === 'nova_poshta' && (
@@ -132,7 +148,12 @@ export const CartCheckout: React.FC = () => {
           </div>
 
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label
+              htmlFor="email"
+              className="text-primary"
+            >
+              Email
+            </Label>
             <Input
               name="email"
               value={form.email}
@@ -178,7 +199,12 @@ export const CartCheckout: React.FC = () => {
 
           <div className="flex gap-4">
             <div className="flex-1">
-              <Label htmlFor="expiry">MM/YY</Label>
+              <Label
+                htmlFor="expiry"
+                className="text-primary"
+              >
+                MM/YY
+              </Label>
               <Input
                 name="expiry"
                 value={form.expiry}
@@ -188,7 +214,12 @@ export const CartCheckout: React.FC = () => {
               />
             </div>
             <div className="flex-1">
-              <Label htmlFor="cvc">CVC</Label>
+              <Label
+                htmlFor="cvc"
+                className="text-primary"
+              >
+                CVC
+              </Label>
               <Input
                 name="cvc"
                 value={form.cvc}

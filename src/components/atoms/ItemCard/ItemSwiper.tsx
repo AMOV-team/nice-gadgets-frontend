@@ -22,10 +22,10 @@ export const ItemSwiper: React.FC<Props> = ({
   return (
     <div
       className={`
-          gap-4 mb-10
-          !grid grid-cols-4 sm:grid-cols-7 xl:grid-cols-12
-          col-span-4 sm:col-span-7 xl:col-span-12
-          grid-rows-1
+        gap-4 mb-10
+        !grid grid-cols-4 sm:grid-cols-7 xl:grid-cols-12
+        col-span-4 sm:col-span-7 xl:col-span-12
+        grid-rows-1
       `}
     >
       <Swiper
@@ -34,19 +34,19 @@ export const ItemSwiper: React.FC<Props> = ({
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Thumbs]}
         className={`
-        h-72 col-span-4 sm:col-start-2 sm:h-[287px]
-        xl:!h-[464px] !m-0 cursor-pointer xl:max-w-[464px]
-        xl:col-start-3 xl:col-end-12 xl:col-span-10
-        !flex !justify-center !items-center sm:order-2
+          h-72 col-span-4 sm:col-start-2 sm:h-[287px]
+          xl:!h-[464px] !m-0 cursor-pointer xl:max-w-[464px]
+          xl:col-start-3 xl:col-end-12 xl:col-span-10
+          !flex !justify-center !items-center sm:order-2
         `}
       >
         {images.map((image) => (
           <SwiperSlide
             key={image}
             className={`
-            h-72 sm:h-[287px] xl:!h-[464px]
-            flex justify-center items-center
-          `}
+              h-72 sm:h-[287px] xl:!h-[464px]
+              flex justify-center items-center
+            `}
           >
             <img
               src={image}
@@ -115,9 +115,8 @@ export const ItemSwiper: React.FC<Props> = ({
               src={image}
               alt=""
               className={`
-              object-contain
-
-              h-full w-full
+                object-contain
+                h-full w-full
               `}
             />
           </SwiperSlide>

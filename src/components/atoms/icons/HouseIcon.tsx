@@ -7,7 +7,7 @@ type Props = {
 export const HouseIcon: React.FC<Props> = ({ className = '' }) => {
   return (
     <Home
-      className={`${className}`}
+      className={`text-custom-primary ${className}`}
       size={16}
     />
   );

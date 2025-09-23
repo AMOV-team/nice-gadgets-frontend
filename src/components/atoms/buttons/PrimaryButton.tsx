@@ -2,15 +2,10 @@ import * as React from 'react';
 
 type ButtonProps = {
   text: string;
-  selected?: boolean;
   onSelect?: () => void;
 };
 
-export const PrimaryButton: React.FC<ButtonProps> = ({
-  text,
-  selected = false,
-  onSelect,
-}) => {
+export const PrimaryButton: React.FC<ButtonProps> = ({ text, onSelect }) => {
   return (
     <button
       onClick={onSelect}
@@ -20,11 +15,7 @@ export const PrimaryButton: React.FC<ButtonProps> = ({
           w-full h-[40px]
           border rounded-[48px]
           transition-all duration-200 cursor-pointer
-          ${
-            selected ?
-              'bg-white text-accent border-elements border-solid'
-            : 'bg-custom-accent text-white border-none dark:hover:shadow-[0px_3px_13px_0px_hsl(var(--hover)/0.4)] hover:shadow-[0px_3px_13px_0px_#17203166]'
-          }
+          bg-custom-accent text-white border-none dark:hover:shadow-[0px_3px_13px_0px_hsl(var(--hover)/0.4)] hover:shadow-[0px_3px_13px_0px_#17203166]
           active:scale-95
         `}
       type="button"

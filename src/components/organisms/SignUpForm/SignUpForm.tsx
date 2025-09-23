@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { toast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/useToast';
 import { supabase } from '@/lib/supabase';
 import { useTranslation } from 'react-i18next';
 
@@ -19,7 +19,6 @@ export default function SignUpForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 🔍 Валідація email
     if (!/\S+@\S+\.\S+/.test(email)) {
       toast({
         title: t('fail-email'),
@@ -29,7 +28,6 @@ export default function SignUpForm() {
       return;
     }
 
-    // 🔐 Валідація паролю
     if (password.length < 6) {
       toast({
         title: t('short-password'),
@@ -78,18 +76,6 @@ export default function SignUpForm() {
       setLoading(false);
     }
   };
-
-  // const signUpWithGoogle = async () => {
-  //   await supabase.auth.signInWithOAuth({
-  //     provider: 'google',
-  //     options: {
-  //       redirectTo: `${window.location.origin}/auth-callback`,
-  //       queryParams: {
-  //         prompt: 'select_account',
-  //       },
-  //     },
-  //   });
-  // };
 
   return (
     <Card className="max-w-md mx-auto mt-10">

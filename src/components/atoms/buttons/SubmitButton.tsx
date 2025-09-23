@@ -4,7 +4,7 @@ type ButtonProps = {
   text: string;
   selected?: boolean;
   onSelect?: () => void;
-  type?: 'button' | 'submit' | 'reset'; // додано тип кнопки
+  type: 'button' | 'submit' | 'reset';
 };
 
 export const SubmitButton: React.FC<ButtonProps> = ({

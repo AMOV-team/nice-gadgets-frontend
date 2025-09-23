@@ -3,8 +3,8 @@ import { FavouritesIconYellow } from '../icons/FavouritesIconYellow';
 import { FavouritesIcon } from '../icons/FavouritesIcon';
 
 type AddToFavoriteButtonProps = {
-  selected?: boolean;
-  onSelect?: () => void;
+  selected: boolean;
+  onSelect: () => void;
 };
 
 export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({

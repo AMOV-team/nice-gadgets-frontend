@@ -12,9 +12,9 @@ export const TechSpecsWithTitle: React.FC<Props> = ({ specs }) => {
   return (
     <div
       className={`
-      w-full
-      xl:w-[50%]
-    `}
+        w-full
+        xl:w-[50%]
+      `}
     >
       <h3
         className={`

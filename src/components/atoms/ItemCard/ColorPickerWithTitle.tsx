@@ -17,16 +17,16 @@ export const ColorPickerWithTitle: React.FC<Props> = ({
   return (
     <div
       className={`
-              relative
-              mb-12
-              after:content-['']
-              after:w-full
-              after:h-[1px]
-              after:bg-elements
-              after:absolute
-              after:bottom-[-24px]
-              after:left-0
-            `}
+        relative
+        mb-12
+        after:content-['']
+        after:w-full
+        after:h-[1px]
+        after:bg-elements
+        after:absolute
+        after:bottom-[-24px]
+        after:left-0
+      `}
     >
       <p className="font-mont font-semibold text-[#89939A] text-xs mb-2">
         {t('Available-colors')}
