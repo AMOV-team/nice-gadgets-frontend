@@ -88,7 +88,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
           </p>
         </div>
 
-        <div className="grid gap-8">
+        <div className="grid gap-8 xl:flex xl:flex-row xl:flex-wrap xl:items-center xl:justify-center">
           {team.map((member) => (
             <div
               key={member.id}
@@ -96,7 +96,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
             >
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4">
-                  <Avatar className="size-[250px] sm:size-[500px] xl:size-[650px]">
+                  <Avatar className="size-[250px] sm:size-[500px] xl:size-[200px]">
                     <AvatarImage
                       src={member.avatar}
                       className="object-cover"
@@ -108,10 +108,10 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
                 </div>
 
                 <div className="mb-6">
-                  <h3 className="mb-1 text-h1 xl:text-h1-lg font-mont font-extrabold">
+                  <h3 className="mb-1 text-h1 xl:text-h1 font-mont font-extrabold">
                     {member.name}
                   </h3>
-                  <p className="text-primary text-h3 font-semibold">
+                  <p className="text-primary text-h3 xl:min-h-[52px] font-semibold">
                     {member.role}
                   </p>
                 </div>
@@ -123,7 +123,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
                       target="_blank"
                       className="bg-muted/50 rounded-lg p-2"
                     >
-                      <Github className="text-muted-foreground size-6 sm:size-10" />
+                      <Github className="text-muted-foreground size-6 sm:size-8" />
                     </a>
                   )}
                   {member.telegram && (
@@ -132,7 +132,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
                       target="_blank"
                       className="bg-muted/50 rounded-lg p-2"
                     >
-                      <Send className="text-muted-foreground size-6 sm:size-10" />
+                      <Send className="text-muted-foreground size-6 sm:size-8" />
                     </a>
                   )}
                   {member.linkedin && (
@@ -141,7 +141,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
                       target="_blank"
                       className="bg-muted/50 rounded-lg p-2"
                     >
-                      <Linkedin className="text-muted-foreground size-6 sm:size-10" />
+                      <Linkedin className="text-muted-foreground size-6 sm:size-8" />
                     </a>
                   )}
                 </div>
