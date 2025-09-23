@@ -79,13 +79,13 @@ export const BannerSlider = ({ className = '' }) => {
         ))}
       </Swiper>
 
-      <div className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30">
+      <div className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10">
         <SliderButtonLeft
           onClick={handlePrev}
           disabled={false}
         />
       </div>
-      <div className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30">
+      <div className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-10">
         <SliderButtonRight
           onClick={handleNext}
           disabled={false}

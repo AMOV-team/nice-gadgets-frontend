@@ -30,12 +30,12 @@ export const HeaderButtons: React.FC<Props> = ({
     <div
       className={cn(
         {
-          'fixed bottom-0 left-0 right-0 z-10 h-16': isBurgerMenuActive,
+          'fixed bottom-0 left-0 right-0 z-10 h-fit': isBurgerMenuActive,
           'hidden sm:flex': !isBurgerMenuActive,
         },
         `
-        flex items-center flex-row divide-x divide-[hsl(var(--elements))] sm:h-full z-30
-        border-l border-solid box-border border-elements
+        flex items-center flex-row sm:divide-x sm:divide-[hsl(var(--elements))] sm:h-full z-30
+        sm:border-l sm:border-solid box-border sm:border-elements
         fixed -bottom-[calc(100vh-46px)] left-0 right-0 sm:static
         h-0 bg-white dark:bg-black
       `,

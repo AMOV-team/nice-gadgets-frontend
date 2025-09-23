@@ -25,7 +25,7 @@ export const NavbarIconLink: React.FC<Props> = ({
       }}
       className={({ isActive }) =>
         classNames(
-          'flex-1 relative w-12 h-12 xl:w-16 xl:h-16 inline-flex items-center justify-center no-underline z-30',
+          'flex-1 relative size-[48px] xl:size-[64px] box-border inline-flex items-center justify-center no-underline z-30',
           isActive ?
             `
               after:content-[""]
