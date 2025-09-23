@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dropdown } from '../../atoms/Dropdown';
 import type { SortOption } from '../../../types/SortOption';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface FiltersProps {
   sortOptions: SortOption[];
@@ -38,6 +39,7 @@ export const Filters: React.FC<FiltersProps> = ({
     setSearchParams(params);
   };
 
+  const { t } = useTranslation();
   return (
     <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4 items-end grid-rows-2 sm:grid-rows-1">
       <form
@@ -85,14 +87,14 @@ export const Filters: React.FC<FiltersProps> = ({
             type="submit"
             className="text-white bg-custom-accent hover:bg-custom-accent focus:ring-4 focus:outline-none focus:ring-custom-accent font-medium rounded-lg text-sm px-4 py-2"
           >
-            Search
+            {t('search')}
           </button>
         </div>
       </form>
 
       <div className="col-span-2 sm:col-span-3 xl:col-span-5">
         <p className="text-small font-mont text-custom-secondary mb-1">
-          Sort by
+          {t('sortby')}
         </p>
         <Dropdown
           defaultText={sortDefault}
@@ -105,7 +107,7 @@ export const Filters: React.FC<FiltersProps> = ({
 
       <div className="col-span-2 xl:col-span-5">
         <p className="text-small font-mont text-custom-secondary mb-1">
-          Items per page
+          {t('items-on-page')}
         </p>
         <Dropdown
           defaultText={String(itemsPerPage)}

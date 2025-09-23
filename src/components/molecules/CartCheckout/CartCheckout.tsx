@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { useOrderSubmit } from '@/hooks/useOrderSubmit';
 import { SubmitButton } from '@/components/atoms/buttons/SubmitButton';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 export const CartCheckout: React.FC = () => {
   const { cartTotal, totalItems } = useCart();
@@ -39,12 +40,14 @@ export const CartCheckout: React.FC = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col gap-6 p-6 border border-solid border-elements rounded-lg">
       <div className="flex flex-col justify-center items-center">
         <span className="text-h2 font-extrabold">${cartTotal}</span>
         <span className="text-body font-semibold">
-          Total for {totalItems} items
+          {t('total-for')} {totalItems} {t('items')}
         </span>
       </div>
 
@@ -66,7 +69,7 @@ export const CartCheckout: React.FC = () => {
 
       {!showForm && totalItems > 0 && (
         <PrimaryButton
-          text="Checkout"
+          text={t('checkout')}
           onSelect={() => setShowForm(true)}
         />
       )}
@@ -90,7 +93,7 @@ export const CartCheckout: React.FC = () => {
           }}
         >
           <div>
-            <Label htmlFor="deliveryType">Тип доставки</Label>
+            <Label htmlFor="deliveryType">{t('delivery-type')}</Label>
             <select
               name="deliveryType"
               value={deliveryType}
@@ -98,32 +101,32 @@ export const CartCheckout: React.FC = () => {
               className="w-full border rounded px-2 py-1"
               required
             >
-              <option value="">Оберіть тип</option>
-              <option value="nova_poshta">Нова Пошта (відділення)</option>
-              <option value="courier">Кур’єр</option>
+              <option value="">{t('select-type')}</option>
+              <option value="nova_poshta">{t('nova-post')}</option>
+              <option value="courier">{t('courier')}</option>
             </select>
           </div>
 
           {deliveryType === 'nova_poshta' && (
             <div>
-              <Label htmlFor="branch">Відділення Нової Пошти</Label>
+              <Label htmlFor="branch">{t('nova-post-branch')}</Label>
               <Input
                 name="branch"
                 value={form.branch}
                 onChange={handleChange}
-                placeholder="Напр. №5, Хмельницький"
+                placeholder={t('example-nova-post')}
                 required
               />
             </div>
           )}
 
           <div>
-            <Label htmlFor="name">Ім’я</Label>
+            <Label htmlFor="name">{t('name')}</Label>
             <Input
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="Степан Гіга"
+              placeholder={t('stepan-giga')}
               required
             />
           </div>
@@ -139,7 +142,7 @@ export const CartCheckout: React.FC = () => {
           </div>
 
           <div>
-            <Label htmlFor="phone">Телефон</Label>
+            <Label htmlFor="phone">{t('phone-number')}</Label>
             <Input
               name="phone"
               value={form.phone}
@@ -151,19 +154,19 @@ export const CartCheckout: React.FC = () => {
 
           {deliveryType === 'courier' && (
             <div>
-              <Label htmlFor="address">Адреса доставки</Label>
+              <Label htmlFor="address">{t('delivery-adress')}</Label>
               <Input
                 name="address"
                 value={form.address}
                 onChange={handleChange}
-                placeholder="вул. Незалежності 12, Київ"
+                placeholder={t('street')}
                 required
               />
             </div>
           )}
 
           <div>
-            <Label htmlFor="cardNumber">Номер карти</Label>
+            <Label htmlFor="cardNumber">{t('card-number')}</Label>
             <Input
               name="cardNumber"
               value={form.cardNumber}
@@ -197,7 +200,7 @@ export const CartCheckout: React.FC = () => {
           </div>
 
           <SubmitButton
-            text="Оформити замовлення"
+            text={t('place-order')}
             type="submit"
           />
         </form>

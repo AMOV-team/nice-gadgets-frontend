@@ -25,7 +25,7 @@ import SignInForm from '../organisms/SignInForm/SignInForm.tsx';
 import { AuthProvider } from '@/context/AuthProvider.tsx';
 import AuthCallback from '../pages/AuthCallback.tsx';
 import { RightsPage } from '../pages/RightsPage.tsx';
-
+import TidioChat from '../molecules/TidioChat/TidioChat.tsx';
 
 export const Root = () => (
   <AuthProvider>
@@ -33,6 +33,8 @@ export const Root = () => (
       <ComparisonProvider>
         <CartProvider id="main-cart">
           <HashRouter>
+            <TidioChat />
+
             <ScrollToTop />
             <Toaster />
             <Routes>
