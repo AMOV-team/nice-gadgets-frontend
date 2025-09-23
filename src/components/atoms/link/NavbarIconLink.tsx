@@ -25,10 +25,10 @@ export const NavbarIconLink: React.FC<Props> = ({
       }}
       className={({ isActive }) =>
         classNames(
-          'flex-1 relative shadow-[-1px_0px_0px_0px_hsl(var(--elements))] h-full sm:w-16 inline-flex items-center justify-center no-underline z-30',
+          'flex-1 relative shadow-[-1px_0_0_0_hsl(var(--elements))] h-full w-12 xl:w-16 inline-flex items-center justify-center no-underline z-30 box-border',
           isActive ?
             `
-              after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[4px] after:bg-custom-primary after:rounded-lg
+              after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-[calc(100%-1px)] after:h-[4px] after:bg-custom-primary after:rounded-lg
               bg-white dark:bg-black
             `
           : '',

@@ -1,17 +1,14 @@
 import cn from 'classnames';
-import { ThemeSwitcher } from '../buttons/ThemeSwitcher.tsx';
 import { NavbarIconLink } from '../link/NavbarIconLink.tsx';
 import React from 'react';
 import { ShoppingBagIconCounter } from '../icons/ShoppingBagIconCounter.tsx';
-import { LangButton } from '../buttons/LangButton.tsx';
 import { FavouritesIconCounter } from '../icons/FavouritesIconCounter.tsx';
 import { useFavorites } from '../../../hooks/useFavorites.ts';
 import { useCart } from 'react-use-cart';
 import { ShoppingBagIcon } from '../icons/ShoppingBagIcon.tsx';
-import { UserCabinetIcon } from '../icons/UserCabinetIcon.tsx';
 import { CompareIconCounter } from '../icons/CompareIconCounter.tsx';
 import { useComparison } from '@/hooks/useComparison.ts';
-import { useAuth } from '@/hooks/useAuth.ts';
+import { ButtonsDropdown } from '@/components/atoms/ButtonsDropdown.tsx';
 
 type Props = {
   isBurgerMenuActive: boolean;
@@ -25,7 +22,6 @@ export const HeaderButtons: React.FC<Props> = ({
   const { favorites } = useFavorites();
   const { comparison } = useComparison();
   const { isEmpty, totalItems } = useCart();
-  const { user } = useAuth();
 
   return (
     <div
@@ -42,8 +38,6 @@ export const HeaderButtons: React.FC<Props> = ({
       )}
       style={{ transition: 'height .3s ease' }}
     >
-      <ThemeSwitcher />
-      <LangButton />
       <NavbarIconLink
         handleIsBurgerMenuActive={handleIsBurgerMenuActive}
         link="/compare"
@@ -80,14 +74,7 @@ export const HeaderButtons: React.FC<Props> = ({
           }
         </div>
       </NavbarIconLink>
-      <NavbarIconLink
-        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
-        link={user ? '/userprofile' : '/signin'}
-      >
-        <div className="size-[16px] flex justify-center items-center bg-white">
-          <UserCabinetIcon className="text-custom-primary bg-white dark:bg-black" />
-        </div>
-      </NavbarIconLink>
+      <ButtonsDropdown handleIsBurgerMenuActive={handleIsBurgerMenuActive} />
     </div>
   );
 };
