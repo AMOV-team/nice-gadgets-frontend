@@ -4,6 +4,7 @@ import { AddToFavoriteButton } from '../../../atoms/buttons/AddToFavoriteButton'
 import { useTranslation } from 'react-i18next';
 import { useFavorites } from '../../../../hooks/useFavorites';
 import type { Product } from '../../../../types/Product';
+import { toast } from '@/hooks/use-toast';
 
 type ProductActionsProps = {
   product: Product;
@@ -36,7 +37,15 @@ export const ProductActions: React.FC<ProductActionsProps> = ({
     <div className="flex justify-between items-center gap-[8px]">
       <PrimaryButton
         text={t('add-to-cart')}
-        onSelect={onAddToCart}
+        onSelect={() => {
+          if (onAddToCart) {
+            onAddToCart();
+          }
+
+          toast({
+            title: `${t('added-to-cart')}`,
+          });
+        }}
       />
       <AddToFavoriteButton
         selected={isFavorite(product.itemId)}

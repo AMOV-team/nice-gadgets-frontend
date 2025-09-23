@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown } from '../../atoms/Dropdown';
 import type { SortOption } from '../../../types/SortOption';
+import { useTranslation } from 'react-i18next';
 import { ProductSearch } from '../../molecules/ProductsSearch/ProductsSearch';
 import type { Product } from '../../../types/Product';
 
@@ -33,10 +34,9 @@ export const Filters: React.FC<FiltersProps> = ({
           onFiltered={onFiltered}
         />
       </div>
-
       <div className="col-span-2 sm:col-span-3 xl:col-span-5">
         <p className="text-small font-mont text-custom-secondary mb-1">
-          Sort by
+          {t('sortby')}
         </p>
         <Dropdown
           defaultText={sortDefault}
@@ -49,7 +49,7 @@ export const Filters: React.FC<FiltersProps> = ({
 
       <div className="col-span-2 xl:col-span-5">
         <p className="text-small font-mont text-custom-secondary mb-1">
-          Items per page
+          {t('items-on-page')}
         </p>
         <Dropdown
           defaultText={String(itemsPerPage)}
