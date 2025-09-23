@@ -34,7 +34,7 @@ export const ShopCategory: React.FC<Props> = ({
       <Link
         to={productLink}
         className={`group col-span-4 aspect-square rounded-lg relative overflow-hidden 
-            transition-shadow duration-1000`}
+            transition-shadow duration-1000 overflow-hidden`}
         style={{
           backgroundColor: color,
           boxShadow: 'none',
