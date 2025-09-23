@@ -39,7 +39,7 @@ export const ButtonsDropdown: React.FC<Props> = ({
         >
           <svg
             className={`
-            w-6 h-6 fill-black dark:fill-white
+            size-[16px] fill-black dark:fill-white
           `}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 640 640"
