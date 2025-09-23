@@ -7,11 +7,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useOrderSubmit } from '@/hooks/useOrderSubmit';
 import { SubmitButton } from '@/components/atoms/buttons/SubmitButton';
+import { useAuth } from '@/hooks/useAuth';
 
 export const CartCheckout: React.FC = () => {
   const { cartTotal, totalItems } = useCart();
   const { handleSubmit } = useOrderSubmit();
   const [showSuccessModal, setShowSuccessModal] = React.useState(false);
+  const { user } = useAuth();
+  const { emptyCart } = useCart();
 
   useCartSyncManager();
 
@@ -22,6 +25,7 @@ export const CartCheckout: React.FC = () => {
   const [form, setForm] = React.useState({
     name: '',
     email: '',
+    phone: '',
     address: '',
     branch: '',
     cardNumber: '',
@@ -60,18 +64,29 @@ export const CartCheckout: React.FC = () => {
         </div>
       )}
 
-      {!showForm ?
+      {!showForm && totalItems > 0 && (
         <PrimaryButton
           text="Checkout"
           onSelect={() => setShowForm(true)}
         />
-      : <form
+      )}
+      {showForm && totalItems > 0 && (
+        <form
           className="flex flex-col gap-4"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            handleSubmit();
+
+            if (user) {
+              await handleSubmit();
+            } else {
+              emptyCart();
+            }
+
             setShowForm(false);
             setShowSuccessModal(true);
+            setTimeout(() => {
+              setShowSuccessModal(false);
+            }, 3000);
           }}
         >
           <div>
@@ -81,6 +96,7 @@ export const CartCheckout: React.FC = () => {
               value={deliveryType}
               onChange={(e) => setDeliveryType(e.target.value as any)}
               className="w-full border rounded px-2 py-1"
+              required
             >
               <option value="">Оберіть тип</option>
               <option value="nova_poshta">Нова Пошта (відділення)</option>
@@ -96,6 +112,7 @@ export const CartCheckout: React.FC = () => {
                 value={form.branch}
                 onChange={handleChange}
                 placeholder="Напр. №5, Хмельницький"
+                required
               />
             </div>
           )}
@@ -106,6 +123,8 @@ export const CartCheckout: React.FC = () => {
               name="name"
               value={form.name}
               onChange={handleChange}
+              placeholder="Степан Гіга"
+              required
             />
           </div>
 
@@ -115,17 +134,33 @@ export const CartCheckout: React.FC = () => {
               name="email"
               value={form.email}
               onChange={handleChange}
+              placeholder="tseySon@gmail.com"
             />
           </div>
 
           <div>
-            <Label htmlFor="address">Адреса доставки</Label>
+            <Label htmlFor="phone">Телефон</Label>
             <Input
-              name="address"
-              value={form.address}
+              name="phone"
+              value={form.phone}
               onChange={handleChange}
+              placeholder="+380-12-345-6789"
+              required
             />
           </div>
+
+          {deliveryType === 'courier' && (
+            <div>
+              <Label htmlFor="address">Адреса доставки</Label>
+              <Input
+                name="address"
+                value={form.address}
+                onChange={handleChange}
+                placeholder="вул. Незалежності 12, Київ"
+                required
+              />
+            </div>
+          )}
 
           <div>
             <Label htmlFor="cardNumber">Номер карти</Label>
@@ -134,6 +169,7 @@ export const CartCheckout: React.FC = () => {
               value={form.cardNumber}
               onChange={handleChange}
               placeholder="1234 5678 9012 3456"
+              required
             />
           </div>
 
@@ -145,6 +181,7 @@ export const CartCheckout: React.FC = () => {
                 value={form.expiry}
                 onChange={handleChange}
                 placeholder="12/25"
+                required
               />
             </div>
             <div className="flex-1">
@@ -154,6 +191,7 @@ export const CartCheckout: React.FC = () => {
                 value={form.cvc}
                 onChange={handleChange}
                 placeholder="123"
+                required
               />
             </div>
           </div>
@@ -163,7 +201,7 @@ export const CartCheckout: React.FC = () => {
             type="submit"
           />
         </form>
-      }
+      )}
     </div>
   );
 };

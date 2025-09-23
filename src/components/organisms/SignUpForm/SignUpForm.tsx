@@ -65,7 +65,7 @@ export default function SignUpForm() {
         description: 'Акаунт створено. Можете увійти.',
       });
 
-      navigate('/signin');
+      navigate('/userprofile');
     } catch (err: any) {
       toast({
         title: 'Невідома помилка',
@@ -77,17 +77,17 @@ export default function SignUpForm() {
     }
   };
 
-  const signUpWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth-callback`,
-        queryParams: {
-          prompt: 'select_account',
-        },
-      },
-    });
-  };
+  // const signUpWithGoogle = async () => {
+  //   await supabase.auth.signInWithOAuth({
+  //     provider: 'google',
+  //     options: {
+  //       redirectTo: `${window.location.origin}/auth-callback`,
+  //       queryParams: {
+  //         prompt: 'select_account',
+  //       },
+  //     },
+  //   });
+  // };
 
   return (
     <Card className="max-w-md mx-auto mt-10">
@@ -129,17 +129,6 @@ export default function SignUpForm() {
             {loading ? 'Завантаження...' : 'Зареєструватись'}
           </Button>
         </form>
-
-        <div className="mt-6 text-center">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={signUpWithGoogle}
-            className="w-full"
-          >
-            Зареєструватись через Google
-          </Button>
-        </div>
       </CardContent>
     </Card>
   );
