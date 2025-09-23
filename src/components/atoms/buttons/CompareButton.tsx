@@ -2,8 +2,8 @@ import * as React from 'react';
 import { CompareIconCounter } from '../icons/CompareIconCounter';
 
 type Props = {
-  selected?: boolean;
-  onSelect?: () => void;
+  selected: boolean;
+  onSelect: () => void;
 };
 
 export const CompareButton: React.FC<Props> = ({

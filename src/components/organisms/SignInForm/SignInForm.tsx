@@ -6,8 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { toast } from '@/hooks/use-toast';
-import { useLogin } from '@/hooks/login';
+import { toast } from '@/hooks/useToast';
+import { useLogin } from '@/hooks/useLogin';
 
 export default function SignInForm() {
   const [email, setEmail] = useState('');

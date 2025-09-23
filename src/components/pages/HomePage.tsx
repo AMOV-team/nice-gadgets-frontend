@@ -12,12 +12,11 @@ export const HomePage: React.FC = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      setIsLoading(true); // включаем лоадер
+      setIsLoading(true);
       try {
-        // Здесь можно делать асинхронные запросы для BannerSlider, SectionSlider и категорий
-        // Например: await fetch(...);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       } finally {
-        setIsLoading(false); // отключаем лоадер после загрузки
+        setIsLoading(false);
       }
     };
 

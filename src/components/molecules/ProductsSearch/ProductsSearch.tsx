@@ -18,17 +18,15 @@ export const ProductSearch: React.FC<ProductSearchProps> = ({
   const [query, setQuery] = useState(searchParams.get('query') || '');
   const [debouncedQuery, setDebouncedQuery] = useState(query);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
+  const handleChange = (element: ChangeEvent<HTMLInputElement>) => {
+    setQuery(element.target.value);
   };
 
-  // Debounce 500ms
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedQuery(query.trim()), 500);
     return () => clearTimeout(handler);
   }, [query]);
 
-  // Фільтрація та оновлення URL
   useEffect(() => {
     if (debouncedQuery) {
       onFiltered(

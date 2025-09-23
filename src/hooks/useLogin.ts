@@ -1,4 +1,3 @@
-// useLogin.ts
 import { useCart } from 'react-use-cart';
 import { supabase } from '@/lib/supabase';
 import { pullCartFromServer } from '@/utils/pullCartFromServer';
