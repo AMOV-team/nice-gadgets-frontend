@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import type { Product } from '../../../types/Product';
 import { Search } from 'lucide-react';
 import DeleteButton from '@/components/atoms/buttons/DeleteButton';
+import { useTranslation } from 'react-i18next';
 
 interface ProductSearchProps {
   products: Product[];
@@ -44,6 +45,8 @@ export const ProductSearch: React.FC<ProductSearchProps> = ({
     setSearchParams(newParams);
   }, [debouncedQuery, products, onFiltered, searchParams, setSearchParams]);
 
+  const { t } = useTranslation();
+
   return (
     <div className="relative w-full">
       <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -53,7 +56,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = ({
         value={query}
         onChange={handleChange}
         className="block w-full p-[9px] ps-10 outline-none text-sm border border-elements rounded-lg bg-transparent focus:border-custom-secondary"
-        placeholder="Search for goods"
+        placeholder={t('search-for-goods')}
       />
       {query && (
         <div className="absolute inset-y-0 end-0 flex items-center pe-3">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { CapacityPicker } from './CapacityPicker.tsx';
 import type { Item } from '../../../types/Item.ts';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   item: Item;
@@ -11,6 +12,7 @@ export const CapacityPickerWithTitle: React.FC<Props> = ({
   item,
   handleSelectCapacity,
 }) => {
+  const { t } = useTranslation();
   return (
     <div
       className={`
@@ -26,7 +28,7 @@ export const CapacityPickerWithTitle: React.FC<Props> = ({
       `}
     >
       <p className="font-mont font-semibold text-[#89939A] text-xs mb-2">
-        Select capacity
+        {t('capacity')}
       </p>
       <CapacityPicker
         item={item}

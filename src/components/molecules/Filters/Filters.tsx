@@ -26,6 +26,8 @@ export const Filters: React.FC<FiltersProps> = ({
   products,
   onFiltered,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4 items-end grid-rows-2 sm:grid-rows-1">
       <div className="col-span-full sm:col-span-6 xl:col-span-10">
