@@ -8,6 +8,7 @@ export interface ComparisonContextType {
   removeFromComparison: (productId: Product['id']) => void;
   isInComparison: (productId: Product['id']) => boolean;
   toggleComparison: (product: Product) => void;
+  clearComparison: () => void;
 }
 
 const ComparisonContext = createContext<ComparisonContextType | undefined>(
@@ -52,6 +53,11 @@ export const ComparisonProvider: React.FC<ComparisonProviderProps> = ({
     else addToComparison(product);
   };
 
+  const clearComparison = () => {
+    setComparison([]);
+    localStorage.removeItem('comparison');
+  };
+
   return (
     <ComparisonContext.Provider
       value={{
@@ -60,6 +66,7 @@ export const ComparisonProvider: React.FC<ComparisonProviderProps> = ({
         removeFromComparison,
         isInComparison,
         toggleComparison,
+        clearComparison,
       }}
     >
       {children}
