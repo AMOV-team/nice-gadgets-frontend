@@ -31,7 +31,7 @@ export const HeaderButtons: React.FC<Props> = ({
           'hidden sm:flex': !isBurgerMenuActive,
         },
         `
-        flex items-center flex-row sm:h-full z-30 border-t border-1
+        flex items-center flex-row sm:h-full z-30
         fixed -bottom-[calc(100vh-46px)] left-0 right-0 sm:static
         h-0 bg-white dark:bg-black
       `,

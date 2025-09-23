@@ -17,7 +17,7 @@ export const Header: React.FC<Props> = ({
   return (
     <header
       className={`
-        relative flex items-center justify-between h-[48px] pl-4 border-b
+        relative flex items-center justify-between h-[48px] pl-4
         shadow-[0px_1px_0px_0px_hsl(var(--elements))]
         after:content-[""] after:absolute after:block after:top-0 after:w-full
         after:h-full after:bg-white after:z-20 dark:after:bg-black xl:h-16
