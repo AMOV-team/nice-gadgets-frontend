@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 type ThemeImageProps = {
-  light: string; // шлях до світлої версії
-  dark: string; // шлях до темної версії
+  light: string;
+  dark: string;
   alt: string;
   className?: string;
 };

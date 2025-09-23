@@ -9,6 +9,8 @@ import { ShoppingBagIcon } from '../icons/ShoppingBagIcon.tsx';
 import { CompareIconCounter } from '../icons/CompareIconCounter.tsx';
 import { useComparison } from '@/hooks/useComparison.ts';
 import { ButtonsDropdown } from '@/components/atoms/ButtonsDropdown.tsx';
+import { UserCabinetIcon } from '../icons/UserCabinetIcon.tsx';
+import { useAuth } from '@/hooks/useAuth.ts';
 
 type Props = {
   isBurgerMenuActive: boolean;
@@ -22,6 +24,7 @@ export const HeaderButtons: React.FC<Props> = ({
   const { favorites } = useFavorites();
   const { comparison } = useComparison();
   const { isEmpty, totalItems } = useCart();
+  const { user } = useAuth();
 
   return (
     <div
@@ -31,7 +34,8 @@ export const HeaderButtons: React.FC<Props> = ({
           'hidden sm:flex': !isBurgerMenuActive,
         },
         `
-        flex items-center flex-row sm:h-full z-30
+        flex items-center flex-row divide-x divide-[hsl(var(--elements))] sm:h-full z-30
+        border-l border-solid box-border border-elements
         fixed -bottom-[calc(100vh-46px)] left-0 right-0 sm:static
         h-0 bg-white dark:bg-black
       `,
@@ -72,6 +76,14 @@ export const HeaderButtons: React.FC<Props> = ({
               count={totalItems}
             />
           }
+        </div>
+      </NavbarIconLink>
+      <NavbarIconLink
+        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+        link={user ? '/userprofile' : '/signin'}
+      >
+        <div className="h-full flex justify-center items-center bg-white dark:bg-black">
+          <UserCabinetIcon />
         </div>
       </NavbarIconLink>
       <ButtonsDropdown handleIsBurgerMenuActive={handleIsBurgerMenuActive} />
