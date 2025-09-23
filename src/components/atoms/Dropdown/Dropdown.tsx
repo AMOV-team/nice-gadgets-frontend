@@ -66,11 +66,12 @@ export const Dropdown: React.FC<Props> = ({
 
       <SelectContent
         className="
-          w-[250px]
+          w-full
           overflow-y-auto
           max-h-[300px]
           box-border
           bg-white
+          dark:bg-black
           border-elements
           rounded-md
           shadow-[0px_2px_15px_0px_rgba(0,0,0,0.05)]

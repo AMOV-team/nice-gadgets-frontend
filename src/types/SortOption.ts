@@ -1,5 +1,5 @@
 export type SortOption = {
-  id: number;
+  id: number | string;
   label: string;
   value?: string;
 };

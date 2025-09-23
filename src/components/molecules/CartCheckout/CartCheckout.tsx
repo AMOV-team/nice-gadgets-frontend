@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import { PrimaryButton } from '../../atoms/buttons';
 import { useCart } from 'react-use-cart';
@@ -8,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useOrderSubmit } from '@/hooks/useOrderSubmit';
 import { SubmitButton } from '@/components/atoms/buttons/SubmitButton';
 import { useAuth } from '@/hooks/useAuth';
+import { Dropdown } from '@/components/atoms/Dropdown';
 
 export const CartCheckout: React.FC = () => {
   const { cartTotal, totalItems } = useCart();
@@ -39,20 +39,34 @@ export const CartCheckout: React.FC = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const deliveryOptions = [
+    {
+      id: 'nova_poshta',
+      label: 'Нова Пошта (відділення)',
+      value: 'nova_poshta',
+    },
+    { id: 'courier', label: 'Кур’єр', value: 'courier' },
+  ];
+
   return (
-    <div className="flex flex-col gap-6 p-6 border border-solid border-elements rounded-lg">
+    <div className="flex flex-col gap-6 p-6 border border-solid border-elements rounded-lg bg-white dark:bg-black text-primary">
       <div className="flex flex-col justify-center items-center">
-        <span className="text-h2 font-extrabold">${cartTotal}</span>
-        <span className="text-body font-semibold">
+        <span className="text-h2 font-extrabold text-primary">
+          ${cartTotal}
+        </span>
+        <span className="text-body font-semibold text-primary">
           Total for {totalItems} items
         </span>
       </div>
 
-      <div className="border border-solid border-elements" />
+      <div className="border border-solid border-elements dark:border-elements" />
+
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 shadow-lg text-center max-w-sm w-full">
-            <h2 className="text-xl font-bold mb-2">Дякуємо за замовлення!</h2>
+          <div className="bg-white dark:bg-black rounded-lg p-6 shadow-lg text-center max-w-sm w-full text-primary">
+            <h2 className="text-xl font-bold mb-2 text-primary">
+              Дякуємо за замовлення!
+            </h2>
             <p className="text-muted-foreground mb-4">
               Ваше замовлення успішно оформлено.
             </p>
@@ -70,9 +84,10 @@ export const CartCheckout: React.FC = () => {
           onSelect={() => setShowForm(true)}
         />
       )}
+
       {showForm && totalItems > 0 && (
         <form
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-4 text-primary"
           onSubmit={async (e) => {
             e.preventDefault();
 
@@ -90,23 +105,32 @@ export const CartCheckout: React.FC = () => {
           }}
         >
           <div>
-            <Label htmlFor="deliveryType">Тип доставки</Label>
-            <select
-              name="deliveryType"
-              value={deliveryType}
-              onChange={(e) => setDeliveryType(e.target.value as any)}
-              className="w-full border rounded px-2 py-1"
-              required
+            <Label
+              htmlFor="deliveryType"
+              className="bg-white dark:bg-black text-primary"
             >
-              <option value="">Оберіть тип</option>
-              <option value="nova_poshta">Нова Пошта (відділення)</option>
-              <option value="courier">Кур’єр</option>
-            </select>
+              Тип доставки
+            </Label>
+            <Dropdown
+              value={deliveryType}
+              defaultText="Оберіть тип"
+              itemData={deliveryOptions}
+              triggerClass="w-full"
+              itemClass=""
+              onSelect={(val) =>
+                setDeliveryType(val as 'nova_poshta' | 'courier' | '')
+              }
+            />
           </div>
 
           {deliveryType === 'nova_poshta' && (
             <div>
-              <Label htmlFor="branch">Відділення Нової Пошти</Label>
+              <Label
+                htmlFor="branch"
+                className="text-primary"
+              >
+                Відділення Нової Пошти
+              </Label>
               <Input
                 name="branch"
                 value={form.branch}
@@ -118,7 +142,12 @@ export const CartCheckout: React.FC = () => {
           )}
 
           <div>
-            <Label htmlFor="name">Ім’я</Label>
+            <Label
+              htmlFor="name"
+              className="text-primary"
+            >
+              Ім’я
+            </Label>
             <Input
               name="name"
               value={form.name}
@@ -129,7 +158,12 @@ export const CartCheckout: React.FC = () => {
           </div>
 
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label
+              htmlFor="email"
+              className="text-primary"
+            >
+              Email
+            </Label>
             <Input
               name="email"
               value={form.email}
@@ -139,7 +173,12 @@ export const CartCheckout: React.FC = () => {
           </div>
 
           <div>
-            <Label htmlFor="phone">Телефон</Label>
+            <Label
+              htmlFor="phone"
+              className="text-primary"
+            >
+              Телефон
+            </Label>
             <Input
               name="phone"
               value={form.phone}
@@ -151,7 +190,12 @@ export const CartCheckout: React.FC = () => {
 
           {deliveryType === 'courier' && (
             <div>
-              <Label htmlFor="address">Адреса доставки</Label>
+              <Label
+                htmlFor="address"
+                className="text-primary"
+              >
+                Адреса доставки
+              </Label>
               <Input
                 name="address"
                 value={form.address}
@@ -163,7 +207,12 @@ export const CartCheckout: React.FC = () => {
           )}
 
           <div>
-            <Label htmlFor="cardNumber">Номер карти</Label>
+            <Label
+              htmlFor="cardNumber"
+              className="text-primary"
+            >
+              Номер карти
+            </Label>
             <Input
               name="cardNumber"
               value={form.cardNumber}
@@ -175,7 +224,12 @@ export const CartCheckout: React.FC = () => {
 
           <div className="flex gap-4">
             <div className="flex-1">
-              <Label htmlFor="expiry">MM/YY</Label>
+              <Label
+                htmlFor="expiry"
+                className="text-primary"
+              >
+                MM/YY
+              </Label>
               <Input
                 name="expiry"
                 value={form.expiry}
@@ -185,7 +239,12 @@ export const CartCheckout: React.FC = () => {
               />
             </div>
             <div className="flex-1">
-              <Label htmlFor="cvc">CVC</Label>
+              <Label
+                htmlFor="cvc"
+                className="text-primary"
+              >
+                CVC
+              </Label>
               <Input
                 name="cvc"
                 value={form.cvc}
