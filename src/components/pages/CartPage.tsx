@@ -8,13 +8,15 @@ import type { CartItem } from '../../types/CartItem.tsx';
 import { useTranslation } from 'react-i18next';
 
 export const CartPage: React.FC = () => {
-  const { items } = useCart() as unknown as { items: CartItem[] };
+  const { items, isEmpty } = useCart() as unknown as { items: CartItem[] };
   const { t } = useTranslation();
+
   return (
     <GridContainer>
       <div className="col-span-full">
         <Breadcrumb />
         <h1 className="text-h1 font-bold text-custom-primary">{t('cart')}</h1>
+        {isEmpty && <p>Ваша корзина порожня</p>}
       </div>
 
       <div className="col-span-full xl:col-span-16">
@@ -27,6 +29,7 @@ export const CartPage: React.FC = () => {
           ))}
         </div>
       </div>
+
       <div className="col-span-4 sm:col-span-12 xl:col-span-8">
         <CartCheckout />
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import {
@@ -14,11 +15,13 @@ import { Heart, ShoppingCart } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserSync } from '@/hooks/useUserSync';
 import { useProfile } from '@/hooks/useProfile';
+import { usePullOrders } from '@/hooks/usePullOrders';
 
 export default function UserCabinet() {
   const { user } = useAuth();
   const profile = useProfile(user?.id ?? null);
   const { cart, favorites } = useUserSync(user?.id ?? null);
+  const orders = usePullOrders(user?.id ?? null);
 
   return (
     <Card className="w-full max-w-4xl mx-auto">
@@ -58,17 +61,38 @@ export default function UserCabinet() {
                   <TableHead>Дата</TableHead>
                   <TableHead>Статус</TableHead>
                   <TableHead>Сума</TableHead>
+                  <TableHead>Товари</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell>#12345</TableCell>
-                  <TableCell>18-09-2025</TableCell>
-                  <TableCell>
-                    <Badge>Доставлено</Badge>
-                  </TableCell>
-                  <TableCell>$120</TableCell>
-                </TableRow>
+                {orders.map((order) => (
+                  <TableRow key={order.id}>
+                    <TableCell>{order.order_number}</TableCell>
+                    <TableCell>
+                      {new Date(order.created_at).toLocaleDateString('uk-UA')}
+                    </TableCell>
+                    <TableCell>
+                      <Badge>Комплектується</Badge>
+                    </TableCell>
+                    <TableCell>
+                      $
+                      {order.items.reduce(
+                        (sum: number, item: any) =>
+                          sum + item.price * item.quantity,
+                        0,
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <ul className="list-disc pl-4 space-y-1">
+                        {order.items.map((item: any, index: number) => (
+                          <li key={index}>
+                            {item.name} × {item.quantity}
+                          </li>
+                        ))}
+                      </ul>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TabsContent>
