@@ -33,7 +33,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   titleKey,
 }) => {
   const { t } = useTranslation();
-  const { products, loading, error } = useProducts(category);
+  const { products, error } = useProducts(category);
   const {
     currentItems,
     totalPages,
@@ -44,7 +44,6 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
     handlePageChange,
   } = usePaginatedProducts(products);
 
-  if (loading) return <p className="col-span-full">{t('loading')}...</p>;
   if (error) return <p className="col-span-full text-red-500">{error}</p>;
 
   return (

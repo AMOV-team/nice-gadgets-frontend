@@ -3,9 +3,27 @@ import { ShopCategory } from '../atoms/shopCategory';
 import { SectionSlider } from '../organisms/SectionSlider/SectionSlider';
 import { GridContainer } from '../atoms/GridContainer';
 import { useTranslation } from 'react-i18next';
+import { useLoader } from '@/hooks/useLoader';
+import { useEffect } from 'react';
 
 export const HomePage: React.FC = () => {
   const { t } = useTranslation();
+  const { setIsLoading } = useLoader();
+
+  useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true); // включаем лоадер
+      try {
+        // Здесь можно делать асинхронные запросы для BannerSlider, SectionSlider и категорий
+        // Например: await fetch(...);
+      } finally {
+        setIsLoading(false); // отключаем лоадер после загрузки
+      }
+    };
+
+    loadData();
+  }, [setIsLoading]);
+
   return (
     <>
       <BannerSlider />

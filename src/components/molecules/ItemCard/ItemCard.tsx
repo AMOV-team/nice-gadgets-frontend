@@ -12,6 +12,7 @@ import {
   getProductById,
   getProductsByCategory,
 } from '../../../api/productCrud.ts';
+import { useLoader } from '@/hooks/useLoader.ts';
 
 type Props = {
   category: Category;
@@ -21,6 +22,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
+  const { setIsLoading } = useLoader();
 
   const [item, setItem] = useState<Item | null>(null);
   const [productId, setProductId] = useState<number | null>();
@@ -30,6 +32,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
     if (!category || !slug) return;
 
     const fetchItem = async () => {
+      setIsLoading(true); // включаем лоадер
       try {
         const res = await getProductById(category, slug);
 
@@ -44,35 +47,36 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
       } catch {
         setItem(null);
         setSelectedImage('');
+      } finally {
+        setIsLoading(false); // выключаем лоадер
       }
     };
 
     fetchItem();
-  }, [category, slug]);
+  }, [category, slug, setIsLoading]);
 
   useEffect(() => {
-    if (!item) {
-      return;
-    }
+    if (!item) return;
 
-    const fetchItem = async () => {
+    const fetchRelated = async () => {
+      setIsLoading(true); // включаем лоадер на загрузку связанных продуктов
       try {
         const res = await getProductsByCategory(category);
-
         if (res && res.length) {
           const product = res.find((p) => p.itemId === item.id);
-
-          setProductId(product?.id);
+          setProductId(product?.id ?? null);
         } else {
           setProductId(null);
         }
       } catch {
         setProductId(null);
+      } finally {
+        setIsLoading(false); // выключаем лоадер
       }
     };
 
-    fetchItem();
-  }, [category, slug, item]);
+    fetchRelated();
+  }, [category, item, setIsLoading]);
 
   if (!item) {
     return <p>{t('product-not-found')}</p>;

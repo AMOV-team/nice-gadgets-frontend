@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { LoaderContext } from '@/context/LoaderContext.ts';
+import { LoaderContext } from './LoaderContext';
+import { Loader } from '@/components/organisms/Loader/Loader';
 
 export const LoaderProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -9,6 +10,7 @@ export const LoaderProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <LoaderContext.Provider value={{ isLoading, setIsLoading }}>
       {children}
+      {isLoading && <Loader />}
     </LoaderContext.Provider>
   );
 };

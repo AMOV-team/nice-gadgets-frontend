@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react';
-import { client } from '../utils/fetchClient';
-import type { Product } from '../types/Product';
+import { client } from '@/utils/fetchClient';
+import type { Product } from '@/types/Product';
+import { useLoader } from './useLoader';
 
 export const useProducts = (category: string) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { setIsLoading } = useLoader();
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     client
       .get<Product[]>('/products?select=*')
       .then((data) => {
-        const filtered = data.filter((p) => p.category === category);
-        setProducts(filtered);
+        setProducts(data.filter((p) => p.category === category));
         setError(null);
       })
       .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
-  }, [category]);
+      .finally(() => setIsLoading(false));
+  }, [category, setIsLoading]);
 
-  return { products, loading, error };
+  return { products, error };
 };

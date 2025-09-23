@@ -1,22 +1,16 @@
-import { FadeLoader } from 'react-spinners';
+// src/components/atoms/Loader.tsx
 import React from 'react';
 
 export const Loader: React.FC = () => (
   <div
-    className={`
-      fixed inset-0 z-50
-      w-screen
-      h-screen
-      flex items-center justify-center backdrop-blur-md bg-black/10
-      border shadow-lg p-6
-      dark:bg-white/10
-      `}
+    className="fixed inset-0 z-50 w-screen h-screen flex items-center justify-center
+               backdrop-blur-md bg-black/10 dark:bg-white/10 p-6"
   >
-    <FadeLoader
-      color={
-        document.documentElement.classList.contains('dark') ? 'white' : 'black'
-      }
-      loading={true}
-    />
+    <div
+      className="p-3 animate-spin drop-shadow-2xl bg-gradient-to-bl from-pink-400 via-purple-400 to-indigo-600 
+                 md:w-48 md:h-48 h-32 w-32 aspect-square rounded-full"
+    >
+      <div className="rounded-full h-full w-full bg-slate-100 dark:bg-zinc-900 backdrop-blur-md"></div>
+    </div>
   </div>
 );

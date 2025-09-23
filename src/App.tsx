@@ -6,6 +6,7 @@ import cn from 'classnames';
 import { useAuth } from './hooks/useAuth';
 import { useCart } from 'react-use-cart';
 import { pullCartFromServer } from './utils/pullCartFromServer';
+import { LoaderProvider } from './context/LoaderProvider';
 
 function App() {
   const [isBurgerMenuActive, setIsBurgerMenuActive] = useState(false);
@@ -25,24 +26,26 @@ function App() {
   }, [user?.id]);
 
   return (
-    <div
-      data-cy="app"
-      className={cn(
-        {
-          'max-h-[100vh] overflow-y-hidden': isBurgerMenuActive,
-        },
-        'flex flex-col min-h-screen',
-      )}
-    >
-      <Header
-        isBurgerMenuActive={isBurgerMenuActive}
-        handleIsBurgerMenuActive={setIsBurgerMenuActive}
-      />
-      <div className="bg-hover dark:bg-black flex-grow">
-        <Outlet />
+    <LoaderProvider>
+      <div
+        data-cy="app"
+        className={cn(
+          {
+            'max-h-[100vh] overflow-y-hidden': isBurgerMenuActive,
+          },
+          'flex flex-col min-h-screen',
+        )}
+      >
+        <Header
+          isBurgerMenuActive={isBurgerMenuActive}
+          handleIsBurgerMenuActive={setIsBurgerMenuActive}
+        />
+        <div className="bg-hover dark:bg-black flex-grow">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </LoaderProvider>
   );
 }
 
