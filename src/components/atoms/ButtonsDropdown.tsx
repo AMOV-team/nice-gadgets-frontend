@@ -28,29 +28,28 @@ export const ButtonsDropdown: React.FC<Props> = () => {
             h-12 xl:h-16 w-12 xl:w-16 justify-center
             bg-white dark:bg-black
             flex items-center
-            box-border
-            shadow-[-1px_0px_0px_0px_hsl(var(--elements))]
+            box-border shadow-none
+            sm:shadow-[-1px_0px_0px_0px_hsl(var(--elements))]
             cursor-pointer
+            focus:outline-none focus:ring-0 focus-visible:ring-0
           `}
         >
           <Settings className="text-custom-primary size-[16px]" />
         </MenuButton>
 
         <MenuItems
-          transition
           className={`
             translate-y-[1px]
             absolute right-0 z-10 origin-top-right w-12 xl:w-16 flex flex-col items-center
-            bg-white dark:bg-black outline-1 -outline-offset-1 outline-white/10 transition
-            data-closed:scale-95 data-closed:transform data-closed:opacity-0
-            data-enter:duration-100 data-enter:ease-out data-leave:duration-75
-            data-leave:ease-in
+            focus:outline-none focus:ring-0 focus-visible:ring-0
+            bg-white dark:bg-black
+            
           `}
         >
           <div>
             <MenuItem as="div">
               <div
-                className="w-full shadow-[-1px_-1px_0_0_hsl(var(--elements))]"
+                className="w-full shadow-none sm:shadow-[-1px_-1px_0_0_hsl(var(--elements))]"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -61,7 +60,7 @@ export const ButtonsDropdown: React.FC<Props> = () => {
 
             <MenuItem as="div">
               <div
-                className="w-full shadow-[-1px_-1px_0_0_hsl(var(--elements)),_-1px_1px_0_0_hsl(var(--elements))]"
+                className="w-full shadow-none sm:shadow-[-1px_-1px_0_0_hsl(var(--elements)),_-1px_1px_0_0_hsl(var(--elements))]"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
