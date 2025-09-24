@@ -7,6 +7,9 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,css,scss}'],
   theme: {
     extend: {
+      screens: {
+        'min-720': { min: '720px' },
+      },
       gridTemplateColumns: {
         24: 'repeat(24, minmax(0, 1fr))',
       },

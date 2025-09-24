@@ -1,15 +1,16 @@
 import { Outlet } from 'react-router-dom';
 import { Footer } from './components/organisms/Footer';
 import { Header } from './components/organisms/Header';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import cn from 'classnames';
 import { useAuth } from './hooks/useAuth';
 import { useCart } from 'react-use-cart';
 import { pullCartFromServer } from './utils/pullCartFromServer';
 import { LoaderProvider } from './context/LoaderProvider';
+import { useBurgerMenu } from '@/hooks/useBurgerMenu.ts';
 
 function App() {
-  const [isBurgerMenuActive, setIsBurgerMenuActive] = useState(false);
+  const { isBurgerMenuActive, setIsBurgerMenuActive } = useBurgerMenu();
   const { user } = useAuth();
   const { setItems } = useCart();
 
