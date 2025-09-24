@@ -41,7 +41,6 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const { t } = useTranslation();
   const { products, error } = useProducts(category);
 
-  // формуємо activeFilters по чекбоксам
   useEffect(() => {
     const newActiveFilters: ActiveFiltersType = {};
 
@@ -53,13 +52,11 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
     setActiveFilters(newActiveFilters);
   }, [filters]);
 
-  // тут одне джерело правди — filteredItems
   const filteredItems = useMemo(() => {
     if (!products.length) return [];
 
     let result = products;
 
-    // фільтри
     result = result.filter((item) =>
       Object.entries(activeFilters).every(([key, values]) => {
         if (key === 'price') {
@@ -76,7 +73,6 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
       }),
     );
 
-    // пошук
     if (query.trim()) {
       result = result.filter((p) =>
         p.name.toLowerCase().includes(query.toLowerCase()),
