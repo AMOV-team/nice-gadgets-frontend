@@ -3,7 +3,6 @@ export type FilterItem = { value: string; checked: boolean };
 export const capacityToValue = (cap: string) => {
   const trimmed = cap.trim();
 
-  // память
   const memoryMatch = trimmed.match(/^([\d.]+)\s*(MB|GB|TB)$/i);
   if (memoryMatch) {
     const num = parseFloat(memoryMatch[1]);
@@ -11,26 +10,27 @@ export const capacityToValue = (cap: string) => {
 
     switch (unit) {
       case 'MB':
-        return num * 1024 * 1024;
+        return num;
       case 'GB':
-        return num * 1024 * 1024 * 1024;
+        return num * 1024;
       case 'TB':
-        return num * 1024 * 1024 * 1024 * 1024;
+        return num * 1024 * 1024;
     }
   }
 
-  // миллиметры (аксессуары)
   const mmMatch = trimmed.match(/^([\d.]+)\s*mm$/i);
   if (mmMatch) {
     return parseFloat(mmMatch[1]);
   }
 
-  return 0; // fallback
+  return 0;
 };
 
 export const priceToNumber = (price: string) => {
-  const match = price.match(/\$?(\d+)/);
-  return match ? parseInt(match[1], 10) : 0;
+  const matches = price.match(/\d+/g);
+  if (!matches) return 0;
+
+  return parseInt(matches[0], 10);
 };
 
 export const sortFilters = (
@@ -39,11 +39,10 @@ export const sortFilters = (
 ) => {
   return filters.slice().sort((a, b) => {
     switch (type) {
-      case 'capacity':
-        return (
-          capacityToValue(a.value) - capacityToValue(b.value) ||
-          a.value.localeCompare(b.value)
-        );
+      case 'capacity': {
+        const diff = capacityToValue(a.value) - capacityToValue(b.value);
+        return diff !== 0 ? diff : a.value.localeCompare(b.value);
+      }
       case 'price':
         return priceToNumber(a.value) - priceToNumber(b.value);
       case 'string':

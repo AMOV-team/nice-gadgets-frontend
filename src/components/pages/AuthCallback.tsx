@@ -9,15 +9,11 @@ export default function AuthCallback() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('🔄 AuthCallback викликано');
-
     const sync = async () => {
-      // 🧠 Витягуємо токени з подвійного хешу
       const hashParts = window.location.href.split('#');
       const tokenString =
         hashParts.length > 2 ? hashParts.slice(2).join('#') : hashParts[1];
       if (!tokenString) {
-        console.warn('⚠️ Токени не знайдені в URL');
         return;
       }
 
@@ -25,15 +21,10 @@ export default function AuthCallback() {
       const access_token = params.get('access_token');
       const refresh_token = params.get('refresh_token');
 
-      console.log('🔐 access_token:', access_token?.slice(0, 12), '...');
-      console.log('🔐 refresh_token:', refresh_token?.slice(0, 12), '...');
-
       if (!access_token || !refresh_token) {
-        console.warn('❌ Токени не валідні або відсутні');
         return;
       }
 
-      // 🔐 Встановлюємо сесію
       const { error: setError } = await supabase.auth.setSession({
         access_token,
         refresh_token,
@@ -43,10 +34,8 @@ export default function AuthCallback() {
         return;
       }
 
-      // 🧹 Очищаємо хеш
       window.location.hash = '';
 
-      // 📦 Отримуємо сесію
       const {
         data: { session },
         error: getError,
@@ -67,14 +56,8 @@ export default function AuthCallback() {
         return;
       }
 
-      console.log('✅ Користувач авторизований:', userId);
-
-      // 🛒 Підтягуємо корзину
       const cartItems = await pullCartFromServer(userId);
       await setItems(cartItems ?? []);
-      console.log('🧩 Корзина підтягнута після Google логіну');
-
-      // 🚀 Редірект на головну
       navigate('/');
     };
 
