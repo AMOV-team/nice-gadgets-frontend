@@ -29,7 +29,7 @@ export const ButtonsDropdown: React.FC<Props> = () => {
             bg-white dark:bg-black
             flex items-center
             box-border shadow-none
-            sm:shadow-[-1px_0px_0px_0px_hsl(var(--elements))]
+            min-720:shadow-[-1px_0px_0px_0px_hsl(var(--elements))]
             cursor-pointer
             focus:outline-none focus:ring-0 focus-visible:ring-0
           `}
@@ -49,7 +49,7 @@ export const ButtonsDropdown: React.FC<Props> = () => {
           <div>
             <MenuItem as="div">
               <div
-                className="w-full shadow-none sm:shadow-[-1px_-1px_0_0_hsl(var(--elements))]"
+                className="w-full shadow-none min-720:shadow-[-1px_-1px_0_0_hsl(var(--elements))]"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -60,7 +60,7 @@ export const ButtonsDropdown: React.FC<Props> = () => {
 
             <MenuItem as="div">
               <div
-                className="w-full shadow-none sm:shadow-[-1px_-1px_0_0_hsl(var(--elements)),_-1px_1px_0_0_hsl(var(--elements))]"
+                className="w-full shadow-none min-720:shadow-[-1px_-1px_0_0_hsl(var(--elements)),_-1px_1px_0_0_hsl(var(--elements))]"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
