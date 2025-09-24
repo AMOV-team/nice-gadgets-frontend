@@ -16,9 +16,9 @@ export const ThemeImage: React.FC<ThemeImageProps> = ({
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    const saved =
-      (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
-    setTheme(saved);
+    const initialTheme =
+      document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    setTheme(initialTheme);
 
     const observer = new MutationObserver(() => {
       setTheme(
