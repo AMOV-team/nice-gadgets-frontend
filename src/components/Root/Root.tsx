@@ -47,6 +47,15 @@ export const Root = () => (
                   element={<AuthCallback />}
                 />
                 <Route
+                  path="auth/v1/callback"
+                  element={
+                    <Navigate
+                      to={'auth-callback'}
+                      replace
+                    />
+                  }
+                />
+                <Route
                   index
                   element={<HomePage />}
                 />

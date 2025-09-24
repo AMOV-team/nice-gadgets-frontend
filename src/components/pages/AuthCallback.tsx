@@ -9,8 +9,6 @@ export default function AuthCallback() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('🔄 AuthCallback викликано');
-
     const sync = async () => {
       const hash = window.location.hash;
       const params = new URLSearchParams(hash.slice(1));
@@ -35,7 +33,7 @@ export default function AuthCallback() {
 
       const cartItems = await pullCartFromServer(userId);
       setItems(cartItems ?? []);
-      console.log('🧩 Корзина підтягнута після Google логіну');
+      console.log('Корзина підтягнута після Google логіну');
 
       navigate('/');
     };
