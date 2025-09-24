@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { toast } from '@/hooks/useToast';
 import { useLogin } from '@/hooks/useLogin';
 import { useTranslation } from 'react-i18next';
+import googleLogo from '../../../../public/img/google-color.svg';
 
 export default function SignInForm() {
   const [email, setEmail] = useState('');
@@ -122,8 +123,7 @@ export default function SignInForm() {
               onClick={signUpWithGoogle}
               className="w-full"
             >
-              {t('sign-in-google')}{' '}
-              <img src="../../../../public/img/google-color.svg"></img>
+              {t('sign-in-google')} <img src={googleLogo}></img>
             </Button>
           </div>
         </form>
