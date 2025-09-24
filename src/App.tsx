@@ -20,7 +20,6 @@ function App() {
     const sync = async () => {
       const cartItems = await pullCartFromServer(user.id);
       setItems(cartItems ?? []);
-      console.log('✅ Корзина підтягнута в App');
     };
 
     sync();

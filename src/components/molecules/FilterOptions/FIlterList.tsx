@@ -20,17 +20,6 @@ export const FilterList: React.FC<Props> = ({
     : title.toLowerCase() === 'price' ? 'price'
     : 'string';
 
-  const ram = [
-    { value: '512MB', checked: false },
-    { value: '0.75GB', checked: false },
-    { value: '1GB', checked: false },
-    { value: '768MB', checked: false },
-  ];
-
-  const sortedRam = sortFilters(ram, 'capacity');
-  console.log(sortedRam.map((r) => r.value));
-  // ['512MB', '768MB', '0.75GB', '1GB']
-
   const sorted = sortFilters([...filters], type);
 
   return (
