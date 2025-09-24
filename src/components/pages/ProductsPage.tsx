@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
@@ -10,7 +10,6 @@ import { Pagination } from '../molecules/Pagination/Pagination';
 import type { SortOption } from '../../types/SortOption';
 import { FilterOptions } from '@/components/molecules/FilterOptions/FilterOptions.tsx';
 import { Filters } from '@/components/molecules/Filters/Filters.tsx';
-import type { Product } from '@/types/Product.ts';
 
 interface ProductsPageProps {
   category: string;
@@ -38,14 +37,11 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const [areFilterOptionsActive, setAreFilterOptionsActive] = useState(false);
   const [filters, setFilters] = useState<FiltersType>({});
   const [activeFilters, setActiveFilters] = useState<ActiveFiltersType>({});
+  const [query, setQuery] = useState('');
   const { t } = useTranslation();
   const { products, error } = useProducts(category);
-  const [filteredItems, setFilteredItems] = useState<Product[]>([]);
 
-  useEffect(() => {
-    setFilteredItems(products);
-  }, [products]);
-
+  // формуємо activeFilters по чекбоксам
   useEffect(() => {
     const newActiveFilters: ActiveFiltersType = {};
 
@@ -55,11 +51,17 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
     });
 
     setActiveFilters(newActiveFilters);
+  }, [filters]);
 
-    if (!products.length) return;
+  // тут одне джерело правди — filteredItems
+  const filteredItems = useMemo(() => {
+    if (!products.length) return [];
 
-    const filtered = products.filter((item) =>
-      Object.entries(newActiveFilters).every(([key, values]) => {
+    let result = products;
+
+    // фільтри
+    result = result.filter((item) =>
+      Object.entries(activeFilters).every(([key, values]) => {
         if (key === 'price') {
           const itemPrice = item.price;
           return values.some((range) => {
@@ -69,18 +71,20 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             if (!max) return itemPrice >= min;
             return itemPrice >= min && itemPrice < max;
           });
-        } else {
-          return values.includes(item[key as keyof typeof item] as string);
         }
+        return values.includes(item[key as keyof typeof item] as string);
       }),
     );
 
-    setFilteredItems(filtered);
-  }, [filters, products]);
+    // пошук
+    if (query.trim()) {
+      result = result.filter((p) =>
+        p.name.toLowerCase().includes(query.toLowerCase()),
+      );
+    }
 
-  const handleQuery = useCallback((filtered: Product[]) => {
-    setFilteredItems(filtered);
-  }, []);
+    return result;
+  }, [products, activeFilters, query]);
 
   const handleClearAll = () => {
     const clearedFilters: FiltersType = {};
@@ -125,8 +129,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         sortDefault={t('Newest')}
         activeFilters={activeFilters}
         handleClearAll={handleClearAll}
-        products={products}
-        onQuery={handleQuery}
+        query={query}
+        onQueryChange={setQuery}
       />
 
       {areFilterOptionsActive && (

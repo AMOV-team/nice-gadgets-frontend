@@ -4,8 +4,7 @@ import type { SortOption } from '../../../types/SortOption';
 import cn from 'classnames';
 import type { ActiveFiltersType } from '@/types/FiltersType.ts';
 import { useTranslation } from 'react-i18next';
-import { ProductSearch } from '../../molecules/ProductsSearch/ProductsSearch';
-import type { Product } from '../../../types/Product';
+import { ProductSearch } from '../../molecules/ProductSearch/ProductSearch';
 import { Funnel } from 'lucide-react';
 
 interface FiltersProps {
@@ -19,8 +18,8 @@ interface FiltersProps {
   handleFilterOptionsActive: (value: boolean) => void;
   activeFilters: ActiveFiltersType;
   handleClearAll: () => void;
-  products: Product[];
-  onQuery: (filtered: Product[]) => void;
+  query: string;
+  onQueryChange: (value: string) => void;
 }
 
 export const Filters: React.FC<FiltersProps> = ({
@@ -34,8 +33,8 @@ export const Filters: React.FC<FiltersProps> = ({
   handleFilterOptionsActive,
   activeFilters,
   handleClearAll,
-  products,
-  onQuery,
+  query,
+  onQueryChange,
 }) => {
   const { t } = useTranslation();
 
@@ -48,8 +47,8 @@ export const Filters: React.FC<FiltersProps> = ({
     <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4 items-end grid-rows-2 sm:grid-rows-1">
       <div className="col-span-full sm:col-span-6 xl:col-span-10">
         <ProductSearch
-          products={products}
-          onFiltered={onQuery}
+          query={query}
+          onQueryChange={onQueryChange}
         />
       </div>
       <div className="col-span-2 sm:col-span-3 xl:col-span-5">
@@ -87,14 +86,10 @@ export const Filters: React.FC<FiltersProps> = ({
             }}
           >
             <Funnel
-              className={cn(
-                `
-                mb-1 size-6`,
-                {
-                  'text-custom-primary': areFilterOptionsActive,
-                  'text-elements': !areFilterOptionsActive,
-                },
-              )}
+              className={cn(`mb-1 size-6`, {
+                'text-custom-primary': areFilterOptionsActive,
+                'text-elements': !areFilterOptionsActive,
+              })}
             />
           </button>
 
