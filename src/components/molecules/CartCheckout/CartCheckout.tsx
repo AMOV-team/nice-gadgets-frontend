@@ -9,13 +9,18 @@ import { SubmitButton } from '@/components/atoms/buttons/SubmitButton';
 import { useAuth } from '@/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from '@/components/atoms/Dropdown';
+import { handleChangeWithMask } from '@/utils/changeHandler';
+import { validateFormFields, type FormErrors } from '@/utils/formValidation';
+import { FormErrorMessage } from '../FormErorMessage/FormErorMessage';
 
 export const CartCheckout: React.FC = () => {
+  const [errors, setErrors] = React.useState<FormErrors>({});
   const { cartTotal, totalItems } = useCart();
   const { handleSubmit } = useOrderSubmit();
   const [showSuccessModal, setShowSuccessModal] = React.useState(false);
   const { user } = useAuth();
   const { emptyCart } = useCart();
+  const { t } = useTranslation();
 
   useCartSyncManager();
 
@@ -33,14 +38,6 @@ export const CartCheckout: React.FC = () => {
     expiry: '',
     cvc: '',
   });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const { t } = useTranslation();
   const deliveryOptions = [
     {
       id: 'nova_poshta',
@@ -49,6 +46,19 @@ export const CartCheckout: React.FC = () => {
     },
     { id: 'courier', label: `${t('courier')}`, value: 'courier' },
   ];
+
+  const handlePhoneBlur = () => {
+    if (
+      form.phone === '+380' ||
+      form.phone === '+380-' ||
+      form.phone === '+380-3' ||
+      form.phone === '+380-38'
+    ) {
+      setForm((prev) => ({ ...prev, phone: '' }));
+    }
+  };
+
+  const handleChange = handleChangeWithMask(setForm);
 
   return (
     <div className="flex flex-col gap-6 p-6 border border-solid border-elements rounded-lg bg-white dark:bg-black text-primary">
@@ -65,13 +75,13 @@ export const CartCheckout: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-black rounded-lg p-6 shadow-lg text-center max-w-sm w-full text-primary">
             <h2 className="text-xl font-bold mb-2 text-primary">
-              Дякуємо за замовлення!
+              {t('success-modal-title')}
             </h2>
             <p className="text-muted-foreground mb-4">
-              Ваше замовлення успішно оформлено.
+              {t('success-modal-message')}
             </p>
             <PrimaryButton
-              text="Закрити"
+              text={t('success-modal-close')}
               onSelect={() => setShowSuccessModal(false)}
             />
           </div>
@@ -90,6 +100,12 @@ export const CartCheckout: React.FC = () => {
           className="flex flex-col gap-4 text-primary"
           onSubmit={async (e) => {
             e.preventDefault();
+
+            const validationErrors = validateFormFields(form);
+            if (Object.keys(validationErrors).length > 0) {
+              setErrors(validationErrors);
+              return;
+            }
 
             if (user) {
               await handleSubmit();
@@ -162,17 +178,6 @@ export const CartCheckout: React.FC = () => {
             />
           </div>
 
-          <div>
-            <Label htmlFor="phone">{t('phone-number')}</Label>
-            <Input
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              placeholder="+380-12-345-6789"
-              required
-            />
-          </div>
-
           {deliveryType === 'courier' && (
             <div>
               <Label htmlFor="address">{t('delivery-adress')}</Label>
@@ -186,47 +191,80 @@ export const CartCheckout: React.FC = () => {
             </div>
           )}
 
-          <div>
+          <div className="flex flex-col gap-[5px]">
+            <Label htmlFor="phone">{t('phone-number')}</Label>
+            <Input
+              name="phone"
+              value={form.phone}
+              onBlur={handlePhoneBlur}
+              onChange={handleChange}
+              placeholder="+380-12-345-6789"
+              required
+            />
+            {errors.phone && <FormErrorMessage error={t(errors.phone)} />}
+          </div>
+
+          <div className="flex flex-col gap-[5px]">
             <Label htmlFor="cardNumber">{t('card-number')}</Label>
             <Input
               name="cardNumber"
               value={form.cardNumber}
               onChange={handleChange}
               placeholder="1234 5678 9012 3456"
+              maxLength={19}
               required
             />
+            {errors.cardNumber && (
+              <FormErrorMessage error={t(errors.cardNumber)} />
+            )}
           </div>
 
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <Label
-                htmlFor="expiry"
-                className="text-primary"
-              >
-                MM/YY
-              </Label>
-              <Input
-                name="expiry"
-                value={form.expiry}
-                onChange={handleChange}
-                placeholder="12/25"
-                required
-              />
+          <div className="flex flex-col gap-[5px]">
+            <div className="flex flex-row gap-4">
+              <div className="flex-1">
+                <Label
+                  htmlFor="expiry"
+                  className="text-primary"
+                >
+                  MM/YY
+                </Label>
+                <Input
+                  name="expiry"
+                  value={form.expiry}
+                  onChange={handleChange}
+                  placeholder="12/25"
+                  required
+                />
+              </div>
+              <div className="flex-1">
+                <Label
+                  htmlFor="cvc"
+                  className="text-primary"
+                >
+                  CVC
+                </Label>
+                <Input
+                  name="cvc"
+                  value={form.cvc}
+                  onChange={handleChange}
+                  placeholder="123"
+                  required
+                />
+              </div>
             </div>
-            <div className="flex-1">
-              <Label
-                htmlFor="cvc"
-                className="text-primary"
-              >
-                CVC
-              </Label>
-              <Input
-                name="cvc"
-                value={form.cvc}
-                onChange={handleChange}
-                placeholder="123"
-                required
-              />
+            <div className="flex flex-row gap-4">
+              {errors.expiry && (
+                <FormErrorMessage
+                  error={t(errors.expiry)}
+                  className="flex-1"
+                />
+              )}
+              {errors.cvc && (
+                <FormErrorMessage
+                  error={t(errors.cvc)}
+                  className="flex-1"
+                />
+              )}
             </div>
           </div>
 
