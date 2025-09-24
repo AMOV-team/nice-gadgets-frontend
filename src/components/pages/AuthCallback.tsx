@@ -27,13 +27,11 @@ export default function AuthCallback() {
 
       const userId = session?.user?.id;
       if (!userId) {
-        console.warn('❌ Користувач не знайдений після setSession');
         return;
       }
 
       const cartItems = await pullCartFromServer(userId);
       setItems(cartItems ?? []);
-      console.log('🧩 Корзина підтягнута після Google логіну');
 
       navigate('/');
     };
@@ -41,5 +39,5 @@ export default function AuthCallback() {
     sync();
   }, [setItems, navigate]);
 
-  return <div>🔄 Авторизація через Google…</div>;
+  return <div> Авторизація через Google…</div>;
 }

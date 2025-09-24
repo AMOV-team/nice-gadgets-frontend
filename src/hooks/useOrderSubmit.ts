@@ -14,12 +14,10 @@ export const useOrderSubmit = () => {
 
   const handleSubmit = async () => {
     if (!user?.id) {
-      console.warn('❌ Користувач не авторизований');
       return;
     }
 
     if (items.length === 0) {
-      console.warn('⚠️ Корзина пуста, замовлення не створено');
       return;
     }
 
@@ -34,11 +32,11 @@ export const useOrderSubmit = () => {
       .insert([orderPayload]);
 
     if (insertError) {
-      console.error('❌ Помилка при створенні замовлення:', insertError);
+      throw new Error(
+        `Помилка при створенні замовлення: ${insertError.message}`,
+      );
     } else {
-      console.log('✅ Замовлення створено:', orderPayload.order_number);
       emptyCart();
-      // Можеш показати toast або редірект
     }
   };
 
