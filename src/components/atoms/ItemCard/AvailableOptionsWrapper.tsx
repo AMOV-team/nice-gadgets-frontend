@@ -10,6 +10,10 @@ import { useCart } from 'react-use-cart';
 import { useTranslation } from 'react-i18next';
 import { useFavorites } from '@/hooks/useFavorites.ts';
 import { toast } from '@/hooks/useToast';
+import { useProducts } from '@/hooks/useProducts.ts';
+import { useComparison } from '@/hooks/useComparison.ts';
+import type { Product } from '@/types/Product.ts';
+import { CompareButton } from '../buttons/CompareButton.tsx';
 
 type Props = {
   item: Item;
@@ -25,8 +29,19 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
   specs,
 }) => {
   const { addItem } = useCart();
+  const { toggleComparison, isInComparison } = useComparison();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { t } = useTranslation();
+  const { products } = useProducts(item.category);
+  const product: Product | undefined = products.find(
+    (product) => product.itemId === item.id,
+  );
+
+  const handleComparisonClick = () => {
+    if (product) {
+      toggleComparison(product);
+    }
+  };
 
   const handleAdd = () => {
     addItem({
@@ -84,6 +99,11 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
         <AddToFavoriteButton
           selected={isFavorite(item.id)}
           onSelect={handleFavoriteClick}
+        />
+
+        <CompareButton
+          selected={product ? isInComparison(product.id) : false}
+          onSelect={handleComparisonClick}
         />
       </div>
 

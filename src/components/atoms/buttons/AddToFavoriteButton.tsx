@@ -19,6 +19,7 @@ export const AddToFavoriteButton: React.FC<AddToFavoriteButtonProps> = ({
         min-w-[40px]
         rounded-full cursor-pointer
         box-border
+        bg-white dark:bg-surface
         border border-elements
         transition-all duration-200
         hover:border-custom-primary
