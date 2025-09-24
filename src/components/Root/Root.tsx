@@ -36,14 +36,23 @@ export const Root = () => (
           <BurgerMenuProvider>
             <HashRouter>
               <TidioChat />
-
-              <ScrollToTop />
-              <Toaster />
-              <Routes>
+            <ScrollToTop />
+            <Toaster />
+            <Routes>
+              <Route
+                path="/"
+                element={<App />}
+              >
                 <Route
-                  path="/auth/v1/callback"
+                  path="auth-callback"
                   element={<AuthCallback />}
                 />
+                <Route
+                  index
+                  element={<HomePage />}
+
+                />
+
                 <Route
                   path="/"
                   element={<App />}
