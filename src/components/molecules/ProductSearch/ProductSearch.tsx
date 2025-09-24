@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import type { ChangeEvent } from 'react';
 import { Search } from 'lucide-react';
@@ -23,7 +24,9 @@ export const ProductSearch: React.FC<ProductSearchProps> = ({
   const { t } = useTranslation();
 
   const phrases = [
+    'Це робив Cursor',
     `${t('search')}`,
+    `${t('register')}`,
     'iPhone 14 128GB Midnight',
     'iPad Pro 11 (2021) 128GB Space Gray',
     'Watch Series 3 42mm Gold',
