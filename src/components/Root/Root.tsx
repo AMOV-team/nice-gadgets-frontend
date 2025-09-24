@@ -1,8 +1,6 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-
+import { Routes, Route, Navigate, HashRouter } from 'react-router-dom';
 import '../../App.css';
 
-import { HashRouter } from 'react-router-dom';
 import App from '../../App';
 import { PageNotFound } from '../pages/PageNotFound';
 import { HomePage } from '../pages/HomePage';
@@ -36,23 +34,9 @@ export const Root = () => (
           <BurgerMenuProvider>
             <HashRouter>
               <TidioChat />
-            <ScrollToTop />
-            <Toaster />
-            <Routes>
-              <Route
-                path="/"
-                element={<App />}
-              >
-                <Route
-                  path="auth-callback"
-                  element={<AuthCallback />}
-                />
-                <Route
-                  index
-                  element={<HomePage />}
-
-                />
-
+              <ScrollToTop />
+              <Toaster />
+              <Routes>
                 <Route
                   path="/"
                   element={<App />}
@@ -60,6 +44,10 @@ export const Root = () => (
                   <Route
                     index
                     element={<HomePage />}
+                  />
+                  <Route
+                    path="auth-callback"
+                    element={<AuthCallback />}
                   />
                   <Route
                     path="home"
@@ -92,10 +80,6 @@ export const Root = () => (
                       path=":slug"
                       element={<ItemCardPage category="phones" />}
                     />
-                    <Route
-                      path="*"
-                      element={<PageNotFound />}
-                    />
                   </Route>
 
                   <Route path="tablets">
@@ -107,10 +91,6 @@ export const Root = () => (
                       path=":slug"
                       element={<ItemCardPage category="tablets" />}
                     />
-                    <Route
-                      path="*"
-                      element={<PageNotFound />}
-                    />
                   </Route>
 
                   <Route path="accessories">
@@ -121,10 +101,6 @@ export const Root = () => (
                     <Route
                       path=":slug"
                       element={<ItemCardPage category="accessories" />}
-                    />
-                    <Route
-                      path="*"
-                      element={<PageNotFound />}
                     />
                   </Route>
 

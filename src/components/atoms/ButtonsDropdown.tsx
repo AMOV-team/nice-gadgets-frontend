@@ -12,7 +12,7 @@ export const ButtonsDropdown: React.FC<Props> = () => {
   const [isWide, setIsWide] = useState(false);
 
   useEffect(() => {
-    const checkWidth = () => setIsWide(window.innerWidth >= 640);
+    const checkWidth = () => setIsWide(window.innerWidth >= 720);
     checkWidth();
     window.addEventListener('resize', checkWidth);
     return () => window.removeEventListener('resize', checkWidth);
