@@ -19,6 +19,8 @@ export default function SignInForm() {
   const { t } = useTranslation();
 
   const signUpWithGoogle = async () => {
+    console.log('📤 redirectTo:', `${window.location.origin}/#/auth-callback`);
+
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -119,7 +121,7 @@ export default function SignInForm() {
             <Button
               type="button"
               variant="outline"
-              onClick={signUpWithGoogle}
+              onClick={() => signUpWithGoogle()}
               className="w-full"
             >
               {t('sign-in-google')}{' '}
