@@ -58,6 +58,7 @@
   "models": "models",
   "hot-prices": "Hot prices",
   "full-price": "Full price",
+  "price": "Price",
   "latest-phones": "Latest Smartphones in Store",
   "new-phones": "Discover New Phones",
   "top-tablets": "Top Tablets for Work and Play",
@@ -119,6 +120,9 @@
   "success-modal-title": "Thank you for your order!",
   "success-modal-message": "Your order has been successfully placed.",
   "success-modal-close": "Close",
+
+  "filters": "Filters",
+  "year": "Year",
 
   "ownership-and-ip": "1. Ownership and Intellectual Property",
   "ownership-and-ip-content": "All content on this site — including text, images, graphics, logos, design, software, trademarks, and domain names — is owned by the AMOV² team and is protected by copyright and intellectual property laws.",
