@@ -9,6 +9,7 @@ import { CapacityPickerWithTitle } from './CapacityPickerWithTitle.tsx';
 import { useCart } from 'react-use-cart';
 import { useTranslation } from 'react-i18next';
 import { useFavorites } from '@/hooks/useFavorites.ts';
+import { toast } from '@/hooks/useToast';
 
 type Props = {
   item: Item;
@@ -73,7 +74,12 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
       <div className="flex gap-2 items-center mb-8 justify-between max-w-[400px]">
         <PrimaryButton
           text={t('add-to-cart')}
-          onSelect={handleAdd}
+          onSelect={() => {
+            handleAdd();
+            toast({
+              title: `${t('added-to-cart')}`,
+            });
+          }}
         />
         <AddToFavoriteButton
           selected={isFavorite(item.id)}
