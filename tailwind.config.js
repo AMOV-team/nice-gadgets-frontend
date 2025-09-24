@@ -46,7 +46,6 @@ module.exports = {
         semibold: '600',
       },
       colors: {
-        // Кольори shadcn/ui
         'background': 'hsl(var(--background))',
         'foreground': 'hsl(var(--foreground))',
         'card': {
@@ -88,7 +87,6 @@ module.exports = {
           5: 'hsl(var(--chart-5))',
         },
 
-        // кастомні кольори
         'custom-accent': 'hsl(var(--custom-accent))',
         'custom-accent-secondary': 'hsl(var(--custom-accent-secondary))',
         'custom-primary': 'hsl(var(--custom-primary))',

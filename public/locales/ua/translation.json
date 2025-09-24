@@ -111,6 +111,15 @@
   "unknown-error": "Невідома помилка",
   "smth-went-wrong": "Щось пішло не так",
 
+  "error-card-number": "Номер картки має містити 16 цифр",
+  "error-phone": "Телефон має містити 12 цифр",
+  "error-cvc": "CVC має містити 3 цифри",
+  "error-expiry": "Expiry має бути у форматі MM/YY",
+
+  "success-modal-title": "Дякуємо за замовлення!",
+  "success-modal-message": "Ваше замовлення успішно оформлено.",
+  "success-modal-close": "Закрити",
+
   "phones-carousel": {
     "apple13": {
       "short": "Флагманський iPhone з топовою камерою та продуктивністю"
