@@ -2,17 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import type { ChangeEvent } from 'react';
 import { Search } from 'lucide-react';
 import DeleteButton from '@/components/atoms/buttons/DeleteButton';
+import { useTranslation } from 'react-i18next';
 
 interface ProductSearchProps {
   query: string;
   onQueryChange: (value: string) => void;
 }
-
-const phrases = [
-  'iPhone 14 128GB Midnight',
-  'iPad Pro 11 (2021) 128GB Space Gray',
-  'Watch Series 3 42mm Gold',
-];
 
 export const ProductSearch: React.FC<ProductSearchProps> = ({
   query,
@@ -25,6 +20,14 @@ export const ProductSearch: React.FC<ProductSearchProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const [startTyping, setStartTyping] = useState(false);
   const blurTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { t } = useTranslation();
+
+  const phrases = [
+    `${t('search')}`,
+    'iPhone 14 128GB Midnight',
+    'iPad Pro 11 (2021) 128GB Space Gray',
+    'Watch Series 3 42mm Gold',
+  ];
 
   useEffect(() => {
     if (!localQuery && !isFocused) {
