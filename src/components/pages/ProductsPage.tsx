@@ -5,10 +5,12 @@ import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { useProducts } from '../../hooks/useProducts';
 import { usePaginatedProducts } from '../../hooks/usePaginatedProducts';
-import { Filters } from '../molecules/Filters/Filters';
+import type { ActiveFiltersType, FiltersType } from '@/types/FiltersType.ts';
 import { Pagination } from '../molecules/Pagination/Pagination';
 import type { SortOption } from '../../types/SortOption';
-import type { Product } from '../../types/Product';
+import { FilterOptions } from '@/components/molecules/FilterOptions/FilterOptions.tsx';
+import { Filters } from '@/components/molecules/Filters/Filters.tsx';
+import type { Product } from '@/types/Product.ts';
 
 interface ProductsPageProps {
   category: string;
@@ -33,9 +35,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   category,
   titleKey,
 }) => {
+  const [areFilterOptionsActive, setAreFilterOptionsActive] = useState(false);
+  const [filters, setFilters] = useState<FiltersType>({});
   const { t } = useTranslation();
+  const { products, loading, error } = useProducts(category);
+  const [activeFilters, setActiveFilters] = useState<ActiveFiltersType>({});
+  const [filteredItems, setFilteredItems] = useState<Product[]>([]);
   const { products, error } = useProducts(category);
-
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
   useEffect(() => {
@@ -45,6 +51,59 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const handleFiltered = useCallback((filtered: Product[]) => {
     setFilteredProducts(filtered);
   }, []);
+    
+  const handleClearAll = () => {
+    const clearedFilters: FiltersType = {};
+
+    Object.entries(filters).forEach(([key, values]) => {
+      clearedFilters[key] = values.map((v) => ({
+        ...v,
+        checked: false,
+      }));
+    });
+
+    setFilters(clearedFilters);
+  };
+
+  useEffect(() => {
+    const newActiveFilters: ActiveFiltersType = {};
+
+    Object.entries(filters).forEach(([key, values]) => {
+      const checkedValues = values.filter((v) => v.checked).map((v) => v.value);
+
+      if (checkedValues.length) {
+        newActiveFilters[key] = checkedValues;
+      }
+    });
+
+    setActiveFilters(newActiveFilters);
+
+    const filtered = products.filter((item) =>
+      Object.entries(newActiveFilters).every(([key, values]) => {
+        if (key === 'price') {
+          const itemPrice = item.price;
+
+          return values.some((range) => {
+            const [min, max] = range
+              .split(' - ')
+              .map((v) => parseInt(v.replace('$', '')));
+
+            if (!max) {
+              return itemPrice >= min;
+            }
+
+            return itemPrice >= min && itemPrice < max;
+          });
+        } else {
+          return values.includes(item[key as keyof typeof item] as string);
+        }
+      }),
+    );
+
+    setFilteredItems((prev) =>
+      JSON.stringify(prev) !== JSON.stringify(filtered) ? filtered : prev,
+    );
+  }, [filters, products]);
 
   const {
     currentItems,
@@ -76,10 +135,21 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         itemsPerPage={itemsPerPage}
         onSortChange={handleSortChange}
         onItemsPerPageChange={handleItemsPerPageChange}
+        areFilterOptionsActive={areFilterOptionsActive}
+        handleFilterOptionsActive={setAreFilterOptionsActive}
         sortDefault={t('Newest')}
+        activeFilters={activeFilters}
+        handleClearAll={handleClearAll}
         products={products}
         onFiltered={handleFiltered}
       />
+
+      {areFilterOptionsActive && (
+        <FilterOptions
+          filters={filters}
+          handleFilters={setFilters}
+        />
+      )}
 
       <Pagination
         currentPage={currentPage}
