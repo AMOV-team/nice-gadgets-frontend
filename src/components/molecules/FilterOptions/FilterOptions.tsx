@@ -4,6 +4,8 @@ import { getProductsByCategory } from '@/api/productCrud.ts';
 import type { FiltersType } from '@/types/FiltersType.ts';
 import type { FilterItem } from '@/utils/sortFilters.ts';
 import { FilterList } from '@/components/molecules/FilterOptions/FIlterList.tsx';
+import { useLoader } from '@/hooks/useLoader.ts';
+import { useTranslation } from 'react-i18next';
 
 const PRICE_RANGES: FilterItem[] = [
   { value: '$350 - $500', checked: false },
@@ -19,6 +21,8 @@ type Props = {
 };
 
 export const FilterOptions: React.FC<Props> = ({ filters, handleFilters }) => {
+  const { setIsLoading } = useLoader();
+
   const matchPhones = useMatch('/phones/*');
   const matchTablets = useMatch('/tablets/*');
   const matchAccessories = useMatch('/accessories/*');
@@ -30,29 +34,38 @@ export const FilterOptions: React.FC<Props> = ({ filters, handleFilters }) => {
     : '';
 
   useEffect(() => {
-    if (category && Object.keys(filters).length === 0) {
-      const fetchItems = async () => {
-        const items = await getProductsByCategory(category);
-        const newFilters: FiltersType = {};
+    if (!category) return;
 
-        newFilters['price'] = PRICE_RANGES.map((f) => ({ ...f }));
+    const fetchItems = async () => {
+      setIsLoading(true);
+      try {
+        if (Object.keys(filters).length === 0) {
+          const items = await getProductsByCategory(category);
+          const newFilters: FiltersType = {};
 
-        items.forEach((item) => {
-          Object.entries(item).forEach(([key, value]) => {
-            if (!value || !['ram', 'capacity', 'year'].includes(key)) return;
-            if (!newFilters[key]) newFilters[key] = [];
-            if (!newFilters[key].some((v) => v.value === value)) {
-              newFilters[key].push({ value, checked: false });
-            }
+          newFilters['price'] = PRICE_RANGES.map((f) => ({ ...f }));
+
+          items.forEach((item) => {
+            Object.entries(item).forEach(([key, value]) => {
+              if (!value || !['ram', 'capacity', 'year'].includes(key)) return;
+              if (!newFilters[key]) newFilters[key] = [];
+              if (!newFilters[key].some((v) => v.value === value)) {
+                newFilters[key].push({ value, checked: false });
+              }
+            });
           });
-        });
 
-        handleFilters(newFilters);
-      };
+          handleFilters(newFilters);
+        }
+      } catch (error) {
+        console.error('Error fetching filters:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-      fetchItems();
-    }
-  }, [category]);
+    fetchItems();
+  }, [category, filters, handleFilters, setIsLoading]);
 
   const handleToggle = (key: string, value: string, checked: boolean) => {
     handleFilters({
@@ -63,30 +76,31 @@ export const FilterOptions: React.FC<Props> = ({ filters, handleFilters }) => {
     });
   };
 
+  const { t } = useTranslation();
   return (
     <div className="col-span-full w-full font-mont">
       <ul
         className={`grid gap-y-8 gap-x-2 grid-cols-2 sm:flex sm:flex-row gap-2 sm:gap-6 sm:justify-between`}
       >
         <FilterList
-          title="Price"
+          title={t('price')}
           filters={filters['price'] || PRICE_RANGES}
           onChange={(value, checked) => handleToggle('price', value, checked)}
         />
         <FilterList
-          title="Ram"
+          title={t('RAM')}
           filters={filters['ram'] || []}
           onChange={(value, checked) => handleToggle('ram', value, checked)}
         />
         <FilterList
-          title="Capacity"
+          title={t('capacity')}
           filters={filters['capacity'] || []}
           onChange={(value, checked) =>
             handleToggle('capacity', value, checked)
           }
         />
         <FilterList
-          title="Year"
+          title={t('year')}
           filters={filters['year'] || []}
           onChange={(value, checked) => handleToggle('year', value, checked)}
         />

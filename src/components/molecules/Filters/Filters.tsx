@@ -111,7 +111,7 @@ export const Filters: React.FC<FiltersProps> = ({
                  after:absolute after:-right-5 after:top-[calc(50%-10px)]`,
               )}
             >
-              {filtersCount} Filters
+              {filtersCount} {t('filters')}
             </span>
             <button
               disabled={filtersCount === 0}
@@ -122,7 +122,7 @@ export const Filters: React.FC<FiltersProps> = ({
                 handleFilterOptionsActive(false);
               }}
             >
-              Clear all
+              {t('clear-all')}
             </button>
           </div>
         </div>
