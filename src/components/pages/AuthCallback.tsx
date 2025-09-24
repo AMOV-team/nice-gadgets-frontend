@@ -12,24 +12,28 @@ export default function AuthCallback() {
     console.log('🔄 AuthCallback викликано');
 
     const sync = async () => {
-      const rawHash = window.location.href.split('#')[1];
-      if (!rawHash) {
-        console.warn('⚠️ Хеш не знайдено в URL');
+      // 🧠 Витягуємо токени з подвійного хешу
+      const hashParts = window.location.href.split('#');
+      const tokenString =
+        hashParts.length > 2 ? hashParts.slice(2).join('#') : hashParts[1];
+      if (!tokenString) {
+        console.warn('⚠️ Токени не знайдені в URL');
         return;
       }
 
-      const params = new URLSearchParams(rawHash);
+      const params = new URLSearchParams(tokenString);
       const access_token = params.get('access_token');
       const refresh_token = params.get('refresh_token');
 
-      console.log('🔐 access_token:', access_token);
-      console.log('🔐 refresh_token:', refresh_token);
+      console.log('🔐 access_token:', access_token?.slice(0, 12), '...');
+      console.log('🔐 refresh_token:', refresh_token?.slice(0, 12), '...');
 
       if (!access_token || !refresh_token) {
-        console.warn('❌ Токени не знайдені в хеші');
+        console.warn('❌ Токени не валідні або відсутні');
         return;
       }
 
+      // 🔐 Встановлюємо сесію
       const { error: setError } = await supabase.auth.setSession({
         access_token,
         refresh_token,
@@ -39,8 +43,10 @@ export default function AuthCallback() {
         return;
       }
 
+      // 🧹 Очищаємо хеш
       window.location.hash = '';
 
+      // 📦 Отримуємо сесію
       const {
         data: { session },
         error: getError,
@@ -63,10 +69,12 @@ export default function AuthCallback() {
 
       console.log('✅ Користувач авторизований:', userId);
 
+      // 🛒 Підтягуємо корзину
       const cartItems = await pullCartFromServer(userId);
       await setItems(cartItems ?? []);
       console.log('🧩 Корзина підтягнута після Google логіну');
 
+      // 🚀 Редірект на головну
       navigate('/');
     };
 
