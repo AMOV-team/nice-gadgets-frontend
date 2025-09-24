@@ -1,4 +1,4 @@
-import pagenotfound from '../../../public/img/Page-not-found.png';
+import pagenotfound from '../../../public/img/page-not-found.png';
 
 export const PageNotFound = () => {
   return (

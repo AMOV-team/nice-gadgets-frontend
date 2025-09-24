@@ -139,139 +139,143 @@ export const CartCheckout: React.FC = () => {
             />
           </div>
 
-          {deliveryType === 'nova_poshta' && (
-            <div>
-              <Label htmlFor="branch">{t('nova-post-branch')}</Label>
-              <Input
-                name="branch"
-                value={form.branch}
-                onChange={handleChange}
-                placeholder={t('example-nova-post')}
-                required
-              />
-            </div>
-          )}
+          {deliveryType && (
+            <>
+              {deliveryType === 'nova_poshta' && (
+                <div>
+                  <Label htmlFor="branch">{t('nova-post-branch')}</Label>
+                  <Input
+                    name="branch"
+                    value={form.branch}
+                    onChange={handleChange}
+                    placeholder={t('example-nova-post')}
+                    required
+                  />
+                </div>
+              )}
 
-          <div>
-            <Label htmlFor="name">{t('name')}</Label>
-            <Input
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder={t('stepan-giga')}
-              required
-            />
-          </div>
-
-          <div>
-            <Label
-              htmlFor="email"
-              className="text-primary"
-            >
-              Email
-            </Label>
-            <Input
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="tseySon@gmail.com"
-            />
-          </div>
-
-          {deliveryType === 'courier' && (
-            <div>
-              <Label htmlFor="address">{t('delivery-adress')}</Label>
-              <Input
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                placeholder={t('street')}
-                required
-              />
-            </div>
-          )}
-
-          <div className="flex flex-col gap-[5px]">
-            <Label htmlFor="phone">{t('phone-number')}</Label>
-            <Input
-              name="phone"
-              value={form.phone}
-              onBlur={handlePhoneBlur}
-              onChange={handleChange}
-              placeholder="+380-12-345-6789"
-              required
-            />
-            {errors.phone && <FormErrorMessage error={t(errors.phone)} />}
-          </div>
-
-          <div className="flex flex-col gap-[5px]">
-            <Label htmlFor="cardNumber">{t('card-number')}</Label>
-            <Input
-              name="cardNumber"
-              value={form.cardNumber}
-              onChange={handleChange}
-              placeholder="1234 5678 9012 3456"
-              maxLength={19}
-              required
-            />
-            {errors.cardNumber && (
-              <FormErrorMessage error={t(errors.cardNumber)} />
-            )}
-          </div>
-
-          <div className="flex flex-col gap-[5px]">
-            <div className="flex flex-row gap-4">
-              <div className="flex-1">
-                <Label
-                  htmlFor="expiry"
-                  className="text-primary"
-                >
-                  MM/YY
-                </Label>
+              <div>
+                <Label htmlFor="name">{t('name')}</Label>
                 <Input
-                  name="expiry"
-                  value={form.expiry}
+                  name="name"
+                  value={form.name}
                   onChange={handleChange}
-                  placeholder="12/25"
+                  placeholder={t('stepan-giga')}
                   required
                 />
               </div>
-              <div className="flex-1">
+
+              <div>
                 <Label
-                  htmlFor="cvc"
+                  htmlFor="email"
                   className="text-primary"
                 >
-                  CVC
+                  Email
                 </Label>
                 <Input
-                  name="cvc"
-                  value={form.cvc}
+                  name="email"
+                  value={form.email}
                   onChange={handleChange}
-                  placeholder="123"
-                  required
+                  placeholder="tseySon@gmail.com"
                 />
               </div>
-            </div>
-            <div className="flex flex-row gap-4">
-              {errors.expiry && (
-                <FormErrorMessage
-                  error={t(errors.expiry)}
-                  className="flex-1"
-                />
-              )}
-              {errors.cvc && (
-                <FormErrorMessage
-                  error={t(errors.cvc)}
-                  className="flex-1"
-                />
-              )}
-            </div>
-          </div>
 
-          <SubmitButton
-            text={t('place-order')}
-            type="submit"
-          />
+              {deliveryType === 'courier' && (
+                <div>
+                  <Label htmlFor="address">{t('delivery-adress')}</Label>
+                  <Input
+                    name="address"
+                    value={form.address}
+                    onChange={handleChange}
+                    placeholder={t('street')}
+                    required
+                  />
+                </div>
+              )}
+
+              <div className="flex flex-col gap-[5px]">
+                <Label htmlFor="phone">{t('phone-number')}</Label>
+                <Input
+                  name="phone"
+                  value={form.phone}
+                  onBlur={handlePhoneBlur}
+                  onChange={handleChange}
+                  placeholder="+380-12-345-6789"
+                  required
+                />
+                {errors.phone && <FormErrorMessage error={t(errors.phone)} />}
+              </div>
+
+              <div className="flex flex-col gap-[5px]">
+                <Label htmlFor="cardNumber">{t('card-number')}</Label>
+                <Input
+                  name="cardNumber"
+                  value={form.cardNumber}
+                  onChange={handleChange}
+                  placeholder="1234 5678 9012 3456"
+                  maxLength={19}
+                  required
+                />
+                {errors.cardNumber && (
+                  <FormErrorMessage error={t(errors.cardNumber)} />
+                )}
+              </div>
+
+              <div className="flex flex-col gap-[5px]">
+                <div className="flex flex-row gap-4">
+                  <div className="flex-1">
+                    <Label
+                      htmlFor="expiry"
+                      className="text-primary"
+                    >
+                      MM/YY
+                    </Label>
+                    <Input
+                      name="expiry"
+                      value={form.expiry}
+                      onChange={handleChange}
+                      placeholder="12/25"
+                      required
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <Label
+                      htmlFor="cvc"
+                      className="text-primary"
+                    >
+                      CVC
+                    </Label>
+                    <Input
+                      name="cvc"
+                      value={form.cvc}
+                      onChange={handleChange}
+                      placeholder="123"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-row gap-4">
+                  {errors.expiry && (
+                    <FormErrorMessage
+                      error={t(errors.expiry)}
+                      className="flex-1"
+                    />
+                  )}
+                  {errors.cvc && (
+                    <FormErrorMessage
+                      error={t(errors.cvc)}
+                      className="flex-1"
+                    />
+                  )}
+                </div>
+              </div>
+
+              <SubmitButton
+                text={t('place-order')}
+                type="submit"
+              />
+            </>
+          )}
         </form>
       )}
     </div>

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { ThemeSwitch } from '../icons/ThemeSwitch';
+import { useLoader } from '@/hooks/useLoader.ts';
 
 export const ThemeSwitcher: React.FC = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const { setIsLoading } = useLoader();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
@@ -13,10 +15,16 @@ export const ThemeSwitcher: React.FC = () => {
   }, []);
 
   const toggleTheme = () => {
+    setIsLoading(true);
+
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
   };
 
   return (
