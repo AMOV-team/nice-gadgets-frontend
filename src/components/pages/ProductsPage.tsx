@@ -37,61 +37,36 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 }) => {
   const [areFilterOptionsActive, setAreFilterOptionsActive] = useState(false);
   const [filters, setFilters] = useState<FiltersType>({});
-  const { t } = useTranslation();
-  const { products, loading, error } = useProducts(category);
   const [activeFilters, setActiveFilters] = useState<ActiveFiltersType>({});
-  const [filteredItems, setFilteredItems] = useState<Product[]>([]);
+  const { t } = useTranslation();
   const { products, error } = useProducts(category);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+  const [filteredItems, setFilteredItems] = useState<Product[]>([]);
 
   useEffect(() => {
-    setFilteredProducts(products);
+    setFilteredItems(products);
   }, [products]);
-
-  const handleFiltered = useCallback((filtered: Product[]) => {
-    setFilteredProducts(filtered);
-  }, []);
-    
-  const handleClearAll = () => {
-    const clearedFilters: FiltersType = {};
-
-    Object.entries(filters).forEach(([key, values]) => {
-      clearedFilters[key] = values.map((v) => ({
-        ...v,
-        checked: false,
-      }));
-    });
-
-    setFilters(clearedFilters);
-  };
 
   useEffect(() => {
     const newActiveFilters: ActiveFiltersType = {};
 
     Object.entries(filters).forEach(([key, values]) => {
       const checkedValues = values.filter((v) => v.checked).map((v) => v.value);
-
-      if (checkedValues.length) {
-        newActiveFilters[key] = checkedValues;
-      }
+      if (checkedValues.length) newActiveFilters[key] = checkedValues;
     });
 
     setActiveFilters(newActiveFilters);
+
+    if (!products.length) return;
 
     const filtered = products.filter((item) =>
       Object.entries(newActiveFilters).every(([key, values]) => {
         if (key === 'price') {
           const itemPrice = item.price;
-
           return values.some((range) => {
             const [min, max] = range
               .split(' - ')
               .map((v) => parseInt(v.replace('$', '')));
-
-            if (!max) {
-              return itemPrice >= min;
-            }
-
+            if (!max) return itemPrice >= min;
             return itemPrice >= min && itemPrice < max;
           });
         } else {
@@ -100,10 +75,20 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
       }),
     );
 
-    setFilteredItems((prev) =>
-      JSON.stringify(prev) !== JSON.stringify(filtered) ? filtered : prev,
-    );
+    setFilteredItems(filtered);
   }, [filters, products]);
+
+  const handleQuery = useCallback((filtered: Product[]) => {
+    setFilteredItems(filtered);
+  }, []);
+
+  const handleClearAll = () => {
+    const clearedFilters: FiltersType = {};
+    Object.entries(filters).forEach(([key, values]) => {
+      clearedFilters[key] = values.map((v) => ({ ...v, checked: false }));
+    });
+    setFilters(clearedFilters);
+  };
 
   const {
     currentItems,
@@ -113,7 +98,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
     handleSortChange,
     handleItemsPerPageChange,
     handlePageChange,
-  } = usePaginatedProducts(filteredProducts);
+  } = usePaginatedProducts(filteredItems);
 
   if (error) return <p className="col-span-full text-red-500">{error}</p>;
 
@@ -125,7 +110,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           {t(titleKey)}
         </h1>
         <p className="text-body-14 font-mont font-semibold text-custom-secondary">
-          {filteredProducts.length} {t('models')}
+          {filteredItems.length} {t('models')}
         </p>
       </div>
 
@@ -141,7 +126,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         activeFilters={activeFilters}
         handleClearAll={handleClearAll}
         products={products}
-        onFiltered={handleFiltered}
+        onQuery={handleQuery}
       />
 
       {areFilterOptionsActive && (
