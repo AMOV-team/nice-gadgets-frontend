@@ -5,6 +5,8 @@ import { GridContainer } from '../atoms/GridContainer';
 import { useTranslation } from 'react-i18next';
 import { useLoader } from '@/hooks/useLoader';
 import { useEffect } from 'react';
+import DeleteButton from '../atoms/buttons/DeleteButton';
+import { Link } from 'react-router-dom';
 
 export const HomePage: React.FC = () => {
   const { t } = useTranslation();
@@ -37,6 +39,27 @@ export const HomePage: React.FC = () => {
           >
             {t('welcome-text')}
           </h1>
+        </section>
+
+        <section className="col-span-full flex flex-row justify-center">
+          <div className="flex flex-row items-center w-[380px] justify-between gap-3 bg-indigo-500 rounded px-4 py-2">
+            <Link
+              to={'signin'}
+              className="flex self-center"
+            >
+              <p className="font-semibold text-white">
+                3 free deliveries for registered users!
+              </p>
+            </Link>
+
+            <button
+              type="button"
+              className="text-white font-bold"
+              onClick={() => {}}
+            >
+              <DeleteButton className="text-white dark:hover:text-elements" />
+            </button>
+          </div>
         </section>
 
         <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
