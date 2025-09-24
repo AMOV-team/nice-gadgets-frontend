@@ -112,9 +112,9 @@ export const ComparePage: React.FC = () => {
                   <div className="w-full text-sm space-y-3">
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
-                        {t('full-price')}
+                        {t('price')}
                       </p>
-                      <p className="text-center">{`$ ${product.fullPrice}`}</p>
+                      <p className="text-center">{`$ ${product.price}`}</p>
                     </div>
 
                     <div>

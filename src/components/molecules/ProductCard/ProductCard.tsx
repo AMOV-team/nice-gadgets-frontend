@@ -61,6 +61,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <CompareButton
         selected={isInComparison(product.id)}
         onSelect={handleComparisonClick}
+        className="absolute"
       />
 
       <Link
