@@ -33,6 +33,12 @@ export const ItemSwiper: React.FC<Props> = ({
         navigation={false}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Thumbs]}
+        onSlideChange={(swiper) => {
+          const image = images[swiper.activeIndex]; // get image for active slide
+          if (selectedImage !== image) {
+            selectImageHandler(image);
+          }
+        }}
         className={`
         h-72 col-span-4 sm:col-start-2 sm:h-[287px]
         xl:!h-[464px] !m-0 cursor-pointer xl:max-w-[464px]

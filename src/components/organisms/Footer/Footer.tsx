@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
 
       <ul className="flex flex-col md:flex-row list-none items-start md:items-center gap-4 md:gap-8 lg:gap-12 p-0 m-0">
         {footerLinks.map((link) => (
-          <li>
+          <li key={link.href}>
             <FooterLink
               text={`${link.label}`}
               link={`${link.href}`}
