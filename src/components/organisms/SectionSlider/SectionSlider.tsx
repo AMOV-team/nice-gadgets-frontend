@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react';
-import products from '../../../../public/api/products.json';
+import React, { useRef, useState, useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import type { SwiperClass } from 'swiper/react';
@@ -10,14 +9,31 @@ import './styles.scss';
 import { ProductCard } from '../../molecules/ProductCard/ProductCard';
 import { SliderButtonLeft } from '../../atoms/buttons/SliderButtonLeft';
 import { SliderButtonRight } from '../../atoms/buttons/SliderButtonRight';
+import { useProducts } from '@/hooks/useProducts';
 
 type Props = {
   HeaderText: string;
+  category: string;
+  sortBy?: 'newest' | 'hot';
+  random?: boolean;
 };
-export const SectionSlider: React.FC<Props> = ({ HeaderText }) => {
+
+export const SectionSlider: React.FC<Props> = ({
+  HeaderText,
+  category,
+  sortBy,
+  random = false,
+}) => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const { products } = useProducts(category, sortBy);
+
+  const randomProducts = useMemo(() => {
+    if (!random) return products;
+
+    return [...products].sort(() => Math.random() - 0.5).slice(0, 10);
+  }, [products, random]);
 
   return (
     <>
@@ -53,15 +69,27 @@ export const SectionSlider: React.FC<Props> = ({ HeaderText }) => {
           slidesPerView={1.5}
           slidesPerGroup={1}
           breakpoints={{
-            0: { slidesPerView: 1.3 },
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 4 },
+            0: {
+              slidesPerView: 1.3,
+              slidesOffsetBefore: 16,
+              slidesOffsetAfter: 16,
+            },
+            640: {
+              slidesPerView: 2,
+              slidesOffsetBefore: 20,
+              slidesOffsetAfter: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              slidesOffsetBefore: 32,
+              slidesOffsetAfter: 32,
+            },
           }}
-          className="w-full section-slider !py-3"
+          className="w-full section-slider !py-3 overflow-visible"
         >
-          {products.map((product) => (
+          {randomProducts.map((product) => (
             <SwiperSlide key={product.id}>
-              <div className="relative w-full  ">
+              <div className="relative w-full">
                 <ProductCard product={product} />
               </div>
             </SwiperSlide>

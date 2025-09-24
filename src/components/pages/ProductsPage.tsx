@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
@@ -41,7 +41,17 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const { products, loading, error } = useProducts(category);
   const [activeFilters, setActiveFilters] = useState<ActiveFiltersType>({});
   const [filteredItems, setFilteredItems] = useState<Product[]>([]);
+  const { products, error } = useProducts(category);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
+
+  const handleFiltered = useCallback((filtered: Product[]) => {
+    setFilteredProducts(filtered);
+  }, []);
+    
   const handleClearAll = () => {
     const clearedFilters: FiltersType = {};
 
@@ -103,9 +113,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
     handleSortChange,
     handleItemsPerPageChange,
     handlePageChange,
-  } = usePaginatedProducts(filteredItems);
+  } = usePaginatedProducts(filteredProducts);
 
-  if (loading) return <p className="col-span-full">{t('loading')}...</p>;
   if (error) return <p className="col-span-full text-red-500">{error}</p>;
 
   return (
@@ -116,7 +125,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           {t(titleKey)}
         </h1>
         <p className="text-body-14 font-mont font-semibold text-custom-secondary">
-          {products.length} {t('models')}
+          {filteredProducts.length} {t('models')}
         </p>
       </div>
 
@@ -131,6 +140,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         sortDefault={t('Newest')}
         activeFilters={activeFilters}
         handleClearAll={handleClearAll}
+        products={products}
+        onFiltered={handleFiltered}
       />
 
       {areFilterOptionsActive && (

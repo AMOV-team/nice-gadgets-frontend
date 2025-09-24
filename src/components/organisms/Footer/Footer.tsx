@@ -9,7 +9,11 @@ export const Footer: React.FC = () => {
   const { t } = useTranslation();
 
   const footerLinks = [
-    { label: 'github', href: '/github' },
+    {
+      label: 'github',
+      href: 'https://github.com/AMOV-team/nice-gadgets-frontend',
+      external: true,
+    },
     { label: t('contacts'), href: '/contacts' },
     { label: t('rights'), href: '/rights' },
   ];

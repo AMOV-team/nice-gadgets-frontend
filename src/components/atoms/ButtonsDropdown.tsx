@@ -1,24 +1,18 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import React, { useEffect, useState } from 'react';
-import { UserCabinetIcon } from '@/components/atoms/icons/UserCabinetIcon.tsx';
-import { NavbarIconLink } from '@/components/atoms/link/NavbarIconLink.tsx';
 import { ThemeSwitcher } from '@/components/atoms/buttons/ThemeSwitcher.tsx';
 import { LangButton } from '@/components/atoms/buttons/LangButton.tsx';
-import { useAuth } from '@/hooks/useAuth.ts';
 import { Settings } from 'lucide-react';
 
 type Props = {
   handleIsBurgerMenuActive: (state: boolean) => void;
 };
 
-export const ButtonsDropdown: React.FC<Props> = ({
-  handleIsBurgerMenuActive,
-}) => {
-  const { user } = useAuth();
+export const ButtonsDropdown: React.FC<Props> = () => {
   const [isWide, setIsWide] = useState(false);
 
   useEffect(() => {
-    const checkWidth = () => setIsWide(window.innerWidth >= 640); // 640px = sm
+    const checkWidth = () => setIsWide(window.innerWidth >= 640);
     checkWidth();
     window.addEventListener('resize', checkWidth);
     return () => window.removeEventListener('resize', checkWidth);
@@ -27,36 +21,35 @@ export const ButtonsDropdown: React.FC<Props> = ({
   return isWide ?
       <Menu
         as="div"
-        className="relative inline-block "
+        className="relative inline-block"
       >
         <MenuButton
           className={`
-          h-12 xl:h-16 w-12 xl:w-16 justify-center
-          bg-white dark:bg-black
-          flex items-center
-          box-border
-          border-l border-r border-b border-solid border-elements
-          shadow-[-1px_0px_0px_0px_hsl(var(--elements))]
-          cursor-pointer
-        `}
+            h-12 xl:h-16 w-12 xl:w-16 justify-center
+            bg-white dark:bg-black
+            flex items-center
+            box-border shadow-none
+            sm:shadow-[-1px_0px_0px_0px_hsl(var(--elements))]
+            cursor-pointer
+            focus:outline-none focus:ring-0 focus-visible:ring-0
+          `}
         >
           <Settings className="text-custom-primary size-[16px]" />
         </MenuButton>
 
         <MenuItems
-          transition
           className={`
-          absolute right-0 z-10 origin-top-right w-12 xl:w-16 flex flex-col items-center
-          bg-white dark:bg-black outline-1 -outline-offset-1 outline-white/10 transition
-          data-closed:scale-95 data-closed:transform data-closed:opacity-0
-          data-enter:duration-100 data-enter:ease-out data-leave:duration-75
-          data-leave:ease-in
-        `}
+            translate-y-[1px]
+            absolute right-0 z-10 origin-top-right w-12 xl:w-16 flex flex-col items-center
+            focus:outline-none focus:ring-0 focus-visible:ring-0
+            bg-white dark:bg-black
+            
+          `}
         >
           <div>
             <MenuItem as="div">
               <div
-                className="border border-[hsl(var(--elements))] w-full"
+                className="w-full shadow-none sm:shadow-[-1px_-1px_0_0_hsl(var(--elements))]"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -67,7 +60,7 @@ export const ButtonsDropdown: React.FC<Props> = ({
 
             <MenuItem as="div">
               <div
-                className="border border-elements w-full"
+                className="w-full shadow-none sm:shadow-[-1px_-1px_0_0_hsl(var(--elements)),_-1px_1px_0_0_hsl(var(--elements))]"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
@@ -75,31 +68,12 @@ export const ButtonsDropdown: React.FC<Props> = ({
                 <ThemeSwitcher />
               </div>
             </MenuItem>
-            <MenuItem as="div">
-              <div className="h-12 xl:h-16 w-12 xl:w-16 shadow-[-1px_0_0_0_hsl(var(--elements)),0_1px_0_0_hsl(var(--elements))]">
-                <NavbarIconLink
-                  handleIsBurgerMenuActive={handleIsBurgerMenuActive}
-                  link={user ? '/userprofile' : '/signin'}
-                >
-                  <div className="h-full flex justify-center items-center bg-white dark:bg-black">
-                    <UserCabinetIcon />
-                  </div>
-                </NavbarIconLink>
-              </div>
-            </MenuItem>
+            <MenuItem as="div"></MenuItem>
           </div>
         </MenuItems>
       </Menu>
     : <>
         <LangButton />
         <ThemeSwitcher />
-        <NavbarIconLink
-          handleIsBurgerMenuActive={handleIsBurgerMenuActive}
-          link={user ? '/userprofile' : '/signin'}
-        >
-          <div className="h-full flex justify-center items-center bg-white dark:bg-black">
-            <UserCabinetIcon />
-          </div>
-        </NavbarIconLink>
       </>;
 };

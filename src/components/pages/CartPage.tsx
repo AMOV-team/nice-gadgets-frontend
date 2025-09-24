@@ -16,7 +16,7 @@ export const CartPage: React.FC = () => {
       <div className="col-span-full">
         <Breadcrumb />
         <h1 className="text-h1 font-bold text-custom-primary">{t('cart')}</h1>
-        {items.length === 0 && <p>Ваша корзина порожня</p>}
+        {items.length === 0 && <p>{t('empty-cart')}</p>}
       </div>
 
       <div className="col-span-full xl:col-span-16">

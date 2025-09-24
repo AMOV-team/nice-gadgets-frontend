@@ -7,13 +7,12 @@ import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
 import { ProductCard } from '../molecules/ProductCard/ProductCard';
 import { useTranslation } from 'react-i18next';
-import { useLoader } from '@/hooks/useLoader.ts';
-import { Loader } from '@/components/organisms/Loader/Loader.tsx'; // 👈 use your full-screen loader
+import { useLoader } from '@/hooks/useLoader';
 
 export const FavoritesPage: React.FC = () => {
   const { favorites } = useFavorites();
   const [favoriteProducts, setFavoriteProducts] = useState<ProductsAll[]>([]);
-  const { isLoading, setIsLoading } = useLoader();
+  const { setIsLoading } = useLoader();
   const { t } = useTranslation();
 
   const count = favorites.length;
@@ -42,37 +41,33 @@ export const FavoritesPage: React.FC = () => {
     };
 
     fetchFavorites();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [favorites]);
+  }, [favorites, setIsLoading]);
 
   return (
     <>
-      {isLoading ?
-        <Loader /> // 👈 full screen loader
-      : <GridContainer>
-          <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-            <Breadcrumb />
-            <h1 className="text-h1 font-bold">{t('favorites')}</h1>
-            <p className="font-semibold text-custom-secondary text-body">
-              {count > 0 && `${count} ${count === 1 ? t('item') : t('items')}`}
-            </p>
-          </div>
+      <GridContainer>
+        <div className="col-span-4 sm:col-span-12 xl:col-span-24">
+          <Breadcrumb />
+          <h1 className="text-h1 font-bold">{t('favorites')}</h1>
+          <p className="font-semibold text-custom-secondary text-body">
+            {count > 0 && `${count} ${count === 1 ? t('item') : t('items')}`}
+          </p>
+        </div>
 
-          {favoriteProducts.length === 0 ?
-            <div className="col-span-4 sm:col-span-12 xl:col-span-24">
-              <p>{t('empty-favourites')}</p>
+        {favoriteProducts.length === 0 ?
+          <div className="col-span-4 sm:col-span-12 xl:col-span-24">
+            <p>{t('empty-favourites')}</p>
+          </div>
+        : favoriteProducts.map((product) => (
+            <div
+              key={product.itemId}
+              className="col-span-4 sm:col-span-6 xl:col-span-6"
+            >
+              <ProductCard product={product} />
             </div>
-          : favoriteProducts.map((product) => (
-              <div
-                key={product.itemId}
-                className="col-span-4 sm:col-span-6 xl:col-span-6"
-              >
-                <ProductCard product={product} />
-              </div>
-            ))
-          }
-        </GridContainer>
-      }
+          ))
+        }
+      </GridContainer>
     </>
   );
 };

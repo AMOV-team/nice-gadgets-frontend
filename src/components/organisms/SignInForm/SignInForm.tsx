@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { toast } from '@/hooks/use-toast';
-import { useLogin } from '@/hooks/login';
+import { toast } from '@/hooks/useToast';
+import { useLogin } from '@/hooks/useLogin';
+import { useTranslation } from 'react-i18next';
 
 export default function SignInForm() {
   const [email, setEmail] = useState('');
@@ -14,14 +16,27 @@ export default function SignInForm() {
   const [loading, setLoading] = useState(false);
   const { login } = useLogin();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const signUpWithGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth-callback`,
+        queryParams: {
+          prompt: 'select_account',
+        },
+      },
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!/\S+@\S+\.\S+/.test(email)) {
       toast({
-        title: 'Невірний email',
-        description: 'Будь ласка, введіть коректну адресу',
+        title: t('fail-email'),
+        description: t('email-please'),
         variant: 'destructive',
       });
       return;
@@ -29,8 +44,8 @@ export default function SignInForm() {
 
     if (password.length < 6) {
       toast({
-        title: 'Короткий пароль',
-        description: 'Пароль має містити щонайменше 6 символів',
+        title: t('short-password'),
+        description: t('min-6-password'),
         variant: 'destructive',
       });
       return;
@@ -41,15 +56,16 @@ export default function SignInForm() {
       await login(email, password);
 
       toast({
-        title: 'Вхід успішний',
-        description: 'Ви увійшли в кабінет',
+        title: t('login'),
+        description: t('login-profile'),
       });
 
       navigate('/');
     } catch (error: any) {
+      console.error(error);
       toast({
-        title: 'Помилка входу',
-        description: error.message,
+        title: t('login-error'),
+        description: t('login-false'),
         variant: 'destructive',
       });
     } finally {
@@ -60,7 +76,9 @@ export default function SignInForm() {
   return (
     <Card className="max-w-md mx-auto mt-10">
       <CardHeader>
-        <h2 className="text-xl font-semibold text-center">Вхід в кабінет</h2>
+        <h2 className="text-xl font-semibold text-center">
+          {t('login-to-account')}
+        </h2>
       </CardHeader>
       <CardContent>
         <form
@@ -79,7 +97,7 @@ export default function SignInForm() {
             />
           </div>
           <div>
-            <Label htmlFor="password">Пароль</Label>
+            <Label htmlFor="password">{t('password')}</Label>
             <Input
               id="password"
               type="password"
@@ -94,19 +112,33 @@ export default function SignInForm() {
             className="w-full"
             disabled={loading}
           >
-            {loading ? 'Завантаження...' : 'Увійти'}
+            {loading ? t('loading') : t('sign-in')}
           </Button>
+
+          <div className="mt-6 text-center">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={signUpWithGoogle}
+              className="w-full"
+            >
+              {t('sign-in-google')}{' '}
+              <img src="../../../../public/img/google-color.svg"></img>
+            </Button>
+          </div>
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-muted-foreground mb-2">Немає акаунта?</p>
+          <p className="text-sm text-muted-foreground mb-2">
+            {t('no-account')}
+          </p>
           <Button
             variant="outline"
             type="button"
             onClick={() => navigate('/signup')}
             className="w-full"
           >
-            Зареєструватись
+            {t('sign-up')}
           </Button>
         </div>
       </CardContent>

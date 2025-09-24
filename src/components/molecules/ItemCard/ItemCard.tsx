@@ -12,6 +12,7 @@ import {
   getProductById,
   getProductsByCategory,
 } from '../../../api/productCrud.ts';
+import { useLoader } from '@/hooks/useLoader.ts';
 
 type Props = {
   category: Category;
@@ -21,6 +22,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
+  const { setIsLoading } = useLoader();
 
   const [item, setItem] = useState<Item | null>(null);
   const [productId, setProductId] = useState<number | null>();
@@ -30,6 +32,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
     if (!category || !slug) return;
 
     const fetchItem = async () => {
+      setIsLoading(true);
       try {
         const res = await getProductById(category, slug);
 
@@ -44,35 +47,36 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
       } catch {
         setItem(null);
         setSelectedImage('');
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchItem();
-  }, [category, slug]);
+  }, [category, slug, setIsLoading]);
 
   useEffect(() => {
-    if (!item) {
-      return;
-    }
+    if (!item) return;
 
-    const fetchItem = async () => {
+    const fetchRelated = async () => {
+      setIsLoading(true);
       try {
         const res = await getProductsByCategory(category);
-
         if (res && res.length) {
           const product = res.find((p) => p.itemId === item.id);
-
-          setProductId(product?.id);
+          setProductId(product?.id ?? null);
         } else {
           setProductId(null);
         }
       } catch {
         setProductId(null);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchItem();
-  }, [category, slug, item]);
+    fetchRelated();
+  }, [category, item, setIsLoading]);
 
   if (!item) {
     return <p>{t('product-not-found')}</p>;
@@ -113,7 +117,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
       `}
     >
-      {/* Заголовок + breadcrumb */}
       <div className="col-span-full">
         <Breadcrumb />
 
@@ -129,7 +132,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         </h2>
       </div>
 
-      {/* Main */}
       <div
         className={`
           mb-14 sm:mb-16 xl:mb-20
@@ -138,7 +140,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
           grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
         `}
       >
-        {/* Product ID */}
         <div
           className={`
             absolute right-0 top-[395px]
@@ -150,14 +151,12 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
           </p>
         </div>
 
-        {/* Left side */}
         <ItemSwiper
           images={item.images}
           selectImageHandler={setSelectedImage}
           selectedImage={selectedImage}
         />
 
-        {/* Right side */}
         <AvailableOptionsWrapper
           item={item}
           handleSelectColor={handleSelectColor}
@@ -166,7 +165,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         />
       </div>
 
-      {/* Product Description */}
       <div
         className={`
           flex flex-col gap-14 sm:gap-16 col-span-4 sm:col-span-12 xl:col-span-24

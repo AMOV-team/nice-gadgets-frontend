@@ -7,14 +7,12 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 
-// Sidebar context type
 interface SidebarContextType {
   expanded: boolean;
 }
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
-// Sidebar Props
 interface SidebarProps {
   children: ReactNode;
 }
@@ -33,7 +31,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
       )}
     >
       <nav className="h-full flex flex-col bg-indigo-50 border-r border-indigo-200 shadow-sm">
-        {/* Logo & toggle */}
         <div className="p-4 pb-2 flex justify-between items-center">
           <div
             className={`overflow-hidden font-bold text-xl text-indigo-700 transition-all ${
@@ -56,7 +53,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
 
-        {/* User info */}
         <div className="border-t border-indigo-200 flex p-3 items-center">
           <div className="w-10 h-10 rounded-md bg-indigo-200 flex items-center justify-center text-indigo-700 font-semibold">
             JD
@@ -81,7 +77,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   );
 };
 
-// SidebarItem Props
 interface SidebarItemProps {
   icon: ReactNode;
   text: string;

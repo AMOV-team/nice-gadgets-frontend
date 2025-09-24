@@ -5,33 +5,33 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { toast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/useToast';
 import { supabase } from '@/lib/supabase';
+import { useTranslation } from 'react-i18next';
 
 export default function SignUpForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 🔍 Валідація email
     if (!/\S+@\S+\.\S+/.test(email)) {
       toast({
-        title: 'Невірний email',
-        description: 'Будь ласка, введіть коректну адресу',
+        title: t('fail-email'),
+        description: t('email-please'),
         variant: 'destructive',
       });
       return;
     }
 
-    // 🔐 Валідація паролю
     if (password.length < 6) {
       toast({
-        title: 'Короткий пароль',
-        description: 'Пароль має містити щонайменше 6 символів',
+        title: t('short-password'),
+        description: t('min-6-password'),
         variant: 'destructive',
       });
       return;
@@ -46,14 +46,14 @@ export default function SignUpForm() {
         const msg = error.message || '';
         if (msg.includes('User already registered')) {
           toast({
-            title: 'Користувач вже існує',
-            description: 'Спробуйте увійти або використайте інший email',
+            title: t('user-register'),
+            description: t('try-login'),
             variant: 'destructive',
           });
         } else {
           toast({
-            title: 'Помилка реєстрації',
-            description: msg,
+            title: t('sign-up-error'),
+            description: t('sign-up-offline'),
             variant: 'destructive',
           });
         }
@@ -61,15 +61,15 @@ export default function SignUpForm() {
       }
 
       toast({
-        title: 'Реєстрація успішна',
-        description: 'Акаунт створено. Можете увійти.',
+        title: t('sign-up-succesful'),
+        description: t('account-created'),
       });
 
-      navigate('/signin');
+      navigate('/userprofile');
     } catch (err: any) {
       toast({
-        title: 'Невідома помилка',
-        description: err.message || 'Щось пішло не так',
+        title: t('unknown-error'),
+        description: err.message || t('smth-went-wrong'),
         variant: 'destructive',
       });
     } finally {
@@ -77,22 +77,12 @@ export default function SignUpForm() {
     }
   };
 
-  const signUpWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth-callback`,
-        queryParams: {
-          prompt: 'select_account',
-        },
-      },
-    });
-  };
-
   return (
     <Card className="max-w-md mx-auto mt-10">
       <CardHeader>
-        <h2 className="text-xl font-semibold text-center">Реєстрація</h2>
+        <h2 className="text-xl font-semibold text-center">
+          {t('registration')}
+        </h2>
       </CardHeader>
       <CardContent>
         <form
@@ -111,7 +101,7 @@ export default function SignUpForm() {
             />
           </div>
           <div>
-            <Label htmlFor="password">Пароль</Label>
+            <Label htmlFor="password">{t('password')}</Label>
             <Input
               id="password"
               type="password"
@@ -126,20 +116,9 @@ export default function SignUpForm() {
             className="w-full"
             disabled={loading}
           >
-            {loading ? 'Завантаження...' : 'Зареєструватись'}
+            {loading ? t('loading') : t('sign-up')}
           </Button>
         </form>
-
-        <div className="mt-6 text-center">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={signUpWithGoogle}
-            className="w-full"
-          >
-            Зареєструватись через Google
-          </Button>
-        </div>
       </CardContent>
     </Card>
   );

@@ -57,7 +57,7 @@ export const ComparePage: React.FC = () => {
           />
           <div className="flex flex-row font-semibold text-sm justify-center items-center gap-[10px] px-4 py-2 bg-red-500 text-custom-primary rounded hover:bg-red-600">
             <DeleteButton onDelete={clearComparison} />
-            Clear all
+            {t('clear-all')}
           </div>
         </div>
       </div>
