@@ -12,8 +12,8 @@ export default function AuthCallback() {
     console.log('🔄 AuthCallback викликано');
 
     const sync = async () => {
-      const hash = window.location.hash;
-      const params = new URLSearchParams(hash.slice(1));
+      const rawHash = window.location.href.split('#')[1];
+      const params = new URLSearchParams(rawHash);
 
       const access_token = params.get('access_token');
       const refresh_token = params.get('refresh_token');

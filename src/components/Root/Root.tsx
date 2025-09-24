@@ -46,7 +46,7 @@ export const Root = () => (
                     element={<HomePage />}
                   />
                   <Route
-                    path="#/auth-callback"
+                    path="auth-callback"
                     element={<AuthCallback />}
                   />
 
@@ -54,7 +54,7 @@ export const Root = () => (
                     path="auth/v1/callback"
                     element={
                       <Navigate
-                        to={'#/auth-callback'}
+                        to={'auth-callback'}
                         replace
                       />
                     }
