@@ -7,10 +7,6 @@ export const useCartSyncManager = () => {
   const { user } = useAuth();
   const userId = user?.id;
   const { cartTotal, totalItems } = useCart();
-  console.log('🟡 cartTotal:', cartTotal);
-  console.log('🟡 totalItems:', totalItems);
-  const cart = useCart();
-  console.log('🧩 useCart raw:', cart);
 
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
 

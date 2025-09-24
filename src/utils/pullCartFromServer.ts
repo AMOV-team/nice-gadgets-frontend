@@ -8,8 +8,9 @@ export async function pullCartFromServer(userId: string) {
     .eq('user_id', userId);
 
   if (error || !data) {
-    console.error('❌ Помилка завантаження корзини з сервера:', error?.message);
-    return;
+    throw new Error(
+      `Помилка завантаження корзини з сервера: ${error?.message || 'Немає даних'}`,
+    );
   }
 
   const raw = localStorage.getItem('react-use-cart-main-cart');
@@ -43,7 +44,6 @@ export async function pullCartFromServer(userId: string) {
   };
 
   localStorage.setItem('react-use-cart-main-cart', JSON.stringify(formatted));
-  console.log('✅ Корзина оновлена з сервера');
 
   return mergedItems;
 }

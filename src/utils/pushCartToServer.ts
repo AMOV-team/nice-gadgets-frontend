@@ -12,11 +12,7 @@ export async function pushCartToServer(
     const parsed = JSON.parse(raw);
     const items = parsed.items || [];
 
-    // якщо це стартовий sync (після логіну), можна пропустити пуш
     if (skipIfInitialSync && items.length === 0) {
-      console.log(
-        '⏳ Пропускаємо пуш на сервер поки корзина порожня (initial sync)',
-      );
       return;
     }
 
@@ -34,14 +30,9 @@ export async function pushCartToServer(
     });
 
     if (error) {
-      console.error(
-        '❌ Помилка синхронізації корзини через replace_cart:',
-        error.message,
-      );
-    } else {
-      console.log('✅ Корзина повністю замінена на сервері');
+      throw new Error(`replace_cart failed: ${error.message}`);
     }
-  } catch (err) {
-    console.error('❌ Помилка парсингу корзини:', err);
+  } catch (err: any) {
+    throw new Error(`Cart sync failed: ${err.message}`);
   }
 }
