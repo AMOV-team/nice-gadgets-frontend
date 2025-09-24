@@ -2,10 +2,11 @@ import React from 'react';
 import { CloseIcon } from '../icons/CloseIcon';
 
 type DeleteButtonProps = {
-  onDelete: () => void;
+  onDelete?: () => void;
+  className?: string;
 };
 
-const DeleteButton: React.FC<DeleteButtonProps> = ({ onDelete }) => (
+const DeleteButton: React.FC<DeleteButtonProps> = ({ onDelete, className }) => (
   <div
     className="
         group
@@ -17,7 +18,9 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ onDelete }) => (
       "
     onClick={onDelete}
   >
-    <CloseIcon className="transition-all duration-200 text-icons hover:text-custom-primary" />
+    <CloseIcon
+      className={`transition-all duration-200 text-icons hover:text-custom-primary ${className}`}
+    />
   </div>
 );
 
