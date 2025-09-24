@@ -30,7 +30,7 @@ export const ThemeSwitcher: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="bg-white dark:bg-black xl:w-16 xl:h-16 w-12 h-12 flex justify-center items-center sm:shadow-[-1px_0_0_0_hsl(var(--elements))] flex-1"
+      className="bg-white dark:bg-black xl:w-16 xl:h-16 w-12 h-12 flex justify-center items-center flex-1"
     >
       <ThemeSwitch />
     </button>

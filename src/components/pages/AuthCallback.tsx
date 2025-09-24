@@ -20,7 +20,7 @@ export default function AuthCallback() {
 
       if (access_token && refresh_token) {
         await supabase.auth.setSession({ access_token, refresh_token });
-        window.location.hash = ''; // очищення URL
+        window.location.hash = '';
       }
 
       const {
