@@ -39,17 +39,18 @@ export const Root = () => (
             <Toaster />
             <Routes>
               <Route
-                path="/auth/v1/callback"
-                element={<AuthCallback />}
-              />
-              <Route
                 path="/"
                 element={<App />}
               >
                 <Route
+                  path="auth-callback"
+                  element={<AuthCallback />}
+                />
+                <Route
                   index
                   element={<HomePage />}
                 />
+
                 <Route
                   path="home"
                   element={
