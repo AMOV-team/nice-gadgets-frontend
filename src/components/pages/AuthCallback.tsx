@@ -13,28 +13,58 @@ export default function AuthCallback() {
 
     const sync = async () => {
       const rawHash = window.location.href.split('#')[1];
-      const params = new URLSearchParams(rawHash);
-
-      const access_token = params.get('access_token');
-      const refresh_token = params.get('refresh_token');
-
-      if (access_token && refresh_token) {
-        await supabase.auth.setSession({ access_token, refresh_token });
-        window.location.hash = '';
-      }
-
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      const userId = session?.user?.id;
-      if (!userId) {
-        console.warn('❌ Користувач не знайдений після setSession');
+      if (!rawHash) {
+        console.warn('⚠️ Хеш не знайдено в URL');
         return;
       }
 
+      const params = new URLSearchParams(rawHash);
+      const access_token = params.get('access_token');
+      const refresh_token = params.get('refresh_token');
+
+      console.log('🔐 access_token:', access_token);
+      console.log('🔐 refresh_token:', refresh_token);
+
+      if (!access_token || !refresh_token) {
+        console.warn('❌ Токени не знайдені в хеші');
+        return;
+      }
+
+      const { error: setError } = await supabase.auth.setSession({
+        access_token,
+        refresh_token,
+      });
+      if (setError) {
+        console.error('❌ setSession error:', setError.message);
+        return;
+      }
+
+      window.location.hash = '';
+
+      const {
+        data: { session },
+        error: getError,
+      } = await supabase.auth.getSession();
+      if (getError) {
+        console.error('❌ getSession error:', getError.message);
+        return;
+      }
+
+      if (!session) {
+        console.warn('❌ session === null після setSession');
+        return;
+      }
+
+      const userId = session.user?.id;
+      if (!userId) {
+        console.warn('❌ Користувач не знайдений у session.user');
+        return;
+      }
+
+      console.log('✅ Користувач авторизований:', userId);
+
       const cartItems = await pullCartFromServer(userId);
-      setItems(cartItems ?? []);
+      await setItems(cartItems ?? []);
       console.log('🧩 Корзина підтягнута після Google логіну');
 
       navigate('/');
