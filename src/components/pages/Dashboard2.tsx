@@ -17,6 +17,7 @@ import { usePullOrders } from '@/hooks/usePullOrders';
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useCartSync } from '@/hooks/useCartSync';
+import { useTranslation } from 'react-i18next';
 
 export default function UserCabinet() {
   const { user } = useAuth();
@@ -25,6 +26,7 @@ export default function UserCabinet() {
   const { signOut } = useAuth();
   const navigate = useNavigate();
   const { syncBeforeLogout } = useCartSync();
+  const { t } = useTranslation();
 
   return (
     <Card className="w-full max-w-4xl mx-auto">
@@ -41,7 +43,7 @@ export default function UserCabinet() {
           }}
           className="w-[60px] absolute top-[30px] right-[24px] bg-rose-500 text-white "
         >
-          Вийти
+          {t('exit')}
         </Button>
         <Avatar>
           <AvatarImage
@@ -64,7 +66,7 @@ export default function UserCabinet() {
       <CardContent>
         <Tabs defaultValue="orders">
           <TabsList className="grid grid-cols-4 mb-4">
-            <TabsTrigger value="orders">Замовлення</TabsTrigger>
+            <TabsTrigger value="orders">{t('orders')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="orders">
@@ -72,10 +74,10 @@ export default function UserCabinet() {
               <TableHeader>
                 <TableRow>
                   <TableHead>ID</TableHead>
-                  <TableHead>Дата</TableHead>
-                  <TableHead>Статус</TableHead>
-                  <TableHead>Сума</TableHead>
-                  <TableHead>Товари</TableHead>
+                  <TableHead>{t('date')}</TableHead>
+                  <TableHead>{t('status')}</TableHead>
+                  <TableHead>{t('sum')}</TableHead>
+                  <TableHead>{t('products')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -86,7 +88,7 @@ export default function UserCabinet() {
                       {new Date(order.created_at).toLocaleDateString('uk-UA')}
                     </TableCell>
                     <TableCell>
-                      <Badge>Комплектується</Badge>
+                      <Badge>{t('assembling')}</Badge>
                     </TableCell>
                     <TableCell>
                       $

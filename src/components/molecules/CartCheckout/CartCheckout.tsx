@@ -12,6 +12,7 @@ import { Dropdown } from '@/components/atoms/Dropdown';
 import { handleChangeWithMask } from '@/utils/changeHandler';
 import { validateFormFields, type FormErrors } from '@/utils/formValidation';
 import { FormErrorMessage } from '../FormErorMessage/FormErorMessage';
+import { useNavigate } from 'react-router-dom';
 
 export const CartCheckout: React.FC = () => {
   const [errors, setErrors] = React.useState<FormErrors>({});
@@ -59,6 +60,23 @@ export const CartCheckout: React.FC = () => {
   };
 
   const handleChange = handleChangeWithMask(setForm);
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (showSuccessModal) {
+      const timer = setTimeout(() => {
+        setShowSuccessModal(false);
+        if (user) {
+          navigate('/userprofile');
+        } else {
+          navigate('/home');
+        }
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessModal, navigate, user]);
 
   return (
     <div className="flex flex-col gap-6 p-6 border border-solid border-elements rounded-lg bg-white dark:bg-black text-primary">
@@ -115,9 +133,6 @@ export const CartCheckout: React.FC = () => {
 
             setShowForm(false);
             setShowSuccessModal(true);
-            setTimeout(() => {
-              setShowSuccessModal(false);
-            }, 3000);
           }}
         >
           <div>

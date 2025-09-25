@@ -126,6 +126,14 @@
   "filters": "Filters",
   "year": "Year",
 
+  "exit": "Sign out",
+  "orders": "Your Orders",
+  "date": "Date",
+  "status": "Status",
+  "sum": "Amount",
+  "products": "Products",
+  "assembling": "Assembling",
+
   "ownership-and-ip": "1. Ownership and Intellectual Property",
   "ownership-and-ip-content": "All content on this site — including text, images, graphics, logos, design, software, trademarks, and domain names — is owned by the AMOV² team and is protected by copyright and intellectual property laws.",
 
