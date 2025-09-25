@@ -44,7 +44,7 @@ export const Header: React.FC<Props> = ({
 
       <button
         onClick={() => handleIsBurgerMenuActive(!isBurgerMenuActive)}
-        className="min-720:hidden p-4 inline-flex items-center gap-4 no-underline"
+        className="min-768:hidden p-4 inline-flex items-center gap-4 no-underline"
       >
         <BurgerMenu isActive={isBurgerMenuActive} />
       </button>

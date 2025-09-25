@@ -23,10 +23,10 @@ export const Navbar: React.FC<Props> = ({
           'h-0': !isBurgerMenuActive,
         },
         `
-          justify-start gap-6 min-720:gap-8 min-720:h-full flex box-border items-center text-sm
-          text-black no-underline z-10 overflow-hidden flex-col min-720:flex-row
+          justify-start gap-6 min-768:gap-8 min-768:h-full flex box-border items-center text-sm
+          text-black no-underline z-10 overflow-hidden flex-col min-768:flex-row
           absolute top-12 left-0 right-0
-          min-720:static
+          min-768:static
           bg-white dark:bg-black
         `,
       )}

@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'min-720': { min: '720px' },
+        'min-768': { min: '768px' },
       },
       gridTemplateColumns: {
         24: 'repeat(24, minmax(0, 1fr))',
