@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useNavigate } from 'react-router-dom';
@@ -62,8 +61,7 @@ export default function SignInForm() {
       });
 
       navigate('/');
-    } catch (error: any) {
-      console.error(error);
+    } catch {
       toast({
         title: t('login-error'),
         description: t('login-false'),

@@ -46,7 +46,7 @@ export const HomePage: React.FC = () => {
         </section>
 
         <section className="flex relative flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
-          {buttonIsOpen && user?.id && (
+          {buttonIsOpen && !user?.id && (
             <div className="absolute left-[16px] sm:left-0 top-[36px] sm:top-[40px] flex flex-row items-center justify-between gap-3 bg-indigo-500 rounded px-4 py-2">
               <Link
                 to={'signin'}

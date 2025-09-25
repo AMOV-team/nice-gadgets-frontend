@@ -33,8 +33,8 @@ export const FavoritesPage: React.FC = () => {
         );
 
         setFavoriteProducts(products);
-      } catch (error) {
-        console.error('Failed to fetch favorites', error);
+      } catch {
+        return;
       } finally {
         setIsLoading(false);
       }

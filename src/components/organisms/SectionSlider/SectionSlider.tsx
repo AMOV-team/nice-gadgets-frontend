@@ -41,7 +41,7 @@ export const SectionSlider: React.FC<Props> = ({
         <h2 className="text-left font-extrabold text-2xl sm:text-3xl m-0">
           {HeaderText}
         </h2>
-        <div className="flex flex-row justify-end gap-x-4 ">
+        <div className="flex flex-row justify-end gap-x-4">
           <SliderButtonLeft
             onClick={() => swiperRef.current?.slidePrev()}
             disabled={isBeginning}
@@ -81,8 +81,8 @@ export const SectionSlider: React.FC<Props> = ({
             },
             1024: {
               slidesPerView: 4,
-              slidesOffsetBefore: 32,
-              slidesOffsetAfter: 32,
+              slidesOffsetBefore: 8,
+              slidesOffsetAfter: 8,
             },
           }}
           className="w-full section-slider !py-3 overflow-visible"

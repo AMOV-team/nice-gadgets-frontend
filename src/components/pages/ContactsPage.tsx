@@ -108,7 +108,7 @@ export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
           {team.map((member) => (
             <div
               key={member.id}
-              className="p-6"
+              className="p-6 xl:max-w-[250px]"
             >
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4">

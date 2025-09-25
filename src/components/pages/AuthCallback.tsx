@@ -30,7 +30,6 @@ export default function AuthCallback() {
         refresh_token,
       });
       if (setError) {
-        console.error('❌ setSession error:', setError.message);
         return;
       }
 
@@ -41,18 +40,15 @@ export default function AuthCallback() {
         error: getError,
       } = await supabase.auth.getSession();
       if (getError) {
-        console.error('❌ getSession error:', getError.message);
         return;
       }
 
       if (!session) {
-        console.warn('❌ session === null після setSession');
         return;
       }
 
       const userId = session.user?.id;
       if (!userId) {
-        console.warn('❌ Користувач не знайдений у session.user');
         return;
       }
 
@@ -64,5 +60,5 @@ export default function AuthCallback() {
     sync();
   }, [setItems, navigate]);
 
-  return <div>🔄 Авторизація через Google…</div>;
+  return null;
 }
