@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import DeleteButton from '../atoms/buttons/DeleteButton';
 import type { Item } from '@/context/ComparisonContext';
 import { useLoader } from '@/hooks/useLoader';
+import { Link } from 'react-router-dom';
 
 export const ComparePage: React.FC = () => {
   const { comparison, clearComparison } = useComparison();
@@ -120,17 +121,18 @@ export const ComparePage: React.FC = () => {
             {filteredProducts.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className="border rounded-lg shadow-sm p-4 flex flex-col items-center">
-                  <h3 className="text-base font-bold mb-3 text-center">
-                    {item.name}
-                  </h3>
-
-                  <div className="mb-4">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="h-28 w-28 object-contain mx-auto"
-                    />
-                  </div>
+                  <Link to={`../${item.category}/${item.id}`}>
+                    <h3 className="text-base font-bold mb-3 text-center">
+                      {item.name}
+                    </h3>
+                    <div className="mb-4">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-28 w-28 object-contain mx-auto"
+                      />
+                    </div>
+                  </Link>
 
                   <div className="w-full text-sm space-y-3">
                     <div>

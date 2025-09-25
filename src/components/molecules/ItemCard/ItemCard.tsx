@@ -59,7 +59,6 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
     if (!item) return;
 
     const fetchRelated = async () => {
-      setIsLoading(true);
       try {
         const res = await getProductsByCategory(category);
         if (res && res.length) {
@@ -70,13 +69,11 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         }
       } catch {
         setProductId(null);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchRelated();
-  }, [category, item, setIsLoading]);
+  }, [category, item]);
 
   if (!item) {
     return <p>{t('product-not-found')}</p>;

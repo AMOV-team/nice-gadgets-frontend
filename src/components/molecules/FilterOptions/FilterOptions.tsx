@@ -58,7 +58,7 @@ export const FilterOptions: React.FC<Props> = ({ filters, handleFilters }) => {
           handleFilters(newFilters);
         }
       } catch (error) {
-        console.error('Error fetching filters:', error);
+        throw new Error(`Error fetching filters: ${error}`);
       } finally {
         setIsLoading(false);
       }
