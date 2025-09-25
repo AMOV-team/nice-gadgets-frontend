@@ -144,21 +144,21 @@ export const ComparePage: React.FC = () => {
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
                         {t('Screen')}
                       </p>
-                      <p className="text-center">{item.screen}</p>
+                      <p className="text-center">{item.metadata.screen}</p>
                     </div>
 
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
                         {t('capacity')}
                       </p>
-                      <p className="text-center">{item.capacity}</p>
+                      <p className="text-center">{item.metadata.capacity}</p>
                     </div>
 
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
                         {t('RAM')}
                       </p>
-                      <p className="text-center">{item.ram}</p>
+                      <p className="text-center">{item.metadata.ram}</p>
                     </div>
                   </div>
                 </div>
