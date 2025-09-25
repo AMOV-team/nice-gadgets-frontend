@@ -7,6 +7,8 @@ import vladPM from '../../../public/img/VladPM-contacts.png';
 import artem from '../../../public/img/ArtemkaPro-contacts.png';
 import max from '../../../public/img/MaxWhySoSerious-contacts.jpg';
 import vlad from '../../../public/img/VladDev-contacts.jpg';
+import { useLoader } from '@/hooks/useLoader';
+import { useEffect } from 'react';
 
 interface TeamMember {
   id: string;
@@ -24,6 +26,20 @@ interface Team1Props {
 
 export const ContactsPage: React.FC<Team1Props> = ({ members }) => {
   const { t } = useTranslation();
+  const { setIsLoading } = useLoader();
+
+  useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [setIsLoading]);
 
   const defaultMembers: TeamMember[] = [
     {

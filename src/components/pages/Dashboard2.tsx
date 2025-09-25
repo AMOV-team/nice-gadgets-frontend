@@ -18,6 +18,8 @@ import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useCartSync } from '@/hooks/useCartSync';
 import { useTranslation } from 'react-i18next';
+import { useLoader } from '@/hooks/useLoader';
+import { useEffect } from 'react';
 
 export default function UserCabinet() {
   const { user } = useAuth();
@@ -27,6 +29,20 @@ export default function UserCabinet() {
   const navigate = useNavigate();
   const { syncBeforeLogout } = useCartSync();
   const { t } = useTranslation();
+  const { setIsLoading } = useLoader();
+
+  useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [setIsLoading]);
 
   return (
     <Card className="w-full max-w-4xl mx-auto">

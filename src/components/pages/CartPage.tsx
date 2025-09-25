@@ -6,10 +6,25 @@ import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
 import { useCart } from 'react-use-cart';
 import type { CartItem } from '../../types/CartItem.tsx';
 import { useTranslation } from 'react-i18next';
+import { useLoader } from '@/hooks/useLoader.ts';
 
 export const CartPage: React.FC = () => {
   const { items } = useCart() as unknown as { items: CartItem[] };
   const { t } = useTranslation();
+  const { setIsLoading } = useLoader();
+
+  React.useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [setIsLoading]);
 
   return (
     <GridContainer>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
 import { useComparison } from '@/hooks/useComparison';
@@ -15,6 +15,7 @@ import { SliderButtonRight } from '../atoms/buttons/SliderButtonRight';
 import { useTranslation } from 'react-i18next';
 import DeleteButton from '../atoms/buttons/DeleteButton';
 import type { Item } from '@/context/FavoritesContext';
+import { useLoader } from '@/hooks/useLoader';
 
 export const ComparePage: React.FC = () => {
   const { comparison, clearComparison } = useComparison();
@@ -36,6 +37,21 @@ export const ComparePage: React.FC = () => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  const { setIsLoading } = useLoader();
+
+  useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [setIsLoading]);
 
   return (
     <GridContainer>
