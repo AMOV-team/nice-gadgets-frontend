@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { GridContainer } from '../atoms/GridContainer';
 import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb';
 import { useComparison } from '@/hooks/useComparison';
-import type { Product } from '../../types/Product';
 import { Dropdown } from '../atoms/Dropdown';
 import type { SortOption } from '@/types/SortOption';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,6 +14,7 @@ import { SliderButtonLeft } from '../atoms/buttons/SliderButtonLeft';
 import { SliderButtonRight } from '../atoms/buttons/SliderButtonRight';
 import { useTranslation } from 'react-i18next';
 import DeleteButton from '../atoms/buttons/DeleteButton';
+import type { Item } from '@/context/FavoritesContext';
 
 export const ComparePage: React.FC = () => {
   const { comparison, clearComparison } = useComparison();
@@ -28,9 +28,9 @@ export const ComparePage: React.FC = () => {
     { id: 3, label: `${t('accessories')}`, value: 'accessories' },
   ];
 
-  const filteredProducts: Product[] =
+  const filteredProducts: Item[] =
     activeCategory ?
-      comparison.filter((p: Product) => p.category === activeCategory)
+      comparison.filter((item: Item) => item.category === activeCategory)
     : [];
 
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -94,17 +94,17 @@ export const ComparePage: React.FC = () => {
             }}
             className="w-full"
           >
-            {filteredProducts.map((product) => (
-              <SwiperSlide key={product.id}>
+            {filteredProducts.map((item) => (
+              <SwiperSlide key={item.id}>
                 <div className="border rounded-lg shadow-sm p-4 flex flex-col items-center">
                   <h3 className="text-base font-bold mb-3 text-center">
-                    {product.name}
+                    {item.name}
                   </h3>
 
                   <div className="mb-4">
                     <img
-                      src={product.image}
-                      alt={product.name}
+                      src={item.image}
+                      alt={item.name}
                       className="h-28 w-28 object-contain mx-auto"
                     />
                   </div>
@@ -114,28 +114,28 @@ export const ComparePage: React.FC = () => {
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
                         {t('price')}
                       </p>
-                      <p className="text-center">{`$ ${product.price}`}</p>
+                      <p className="text-center">{`$ ${item.price}`}</p>
                     </div>
 
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
                         {t('Screen')}
                       </p>
-                      <p className="text-center">{product.screen}</p>
+                      <p className="text-center">{item.screen}</p>
                     </div>
 
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
                         {t('capacity')}
                       </p>
-                      <p className="text-center">{product.capacity}</p>
+                      <p className="text-center">{item.capacity}</p>
                     </div>
 
                     <div>
                       <p className="text-center text-gray-500 font-semibold uppercase text-xs">
                         {t('RAM')}
                       </p>
-                      <p className="text-center">{product.ram}</p>
+                      <p className="text-center">{item.ram}</p>
                     </div>
                   </div>
                 </div>

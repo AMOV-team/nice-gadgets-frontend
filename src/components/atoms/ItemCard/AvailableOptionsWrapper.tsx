@@ -10,9 +10,7 @@ import { useCart } from 'react-use-cart';
 import { useTranslation } from 'react-i18next';
 import { useFavorites } from '@/hooks/useFavorites.ts';
 import { toast } from '@/hooks/useToast';
-import { useProducts } from '@/hooks/useProducts.ts';
 import { useComparison } from '@/hooks/useComparison.ts';
-import type { Product } from '@/types/Product.ts';
 import { CompareButton } from '../buttons/CompareButton.tsx';
 
 type Props = {
@@ -32,15 +30,21 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
   const { toggleComparison, isInComparison } = useComparison();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { t } = useTranslation();
-  const { products } = useProducts(item.category);
-  const product: Product | undefined = products.find(
-    (product) => product.itemId === item.id,
-  );
 
   const handleComparisonClick = () => {
-    if (product) {
-      toggleComparison(product);
-    }
+    toggleComparison({
+      id: item.id,
+      name: item.name,
+      price: item.priceDiscount,
+      quantity: 1,
+      image: item.images[0],
+      metadata: {
+        color: item.color,
+        capacity: item.capacity,
+        ram: item.ram,
+        screen: item.screen,
+      },
+    });
   };
 
   const handleAdd = () => {
@@ -64,6 +68,7 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
       id: item.id,
       name: item.name,
       price: item.priceDiscount,
+      quantity: 1,
       image: item.images[0],
       metadata: {
         color: item.color,
@@ -91,18 +96,15 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
           text={t('add-to-cart')}
           onSelect={() => {
             handleAdd();
-            toast({
-              title: `${t('added-to-cart')}`,
-            });
+            toast({ title: `${t('added-to-cart')}` });
           }}
         />
         <AddToFavoriteButton
           selected={isFavorite(item.id)}
           onSelect={handleFavoriteClick}
         />
-
         <CompareButton
-          selected={product ? isInComparison(product.id) : false}
+          selected={isInComparison(item.id)}
           onSelect={handleComparisonClick}
         />
       </div>

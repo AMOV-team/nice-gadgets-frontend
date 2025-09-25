@@ -7,6 +7,7 @@ import { useLoader } from '@/hooks/useLoader';
 import { useEffect } from 'react';
 import DeleteButton from '../atoms/buttons/DeleteButton';
 import { Link } from 'react-router-dom';
+import { MousePointerClick } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
   const { t } = useTranslation();
@@ -47,14 +48,15 @@ export const HomePage: React.FC = () => {
               to={'signin'}
               className="flex self-center"
             >
-              <p className="font-semibold text-white">
-                3 free deliveries for registered users!
+              <p className="font-semibold flex flew-row gap-2 text-white">
+                <MousePointerClick className="min-w-6 min-h-6" />
+                {t('register')}
               </p>
             </Link>
 
             <button
               type="button"
-              className="text-white font-bold"
+              className="text-white w-min font-bold"
               onClick={() => {}}
             >
               <DeleteButton className="text-white dark:hover:text-elements" />
