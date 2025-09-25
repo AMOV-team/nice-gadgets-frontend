@@ -1,7 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import type { Item } from './FavoritesContext';
-
 export interface ComparisonContextType {
   comparison: Item[];
   addToComparison: (item: Item) => void;
@@ -9,6 +8,14 @@ export interface ComparisonContextType {
   isInComparison: (itemId: Item['id']) => boolean;
   toggleComparison: (item: Item) => void;
   clearComparison: () => void;
+}
+
+export interface Item {
+  id: string;
+  price: number;
+  quantity?: number;
+  itemTotal?: number;
+  [key: string]: any;
 }
 
 const ComparisonContext = createContext<ComparisonContextType | undefined>(
