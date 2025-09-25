@@ -24,9 +24,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = ({
   const { t } = useTranslation();
 
   const phrases = [
-    'Це робив Cursor',
     `${t('search')}`,
-    `${t('register')}`,
     'iPhone 14 128GB Midnight',
     'iPad Pro 11 (2021) 128GB Space Gray',
     'Watch Series 3 42mm Gold',

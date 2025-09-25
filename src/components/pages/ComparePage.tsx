@@ -55,7 +55,14 @@ export const ComparePage: React.FC = () => {
             itemClass="w-full"
             onSelect={(value) => setActiveCategory(value)}
           />
-          <div className="flex flex-row font-semibold text-sm justify-center items-center gap-[10px] px-4 py-2 bg-red-500 text-custom-primary rounded hover:bg-red-600">
+          <div
+            className="
+              flex flex-row justify-center items-center gap-[10px] px-4 py-2
+              font-semibold text-sm text-custom-secondary
+              rounded cursor-pointer
+            "
+            onClick={clearComparison}
+          >
             <DeleteButton onDelete={clearComparison} />
             {t('clear-all')}
           </div>
