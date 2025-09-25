@@ -14,7 +14,7 @@ import { SliderButtonLeft } from '../atoms/buttons/SliderButtonLeft';
 import { SliderButtonRight } from '../atoms/buttons/SliderButtonRight';
 import { useTranslation } from 'react-i18next';
 import DeleteButton from '../atoms/buttons/DeleteButton';
-import type { Item } from '@/context/FavoritesContext';
+import type { Item } from '@/context/ComparisonContext';
 import { useLoader } from '@/hooks/useLoader';
 
 export const ComparePage: React.FC = () => {

@@ -42,6 +42,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     toggleComparison({
       id: product.itemId,
       name: product.name,
+      category: product.category,
       price: product.price,
       quantity: 1,
       image: product.image,

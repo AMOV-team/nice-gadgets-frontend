@@ -35,6 +35,7 @@ export const AvailableOptionsWrapper: React.FC<Props> = ({
     toggleComparison({
       id: item.id,
       name: item.name,
+      category: item.category,
       price: item.priceDiscount,
       quantity: 1,
       image: item.images[0],
