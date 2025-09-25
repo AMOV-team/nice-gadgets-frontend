@@ -7,6 +7,7 @@ type Props = {
   filters: FilterItem[];
   onChange: (value: string, checked: boolean) => void;
   classname?: string;
+  type?: 'capacity' | 'price' | 'string';
 };
 
 export const FilterList: React.FC<Props> = ({
@@ -14,19 +15,15 @@ export const FilterList: React.FC<Props> = ({
   filters,
   onChange,
   classname,
+  type = 'string',
 }) => {
-  const type =
-    ['capacity', 'ram'].includes(title.toLowerCase()) ? 'capacity'
-    : title.toLowerCase() === 'price' ? 'price'
-    : 'string';
-
   const sorted = sortFilters([...filters], type);
 
   return (
     <li className={`${classname} flex-1 flex`}>
       <div className="sm:w-fit">
         <p className="text-xl font-semibold mb-4 text-left">{title}</p>
-        <ul className={`flex flex-col gap-3`}>
+        <ul className="flex flex-col gap-3">
           {sorted.map((f) => (
             <li key={f.value}>
               <FilterLabel
