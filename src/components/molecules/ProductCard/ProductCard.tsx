@@ -39,7 +39,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   const handleComparisonClick = () => {
-    toggleComparison(product);
+    toggleComparison({
+      id: product.itemId,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      image: product.image,
+      metadata: {
+        color: product.color,
+        capacity: product.capacity,
+        year: product.year,
+        image: product.image,
+        ram: product.ram,
+        screen: product.screen,
+      },
+    });
   };
 
   return (
@@ -59,7 +73,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     `}
     >
       <CompareButton
-        selected={isInComparison(product.id)}
+        selected={isInComparison(product.itemId)}
         onSelect={handleComparisonClick}
         className="absolute"
       />
