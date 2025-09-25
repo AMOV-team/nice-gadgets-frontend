@@ -23,6 +23,7 @@ const TidioChat: React.FC = () => {
           isBurgerMenuActive ? 'none' : 'block',
           'important',
         );
+        root.style.setProperty('height', '70vh', 'important');
       }
     };
 
