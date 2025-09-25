@@ -84,16 +84,19 @@ export const FilterOptions: React.FC<Props> = ({ filters, handleFilters }) => {
       >
         <FilterList
           title={t('price')}
+          type="price"
           filters={filters['price'] || PRICE_RANGES}
           onChange={(value, checked) => handleToggle('price', value, checked)}
         />
         <FilterList
           title={t('RAM')}
+          type="string"
           filters={filters['ram'] || []}
           onChange={(value, checked) => handleToggle('ram', value, checked)}
         />
         <FilterList
           title={t('capacity')}
+          type="capacity"
           filters={filters['capacity'] || []}
           onChange={(value, checked) =>
             handleToggle('capacity', value, checked)
@@ -101,6 +104,7 @@ export const FilterOptions: React.FC<Props> = ({ filters, handleFilters }) => {
         />
         <FilterList
           title={t('year')}
+          type="string"
           filters={filters['year'] || []}
           onChange={(value, checked) => handleToggle('year', value, checked)}
         />
