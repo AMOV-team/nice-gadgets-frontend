@@ -4,7 +4,7 @@ import { SectionSlider } from '../organisms/SectionSlider/SectionSlider';
 import { GridContainer } from '../atoms/GridContainer';
 import { useTranslation } from 'react-i18next';
 import { useLoader } from '@/hooks/useLoader';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import DeleteButton from '../atoms/buttons/DeleteButton';
 import { Link } from 'react-router-dom';
 import { MousePointerClick } from 'lucide-react';
@@ -12,6 +12,7 @@ import { MousePointerClick } from 'lucide-react';
 export const HomePage: React.FC = () => {
   const { t } = useTranslation();
   const { setIsLoading } = useLoader();
+  const [buttonIsOpen, setButtonIsOpen] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
@@ -42,29 +43,35 @@ export const HomePage: React.FC = () => {
           </h1>
         </section>
 
-        <section className="col-span-full flex flex-row justify-center">
-          <div className="flex flex-row items-center w-[380px] justify-between gap-3 bg-indigo-500 rounded px-4 py-2">
-            <Link
-              to={'signin'}
-              className="flex self-center"
-            >
-              <p className="font-semibold flex flew-row gap-2 text-white">
-                <MousePointerClick className="min-w-6 min-h-6" />
-                {t('register')}
-              </p>
-            </Link>
+        <section className="flex relative flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
+          {buttonIsOpen && (
+            <div className="absolute left-[16px] sm:left-0 top-[36px] sm:top-[40px] flex flex-row items-center justify-between gap-3 bg-indigo-500 rounded px-4 py-2">
+              <Link
+                to={'signin'}
+                className="flex self-center"
+              >
+                <p
+                  className="
+                    font-semibold text-[10px] sm:text-small text-white
+                    w-full
+                    flex flew-row gap-2
+                    translate-y-[1.5px]
+                  "
+                >
+                  <MousePointerClick className="w-4 h-4 min-w-4 min-h-4 translate-y-[-2px]" />
+                  {t('register')}
+                </p>
+              </Link>
 
-            <button
-              type="button"
-              className="text-white w-min font-bold"
-              onClick={() => {}}
-            >
-              <DeleteButton className="text-white dark:hover:text-elements" />
-            </button>
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-4 col-span-4 sm:col-span-12 xl:col-span-24">
+              <button
+                type="button"
+                className="text-white w-min font-bold"
+                onClick={() => setButtonIsOpen(false)}
+              >
+                <DeleteButton className="text-white dark:hover:text-elements" />
+              </button>
+            </div>
+          )}
           <SectionSlider
             HeaderText={t('new-models')}
             category="phones"
