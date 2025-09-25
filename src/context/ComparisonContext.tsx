@@ -1,13 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import type { Product } from '../types/Product';
+import type { Item } from './FavoritesContext';
 
 export interface ComparisonContextType {
-  comparison: Product[];
-  addToComparison: (product: Product) => void;
-  removeFromComparison: (productId: Product['id']) => void;
-  isInComparison: (productId: Product['id']) => boolean;
-  toggleComparison: (product: Product) => void;
+  comparison: Item[];
+  addToComparison: (item: Item) => void;
+  removeFromComparison: (itemId: Item['id']) => void;
+  isInComparison: (itemId: Item['id']) => boolean;
+  toggleComparison: (item: Item) => void;
   clearComparison: () => void;
 }
 
@@ -22,7 +22,7 @@ interface ComparisonProviderProps {
 export const ComparisonProvider: React.FC<ComparisonProviderProps> = ({
   children,
 }) => {
-  const [comparison, setComparison] = useState<Product[]>(() => {
+  const [comparison, setComparison] = useState<Item[]>(() => {
     try {
       const saved = localStorage.getItem('comparison');
       return saved ? JSON.parse(saved) : [];
@@ -35,22 +35,22 @@ export const ComparisonProvider: React.FC<ComparisonProviderProps> = ({
     localStorage.setItem('comparison', JSON.stringify(comparison));
   }, [comparison]);
 
-  const addToComparison = (product: Product) => {
+  const addToComparison = (item: Item) => {
     setComparison((prev) =>
-      prev.some((p) => p.id === product.id) ? prev : [...prev, product],
+      prev.some((p) => p.id === item.id) ? prev : [...prev, item],
     );
   };
 
-  const removeFromComparison = (productId: Product['id']) => {
-    setComparison((prev) => prev.filter((p) => p.id !== productId));
+  const removeFromComparison = (itemId: Item['id']) => {
+    setComparison((prev) => prev.filter((p) => p.id !== itemId));
   };
 
-  const isInComparison = (productId: Product['id']) =>
-    comparison.some((p) => p.id === productId);
+  const isInComparison = (itemId: Item['id']) =>
+    comparison.some((p) => p.id === itemId);
 
-  const toggleComparison = (product: Product) => {
-    if (isInComparison(product.id)) removeFromComparison(product.id);
-    else addToComparison(product);
+  const toggleComparison = (item: Item) => {
+    if (isInComparison(item.id)) removeFromComparison(item.id);
+    else addToComparison(item);
   };
 
   const clearComparison = () => {
