@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Thumbs } from 'swiper/modules';
 import type SwiperType from 'swiper';
@@ -18,6 +18,12 @@ export const ItemSwiper: React.FC<Props> = ({
   selectImageHandler,
 }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+
+  useEffect(() => {
+    if (images && images.length > 0) {
+      selectImageHandler(images[0]);
+    }
+  }, [images, selectImageHandler]);
 
   return (
     <div

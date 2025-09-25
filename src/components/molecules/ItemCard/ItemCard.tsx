@@ -25,7 +25,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const { setIsLoading } = useLoader();
 
   const [item, setItem] = useState<Item | null>(null);
-  const [productId, setProductId] = useState<number | null>();
+  const [productId, setProductId] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState('');
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         if (res && res.length > 0) {
           const product = res[0];
           setItem(product);
-          setSelectedImage(product.images[0]);
+          setSelectedImage(product.images[0] ?? '');
         } else {
           setItem(null);
           setSelectedImage('');
@@ -95,63 +95,35 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
   const handleSelectCapacity = (newCapacity: string) => {
     navigate(
       `/${category}/${item.namespaceId}-${newCapacity.toLowerCase()}-${item.color}`,
-      {
-        replace: true,
-      },
+      { replace: true },
     );
   };
 
   const handleSelectColor = (newColor: string) => {
     navigate(
       `/${category}/${item.namespaceId}-${item.capacity.toLowerCase()}-${newColor}`,
-      {
-        replace: true,
-      },
+      { replace: true },
     );
   };
 
   return (
-    <div
-      className={`
-        col-span-full
-        grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
-      `}
-    >
+    <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4">
       <div className="col-span-full">
         <Breadcrumb />
-
-        <h2
-          className={`
-            font-mont font-extrabold
-            text-[22px] leading-[140%]
-            xl:text-[32px] xl:leading-[41px] xl:tracking-[-1%]
-            mb-4 sm:mb-6
-          `}
-        >
+        <h2 className="font-mont font-extrabold text-[22px] leading-[140%] xl:text-[32px] xl:leading-[41px] xl:tracking-[-1%] mb-4 sm:mb-6">
           {item.name}
         </h2>
       </div>
 
-      <div
-        className={`
-          mb-14 sm:mb-16 xl:mb-20
-          relative
-          col-span-full
-          grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4
-        `}
-      >
-        <div
-          className={`
-            absolute right-0 top-[395px]
-            sm:top-0
-          `}
-        >
+      <div className="mb-14 sm:mb-16 xl:mb-20 relative col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4">
+        <div className="absolute right-0 top-[395px] sm:top-0">
           <p className="font-mont font-bold text-xs text-icons">
             ID: {productId}
           </p>
         </div>
 
         <ItemSwiper
+          key={item.id}
           images={item.images}
           selectImageHandler={setSelectedImage}
           selectedImage={selectedImage}
@@ -165,13 +137,7 @@ export const ItemCard: React.FC<Props> = ({ category }) => {
         />
       </div>
 
-      <div
-        className={`
-          flex flex-col gap-14 sm:gap-16 col-span-4 sm:col-span-12 xl:col-span-24
-          xl:flex-row
-          mb-14 sm:mb-14 xl:mb-20
-        `}
-      >
+      <div className="flex flex-col gap-14 sm:gap-16 col-span-4 sm:col-span-12 xl:col-span-24 xl:flex-row mb-14 sm:mb-14 xl:mb-20">
         <AboutDescription item={item} />
         <TechSpecsWithTitle specs={specs} />
       </div>
