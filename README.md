@@ -77,8 +77,9 @@ The platform was designed with **real business requirements** in mind and includ
 ## Getting Started
 
 1. Clone the repository:  
-   ```bash
-   git clone https://github.com/AMOV-team/nice-gadgets-frontend/
+```bash
+git clone https://github.com/AMOV-team/nice-gadgets-frontend/
+```
 
 2. Install dependencies:
 ```bash
