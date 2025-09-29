@@ -81,9 +81,11 @@ The platform was designed with **real business requirements** in mind and includ
    git clone https://github.com/AMOV-team/nice-gadgets-frontend/
 
 2. Install dependencies:
-bash
-npm install
+```bash
+  npm install
+```
 
 3. Run locally:
-bash
+```bash
 npm run dev
+```
