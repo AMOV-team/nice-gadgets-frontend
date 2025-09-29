@@ -72,9 +72,9 @@ The platform was designed with **real business requirements** in mind and includ
 
 **Olexandr Oliferuk** — Tech Lead
 
-## Getting Started
-
 ---
+
+## Getting Started
 
 1. Clone the repository:  
    ```bash
