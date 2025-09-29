@@ -83,7 +83,7 @@ git clone https://github.com/AMOV-team/nice-gadgets-frontend/
 
 2. Install dependencies:
 ```bash
-  npm install
+npm install
 ```
 
 3. Run locally:
