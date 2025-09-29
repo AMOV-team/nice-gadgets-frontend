@@ -68,9 +68,9 @@ The platform was designed with **real business requirements** in mind and includ
 
 **Maksym Tovstopiatyi** — developer
 
-**Vladyslav Sulyma** — Project Manager
+**Vladyslav Sulyma** — Project Manager & developer
 
-**Olexandr Oliferuk** — Tech Lead
+**Olexandr Oliferuk** — Tech Lead & developer
 
 ---
 
