@@ -61,7 +61,20 @@ The platform was designed with **real business requirements** in mind and includ
 
 ---
 
+## Team
+**Vlad Matkovskyi** — developer
+
+**Artem Vikuliev** — developer
+
+**Maksym Tovstopiatyi** — developer
+
+**Vladyslav Sulyma** — Project Manager
+
+**Olexandr Oliferuk** — Tech Lead
+
 ## Getting Started
+
+---
 
 1. Clone the repository:  
    ```bash
@@ -74,18 +87,3 @@ npm install
 3. Run locally:
 bash
 npm run dev
-
-## Team
-**Vlad Matkovskyi** — developer
-
-**Artem Vikuliev** — developer
-
-**Maksym Tovstopiatyi** — developer
-
-**Vladyslav Sulyma** — Project Manager
-
-**Olexandr Oliferuk** — Tech Lead
-
-Provides high performance and excellent UX
-
-Demonstrates the team’s ability to solve complex technical and business challenges
