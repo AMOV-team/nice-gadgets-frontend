@@ -1,0 +1,53 @@
+import * as React from 'react';
+import { CartCard } from '../molecules/CartCard/CartCard';
+import { CartCheckout } from '../molecules/CartCheckout/CartCheckout';
+import { GridContainer } from '../atoms/GridContainer';
+import { Breadcrumb } from '../molecules/Breadcrumb/Breadcrumb.tsx';
+import { useCart } from 'react-use-cart';
+import type { CartItem } from '../../types/CartItem.tsx';
+import { useTranslation } from 'react-i18next';
+import { useLoader } from '@/hooks/useLoader.ts';
+
+export const CartPage: React.FC = () => {
+  const { items } = useCart() as unknown as { items: CartItem[] };
+  const { t } = useTranslation();
+  const { setIsLoading } = useLoader();
+
+  React.useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [setIsLoading]);
+
+  return (
+    <GridContainer>
+      <div className="col-span-full">
+        <Breadcrumb />
+        <h1 className="text-h1 font-bold text-custom-primary">{t('cart')}</h1>
+        {items.length === 0 && <p>{t('empty-cart')}</p>}
+      </div>
+
+      <div className="col-span-full xl:col-span-16">
+        <div className="flex flex-col gap-4">
+          {items.map((cartItem: CartItem) => (
+            <CartCard
+              key={cartItem.id}
+              cartItem={cartItem}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="col-span-4 sm:col-span-12 xl:col-span-8">
+        <CartCheckout />
+      </div>
+    </GridContainer>
+  );
+};

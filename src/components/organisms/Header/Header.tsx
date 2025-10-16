@@ -1,9 +1,58 @@
-import type React from 'react';
+import React from 'react';
+import { Navbar } from '../NavBar/Navbar';
+import { Link } from 'react-router-dom';
+import { ThemeImage } from '../../atoms/icons/ThemeImage';
+import { BurgerMenu } from '../../atoms/BugerMenu/BurgerMenu.tsx';
+import { HeaderButtons } from '../../atoms/HeaderButtons/HeaderButtons.tsx';
 
-export const Header: React.FC = () => {
+type Props = {
+  isBurgerMenuActive: boolean;
+  handleIsBurgerMenuActive: (state: boolean) => void;
+};
+
+export const Header: React.FC<Props> = ({
+  isBurgerMenuActive,
+  handleIsBurgerMenuActive,
+}) => {
   return (
-    <div>
-      <h2>Header</h2>
-    </div>
+    <header
+      className={`
+        flex items-center justify-between h-12 xl:h-16
+        shadow-[0px_1px_0px_0px_hsl(var(--elements))]
+        after:content-[""] after:absolute after:block after:top-0 after:left-0 after:right-0
+        after:h-full after:bg-white after:z-20 dark:after:bg-black
+        sticky top-0 z-20
+      `}
+    >
+      <div className="flex gap-4 items-center z-30 pl-4">
+        <Link
+          to="/"
+          className="pt-[13px] pb-[13px] z-30"
+        >
+          <ThemeImage
+            light="img/logo-light-theme.png"
+            dark="img/logo-dark-theme.png"
+            alt="Nice gadgets"
+            className="w-[64px] h-[22px] block z-30"
+          />
+        </Link>
+        <Navbar
+          isBurgerMenuActive={isBurgerMenuActive}
+          handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+        />
+      </div>
+
+      <button
+        onClick={() => handleIsBurgerMenuActive(!isBurgerMenuActive)}
+        className="min-768:hidden p-4 inline-flex items-center gap-4 no-underline"
+      >
+        <BurgerMenu isActive={isBurgerMenuActive} />
+      </button>
+
+      <HeaderButtons
+        isBurgerMenuActive={isBurgerMenuActive}
+        handleIsBurgerMenuActive={handleIsBurgerMenuActive}
+      />
+    </header>
   );
 };

@@ -1,5 +1,8 @@
-import React from 'react';
+import { ProductsPage } from './ProductsPage';
 
-export const PhonesPage: React.FC = () => {
-  return <h1 className="title">Phones Page</h1>;
-};
+export const PhonesPage = () => (
+  <ProductsPage
+    category="phones"
+    titleKey="mobile-phones"
+  />
+);

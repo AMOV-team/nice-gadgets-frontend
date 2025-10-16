@@ -1,0 +1,52 @@
+.bannerslider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .swiper-slide {
+    position: relative;
+    transition: opacity 3s ease-in-out;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 1;
+      transition: opacity 3s ease-in-out;
+      pointer-events: none;
+    }
+  }
+
+  .swiper-slide-active::after {
+    opacity: 0;
+  }
+
+  .swiper-pagination {
+    bottom: 10px !important;
+    position: absolute !important;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; // как у верхней пагинации
+    z-index: 20;
+  }
+
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: #929292;
+    opacity: 0.2;
+    border-radius: 50%;
+    margin: 0 !important;
+    transition:
+      opacity 0.3s,
+      background 0.3s;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: white;
+  }
+}

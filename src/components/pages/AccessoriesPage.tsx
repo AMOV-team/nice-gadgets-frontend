@@ -1,0 +1,8 @@
+import { ProductsPage } from './ProductsPage';
+
+export const AccessoriesPage = () => (
+  <ProductsPage
+    category="accessories"
+    titleKey="accessories"
+  />
+);

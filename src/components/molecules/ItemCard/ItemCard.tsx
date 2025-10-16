@@ -1,0 +1,143 @@
+import React, { useEffect, useState } from 'react';
+import type { Item } from '../../../types/Item.ts';
+import type { Category } from '../../../types/Category.ts';
+import { AboutDescription } from '../../atoms/ItemCard/AboutDescription.tsx';
+import { TechSpecsWithTitle } from '../../atoms/ItemCard/TechSpecsWithTitle.tsx';
+import { AvailableOptionsWrapper } from '../../atoms/ItemCard/AvailableOptionsWrapper.tsx';
+import { ItemSwiper } from '../../atoms/ItemCard/ItemSwiper.tsx';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Breadcrumb } from '../Breadcrumb/Breadcrumb.tsx';
+import { useTranslation } from 'react-i18next';
+import {
+  getProductById,
+  getProductsByCategory,
+} from '../../../api/productCrud.ts';
+import { useLoader } from '@/hooks/useLoader.ts';
+
+type Props = {
+  category: Category;
+};
+
+export const ItemCard: React.FC<Props> = ({ category }) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { slug } = useParams<{ slug: string }>();
+  const { setIsLoading } = useLoader();
+
+  const [item, setItem] = useState<Item | null>(null);
+  const [productId, setProductId] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState('');
+
+  useEffect(() => {
+    if (!category || !slug) return;
+
+    const fetchItem = async () => {
+      setIsLoading(true);
+      try {
+        const res = await getProductById(category, slug);
+
+        if (res && res.length > 0) {
+          const product = res[0];
+          setItem(product);
+          setSelectedImage(product.images[0] ?? '');
+        } else {
+          setItem(null);
+          setSelectedImage('');
+        }
+      } catch {
+        setItem(null);
+        setSelectedImage('');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchItem();
+  }, [category, slug, setIsLoading]);
+
+  useEffect(() => {
+    if (!item) return;
+
+    const fetchRelated = async () => {
+      try {
+        const res = await getProductsByCategory(category);
+        if (res && res.length) {
+          const product = res.find((p) => p.itemId === item.id);
+          setProductId(product?.id ?? null);
+        } else {
+          setProductId(null);
+        }
+      } catch {
+        setProductId(null);
+      }
+    };
+
+    fetchRelated();
+  }, [category, item]);
+
+  if (!item) {
+    return <p>{t('product-not-found')}</p>;
+  }
+
+  const specs = [
+    { name: `${t('Screen')}`, value: item.screen ?? '' },
+    { name: `${t('Resolution')}`, value: item.resolution ?? '' },
+    { name: `${t('Processor')}`, value: item.processor ?? '' },
+    { name: `${t('RAM')}`, value: item.ram ?? '' },
+    { name: `${t('Camera')}`, value: item.camera ?? '' },
+    { name: `${t('Zoom')}`, value: item.zoom ?? '' },
+    { name: `${t('Cell')}`, value: item.cell?.join(', ') ?? '' },
+  ];
+
+  const handleSelectCapacity = (newCapacity: string) => {
+    navigate(
+      `/${category}/${item.namespaceId}-${newCapacity.toLowerCase()}-${item.color}`,
+      { replace: true },
+    );
+  };
+
+  const handleSelectColor = (newColor: string) => {
+    navigate(
+      `/${category}/${item.namespaceId}-${item.capacity.toLowerCase()}-${newColor}`,
+      { replace: true },
+    );
+  };
+
+  return (
+    <div className="col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4">
+      <div className="col-span-full">
+        <Breadcrumb />
+        <h2 className="font-mont font-extrabold text-[22px] leading-[140%] xl:text-[32px] xl:leading-[41px] xl:tracking-[-1%] mb-4 sm:mb-6">
+          {item.name}
+        </h2>
+      </div>
+
+      <div className="mb-14 sm:mb-16 xl:mb-20 relative col-span-full grid grid-cols-4 sm:grid-cols-12 xl:grid-cols-24 gap-4">
+        <div className="absolute right-0 top-[395px] sm:top-0">
+          <p className="font-mont font-bold text-xs text-icons">
+            ID: {productId}
+          </p>
+        </div>
+
+        <ItemSwiper
+          key={item.id}
+          images={item.images}
+          selectImageHandler={setSelectedImage}
+          selectedImage={selectedImage}
+        />
+
+        <AvailableOptionsWrapper
+          item={item}
+          handleSelectColor={handleSelectColor}
+          handleSelectCapacity={handleSelectCapacity}
+          specs={specs}
+        />
+      </div>
+
+      <div className="flex flex-col gap-14 sm:gap-16 col-span-4 sm:col-span-12 xl:col-span-24 xl:flex-row mb-14 sm:mb-14 xl:mb-20">
+        <AboutDescription item={item} />
+        <TechSpecsWithTitle specs={specs} />
+      </div>
+    </div>
+  );
+};
