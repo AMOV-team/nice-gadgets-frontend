@@ -5,6 +5,11 @@
 
 ---
 
+## DEMO
+https://develop-nice-gadgets-frontend.vercel.app/
+
+---
+
 ## Project Overview
 
 **NiceGadgets** is a modern e-commerce platform built from scratch, enabling users to browse, select, and purchase gadgets online. The primary goal of the project was to deliver a **market-ready platform** that maximizes user conversion and retention while providing a solid technical foundation.
