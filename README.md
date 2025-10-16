@@ -2,11 +2,7 @@
 
 **Team:** AMOV-2  
 **Project Duration:** 2 weeks  
-
----
-
-## DEMO
-https://develop-nice-gadgets-frontend.vercel.app/
+**Demo** https://develop-nice-gadgets-frontend.vercel.app/
 
 ---
 
